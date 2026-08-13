@@ -1,7 +1,7 @@
-import type { Request, Response } from 'express';
+import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
 
-export default async function handler(req: Request, res: Response) {
+export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
@@ -13,7 +13,7 @@ export default async function handler(req: Request, res: Response) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
-      message: 'Method Not Allowed'
+      message: 'Method Not Allowed',
     });
   }
 
@@ -23,7 +23,7 @@ export default async function handler(req: Request, res: Response) {
       try {
         body = JSON.parse(body);
       } catch (e) {
-        console.error('Failed to parse JSON body string:', e);
+        console.error('Failed to parse string body:', e);
       }
     }
 
@@ -31,7 +31,7 @@ export default async function handler(req: Request, res: Response) {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide a valid email address.'
+        message: 'Please provide a valid email address.',
       });
     }
 
@@ -60,7 +60,7 @@ export default async function handler(req: Request, res: Response) {
                 This notification was automatically sent by your Home & Pet Sitter Web Portal.
               </p>
             </div>
-          `
+          `,
         });
 
         if (error) {
@@ -79,7 +79,7 @@ export default async function handler(req: Request, res: Response) {
       message: 'Successfully subscribed to monthly updates.',
       email,
       emailSent,
-      resendData
+      resendData,
     });
   } catch (error: unknown) {
     console.error('Unhandled serverless exception in /api/subscribe:', error);
@@ -87,7 +87,7 @@ export default async function handler(req: Request, res: Response) {
     return res.status(500).json({
       success: false,
       message: 'Failed to process subscription.',
-      error: errorMessage
+      error: errorMessage,
     });
   }
 }
