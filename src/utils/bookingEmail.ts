@@ -1,13 +1,11 @@
-import { SPECIALIZED_CARE_OPTIONS } from '../data';
-
 /**
  * Generates an elegant, beautifully styled HTML email notification for new bookings.
- *
- * Note: While we share visual styling choices with our main UI (such as the premium #b08c40
- * brand accent, high-contrast dark elements, and clean card spacing), we must use inline
- * fallback colors and absolute values here.
- * Email clients (Gmail, Apple Mail, Outlook) do not support CSS variables, external stylesheets,
- * or complex flexbox structures. Using strict inline-styled table grids guarantees a flawless,
+ * 
+ * Note: While we share visual styling choices with our main UI (such as the premium #b08c40 
+ * brand accent, high-contrast dark elements, and clean card spacing), we must use inline 
+ * fallback colors and absolute values here. 
+ * Email clients (Gmail, Apple Mail, Outlook) do not support CSS variables, external stylesheets, 
+ * or complex flexbox structures. Using strict inline-styled table grids guarantees a flawless, 
  * robust, and responsive layout across all inboxes.
  */
 
@@ -47,16 +45,10 @@ interface BookingRequest {
 export function generateBookingEmailHtml(booking: BookingRequest): string {
   // Format pet label gracefully based on count and type
   let petTypeLabel = booking.petType;
-  if (
-    booking.dogCount !== undefined ||
-    booking.catCount !== undefined ||
-    booking.otherCount !== undefined
-  ) {
+  if (booking.dogCount !== undefined || booking.catCount !== undefined || booking.otherCount !== undefined) {
     const parts: string[] = [];
-    if (booking.dogCount && booking.dogCount > 0)
-      parts.push(`${booking.dogCount} ${booking.dogCount === 1 ? 'Dog' : 'Dogs'}`);
-    if (booking.catCount && booking.catCount > 0)
-      parts.push(`${booking.catCount} ${booking.catCount === 1 ? 'Cat' : 'Cats'}`);
+    if (booking.dogCount && booking.dogCount > 0) parts.push(`${booking.dogCount} ${booking.dogCount === 1 ? 'Dog' : 'Dogs'}`);
+    if (booking.catCount && booking.catCount > 0) parts.push(`${booking.catCount} ${booking.catCount === 1 ? 'Cat' : 'Cats'}`);
     if (booking.otherCount && booking.otherCount > 0) parts.push(`${booking.otherCount} Other`);
     if (parts.length > 0) {
       petTypeLabel = `${booking.petCount} (${parts.join(', ')})`;
@@ -77,13 +69,12 @@ export function generateBookingEmailHtml(booking: BookingRequest): string {
 
   // Aggregate special care needs flags
   const specialNeedsList: string[] = [];
-  if (booking.hasSeniorPets) specialNeedsList.push(SPECIALIZED_CARE_OPTIONS.highEnergy.label);
-  if (booking.hasMedications) specialNeedsList.push(SPECIALIZED_CARE_OPTIONS.medications.label);
-  if (booking.largeGarden) specialNeedsList.push(SPECIALIZED_CARE_OPTIONS.garden.label);
-  const specialNeedsHtml =
-    specialNeedsList.length > 0
-      ? specialNeedsList.map((item) => `<div style="margin-bottom: 2px;">• ${item}</div>`).join('')
-      : 'None';
+  if (booking.hasSeniorPets) specialNeedsList.push("High-Energy or Reactive Dogs / Senior Care");
+  if (booking.hasMedications) specialNeedsList.push("Specialized Medical Needs & Medication");
+  if (booking.largeGarden) specialNeedsList.push("Garden, Lawn & Plant Management");
+  const specialNeedsHtml = specialNeedsList.length > 0 
+    ? specialNeedsList.map(item => `<div style="margin-bottom: 2px;">• ${item}</div>`).join('') 
+    : 'None';
 
   // Format stay duration string
   let durationStr = 'Not specified';
@@ -164,97 +155,61 @@ export function generateBookingEmailHtml(booking: BookingRequest): string {
       </div>
 
       <!-- Estimated Cost Breakdown Card -->
-      ${
-        p && p.total !== undefined
-          ? `
+      ${p && p.total !== undefined ? `
       <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-top: 16px;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 14px;">Estimated Cost Breakdown</h3>
         <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
-          ${
-            p.baseRate !== undefined
-              ? `
+          ${p.baseRate !== undefined ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Base Rate (${booking.duration || 1} ${booking.duration === 1 ? 'night' : 'nights'}):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">$${p.baseRate}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.petSurcharge && p.petSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.petSurcharge && p.petSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Additional Pets Surcharge ($10/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.petSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.seniorSurcharge && p.seniorSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.seniorSurcharge && p.seniorSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">High Energy / Senior / Puppy Care ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.seniorSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.medsSurcharge && p.medsSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.medsSurcharge && p.medsSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Medication Administration ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.medsSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.gardenSurcharge && p.gardenSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.gardenSurcharge && p.gardenSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Garden & Plant Care ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.gardenSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.durationDiscount && p.durationDiscount > 0
-              ? `
+          </tr>` : ''}
+          ${p.durationDiscount && p.durationDiscount > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #15803d; font-weight: 500;">Long-Stay Discount:</td>
             <td style="padding: 6px 0; color: #15803d; text-align: right; font-weight: 600;">-$${p.durationDiscount}</td>
-          </tr>`
-              : ''
-          }
+          </tr>` : ''}
           <tr style="background-color: #fcfaf7; border-top: 2px solid #f3ebd8;">
             <td style="padding: 10px 8px; color: #1a1a1a; font-weight: 700; font-size: 15px;">Total Estimate:</td>
             <td style="padding: 10px 8px; color: #b08c40; text-align: right; font-weight: 700; font-size: 18px;">$${p.total}</td>
           </tr>
-          ${
-            p.perDay !== undefined
-              ? `
+          ${p.perDay !== undefined ? `
           <tr>
             <td style="padding: 6px 8px; color: #666666; font-size: 13px;" colspan="2">
               Average Nightly Rate: <strong>~$${p.perDay.toFixed(2)} / night</strong>
             </td>
-          </tr>`
-              : ''
-          }
+          </tr>` : ''}
         </table>
       </div>
-      `
-          : ''
-      }
+      ` : ''}
 
       <!-- Specific Instructions Card -->
-      ${
-        booking.notes
-          ? `
+      ${booking.notes ? `
       <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-top: 16px;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 14px;">Specific Instructions & Routines</h3>
         <p style="margin: 0; font-size: 14px; color: #333333; line-height: 1.6; white-space: pre-wrap;">${booking.notes}</p>
       </div>
-      `
-          : ''
-      }
+      ` : ''}
 
       <!-- Footer Branding & Action -->
       <div style="text-align: center; margin-top: 28px; font-size: 12px; color: #999999; line-height: 1.4;">

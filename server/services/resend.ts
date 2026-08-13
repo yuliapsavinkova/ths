@@ -1,16 +1,10 @@
 import { Resend } from 'resend';
 import { CONFIG } from '../config';
 
-let resendClient: Resend | null = null;
-
-export function getResendClient(): Resend {
-  if (!resendClient) {
-    // Lazy-load API key safely from central CONFIG
-    const key = CONFIG.RESEND_API_KEY;
-    if (!key) {
-      throw new Error('RESEND_API_KEY configuration or environment variable is required');
-    }
-    resendClient = new Resend(key);
+export function getResendClient(apiKey?: string): Resend {
+  const key = apiKey || process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
+  if (!key) {
+    throw new Error('RESEND_API_KEY environment variable is missing.');
   }
-  return resendClient;
+  return new Resend(key);
 }

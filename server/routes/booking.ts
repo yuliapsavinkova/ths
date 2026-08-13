@@ -18,7 +18,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
   if (!booking || typeof booking !== 'object') {
     return res.status(400).json({
       success: false,
-      message: 'Invalid booking data received.',
+      message: 'Invalid booking data received.'
     });
   }
 
@@ -27,7 +27,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     console.error('Missing RESEND_API_KEY');
     return res.status(500).json({
       success: false,
-      message: 'RESEND_API_KEY is not configured in Vercel Environment Variables.',
+      message: 'RESEND_API_KEY is not configured in Vercel Environment Variables.'
     });
   }
 
@@ -36,12 +36,11 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     console.error('Missing SITTER_EMAIL_TO');
     return res.status(500).json({
       success: false,
-      message: 'SITTER_EMAIL_TO is not configured in Vercel Environment Variables.',
+      message: 'SITTER_EMAIL_TO is not configured in Vercel Environment Variables.'
     });
   }
 
-  const sender =
-    process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM || 'onboarding@resend.dev';
+  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM || 'onboarding@resend.dev';
 
   try {
     const resend = getResendClient();
@@ -52,7 +51,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
       to: recipient,
       subject: `New Sit Request from ${booking.name || 'Client'} (${booking.location || 'Location'})`,
       html: emailHtml,
-      replyTo: booking.email || recipient,
+      replyTo: booking.email || recipient
     });
 
     console.log('Email sent successfully via Resend:', data);
@@ -61,7 +60,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
       success: true,
       message: 'Booking request captured and email alert sent successfully.',
       bookingId: Math.random().toString(36).substring(2, 9),
-      resendData: data,
+      resendData: data
     });
   } catch (error: unknown) {
     console.error('Error sending email via Resend:', error);
@@ -69,7 +68,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     return res.status(500).json({
       success: false,
       message: 'Failed to send booking email notification.',
-      error: errorMessage,
+      error: errorMessage
     });
   }
 }
