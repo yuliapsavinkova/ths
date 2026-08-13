@@ -1,0 +1,18 @@
+{
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/api/submit-booking",
+      "destination": "/api/submit-booking"
+    },
+    {
+      "source": "/api/subscribe",
+      "destination": "/api/subscribe"
+    },
+    {
+      "source": "/((?!api/).*)",
+      "destination": "/index.html"
+    }
+  ]
+}

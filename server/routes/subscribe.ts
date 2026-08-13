@@ -17,26 +17,30 @@ export async function handleSubscribe(req: Request, res: Response) {
   console.log(`Received newsletter subscription for: ${email}`);
 
   try {
-    // A. Locally persist the email to subscribers.json
+    // A. Locally persist the email to subscribers.json if filesystem is writable
     const filePath = path.join(process.cwd(), 'subscribers.json');
     let subscribers: string[] = [];
 
-    if (fs.existsSync(filePath)) {
-      try {
-        const fileData = await fs.promises.readFile(filePath, 'utf-8');
-        subscribers = JSON.parse(fileData);
-      } catch (parseError) {
-        console.error('Error parsing subscribers.json, resetting list:', parseError);
-        subscribers = [];
+    try {
+      if (fs.existsSync(filePath)) {
+        try {
+          const fileData = await fs.promises.readFile(filePath, 'utf-8');
+          subscribers = JSON.parse(fileData);
+        } catch (parseError) {
+          console.error('Error parsing subscribers.json, resetting list:', parseError);
+          subscribers = [];
+        }
       }
-    }
 
-    if (!subscribers.includes(email)) {
-      subscribers.push(email);
-      await fs.promises.writeFile(filePath, JSON.stringify(subscribers, null, 2));
-      console.log(`Email ${email} successfully written to subscribers.json. Total count: ${subscribers.length}`);
-    } else {
-      console.log(`Email ${email} is already subscribed (skipped writing).`);
+      if (!subscribers.includes(email)) {
+        subscribers.push(email);
+        await fs.promises.writeFile(filePath, JSON.stringify(subscribers, null, 2));
+        console.log(`Email ${email} successfully written to subscribers.json. Total count: ${subscribers.length}`);
+      } else {
+        console.log(`Email ${email} is already subscribed (skipped writing).`);
+      }
+    } catch (fsError) {
+      console.warn('Could not update subscribers.json (read-only environment or serverless runtime):', fsError);
     }
 
     // B. Send notification email to Yulia via Resend
