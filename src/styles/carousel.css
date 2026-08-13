@@ -1,0 +1,163 @@
+/* ─── CENTRALIZED CAROUSEL & SWIPE DECK DESIGN SYSTEM ─── */
+
+.swipe-deck-wrapper {
+  text-align: center;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  overflow: visible;
+}
+
+.swipe-deck-inner-wrapper {
+  position: relative;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  box-sizing: border-box;
+}
+
+@media (--medium) {
+  .swipe-deck-inner-wrapper {
+    padding: 0 24px; /* Let cards occupy horizontal space with room for side arrows */
+  }
+}
+
+.swipe-deck-container {
+  display: flex;
+  align-items: stretch;
+  overflow-x: auto;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  scroll-snap-type: x mandatory;
+  gap: var(--spacing-md);
+  padding: var(--spacing-md) 0 var(--spacing-lg) 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Hide scrollbar for clean layout */
+}
+
+.swipe-deck-container::-webkit-scrollbar {
+  display: none; /* Hide scrollbar on Chrome/Safari */
+}
+
+/* Base style for carousel card items to share sizing and alignment */
+.swipe-deck-container > * {
+  scroll-snap-align: center;
+  flex: 0 0 85%;
+  max-width: 320px;
+  flex-shrink: 0;
+}
+
+@media (--medium) {
+  .swipe-deck-container > * {
+    flex: 0 0 calc(50% - var(--spacing-md) / 2);
+    scroll-snap-align: start;
+    max-width: none;
+  }
+}
+
+@media (--large) {
+  .swipe-deck-container > * {
+    flex: 0 0 calc(33.333% - var(--spacing-md) * 2 / 3);
+  }
+}
+
+@media (--xlarge) {
+  .swipe-deck-container > * {
+    flex: 0 0 calc(25% - var(--spacing-md) * 3 / 4);
+  }
+}
+
+@media (--xxlarge) {
+  .swipe-deck-container > * {
+    flex: 0 0 calc(20% - var(--spacing-md) * 4 / 5);
+  }
+}
+
+@media (--ultra) {
+  .swipe-deck-container > * {
+    flex: 0 0 calc(16.666% - var(--spacing-md) * 5 / 6);
+  }
+}
+
+/* Nav button controls (Side Floating Arrows for Tablet & Desktop) */
+.carousel-nav-btn {
+  display: none;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  color: var(--color-brand-primary);
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: var(--z-overlay);
+  transition: all var(--transition-fast) ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.carousel-nav-btn.prev {
+  left: -8px;
+}
+
+.carousel-nav-btn.next {
+  right: -8px;
+}
+
+.carousel-nav-btn:hover:not(:disabled) {
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: var(--color-bg-primary);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel-nav-btn:disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+}
+
+@media (--medium) {
+  .carousel-nav-btn {
+    display: flex;
+  }
+  .carousel-nav-btn.prev {
+    left: -16px;
+  }
+  .carousel-nav-btn.next {
+    right: -16px;
+  }
+}
+
+/* Progress bar indicators */
+.swipe-progress-track-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-md);
+  margin-bottom: var(--spacing-xs);
+  width: 100%;
+  max-width: 100%;
+}
+
+.swipe-progress-track {
+  width: 140px;
+  height: 4px;
+  background-color: var(--color-border-inverse-soft);
+  border-radius: var(--radius-full);
+  position: relative;
+  overflow: hidden;
+}
+
+.swipe-progress-bar {
+  position: absolute;
+  width: 45px;
+  height: 100%;
+  background-color: var(--color-brand-primary);
+  border-radius: var(--radius-full);
+  transition: left 0.15s ease-out;
+}

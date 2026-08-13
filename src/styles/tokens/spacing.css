@@ -1,0 +1,49 @@
+:root {
+  /* --- Base Numeric Scale (Single Source of Truth) --- */
+  --spacing-xxs: 0.125rem;       /* 2px - micro adjustments */
+  --spacing-xs: 0.25rem;         /* 4px - tiny gap */
+  --spacing-sm-subtle: 0.375rem;  /* 6px - subtle tag gap */
+  --spacing-sm: 0.5rem;          /* 8px - small element gap */
+  --spacing-md-subtle: 0.75rem;  /* 12px - compact body gap */
+  --spacing-md: 1rem;            /* 16px - standard body padding */
+  --spacing-lg-subtle: 1.25rem;  /* 20px - comfortable component gap */
+  --spacing-lg: 1.5rem;          /* 24px - standard container padding */
+  --spacing-xl: 2rem;            /* 32px - spacious card padding */
+  --spacing-xxl: 3rem;           /* 48px - standard section gap */
+  --spacing-xxxl: 5rem;          /* 80px - majestic hero gap */
+
+  /* --- Semantic Spacing Token System --- */
+  /* Badges & Tags */
+  --spacing-badge-py: var(--spacing-xxs);
+  --spacing-badge-px: var(--spacing-sm-subtle);
+
+  /* Small Interactive Controls (pills, small buttons) */
+  --spacing-pill-py: var(--spacing-xs);
+  --spacing-pill-px: var(--spacing-md-subtle);
+
+  /* Buttons & Inputs */
+  --spacing-control-py: var(--spacing-md-subtle);
+  --spacing-control-px: var(--spacing-lg);
+
+  /* List & Stack Items */
+  --spacing-item-py: var(--spacing-sm);
+  --spacing-item-px: var(--spacing-md);
+
+  /* Cards & Modals */
+  --spacing-card-py: var(--spacing-lg);
+  --spacing-card-px: var(--spacing-lg);
+  --spacing-card-py-compact: var(--spacing-md);
+  --spacing-card-px-compact: var(--spacing-md);
+
+  /* Component Gaps (flex/grid gaps) */
+  --gap-xs: var(--spacing-xs);
+  --gap-sm: var(--spacing-sm);
+  --gap-md: var(--spacing-md);
+  --gap-lg: var(--spacing-lg);
+
+  /* Standard Sections */
+  --spacing-section-py: var(--spacing-xxl);
+  --spacing-section-px: var(--spacing-md);
+  --spacing-section-gap: var(--spacing-xxl);
+}
+

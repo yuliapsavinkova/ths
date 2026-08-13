@@ -1,0 +1,187 @@
+/* PRIVACY DISCLOSURE STYLES */
+
+.privacy-disclosure-container {
+  width: 100%;
+  margin-top: var(--spacing-sm);
+  font-family: var(--font-sans);
+}
+
+/* Alignments */
+.privacy-disclosure-container.align-left {
+  margin-left: 0;
+  margin-right: auto;
+}
+
+.privacy-disclosure-container.align-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.privacy-disclosure-container.align-right {
+  margin-left: auto;
+  margin-right: 0;
+}
+
+.privacy-disclosure-container.align-responsive {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (--large) {
+  .privacy-disclosure-container.align-responsive {
+    margin-left: 0;
+    margin-right: auto;
+  }
+}
+
+/* Toggle Button & Wrappers */
+.privacy-toggle-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.align-left .privacy-toggle-wrapper {
+  justify-content: flex-start;
+}
+
+.align-center .privacy-toggle-wrapper {
+  justify-content: center;
+}
+
+.align-right .privacy-toggle-wrapper {
+  justify-content: flex-end;
+}
+
+.align-responsive .privacy-toggle-wrapper {
+  justify-content: center;
+}
+
+@media (--large) {
+  .align-responsive .privacy-toggle-wrapper {
+    justify-content: flex-start;
+  }
+}
+
+.privacy-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm-subtle);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  opacity: var(--alpha-85);
+}
+
+.privacy-toggle-btn:hover {
+  color: var(--color-brand-primary);
+  opacity: 1;
+}
+
+.privacy-toggle-link {
+  text-decoration: underline;
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+  font-weight: var(--font-weight-medium);
+}
+
+.privacy-toggle-chevron {
+  opacity: var(--alpha-65);
+  transition: transform var(--transition-fast);
+}
+
+.privacy-icon {
+  flex-shrink: 0;
+  opacity: var(--alpha-85);
+  transition: opacity var(--transition-fast);
+}
+
+.privacy-toggle-btn:hover .privacy-icon {
+  opacity: 1;
+}
+
+/* Box Content */
+.privacy-box-content {
+  margin-top: var(--spacing-sm);
+  background-color: var(--color-bg-primary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-md-subtle) var(--spacing-md);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: var(--line-height-relaxed);
+  box-shadow: var(--shadow-subtle);
+  text-align: center;
+}
+
+.privacy-box-content strong {
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.align-left .privacy-box-content {
+  text-align: left;
+}
+
+.align-center .privacy-box-content {
+  text-align: center;
+}
+
+.align-right .privacy-box-content {
+  text-align: right;
+}
+
+.align-responsive .privacy-box-content {
+  text-align: center;
+}
+
+@media (--large) {
+  .align-responsive .privacy-box-content {
+    text-align: left;
+  }
+}
+
+/* Dark theme overrides for dark backgrounds (e.g. newsletter) */
+.privacy-disclosure-container.theme-dark .privacy-toggle-btn {
+  color: var(--color-brand-secondary);
+  opacity: 1;
+}
+
+.privacy-disclosure-container.theme-dark .privacy-toggle-btn:hover {
+  color: var(--color-brand-cream);
+}
+
+.privacy-disclosure-container.theme-dark .privacy-toggle-link {
+  text-decoration-color: var(--color-border-bold);
+}
+
+.privacy-disclosure-container.theme-dark .privacy-box-content {
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-border-inverse-soft);
+  color: var(--color-text-primary-inverse);
+  box-shadow: var(--shadow-lg);
+  line-height: var(--line-height-relaxed);
+}
+
+.privacy-disclosure-container.theme-dark .privacy-box-content strong {
+  color: var(--color-brand-secondary);
+}
+
+/* Booking specific styling to match bms-step-group (steps 1, 2, 3, 4) */
+.privacy-disclosure-container.type-booking .privacy-box-content {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-bold);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal, 0.25s) cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.privacy-disclosure-container.type-booking .privacy-box-content:hover {
+  border-color: var(--color-brand-primary);
+  box-shadow: var(--shadow-md);
+}
+

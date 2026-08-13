@@ -1,0 +1,121 @@
+/* TrustedHousesitters Banner Component Styles powered strictly by Design Tokens */
+
+/* 1. Compact Centered Banner Variant (Text Only) */
+.th-banner-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: var(--z-content);
+}
+
+.th-banner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+  width: fit-content;
+  background: transparent;
+  border: none;
+  padding: var(--spacing-xs) 0;
+  box-shadow: none;
+  text-decoration: none;
+  cursor: pointer;
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+}
+
+.th-banner:hover {
+  background: transparent;
+  box-shadow: none;
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.th-banner-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  color: var(--color-brand-cream);
+}
+
+.th-banner-message {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  color: var(--color-brand-cream);
+  text-align: center;
+}
+
+.th-banner-line {
+  display: block;
+  text-align: center;
+}
+
+.th-banner-message strong {
+  font-weight: var(--font-weight-bold);
+  color: var(--color-brand-secondary);
+  background-color: transparent;
+  padding: 0;
+  border-radius: 0;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+.th-banner-icon {
+  display: inline-block;
+  vertical-align: -1px;
+  margin-left: 5px;
+  color: var(--color-brand-secondary);
+  transition: transform var(--transition-fast) ease;
+}
+
+.th-banner:hover .th-banner-icon,
+.th-promo-card:hover .th-banner-icon {
+  transform: translate(2px, -2px);
+}
+
+/* 2. Standalone Card Variant */
+.th-promo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-surface);
+  border: 1px solid var(--color-border-bold);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  text-decoration: none;
+  transition: all var(--transition-fast) ease;
+  box-shadow: var(--shadow-sm);
+}
+
+.th-promo-card:hover {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-bg-surface-alt);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
+}
+
+.th-promo-card .th-banner-message {
+  color: var(--color-text-primary);
+  font-size: var(--font-size-xs);
+  text-align: center;
+}
+
+.th-promo-card .th-banner-message strong {
+  color: var(--color-brand-primary);
+}
+
+.th-promo-card .th-banner-icon {
+  color: var(--color-brand-primary);
+}
+
+

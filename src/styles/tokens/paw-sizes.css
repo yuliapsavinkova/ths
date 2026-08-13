@@ -1,0 +1,15 @@
+/* PAW ICON CENTRALIZED SIZING CONTROLS */
+:root {
+  /* =========================================================================
+     CATEGORY 1: SECTION HEADERS & TAGS
+     Controls the paw size inside sections like "About", "Services", "Coverage", 
+     "Reviews", "Common Questions", "Rates", "Schedule", etc.
+     ========================================================================= */
+  --paw-size-header: 1rem;
+
+  /* =========================================================================
+     CATEGORY 2: LIST ITEM BULLETS
+     Controls the paw bullet sizes inside the "What Is Included" list items
+     ========================================================================= */
+  --paw-size-bullet: 11px;
+}

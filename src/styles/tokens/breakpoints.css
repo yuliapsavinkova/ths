@@ -1,0 +1,7 @@
+/* ─── CENTRALIZED RESPONSIVE BREAKPOINTS ─── */
+@custom-media --small (width >= 480px);
+@custom-media --medium (width >= 768px);
+@custom-media --large (width >= 1024px);
+@custom-media --xlarge (width >= 1280px);
+@custom-media --xxlarge (width >= 1440px);
+@custom-media --ultra (width >= 1920px);

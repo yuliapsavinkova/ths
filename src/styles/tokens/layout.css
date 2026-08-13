@@ -1,0 +1,32 @@
+:root {
+  /* Sizing and Layout */
+  --container-width-narrow: 640px;
+  --container-width-medium: 896px;
+  --container-width-standard: 1024px;
+  --container-width-wide: 1440px;
+
+  /* Semantic Layout & Offset Tokens */
+  --header-offset-mobile: 5.25rem;  /* ~84px ensures generous clearance under mobile header */
+  --header-offset-tablet: 6rem;     /* ~96px scaled up for tablet header height */
+  --header-offset-desktop: 5.75rem; /* ~92px offset for spacious display */
+
+  /* Border Radii */
+  --radius-xs: 0.125rem;         /* 2px - precise micro-details */
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.75rem;
+  --radius-xl: 1rem;
+  --radius-xxl: 1.5rem;
+  --radius-full: 9999px;
+
+  /* Stacking Context (z-index) Tokens */
+  --z-below: -1;
+  --z-base: 0;
+  --z-content: 1;
+  --z-overlay: 2;
+  --z-above: 3;
+  --z-sticky: 100;
+  --z-drawer: 150;
+  --z-modal: 200;
+  --z-toast: 300;
+}

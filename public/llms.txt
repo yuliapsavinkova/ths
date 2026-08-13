@@ -1,0 +1,13 @@
+# Yulia's Live-In House & Pet Sitting
+
+> Premium, professional live-in house and pet sitting services.
+
+This site offers a comprehensive overview of Yulia's live-in sitting services, including an interactive rates calculator, live schedule and calendar, custom sitting plans, and contact details.
+
+## Core Navigation
+
+- [Yulia's Sitter Home](https://yulia.sitterjourney.com/) - Main portal for live-in house and pet sitting services.
+- [Services Guide](https://yulia.sitterjourney.com/#services-section) - Detailed information on pet care, home security, and custom sitting plans.
+- [Interactive Rates Calculator](https://yulia.sitterjourney.com/#calculator-section) - Estimate sitting costs based on pet types, counts, and booking durations.
+- [Availability Calendar](https://yulia.sitterjourney.com/#calendar-section) - Real-time look at current schedule, bookings, and open slots.
+- [Consultation Request Form](https://yulia.sitterjourney.com/#booking-form-section) - Direct inquiry form to book sitting arrangements.

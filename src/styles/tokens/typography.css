@@ -1,0 +1,33 @@
+:root {
+  /* Centralized Typography Tokens */
+  /* Font Sizes - limited to 10 elegant, scalable values */
+  --font-size-3xs: 0.5625rem;   /* ~9px - micro details */
+  --font-size-2xs: 0.625rem;    /* ~10px - fine labels, small metadata */
+  --font-size-xs: 0.75rem;      /* ~12px - standard captions, badges, small buttons */
+  --font-size-sm: 0.8125rem;    /* ~13px - fine descriptions, input subtexts */
+  --font-size-base: 0.9375rem;  /* ~15px - regular body content, standard form inputs */
+  --font-size-md: 1.0625rem;    /* ~17px - primary body copy, lead paragraphs */
+  --font-size-lg: 1.25rem;      /* ~20px - subsection headers, large testimonials */
+  --font-size-xl: 1.5rem;       /* ~24px - standard card/content titles */
+  --font-size-2xl: 2.25rem;     /* ~36px - section headings, prominent callouts */
+  --font-size-3xl: clamp(2.5rem, 5vw, 4.25rem); /* ~40-68px - majestic display & hero numbers */
+
+  /* Font Weights */
+  --font-weight-light: 300;
+  --font-weight-normal: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* Line Heights */
+  --line-height-none: 1;
+  --line-height-tight: 1.2;
+  --line-height-snug: 1.35;
+  --line-height-normal: 1.5;
+  --line-height-relaxed: 1.625;
+
+  /* Fonts */
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-serif: "Cormorant Garamond", Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+}

@@ -1,0 +1,135 @@
+/* ==========================================
+   BRAND LOGO COMPONENT STYLES (brand-logo.css)
+   ========================================== */
+
+/* Base Component (Default: Dark background context) */
+.brand-logo-component {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-sm);
+  text-decoration: none;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-secondary);
+  transition: color var(--transition-fast), transform var(--transition-fast), opacity var(--transition-fast);
+  letter-spacing: 0.01em;
+}
+
+@media (--medium) {
+  .brand-logo-component {
+    font-size: var(--font-size-xl);
+  }
+}
+
+/* Hover state on dark background */
+.brand-logo-component:hover {
+  color: var(--color-brand-cream);
+  opacity: 0.95;
+}
+
+.brand-logo-icon-img {
+  width: 38px;
+  height: 38px;
+  object-fit: contain;
+  flex-shrink: 0;
+  filter: drop-shadow(0 1px 3px rgba(0, 0, 0, 0.25));
+  transition: transform var(--transition-medium), width var(--transition-normal), height var(--transition-normal);
+}
+
+@media (--medium) {
+  .brand-logo-icon-img {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+.brand-logo-component:hover .brand-logo-icon-img {
+  transform: scale(1.05);
+}
+
+.brand-logo-text-wrap {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  column-gap: 0.35em;
+  row-gap: 0.1em;
+  line-height: 1.25;
+}
+
+.brand-logo-name,
+.brand-logo-tagline {
+  white-space: nowrap;
+}
+
+/* ------------------------------------------
+   LIGHT BACKGROUND CONTEXTS
+   (e.g., when header is scrolled or lightBg=true)
+   ------------------------------------------ */
+
+.brand-logo-component--light-bg,
+header.scrolled .brand-logo-component {
+  color: var(--color-text-primary); /* Dark charcoal text for high contrast on light backgrounds */
+}
+
+.brand-logo-component--light-bg:hover,
+header.scrolled .brand-logo-component:hover {
+  color: var(--color-brand-primary); /* Warm antique gold on hover on light backgrounds */
+  opacity: 1;
+}
+
+/* ------------------------------------------
+   HEADER CONTEXT
+   ------------------------------------------ */
+
+.brand-logo-component--header {
+  color: var(--color-brand-secondary);
+}
+
+header:not(.scrolled) .brand-logo-component--header {
+  color: var(--color-brand-secondary);
+}
+
+header:not(.scrolled) .brand-logo-component--header:hover {
+  color: var(--color-brand-cream);
+}
+
+header.scrolled .brand-logo-component--header {
+  font-size: var(--font-size-lg);
+  gap: var(--spacing-xs);
+  color: var(--color-text-primary);
+}
+
+header.scrolled .brand-logo-component--header:hover {
+  color: var(--color-brand-primary);
+}
+
+header.scrolled .brand-logo-component--header .brand-logo-icon-img {
+  width: 36px;
+  height: 36px;
+}
+
+/* ------------------------------------------
+   FOOTER CONTEXT
+   ------------------------------------------ */
+
+.brand-logo-component--footer {
+  font-size: var(--font-size-xl);
+  color: var(--color-brand-secondary);
+}
+
+.brand-logo-component--footer:hover {
+  color: var(--color-brand-cream);
+}
+
+.brand-logo-component--footer .brand-logo-icon-img {
+  width: 48px;
+  height: 48px;
+}
+
+@media (--medium) {
+  .footer-brand-col .brand-logo-component--footer {
+    justify-content: flex-start;
+  }
+}

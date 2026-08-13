@@ -1,0 +1,122 @@
+:root {
+  /* ==========================================================================
+     1. BASE PALETTE (OKLCH: Lightness %, Chroma, Hue)
+     ========================================================================== */
+  --pram-gray-925: oklch(21% 0.01 50);        /* Deep Charcoal */
+  --pram-gray-600: oklch(38% 0.02 50);        /* High-contrast Medium Gray */
+  --pram-gray-050: oklch(98.5% 0.005 50);     /* Soft Off-white / Light Alabaster */
+
+  --pram-gold-100: oklch(96% 0.02 85);        /* Warm Champagne Cream Surface */
+  --pram-gold-500: oklch(72% 0.065 78);       /* Soft Warm Gold */
+  --pram-gold-700: oklch(38% 0.07 85);        /* Deep Antique Gold (High Contrast WCAG AA) */
+
+  --pram-green-600: oklch(50% 0.12 150);      /* Forest Green */
+  --pram-green-400: oklch(80% 0.18 140);      /* Vibrant Accent Green */
+  --pram-amber-600: oklch(60% 0.16 70);       /* Warning Amber */
+  --pram-red-600:   oklch(55% 0.22 25);       /* Error Red */
+  --pram-blue-500:  oklch(62% 0.19 250);      /* Info Blue */
+
+  /* ==========================================================================
+     2. ALPHA SCALE
+     ========================================================================== */
+  --alpha-05: 5%;
+  --alpha-08: 8%;
+  --alpha-12: 12%;
+  --alpha-20: 20%;
+  --alpha-30: 30%;
+  --alpha-45: 45%;
+  --alpha-65: 65%;
+  --alpha-85: 85%;
+  --alpha-90: 90%;
+  --alpha-95: 95%;
+
+  /* ==========================================================================
+     3. SEMANTIC TOKENS
+     Note: Single-color opacity fades use 'in srgb' to prevent hue-shifting toward yellow/red.
+     ========================================================================== */
+
+  /* --- Brand --- */
+  --color-brand-primary: var(--pram-gold-700);
+  --color-brand-secondary: var(--pram-gold-500);
+  --color-brand-cream: var(--pram-gold-100);
+
+  --color-brand-primary-subtle: color-mix(in srgb, var(--color-brand-primary) var(--alpha-05), transparent);
+  --color-brand-primary-soft:   color-mix(in srgb, var(--color-brand-primary) var(--alpha-12), transparent);
+  --color-brand-primary-medium: color-mix(in srgb, var(--color-brand-primary) var(--alpha-20), transparent);
+  --color-brand-primary-bold:   color-mix(in srgb, var(--color-brand-primary) var(--alpha-30), transparent);
+
+  /* --- Text --- */
+  --color-text-primary: var(--pram-gray-925);
+  --color-text-secondary: var(--pram-gray-600);
+  --color-text-primary-inverse: var(--pram-gray-050);
+  --color-text-secondary-inverse: color-mix(in srgb, var(--pram-gray-050) var(--alpha-65), transparent);
+
+  /* --- Backgrounds & Surfaces --- */
+  --color-bg-primary: var(--pram-gray-050);
+  --color-bg-secondary: var(--pram-gold-100);
+  --color-bg-secondary-translucent: color-mix(in srgb, var(--pram-gold-100) var(--alpha-45), transparent);
+  --color-bg-surface: var(--pram-gray-050);
+  --color-bg-surface-alt: var(--pram-gold-100);
+  --color-bg-dark: var(--pram-gray-925);
+  --color-bg-cream-airy: color-mix(in srgb, var(--pram-gold-100) var(--alpha-12), transparent);
+
+  --color-bg-primary-translucent: color-mix(in srgb, var(--pram-gray-050) var(--alpha-85), transparent);
+  --color-bg-dark-translucent-strong: color-mix(in srgb, var(--pram-gray-925) var(--alpha-85), transparent);
+  --color-bg-dark-translucent-soft: color-mix(in srgb, var(--pram-gray-925) var(--alpha-30), transparent);
+  --color-bg-dark-translucent-faint: color-mix(in srgb, var(--pram-gray-925) var(--alpha-12), transparent);
+  --color-bg-glass-circle: radial-gradient(circle at 30% 30%, color-mix(in srgb, var(--color-brand-secondary) 25%, transparent) 0%, color-mix(in srgb, var(--color-bg-dark) 55%, transparent) 100%);
+
+  /* --- Borders --- */
+  --color-border-primary: color-mix(in srgb, var(--pram-gold-500) var(--alpha-12), transparent);
+  --color-border-soft: color-mix(in srgb, var(--pram-gold-500) var(--alpha-05), transparent);
+  --color-border-bold: color-mix(in srgb, var(--pram-gold-500) var(--alpha-45), transparent);
+  --color-border-inverse-soft: color-mix(in srgb, var(--pram-gold-500) var(--alpha-20), transparent);
+
+  /* --- Status --- */
+  --color-status-success: var(--pram-green-600);
+  --color-status-success-bg: color-mix(in srgb, var(--pram-green-600) var(--alpha-08), transparent);
+  --color-status-success-border: color-mix(in srgb, var(--pram-green-600) var(--alpha-12), transparent);
+  --color-status-success-vibrant: var(--pram-green-400);
+
+  --color-status-warning: var(--pram-amber-600);
+  --color-status-warning-bg: color-mix(in srgb, var(--pram-amber-600) var(--alpha-08), transparent);
+  --color-status-warning-border: color-mix(in srgb, var(--pram-amber-600) var(--alpha-12), transparent);
+
+  --color-status-error: var(--pram-red-600);
+  --color-status-error-bg: color-mix(in srgb, var(--pram-red-600) var(--alpha-05), transparent);
+  --color-status-error-border: color-mix(in srgb, var(--pram-red-600) var(--alpha-12), transparent);
+
+  --color-status-info: var(--pram-blue-500);
+  --color-status-info-bg: color-mix(in srgb, var(--pram-blue-500) var(--alpha-08), transparent);
+  --color-status-info-border: color-mix(in srgb, var(--pram-blue-500) var(--alpha-12), transparent);
+
+  /* --- Overlays --- */
+  --color-overlay-light: color-mix(in srgb, var(--pram-gray-050) var(--alpha-08), transparent);
+  --color-overlay-light-faint: color-mix(in srgb, var(--pram-gray-050) var(--alpha-05), transparent);
+  --color-overlay-dark: color-mix(in srgb, var(--pram-gray-925) var(--alpha-65), transparent);
+
+  /* --- Glows (Fixed Hue Interpolation) --- */
+  --color-glow-soft: color-mix(in srgb, var(--pram-gold-500) var(--alpha-30), transparent);
+  --color-glow-medium: color-mix(in srgb, var(--pram-gold-500) var(--alpha-45), transparent);
+  --color-glow-vibrant: color-mix(in srgb, var(--pram-gold-500) var(--alpha-65), transparent);
+  --color-glow-bold: color-mix(in srgb, var(--pram-gold-500) var(--alpha-85), transparent);
+
+  --color-accent-gold-glow: 0 0 15px color-mix(in srgb, var(--pram-gold-700) var(--alpha-12), transparent);
+  --color-accent-gold-glow-strong: 0 0 25px color-mix(in srgb, var(--pram-gold-700) var(--alpha-30), transparent);
+
+  /* ==========================================================================
+     4. SHADOWS
+     ========================================================================== */
+  --shadow-tint: color-mix(in srgb, var(--pram-gray-925) var(--alpha-05), transparent);
+  --shadow-tint-faint: color-mix(in srgb, var(--pram-gray-925) var(--alpha-05), transparent);
+
+  --shadow-subtle: 0 4px 20px var(--shadow-tint-faint);
+  --shadow-sm: 0 1px 2px 0 var(--shadow-tint-faint);
+  --shadow-md: 0 4px 6px -1px var(--shadow-tint), 0 2px 4px -1px var(--shadow-tint);
+  --shadow-lg: 0 10px 15px -3px var(--shadow-tint), 0 4px 6px -2px var(--shadow-tint);
+  --shadow-xl: 0 20px 25px -5px var(--shadow-tint), 0 10px 10px -5px var(--shadow-tint);
+
+  /* --- Text Shadows --- */
+  --text-shadow-strong: 0 2px 10px color-mix(in srgb, var(--pram-gray-925) var(--alpha-95), transparent), 0 1px 3px color-mix(in srgb, var(--pram-gray-925) var(--alpha-90), transparent);
+  --text-shadow-medium: 0 1.5px 8px color-mix(in srgb, var(--pram-gray-925) var(--alpha-95), transparent), 0 1px 3px color-mix(in srgb, var(--pram-gray-925) var(--alpha-90), transparent);
+}

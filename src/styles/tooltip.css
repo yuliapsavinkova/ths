@@ -1,0 +1,180 @@
+/* ─── Reusable Tooltip CSS Design System Component ─── */
+
+.app-tooltip-wrapper {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  margin-left: var(--spacing-xs);
+  vertical-align: middle;
+  outline: none;
+}
+
+.app-tooltip-icon {
+  color: var(--color-brand-primary);
+  opacity: 0.85;
+  transition: opacity var(--transition-fast) ease, color var(--transition-fast) ease, transform var(--transition-fast) ease;
+}
+
+.app-tooltip-wrapper:hover .app-tooltip-icon,
+.app-tooltip-wrapper:focus-visible .app-tooltip-icon {
+  opacity: 1;
+  color: var(--color-brand-primary-bold);
+  transform: scale(1.15);
+}
+
+.app-tooltip-box {
+  position: absolute;
+  width: max-content;
+  max-width: min(280px, 80vw);
+  background-color: var(--color-bg-dark);
+  color: var(--color-text-primary-inverse);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-normal);
+  padding: var(--spacing-sm) var(--spacing-md-subtle);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-border-bold);
+  box-shadow: var(--shadow-lg);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+  z-index: var(--z-modal);
+  text-align: left;
+  white-space: normal;
+  text-transform: none;
+  letter-spacing: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.app-tooltip-box::after {
+  content: "";
+  position: absolute;
+  border-style: solid;
+}
+
+/* ─── Top Position: Center Alignment ─── */
+.app-tooltip-wrapper.position-top.align-center .app-tooltip-box {
+  bottom: calc(100% + var(--spacing-sm));
+  left: 50%;
+  transform: translateX(-50%) translateY(var(--spacing-xs));
+}
+
+.app-tooltip-wrapper.position-top.align-center .app-tooltip-box::after {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: var(--spacing-sm-subtle) var(--spacing-sm-subtle) 0 var(--spacing-sm-subtle);
+  border-color: var(--color-bg-dark) transparent transparent transparent;
+}
+
+.app-tooltip-wrapper.position-top.align-center:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-center:focus-visible .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Top Position: Left Alignment (Tooltip expands to the right) ─── */
+.app-tooltip-wrapper.position-top.align-left .app-tooltip-box {
+  bottom: calc(100% + var(--spacing-sm));
+  left: -8px;
+  transform: translateY(var(--spacing-xs));
+}
+
+.app-tooltip-wrapper.position-top.align-left .app-tooltip-box::after {
+  top: 100%;
+  left: 14px;
+  transform: none;
+  border-width: var(--spacing-sm-subtle) var(--spacing-sm-subtle) 0 var(--spacing-sm-subtle);
+  border-color: var(--color-bg-dark) transparent transparent transparent;
+}
+
+.app-tooltip-wrapper.position-top.align-left:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-left:focus-visible .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ─── Top Position: Right Alignment (Tooltip expands to the left) ─── */
+.app-tooltip-wrapper.position-top.align-right .app-tooltip-box {
+  bottom: calc(100% + var(--spacing-sm));
+  right: -8px;
+  left: auto;
+  transform: translateY(var(--spacing-xs));
+}
+
+.app-tooltip-wrapper.position-top.align-right .app-tooltip-box::after {
+  top: 100%;
+  right: 14px;
+  left: auto;
+  transform: none;
+  border-width: var(--spacing-sm-subtle) var(--spacing-sm-subtle) 0 var(--spacing-sm-subtle);
+  border-color: var(--color-bg-dark) transparent transparent transparent;
+}
+
+.app-tooltip-wrapper.position-top.align-right:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-right:focus-visible .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ─── Bottom Position: Center Alignment ─── */
+.app-tooltip-wrapper.position-bottom.align-center .app-tooltip-box {
+  top: calc(100% + var(--spacing-sm));
+  left: 50%;
+  transform: translateX(-50%) translateY(calc(-1 * var(--spacing-xs)));
+}
+
+.app-tooltip-wrapper.position-bottom.align-center .app-tooltip-box::after {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 0 var(--spacing-sm-subtle) var(--spacing-sm-subtle) var(--spacing-sm-subtle);
+  border-color: transparent transparent var(--color-bg-dark) transparent;
+}
+
+.app-tooltip-wrapper.position-bottom.align-center:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-center:focus-visible .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* ─── Bottom Position: Left Alignment ─── */
+.app-tooltip-wrapper.position-bottom.align-left .app-tooltip-box {
+  top: calc(100% + var(--spacing-sm));
+  left: -8px;
+  transform: translateY(calc(-1 * var(--spacing-xs)));
+}
+
+.app-tooltip-wrapper.position-bottom.align-left .app-tooltip-box::after {
+  bottom: 100%;
+  left: 14px;
+  transform: none;
+  border-width: 0 var(--spacing-sm-subtle) var(--spacing-sm-subtle) var(--spacing-sm-subtle);
+  border-color: transparent transparent var(--color-bg-dark) transparent;
+}
+
+.app-tooltip-wrapper.position-bottom.align-left:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-left:focus-visible .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ─── Mobile Viewport Adaptations ─── */
+@media (max-width: 640px) {
+  .app-tooltip-box {
+    max-width: min(240px, 75vw);
+    font-size: var(--font-size-xs);
+    padding: var(--spacing-xs) var(--spacing-sm);
+  }
+}
