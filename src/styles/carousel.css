@@ -18,7 +18,7 @@
 
 @media (--medium) {
   .swipe-deck-inner-wrapper {
-    padding: 0 24px; /* Let cards occupy horizontal space with room for side arrows */
+    padding: 0 28px; /* Let cards occupy horizontal space with room for side arrows */
   }
 }
 
@@ -126,10 +126,10 @@
     display: flex;
   }
   .carousel-nav-btn.prev {
-    left: -16px;
+    left: 0px;
   }
   .carousel-nav-btn.next {
-    right: -16px;
+    right: 0px;
   }
 }
 

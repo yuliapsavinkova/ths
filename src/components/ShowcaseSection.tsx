@@ -237,7 +237,7 @@ export default function ShowcaseSection() {
                         {item.category === 'videos' ? '🎥' : '🐾'} {item.petName}
                       </p>
                       <p className="showcase-card-excerpt">
-                        {item.description.length > 105 ? `${item.description.substring(0, 102)}...` : item.description}
+                        {item.description}
                       </p>
                       
                       <div className="showcase-card-footer">
@@ -317,23 +317,7 @@ export default function ShowcaseSection() {
                   onClick={() => setSelectedItemIndex(null)}
                   aria-label="Close modal"
                 >
-                  <X size={20} />
-                </button>
-
-                {/* Left/Right Controls on outer sides of the entire card */}
-                <button 
-                  className="showcase-modal-nav-btn prev-btn"
-                  onClick={handlePrev}
-                  aria-label="Previous story"
-                >
-                  <ChevronLeft size={22} />
-                </button>
-                <button 
-                  className="showcase-modal-nav-btn next-btn"
-                  onClick={handleNext}
-                  aria-label="Next story"
-                >
-                  <ChevronRight size={22} />
+                  <X size={18} />
                 </button>
 
                 {/* Dual Column Layout */}
@@ -366,14 +350,24 @@ export default function ShowcaseSection() {
                       />
                     )}
                     
-                    {/* Corner Quick Badges */}
+                    {/* Corner Quick Badges & Heart Like Button */}
                     <div className="showcase-modal-media-badges">
                       <span className="showcase-modal-tag-pill">
-                        {activeItem.category === 'videos' && <Video size={12} className="tag-icon" />}
+                        {activeItem.category === 'videos' && <Video size={14} className="tag-icon" />}
                         {activeItem.category === 'dogs' && <span className="tag-emoji">🐶</span>}
                         {activeItem.category === 'cats' && <span className="tag-emoji">🐱</span>}
                         <span className="tag-text">{activeItem.category}</span>
                       </span>
+
+                      <button 
+                        className={`showcase-card-like-pill ${likedItems[activeItem.id] ? 'liked' : ''}`}
+                        onClick={(e) => handleLike(activeItem.id, e)}
+                        title={likedItems[activeItem.id] ? "Unlike" : "Love this"}
+                        aria-label={likedItems[activeItem.id] ? "Unlike" : "Love this"}
+                      >
+                        <Heart size={14} fill={likedItems[activeItem.id] ? 'currentColor' : 'none'} />
+                        <span>{likesCount[activeItem.id] ?? activeItem.initialLikes}</span>
+                      </button>
                     </div>
                   </div>
 
@@ -390,54 +384,41 @@ export default function ShowcaseSection() {
 
                       {/* Header Title */}
                       <h3 className="showcase-modal-title">{activeItem.title}</h3>
-                      
-                      {/* Pet Profile Name Card */}
-                      <div className="showcase-modal-profile-card">
-                        <div className="showcase-modal-profile-icon">
-                          {activeItem.category === 'videos' ? '🎥' : '🐾'}
-                        </div>
-                        <div>
-                          <p className="showcase-modal-profile-name">{activeItem.petName}</p>
-                        </div>
-                      </div>
 
-                      {/* Fully Expressive heart-warming narrative description */}
+                      {/* Pet Name directly under title (matching card hierarchy) */}
+                      <p className="showcase-modal-pet-name">
+                        <span className="pet-icon">{activeItem.category === 'videos' ? '🎥' : '🐾'}</span>
+                        <span>{activeItem.petName}</span>
+                      </p>
+
+                      {/* Fully Expressive narrative description */}
                       <div className="showcase-modal-story-section">
-                        <h4 className="showcase-modal-story-title">Story</h4>
                         <p className="showcase-modal-description">{activeItem.description}</p>
-                      </div>
-
-                      {/* Interactive Buttons for Liking */}
-                      <div className="showcase-modal-actions">
-                        <button 
-                          className={`showcase-modal-like-btn ${likedItems[activeItem.id] ? 'liked' : ''}`}
-                          onClick={() => handleLike(activeItem.id)}
-                        >
-                          <Heart size={16} fill={likedItems[activeItem.id] ? 'currentColor' : 'none'} />
-                          <span>{likedItems[activeItem.id] ? 'Loved' : 'Love this'} ({likesCount[activeItem.id] ?? activeItem.initialLikes})</span>
-                        </button>
                       </div>
 
                     </div>
 
-                    {/* Footer bar with progress dots and pagination number */}
+                    {/* Footer bar with Prev/Next navigation and pagination */}
                     <div className="showcase-modal-footer">
-                      {/* Progress Dots indicators inside right side text area */}
-                      <div className="showcase-modal-dots">
-                        {filteredItems.map((_, i) => (
-                          <button
-                            key={i}
-                            className={`showcase-modal-dot ${selectedItemIndex === i ? 'active' : ''}`}
-                            onClick={() => setSelectedItemIndex(i)}
-                            aria-label={`Go to slide ${i + 1}`}
-                          />
-                        ))}
-                      </div>
+                      <button 
+                        className="showcase-modal-nav-link-btn" 
+                        onClick={handlePrev}
+                        aria-label="Previous story"
+                      >
+                        <ChevronLeft size={16} /> Prev
+                      </button>
 
-                      {/* Pagination status indicator (e.g. 3 of 10) */}
                       <div className="showcase-modal-pagination-number">
                         Slide <strong>{selectedItemIndex !== null ? selectedItemIndex + 1 : 0}</strong> of <strong>{filteredItems.length}</strong>
                       </div>
+
+                      <button 
+                        className="showcase-modal-nav-link-btn" 
+                        onClick={handleNext}
+                        aria-label="Next story"
+                      >
+                        Next <ChevronRight size={16} />
+                      </button>
                     </div>
                   </div>
 
