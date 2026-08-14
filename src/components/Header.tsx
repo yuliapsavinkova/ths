@@ -81,7 +81,10 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
               </div>
 
               {/* TrustedHousesitters Promo Banner in Mobile Drawer (Below Book a Sit) */}
-              <TrustedHousesittersBanner variant="card" onClick={closeMobileMenu} />
+              <TrustedHousesittersBanner 
+                variant="card" 
+                onClick={closeMobileMenu} 
+              />
             </div>
           </nav>
         </div>

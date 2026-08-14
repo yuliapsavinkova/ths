@@ -36,16 +36,10 @@ interface BookingRequest {
 
 function generateBookingEmailHtml(booking: BookingRequest): string {
   let petTypeLabel = booking.petType;
-  if (
-    booking.dogCount !== undefined ||
-    booking.catCount !== undefined ||
-    booking.otherCount !== undefined
-  ) {
+  if (booking.dogCount !== undefined || booking.catCount !== undefined || booking.otherCount !== undefined) {
     const parts: string[] = [];
-    if (booking.dogCount && booking.dogCount > 0)
-      parts.push(`${booking.dogCount} ${booking.dogCount === 1 ? 'Dog' : 'Dogs'}`);
-    if (booking.catCount && booking.catCount > 0)
-      parts.push(`${booking.catCount} ${booking.catCount === 1 ? 'Cat' : 'Cats'}`);
+    if (booking.dogCount && booking.dogCount > 0) parts.push(`${booking.dogCount} ${booking.dogCount === 1 ? 'Dog' : 'Dogs'}`);
+    if (booking.catCount && booking.catCount > 0) parts.push(`${booking.catCount} ${booking.catCount === 1 ? 'Cat' : 'Cats'}`);
     if (booking.otherCount && booking.otherCount > 0) parts.push(`${booking.otherCount} Other`);
     if (parts.length > 0) {
       petTypeLabel = `${booking.petCount} (${parts.join(', ')})`;
@@ -65,13 +59,12 @@ function generateBookingEmailHtml(booking: BookingRequest): string {
   }
 
   const specialNeedsList: string[] = [];
-  if (booking.hasSeniorPets) specialNeedsList.push('High-Energy or Reactive Dogs / Senior Care');
-  if (booking.hasMedications) specialNeedsList.push('Specialized Medical Needs & Medication');
-  if (booking.largeGarden) specialNeedsList.push('Garden, Lawn & Plant Management');
-  const specialNeedsHtml =
-    specialNeedsList.length > 0
-      ? specialNeedsList.map((item) => `<div style="margin-bottom: 2px;">• ${item}</div>`).join('')
-      : 'None';
+  if (booking.hasSeniorPets) specialNeedsList.push("High-Energy or Reactive Dogs / Senior Care");
+  if (booking.hasMedications) specialNeedsList.push("Specialized Medical Needs & Medication");
+  if (booking.largeGarden) specialNeedsList.push("Garden, Lawn & Plant Management");
+  const specialNeedsHtml = specialNeedsList.length > 0 
+    ? specialNeedsList.map(item => `<div style="margin-bottom: 2px;">• ${item}</div>`).join('') 
+    : 'None';
 
   let durationStr = 'Not specified';
   if (booking.duration && booking.duration > 0) {
@@ -151,97 +144,61 @@ function generateBookingEmailHtml(booking: BookingRequest): string {
       </div>
 
       <!-- Estimated Cost Breakdown Card -->
-      ${
-        p && p.total !== undefined
-          ? `
+      ${p && p.total !== undefined ? `
       <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-top: 16px;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 14px;">Estimated Cost Breakdown</h3>
         <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.6;">
-          ${
-            p.baseRate !== undefined
-              ? `
+          ${p.baseRate !== undefined ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Base Rate (${booking.duration || 1} ${booking.duration === 1 ? 'night' : 'nights'}):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">$${p.baseRate}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.petSurcharge && p.petSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.petSurcharge && p.petSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Additional Pets Surcharge ($10/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.petSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.seniorSurcharge && p.seniorSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.seniorSurcharge && p.seniorSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">High Energy / Senior / Puppy Care ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.seniorSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.medsSurcharge && p.medsSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.medsSurcharge && p.medsSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Medication Administration ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.medsSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.gardenSurcharge && p.gardenSurcharge > 0
-              ? `
+          </tr>` : ''}
+          ${p.gardenSurcharge && p.gardenSurcharge > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #666666;">Garden & Plant Care ($2.50/night):</td>
             <td style="padding: 6px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.gardenSurcharge}</td>
-          </tr>`
-              : ''
-          }
-          ${
-            p.durationDiscount && p.durationDiscount > 0
-              ? `
+          </tr>` : ''}
+          ${p.durationDiscount && p.durationDiscount > 0 ? `
           <tr>
             <td style="padding: 6px 0; color: #15803d; font-weight: 500;">Long-Stay Discount:</td>
             <td style="padding: 6px 0; color: #15803d; text-align: right; font-weight: 600;">-$${p.durationDiscount}</td>
-          </tr>`
-              : ''
-          }
+          </tr>` : ''}
           <tr style="background-color: #fcfaf7; border-top: 2px solid #f3ebd8;">
             <td style="padding: 10px 8px; color: #1a1a1a; font-weight: 700; font-size: 15px;">Total Estimate:</td>
             <td style="padding: 10px 8px; color: #b08c40; text-align: right; font-weight: 700; font-size: 18px;">$${p.total}</td>
           </tr>
-          ${
-            p.perDay !== undefined
-              ? `
+          ${p.perDay !== undefined ? `
           <tr>
             <td style="padding: 6px 8px; color: #666666; font-size: 13px;" colspan="2">
               Average Nightly Rate: <strong>~$${p.perDay.toFixed(2)} / night</strong>
             </td>
-          </tr>`
-              : ''
-          }
+          </tr>` : ''}
         </table>
       </div>
-      `
-          : ''
-      }
+      ` : ''}
 
       <!-- Specific Instructions Card -->
-      ${
-        booking.notes
-          ? `
+      ${booking.notes ? `
       <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-top: 16px;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 14px;">Specific Instructions & Routines</h3>
         <p style="margin: 0; font-size: 14px; color: #333333; line-height: 1.6; white-space: pre-wrap;">${booking.notes}</p>
       </div>
-      `
-          : ''
-      }
+      ` : ''}
 
       <!-- Footer Branding & Action -->
       <div style="text-align: center; margin-top: 28px; font-size: 12px; color: #999999; line-height: 1.4;">
@@ -265,7 +222,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
-      message: 'Method Not Allowed',
+      message: 'Method Not Allowed'
     });
   }
 
@@ -282,7 +239,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!booking || typeof booking !== 'object') {
       return res.status(400).json({
         success: false,
-        message: 'Invalid or missing JSON payload.',
+        message: 'Invalid or missing JSON payload.'
       });
     }
 
@@ -291,7 +248,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Missing RESEND_API_KEY in Vercel Environment Variables');
       return res.status(500).json({
         success: false,
-        message: 'RESEND_API_KEY environment variable is not configured on Vercel.',
+        message: 'RESEND_API_KEY environment variable is not configured on Vercel.'
       });
     }
 
@@ -300,7 +257,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Missing SITTER_EMAIL_TO in Vercel Environment Variables');
       return res.status(500).json({
         success: false,
-        message: 'SITTER_EMAIL_TO environment variable is not configured on Vercel.',
+        message: 'SITTER_EMAIL_TO environment variable is not configured on Vercel.'
       });
     }
 
@@ -314,7 +271,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: recipient,
       subject: `New Sit Request from ${booking.name || 'Client'} (${booking.location || 'Location'})`,
       html: emailHtml,
-      replyTo: booking.email || recipient,
+      replyTo: booking.email || recipient
     });
 
     if (error) {
@@ -322,7 +279,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({
         success: false,
         message: error.message || 'Resend failed to send email notification.',
-        resendError: error,
+        resendError: error
       });
     }
 
@@ -330,7 +287,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       success: true,
       message: 'Booking request captured and email alert sent successfully.',
       bookingId: Math.random().toString(36).substring(2, 9),
-      resendData: data,
+      resendData: data
     });
   } catch (error: unknown) {
     console.error('Serverless function exception in /api/submit-booking:', error);
@@ -338,7 +295,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({
       success: false,
       message: 'Serverless function execution error.',
-      error: errorMessage,
+      error: errorMessage
     });
   }
 }

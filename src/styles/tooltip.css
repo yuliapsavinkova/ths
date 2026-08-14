@@ -18,7 +18,8 @@
 }
 
 .app-tooltip-wrapper:hover .app-tooltip-icon,
-.app-tooltip-wrapper:focus-visible .app-tooltip-icon {
+.app-tooltip-wrapper:focus-visible .app-tooltip-icon,
+.app-tooltip-wrapper.is-open .app-tooltip-icon {
   opacity: 1;
   color: var(--color-brand-primary-bold);
   transform: scale(1.15);
@@ -52,6 +53,11 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+.app-tooltip-box strong {
+  color: var(--color-brand-secondary);
+  font-weight: var(--font-weight-bold);
+}
+
 .app-tooltip-box::after {
   content: "";
   position: absolute;
@@ -74,7 +80,8 @@
 }
 
 .app-tooltip-wrapper.position-top.align-center:hover .app-tooltip-box,
-.app-tooltip-wrapper.position-top.align-center:focus-visible .app-tooltip-box {
+.app-tooltip-wrapper.position-top.align-center:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-center.is-open .app-tooltip-box {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -96,7 +103,8 @@
 }
 
 .app-tooltip-wrapper.position-top.align-left:hover .app-tooltip-box,
-.app-tooltip-wrapper.position-top.align-left:focus-visible .app-tooltip-box {
+.app-tooltip-wrapper.position-top.align-left:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-left.is-open .app-tooltip-box {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -120,7 +128,8 @@
 }
 
 .app-tooltip-wrapper.position-top.align-right:hover .app-tooltip-box,
-.app-tooltip-wrapper.position-top.align-right:focus-visible .app-tooltip-box {
+.app-tooltip-wrapper.position-top.align-right:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-top.align-right.is-open .app-tooltip-box {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -142,7 +151,8 @@
 }
 
 .app-tooltip-wrapper.position-bottom.align-center:hover .app-tooltip-box,
-.app-tooltip-wrapper.position-bottom.align-center:focus-visible .app-tooltip-box {
+.app-tooltip-wrapper.position-bottom.align-center:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-center.is-open .app-tooltip-box {
   opacity: 1;
   visibility: visible;
   transform: translateX(-50%) translateY(0);
@@ -164,7 +174,33 @@
 }
 
 .app-tooltip-wrapper.position-bottom.align-left:hover .app-tooltip-box,
-.app-tooltip-wrapper.position-bottom.align-left:focus-visible .app-tooltip-box {
+.app-tooltip-wrapper.position-bottom.align-left:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-left.is-open .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* ─── Bottom Position: Right Alignment (Tooltip expands to the left) ─── */
+.app-tooltip-wrapper.position-bottom.align-right .app-tooltip-box {
+  top: calc(100% + var(--spacing-sm));
+  right: -8px;
+  left: auto;
+  transform: translateY(calc(-1 * var(--spacing-xs)));
+}
+
+.app-tooltip-wrapper.position-bottom.align-right .app-tooltip-box::after {
+  bottom: 100%;
+  right: 14px;
+  left: auto;
+  transform: none;
+  border-width: 0 var(--spacing-sm-subtle) var(--spacing-sm-subtle) var(--spacing-sm-subtle);
+  border-color: transparent transparent var(--color-bg-dark) transparent;
+}
+
+.app-tooltip-wrapper.position-bottom.align-right:hover .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-right:focus-visible .app-tooltip-box,
+.app-tooltip-wrapper.position-bottom.align-right.is-open .app-tooltip-box {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
@@ -173,7 +209,7 @@
 /* ─── Mobile Viewport Adaptations ─── */
 @media (max-width: 640px) {
   .app-tooltip-box {
-    max-width: min(240px, 75vw);
+    max-width: min(240px, 72vw);
     font-size: var(--font-size-xs);
     padding: var(--spacing-xs) var(--spacing-sm);
   }

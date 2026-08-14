@@ -13,7 +13,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
-      message: 'Method Not Allowed',
+      message: 'Method Not Allowed'
     });
   }
 
@@ -31,7 +31,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
       return res.status(400).json({
         success: false,
-        message: 'Please provide a valid email address.',
+        message: 'Please provide a valid email address.'
       });
     }
 
@@ -60,7 +60,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
                 This notification was automatically sent by your Home & Pet Sitter Web Portal.
               </p>
             </div>
-          `,
+          `
         });
 
         if (error) {
@@ -79,7 +79,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       message: 'Successfully subscribed to monthly updates.',
       email,
       emailSent,
-      resendData,
+      resendData
     });
   } catch (error: unknown) {
     console.error('Unhandled serverless exception in /api/subscribe:', error);
@@ -87,7 +87,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({
       success: false,
       message: 'Failed to process subscription.',
-      error: errorMessage,
+      error: errorMessage
     });
   }
 }

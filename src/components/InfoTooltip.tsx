@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Info } from 'lucide-react';
 
 export interface InfoTooltipProps {
@@ -18,7 +18,7 @@ export interface InfoTooltipProps {
 
 /**
   * Reusable InfoTooltip Component
-  * Displays a subtle Info icon with a high-contrast, crystal-clear tooltip callout on hover/focus.
+  * Displays a subtle Info icon with a high-contrast, crystal-clear tooltip callout on hover, focus, or tap.
   */
 export const InfoTooltip: React.FC<InfoTooltipProps> = ({
   content,
@@ -28,12 +28,56 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({
   align = 'left',
   className = '',
 }) => {
+  const [isOpen, setIsOpen] = useState(false);
+  const wrapperRef = useRef<HTMLSpanElement>(null);
+
+  const toggleTooltip = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setIsOpen((prev) => !prev);
+  };
+
+  useEffect(() => {
+    if (!isOpen) return;
+
+    const handleOutsideClick = (e: MouseEvent | TouchEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setIsOpen(false);
+      }
+    };
+
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setIsOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleOutsideClick);
+    document.addEventListener('touchstart', handleOutsideClick);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('mousedown', handleOutsideClick);
+      document.removeEventListener('touchstart', handleOutsideClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [isOpen]);
+
   return (
     <span
-      className={`app-tooltip-wrapper position-${position} align-${align} ${className}`.trim()}
+      ref={wrapperRef}
+      className={`app-tooltip-wrapper position-${position} align-${align} ${isOpen ? 'is-open' : ''} ${className}`.trim()}
       aria-label={ariaLabel}
+      aria-expanded={isOpen}
       tabIndex={0}
       role="button"
+      onClick={toggleTooltip}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          setIsOpen((prev) => !prev);
+        }
+      }}
     >
       <Info size={iconSize} className="app-tooltip-icon" />
       <span className="app-tooltip-box" role="tooltip">

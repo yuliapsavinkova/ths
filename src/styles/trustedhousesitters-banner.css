@@ -9,6 +9,7 @@
   margin-bottom: var(--spacing-sm);
   position: relative;
   z-index: var(--z-content);
+  overflow: visible;
 }
 
 .th-banner {
@@ -24,6 +25,7 @@
   text-decoration: none;
   cursor: pointer;
   transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+  overflow: visible;
 }
 
 .th-banner:hover {
@@ -56,8 +58,23 @@
 }
 
 .th-banner-line {
-  display: block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   text-align: center;
+  position: relative;
+  overflow: visible;
+  line-height: var(--line-height-tight);
+}
+
+.th-banner-actions {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  gap: var(--spacing-xs);
+  margin-left: var(--spacing-xs);
+  line-height: 1;
 }
 
 .th-banner-message strong {
@@ -71,11 +88,46 @@
 }
 
 .th-banner-icon {
-  display: inline-block;
-  vertical-align: -1px;
-  margin-left: 5px;
+  display: block;
   color: var(--color-brand-secondary);
   transition: transform var(--transition-fast) ease;
+  flex-shrink: 0;
+}
+
+.th-tooltip-wrapper {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  vertical-align: middle;
+  line-height: 1;
+  margin: 0;
+  padding: 0;
+}
+
+.th-tooltip-wrapper .app-tooltip-wrapper {
+  margin-left: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+}
+
+.th-tooltip-wrapper .app-tooltip-icon {
+  display: block;
+}
+
+/* Info Tooltip Icon styling inside Hero Banner (Dark Background) */
+.th-banner .app-tooltip-icon {
+  color: var(--color-brand-secondary);
+  opacity: 0.95;
+}
+
+.th-banner .app-tooltip-wrapper:hover .app-tooltip-icon,
+.th-banner .app-tooltip-wrapper:focus-visible .app-tooltip-icon,
+.th-banner .app-tooltip-wrapper.is-open .app-tooltip-icon {
+  color: var(--color-brand-cream);
+  opacity: 1;
+  transform: scale(1.15);
 }
 
 .th-banner:hover .th-banner-icon,
@@ -83,7 +135,7 @@
   transform: translate(2px, -2px);
 }
 
-/* 2. Standalone Card Variant */
+/* 2. Standalone Card Variant (e.g. Mobile Drawer Menu) */
 .th-promo-card {
   display: flex;
   align-items: center;
@@ -95,6 +147,8 @@
   text-decoration: none;
   transition: all var(--transition-fast) ease;
   box-shadow: var(--shadow-sm);
+  position: relative;
+  overflow: visible;
 }
 
 .th-promo-card:hover {
@@ -116,6 +170,62 @@
 
 .th-promo-card .th-banner-icon {
   color: var(--color-brand-primary);
+}
+
+/* Tooltip inside Promo Card: Positioned safely relative to card to prevent cut-off in narrow drawer */
+.th-promo-card .th-tooltip-wrapper,
+.th-promo-card .app-tooltip-wrapper {
+  position: static;
+}
+
+.th-promo-card .app-tooltip-icon {
+  color: var(--color-brand-primary);
+  opacity: 0.85;
+}
+
+.th-promo-card .app-tooltip-wrapper:hover .app-tooltip-icon,
+.th-promo-card .app-tooltip-wrapper:focus-visible .app-tooltip-icon,
+.th-promo-card .app-tooltip-wrapper.is-open .app-tooltip-icon {
+  color: var(--color-brand-primary-bold);
+  opacity: 1;
+  transform: scale(1.15);
+}
+
+.th-promo-card .app-tooltip-box {
+  left: 50%;
+  right: auto;
+  bottom: calc(100% + var(--spacing-xs));
+  top: auto;
+  transform: translateX(-50%) translateY(var(--spacing-xs));
+  width: calc(100% - var(--spacing-xs));
+  max-width: 270px;
+  box-sizing: border-box;
+  text-align: left;
+  color: var(--color-text-primary-inverse);
+}
+
+.th-promo-card .app-tooltip-box strong,
+.th-banner .app-tooltip-box strong {
+  color: var(--color-brand-secondary);
+  font-weight: var(--font-weight-bold);
+}
+
+.th-promo-card .app-tooltip-box::after {
+  top: 100%;
+  bottom: auto;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  border-width: var(--spacing-sm-subtle) var(--spacing-sm-subtle) 0 var(--spacing-sm-subtle);
+  border-color: var(--color-bg-dark) transparent transparent transparent;
+}
+
+.th-promo-card .app-tooltip-wrapper:hover .app-tooltip-box,
+.th-promo-card .app-tooltip-wrapper:focus-visible .app-tooltip-box,
+.th-promo-card .app-tooltip-wrapper.is-open .app-tooltip-box {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(0);
 }
 
 

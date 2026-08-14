@@ -9,6 +9,8 @@
  * robust, and responsive layout across all inboxes.
  */
 
+import { formatStayDuration } from './calendarUtils';
+
 interface PricingBreakdownData {
   baseRate?: number;
   petSurcharge?: number;
@@ -79,18 +81,8 @@ export function generateBookingEmailHtml(booking: BookingRequest): string {
   // Format stay duration string
   let durationStr = 'Not specified';
   if (booking.duration && booking.duration > 0) {
-    const n = booking.duration;
-    if (n < 7) {
-      durationStr = `${n} ${n === 1 ? 'night' : 'nights'}`;
-    } else if (n < 30) {
-      const weeks = Math.floor(n / 7);
-      const days = n % 7;
-      durationStr = `${n} nights (${weeks} ${weeks === 1 ? 'week' : 'weeks'}${days > 0 ? `, ${days} ${days === 1 ? 'day' : 'days'}` : ''})`;
-    } else {
-      const months = Math.floor(n / 30);
-      const days = n % 30;
-      durationStr = `${n} nights (~${months} ${months === 1 ? 'month' : 'months'}${days > 0 ? `, ${days} ${days === 1 ? 'day' : 'days'}` : ''})`;
-    }
+    const friendly = formatStayDuration(booking.duration, booking.startDate, booking.endDate);
+    durationStr = `${booking.duration} ${booking.duration === 1 ? 'night' : 'nights'} (${friendly})`;
   }
 
   const p = booking.pricing;

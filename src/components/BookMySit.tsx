@@ -2,6 +2,12 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import { PrivacyDisclosure } from './PrivacyDisclosure';
 import { InfoTooltip } from './InfoTooltip';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
+import {
+  getDatesDiff,
+  calculateEndDateStr,
+  calculateEndDateWithMonths,
+  formatStayDuration
+} from '../utils/calendarUtils';
 import { 
   Calendar, 
   Heart, 
@@ -30,48 +36,20 @@ interface PricingBreakdown {
   perDay: number;
 }
 
-// Helper: date difference
-const getDatesDiff = (startStr: string, endStr: string): number => {
-  if (!startStr || !endStr) return 1;
-  const s = new Date(startStr + 'T00:00:00');
-  const e = new Date(endStr + 'T00:00:00');
-  if (isNaN(s.getTime()) || isNaN(e.getTime())) return 1;
-  const diff = Math.round((e.getTime() - s.getTime()) / (1000 * 60 * 60 * 24));
-  return Math.max(1, diff);
-};
+interface MilestonePreset {
+  days?: number;
+  months?: number;
+  label: string;
+  price: string;
+}
 
-// Helper: calculate end date from start date and nights
-const calculateEndDateStr = (startStr: string, nights: number): string => {
-  if (!startStr) return '';
-  const start = new Date(startStr + 'T00:00:00');
-  const end = new Date(start.getTime() + nights * 24 * 60 * 60 * 1000);
-  const yyyy = end.getFullYear();
-  const mm = String(end.getMonth() + 1).padStart(2, '0');
-  const dd = String(end.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
-};
-
-// Helper: format stay duration into friendly string (e.g. 1 month 2 days)
-const formatStayDuration = (nights: number): string => {
-  if (!nights || nights <= 0) return '1 night';
-  if (nights < 7) {
-    return `${nights} ${nights === 1 ? 'night' : 'nights'}`;
-  }
-  if (nights < 30) {
-    const weeks = Math.floor(nights / 7);
-    const days = nights % 7;
-    const weekText = `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
-    if (days === 0) return weekText;
-    const dayText = `${days} ${days === 1 ? 'day' : 'days'}`;
-    return `${weekText} ${dayText}`;
-  }
-  const months = Math.floor(nights / 30);
-  const days = nights % 30;
-  const monthText = `${months} ${months === 1 ? 'month' : 'months'}`;
-  if (days === 0) return monthText;
-  const dayText = `${days} ${days === 1 ? 'day' : 'days'}`;
-  return `${monthText} ${dayText}`;
-};
+const MILESTONE_PRESETS: MilestonePreset[] = [
+  { days: 1, label: '1 Night', price: '$99' },
+  { days: 7, label: '1 Week', price: '$299' },
+  { days: 30, months: 1, label: '1 Month', price: '$999' },
+  { days: 60, months: 2, label: '2 Months', price: '10% Off' },
+  { days: 90, months: 3, label: '3 Months', price: '15% Off' }
+];
 
 interface BookMySitProps {
   initialDuration?: number;
@@ -232,14 +210,30 @@ export default function BookMySit({
     }
   };
 
-  const handleMilestoneSelect = (nights: number) => {
+  const handleMilestoneSelect = (item: MilestonePreset) => {
     const start = startDate || new Date().toISOString().split('T')[0];
     if (!startDate) {
       setStartDate(start);
     }
-    const end = calculateEndDateStr(start, nights);
+    let end = '';
+    let nightsCount = 0;
+    if (item.months) {
+      end = calculateEndDateWithMonths(start, item.months);
+      nightsCount = getDatesDiff(start, end);
+    } else if (item.days) {
+      end = calculateEndDateStr(start, item.days);
+      nightsCount = item.days;
+    }
     setEndDate(end);
-    setDuration(nights);
+    setDuration(nightsCount);
+  };
+
+  const isPresetActive = (item: MilestonePreset) => {
+    if (item.months) {
+      const currentFormatted = formatStayDuration(duration, startDate, endDate).toLowerCase();
+      return currentFormatted === item.label.toLowerCase() || (item.days ? duration === item.days : false);
+    }
+    return duration === item.days;
   };
 
   // Pricing Engine (ensuring line items and totals add up with 100% mathematical consistency)
@@ -426,18 +420,12 @@ export default function BookMySit({
           {/* Quick Estimates Price Tags Bar */}
           <div className="bms-quick-estimates-bar">
             <div className="bms-price-tags-row">
-              {[
-                { days: 1, label: '1 Night', price: '$99' },
-                { days: 7, label: '1 Week', price: '$299' },
-                { days: 30, label: '1 Month', price: '$999' },
-                { days: 60, label: '2 Months', price: '10% Off' },
-                { days: 90, label: '3 Months', price: '15% Off' }
-              ].map((item) => (
+              {MILESTONE_PRESETS.map((item) => (
                 <button
-                  key={item.days}
+                  key={item.label}
                   type="button"
-                  onClick={() => handleMilestoneSelect(item.days)}
-                  className={`app-pill-btn bms-price-tag-pill ${duration === item.days ? 'active' : ''}`}
+                  onClick={() => handleMilestoneSelect(item)}
+                  className={`app-pill-btn bms-price-tag-pill ${isPresetActive(item) ? 'active' : ''}`}
                 >
                   <span className="bms-tag-label">{item.label}</span>
                   <span className="bms-tag-price">{item.price}</span>
@@ -761,7 +749,7 @@ export default function BookMySit({
                   <span>Review & Submit</span>
                 </div>
                 <div className="bms-nights-pill">
-                  <span>{formatStayDuration(duration)}</span>
+                  <span>{formatStayDuration(duration, startDate, endDate)}</span>
                 </div>
               </div>
 
@@ -799,7 +787,7 @@ export default function BookMySit({
               {/* Line items */}
               <div className="bms-line-items">
                 <div className="bms-line-item">
-                  <span className="bms-item-name">Base Rate ({formatStayDuration(duration)})</span>
+                  <span className="bms-item-name">Base Rate ({formatStayDuration(duration, startDate, endDate)})</span>
                   <span className="bms-item-price">${pricing.baseRate}</span>
                 </div>
 
