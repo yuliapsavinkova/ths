@@ -75,7 +75,9 @@
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition: border-color var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
+  transition:
+    border-color var(--transition-medium) ease,
+    box-shadow var(--transition-medium) ease;
   height: 100%;
 }
 
@@ -310,7 +312,9 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-brand-primary);
-  transition: color var(--transition-fast) ease, font-weight var(--transition-fast) ease;
+  transition:
+    color var(--transition-fast) ease,
+    font-weight var(--transition-fast) ease;
 }
 
 .showcase-card:hover .showcase-card-action {
@@ -708,9 +712,22 @@
 }
 
 .showcase-modal-nav-link-btn:hover {
-  background-color: var(--color-brand-primary);
-  color: var(--color-text-on-brand);
-  border-color: var(--color-brand-primary);
+  background-color: var(--color-bg-secondary);
+  color: var(--color-brand-primary);
+  border-color: var(--color-brand-secondary);
+  box-shadow: var(--shadow-xs);
+  transform: translateY(-1px);
+}
+
+.showcase-modal-nav-link-btn:active {
+  background-color: var(--color-bg-secondary-translucent);
+  transform: translateY(0);
+}
+
+.showcase-modal-nav-link-btn:focus-visible {
+  outline: 2px solid var(--color-brand-secondary);
+  outline-offset: 2px;
+  background-color: var(--color-bg-secondary);
 }
 
 .showcase-modal-pagination-number {
