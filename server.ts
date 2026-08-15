@@ -31,6 +31,9 @@ app.post('/api/submit-feedback', handleFeedbackSubmit);
 // VITE AND STATIC ASSETS SERVING
 // ----------------------------------------------------
 async function startServer() {
+  // Always serve public static assets reliably
+  app.use(express.static(path.join(process.cwd(), 'public')));
+
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
       server: { middlewareMode: true },

@@ -32,7 +32,6 @@ export const ServicesSection: React.FC = () => {
                 height={240}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="app-card-content services-card-content">
@@ -78,7 +77,6 @@ export const ServicesSection: React.FC = () => {
                 height={240}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="app-card-content services-card-content">
@@ -124,7 +122,6 @@ export const ServicesSection: React.FC = () => {
                 height={240}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="app-card-content services-card-content">
@@ -170,7 +167,6 @@ export const ServicesSection: React.FC = () => {
                 height={240}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
             </div>
             <div className="app-card-content services-card-content">

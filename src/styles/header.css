@@ -185,6 +185,10 @@ header:not(.scrolled) .nav-links a.nav-cta-btn:hover {
   background: transparent;
   border: none;
   color: var(--color-brand-secondary);
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   padding: var(--spacing-xs);
   cursor: pointer;
   transition: all var(--transition-fast);
@@ -277,8 +281,10 @@ header.scrolled .mobile-nav-toggle:hover {
   border-radius: var(--radius-full);
   color: var(--color-brand-primary);
   cursor: pointer;
-  width: 36px;
-  height: 36px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   display: flex;
   align-items: center;
   justify-content: center;

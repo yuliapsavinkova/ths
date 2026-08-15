@@ -42,7 +42,7 @@ footer {
 }
 
 .footer-brand-copy {
-  color: var(--color-bg-secondary-translucent);
+  color: var(--color-text-secondary-inverse);
   font-family: var(--font-mono);
   font-size: var(--font-size-2xs);
   display: inline-flex;

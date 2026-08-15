@@ -66,7 +66,6 @@ export const Hero: React.FC = () => {
             loading="eager"
             decoding="async"
             fetchPriority="high"
-            referrerPolicy="no-referrer"
             id="hero-main-img"
           />
 

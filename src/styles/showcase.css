@@ -156,6 +156,43 @@
   font-weight: var(--font-weight-medium);
 }
 
+/* Centered Permanent Video Play Badge */
+.showcase-card-video-badge {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  z-index: var(--z-raised);
+}
+
+.showcase-card-play-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-dark-translucent-strong);
+  border: 1.5px solid var(--color-border-inverse-soft);
+  color: var(--color-text-primary-inverse);
+  box-shadow: var(--shadow-md);
+  backdrop-filter: blur(4px);
+  transition: transform var(--transition-fast) ease, background-color var(--transition-fast) ease, border-color var(--transition-fast) ease;
+}
+
+.showcase-card:hover .showcase-card-play-btn {
+  transform: scale(1.1);
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-cream);
+  color: var(--color-text-primary-inverse);
+}
+
+.showcase-card-play-icon {
+  margin-left: 2px;
+}
+
 /* Floating Badges */
 .showcase-card-badges {
   position: absolute;
@@ -402,8 +439,10 @@
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border-primary);
   color: var(--color-text-primary);
-  width: 32px;
-  height: 32px;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  min-height: 44px;
   border-radius: var(--radius-full);
   display: flex;
   align-items: center;
@@ -425,8 +464,8 @@
   .showcase-modal-close-btn {
     top: var(--spacing-md);
     right: var(--spacing-md);
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
   }
 }
 
@@ -695,7 +734,8 @@
   display: inline-flex;
   align-items: center;
   gap: var(--spacing-xs);
-  padding: var(--spacing-xs) var(--spacing-md-subtle);
+  min-height: 44px;
+  padding: var(--spacing-xs) var(--spacing-md);
   font-family: var(--font-sans);
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);

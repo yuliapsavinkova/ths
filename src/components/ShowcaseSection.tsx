@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { SHOWCASE_ITEMS } from '../data';
 import { ShowcaseItem } from '../types';
@@ -11,12 +11,7 @@ export default function ShowcaseSection() {
   const [likedItems, setLikedItems] = useState<Record<string, boolean>>({});
   const [likesCount, setLikesCount] = useState<Record<string, number>>({});
   const [selectedItemIndex, setSelectedItemIndex] = useState<number | null>(null);
-  const [hasPlayedVideo, setHasPlayedVideo] = useState<boolean>(false);
-
-  // Reset video playback state when selected item changes
-  useEffect(() => {
-    setHasPlayedVideo(false);
-  }, [selectedItemIndex]);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   // Initialize likes from localStorage and SHOWCASE_ITEMS
   useEffect(() => {
@@ -36,6 +31,39 @@ export default function ShowcaseSection() {
     setLikedItems(initialLiked);
   }, []);
 
+  // Categories
+  const categories = [
+    { value: 'all', label: 'All', icon: <PawIcon size={14} className="category-icon" /> },
+    { value: 'dogs', label: 'Dogs', icon: <span className="category-emoji">🐶</span> },
+    { value: 'cats', label: 'Cats', icon: <span className="category-emoji">🐱</span> },
+    { value: 'videos', label: 'Videos', icon: <Video size={14} className="category-icon" /> }
+  ];
+
+  // Filtering items based on category
+  const filteredItems = SHOWCASE_ITEMS.filter(item => {
+    return activeCategory === 'all' || item.category === activeCategory;
+  });
+
+  // Play video automatically when modal opens with video
+  useEffect(() => {
+    if (selectedItemIndex !== null) {
+      const item = filteredItems[selectedItemIndex];
+      if (item?.videoUrl && videoRef.current) {
+        videoRef.current.currentTime = 0;
+        const playPromise = videoRef.current.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(() => {
+            // If browser blocks unmuted autoplay, mute and retry
+            if (videoRef.current) {
+              videoRef.current.muted = true;
+              videoRef.current.play().catch(() => {});
+            }
+          });
+        }
+      }
+    }
+  }, [selectedItemIndex, filteredItems]);
+
   const handleLike = (id: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation(); // Prevent opening lightbox if clicking heart on card
     
@@ -49,19 +77,6 @@ export default function ShowcaseSection() {
     localStorage.setItem(`showcase_liked_${id}`, String(isLiked));
     localStorage.setItem(`showcase_likes_${id}`, String(newLikes));
   };
-
-  // Categories
-  const categories = [
-    { value: 'all', label: 'All', icon: <PawIcon size={14} className="category-icon" /> },
-    { value: 'dogs', label: 'Dogs', icon: <span className="category-emoji">🐶</span> },
-    { value: 'cats', label: 'Cats', icon: <span className="category-emoji">🐱</span> },
-    { value: 'videos', label: 'Videos', icon: <Video size={14} className="category-icon" /> }
-  ];
-
-  // Filtering items based on category
-  const filteredItems = SHOWCASE_ITEMS.filter(item => {
-    return activeCategory === 'all' || item.category === activeCategory;
-  });
 
   const {
     containerRef: deckContainerRef,
@@ -173,26 +188,23 @@ export default function ShowcaseSection() {
                   >
                     {/* Image container */}
                     <div className="showcase-card-media">
-                      {item.videoUrl ? (
-                        <video 
-                          src={`${item.videoUrl}#t=${item.videoThumbnailTime ?? 0.001}`}
-                          poster={item.imageUrl}
-                          preload="metadata"
-                          playsInline
-                          muted
-                          className="showcase-card-img showcase-card-video"
-                        />
-                      ) : (
-                        <img 
-                          src={item.imageUrl} 
-                          alt={item.title} 
-                          width={360}
-                          height={270}
-                          loading="lazy"
-                          decoding="async"
-                          referrerPolicy="no-referrer"
-                          className="showcase-card-img"
-                        />
+                      <img 
+                        src={item.imageUrl} 
+                        alt={item.title} 
+                        width={360}
+                        height={270}
+                        loading="lazy"
+                        decoding="async"
+                        className="showcase-card-img"
+                      />
+
+                      {/* Centered Play Badge for Video cards */}
+                      {item.videoUrl && (
+                        <div className="showcase-card-video-badge" aria-hidden="true">
+                          <div className="showcase-card-play-btn">
+                            <Play size={22} className="showcase-card-play-icon" fill="currentColor" />
+                          </div>
+                        </div>
                       )}
                       
                       {/* Floating Zoom Indicator on Hover */}
@@ -201,7 +213,7 @@ export default function ShowcaseSection() {
                           {item.videoUrl ? (
                             <>
                               <Play size={16} className="showcase-zoom-icon showcase-zoom-icon-play" />
-                              <span className="showcase-zoom-label">Play Video</span>
+                              <span className="showcase-zoom-label">Watch Video</span>
                             </>
                           ) : (
                             <>
@@ -331,21 +343,27 @@ export default function ShowcaseSection() {
                   <div className="showcase-modal-media-col">
                     {activeItem.videoUrl ? (
                       <video 
-                        src={`${activeItem.videoUrl}#t=${activeItem.videoThumbnailTime ?? 0.001}`}
+                        ref={videoRef}
+                        key={`showcase-video-${activeItem.id}`}
+                        src={activeItem.videoUrl}
                         poster={activeItem.imageUrl}
                         controls
+                        autoPlay
                         playsInline
-                        preload="metadata"
+                        preload="auto"
                         className="showcase-modal-main-video"
-                        onPlay={(e) => {
-                          if (!hasPlayedVideo) {
-                            const video = e.currentTarget;
-                            video.currentTime = 0;
-                            video.play().catch(() => {});
-                            setHasPlayedVideo(true);
-                          }
-                        }}
-                      />
+                      >
+                        <source src={activeItem.videoUrl} type="video/mp4" />
+                        <source src="/videos/6d1d0e7941ab4ce6837bb2e9d6ae31df.mov" type="video/quicktime" />
+                        <track 
+                          kind="captions" 
+                          src="/captions.vtt" 
+                          srcLang="en" 
+                          label="English captions" 
+                          default 
+                        />
+                        Your browser does not support playing this video.
+                      </video>
                     ) : (
                       <img 
                         src={activeItem.imageUrl} 
@@ -353,7 +371,6 @@ export default function ShowcaseSection() {
                         width={640}
                         height={480}
                         decoding="async"
-                        referrerPolicy="no-referrer"
                         className="showcase-modal-main-img"
                       />
                     )}

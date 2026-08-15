@@ -102,6 +102,9 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
             className="w-full"
           >
             <form onSubmit={handleSubscribe} className="hero-newsletter-form" id="newsletter-form-el">
+              <label htmlFor="newsletter-email-input" className="sr-only">
+                Email address for availability updates
+              </label>
               <input
                 type="email"
                 required

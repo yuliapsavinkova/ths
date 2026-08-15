@@ -498,25 +498,33 @@ export default function BookMySit({
               
               <div className="bms-dates-row">
                 <div className="bms-input-wrapper">
-                  <span className="bms-input-icon-label"><Calendar size={12} /> Start Date</span>
+                  <label htmlFor="bms-start-date-input" className="bms-input-icon-label">
+                    <Calendar size={12} /> Start Date
+                  </label>
                   <input
+                    id="bms-start-date-input"
                     type="date"
                     required
                     min={todayStr}
                     value={startDate}
                     onChange={(e) => handleStartDateChange(e.target.value)}
                     className="bms-date-input"
+                    aria-label="Start date"
                   />
                 </div>
                 <div className="bms-input-wrapper">
-                  <span className="bms-input-icon-label"><Calendar size={12} /> End Date</span>
+                  <label htmlFor="bms-end-date-input" className="bms-input-icon-label">
+                    <Calendar size={12} /> End Date
+                  </label>
                   <input
+                    id="bms-end-date-input"
                     type="date"
                     required
                     min={startDate || todayStr}
                     value={endDate}
                     onChange={(e) => handleEndDateChange(e.target.value)}
                     className="bms-date-input"
+                    aria-label="End date"
                   />
                 </div>
               </div>
@@ -709,10 +717,11 @@ export default function BookMySit({
               </div>
               <div className="bms-fields-grid">
                 <div className="bms-field">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-name-input" className="bms-field-label">
                     <User size={12} /> Name
                   </label>
                   <input
+                    id="bms-name-input"
                     type="text"
                     required
                     autoComplete="name"
@@ -720,14 +729,16 @@ export default function BookMySit({
                     value={name}
                     onChange={(e) => setName(e.target.value)}
                     className="bms-text-input"
+                    aria-label="Your full name"
                   />
                 </div>
 
                 <div className="bms-field">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-email-input" className="bms-field-label">
                     <Mail size={12} /> Email
                   </label>
                   <input
+                    id="bms-email-input"
                     type="email"
                     required
                     autoComplete="email"
@@ -735,59 +746,68 @@ export default function BookMySit({
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
                     className="bms-text-input"
+                    aria-label="Your email address"
                   />
                 </div>
 
                 <div className="bms-field">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-phone-input" className="bms-field-label">
                     <Phone size={12} /> Phone
                   </label>
                   <input
+                    id="bms-phone-input"
                     type="tel"
                     autoComplete="tel"
                     placeholder="e.g. (555) 234-5678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
                     className="bms-text-input"
+                    aria-label="Your phone number"
                   />
                 </div>
 
                 <div className="bms-field">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-location-input" className="bms-field-label">
                     <MapPin size={12} /> Location
                   </label>
                   <input
+                    id="bms-location-input"
                     type="text"
                     placeholder="e.g. San Francisco, Mission District"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
                     className="bms-text-input"
+                    aria-label="Your location or neighborhood"
                   />
                 </div>
 
                 <div className="bms-field col-span-2">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-referredby-input" className="bms-field-label">
                     <Users size={12} /> Referred by
                   </label>
                   <input
+                    id="bms-referredby-input"
                     type="text"
                     placeholder="e.g. Friend's referral, Instagram, Google search"
                     value={referredBy}
                     onChange={(e) => setReferredBy(e.target.value)}
                     className="bms-text-input"
+                    aria-label="How you heard about Yulia"
                   />
                 </div>
 
                 <div className="bms-field col-span-2">
-                  <label className="bms-field-label">
+                  <label htmlFor="bms-notes-input" className="bms-field-label">
                     <MessageSquare size={12} />Message
                   </label>
                   <textarea
+                    id="bms-notes-input"
                     placeholder="Tell me about your trip, pet's routine, or any special needs..."
                     rows={5}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
                     className="bms-textarea"
+                    aria-label="Additional notes or details about your sit"
                   />
                 </div>
               </div>

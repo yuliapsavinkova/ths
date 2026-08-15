@@ -3,18 +3,18 @@
      1. BASE PALETTE (OKLCH: Lightness %, Chroma, Hue)
      ========================================================================== */
   --pram-gray-925: oklch(21% 0.01 50);        /* Deep Charcoal */
-  --pram-gray-600: oklch(38% 0.02 50);        /* High-contrast Medium Gray */
+  --pram-gray-600: oklch(34% 0.02 50);        /* High-contrast Medium Gray (>6.5:1 on light) */
   --pram-gray-050: oklch(98.5% 0.005 50);     /* Soft Off-white / Light Alabaster */
 
   --pram-gold-100: oklch(96% 0.02 85);        /* Warm Champagne Cream Surface */
-  --pram-gold-500: oklch(72% 0.065 78);       /* Soft Warm Gold */
-  --pram-gold-700: oklch(38% 0.07 85);        /* Deep Antique Gold (High Contrast WCAG AA) */
+  --pram-gold-500: oklch(74% 0.07 78);        /* Soft Warm Gold */
+  --pram-gold-700: oklch(36% 0.08 85);        /* Deep Antique Gold (WCAG AAA High Contrast) */
 
-  --pram-green-600: oklch(50% 0.12 150);      /* Forest Green */
+  --pram-green-600: oklch(48% 0.14 150);      /* Forest Green */
   --pram-green-400: oklch(80% 0.18 140);      /* Vibrant Accent Green */
-  --pram-amber-600: oklch(60% 0.16 70);       /* Warning Amber */
-  --pram-red-600:   oklch(55% 0.22 25);       /* Error Red */
-  --pram-blue-500:  oklch(62% 0.19 250);      /* Info Blue */
+  --pram-amber-600: oklch(45% 0.15 65);       /* Warning Amber (High Contrast) */
+  --pram-red-600:   oklch(52% 0.22 25);       /* Error Red */
+  --pram-blue-500:  oklch(58% 0.19 250);      /* Info Blue */
 
   /* ==========================================================================
      2. ALPHA SCALE
@@ -49,7 +49,7 @@
   --color-text-primary: var(--pram-gray-925);
   --color-text-secondary: var(--pram-gray-600);
   --color-text-primary-inverse: var(--pram-gray-050);
-  --color-text-secondary-inverse: color-mix(in srgb, var(--pram-gray-050) var(--alpha-65), transparent);
+  --color-text-secondary-inverse: oklch(88% 0.01 50);
 
   /* --- Backgrounds & Surfaces --- */
   --color-bg-primary: var(--pram-gray-050);

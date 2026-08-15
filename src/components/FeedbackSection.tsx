@@ -113,10 +113,14 @@ export const FeedbackSection: React.FC = () => {
               
               {/* Simplified Message field */}
               <div className="feedback-field" id="feedback-message-field-box">
+                <label htmlFor="feedback-message-input" className="sr-only">
+                  Share your thoughts, ideas, or suggestions
+                </label>
                 <textarea
                   id="feedback-message-input"
                   className="feedback-textarea"
                   placeholder="Share your thoughts, ideas, or suggestions..."
+                  aria-label="Share your thoughts, ideas, or suggestions"
                   value={message}
                   onChange={(e) => {
                     if (e.target.value.length <= maxChars) {

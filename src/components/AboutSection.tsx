@@ -65,7 +65,6 @@ export const AboutSection: React.FC = () => {
                 height={300}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />
             </div>
@@ -107,7 +106,6 @@ export const AboutSection: React.FC = () => {
                 height={300}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />
             </div>
@@ -141,7 +139,6 @@ export const AboutSection: React.FC = () => {
                 height={300}
                 loading="lazy"
                 decoding="async"
-                referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />
             </div>
