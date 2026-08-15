@@ -62,6 +62,15 @@ export const FeedbackSection: React.FC = () => {
 
   return (
     <section id="feedback-section" className="feedback-section" aria-labelledby="feedback-section-title">
+      {/* Ambient background glows and decorative watermarks */}
+      <div className="feedback-bg-glow" aria-hidden="true" />
+      <div className="feedback-bg-paw-watermark feedback-bg-paw-left" aria-hidden="true">
+        <PawIcon size={160} />
+      </div>
+      <div className="feedback-bg-paw-watermark feedback-bg-paw-right" aria-hidden="true">
+        <PawIcon size={190} />
+      </div>
+
       <div className="feedback-container" id="feedback-container-wrap">
         
         <div className="feedback-card" id="feedback-main-card">

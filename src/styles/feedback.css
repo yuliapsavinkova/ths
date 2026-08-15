@@ -3,31 +3,121 @@
    ========================================================================== */
 
 .feedback-section {
-  padding: var(--spacing-xxl) 0 var(--spacing-xxxl) 0;
-  background-color: var(--color-bg-primary);
-  border-top: 1px solid var(--color-border-soft);
+  padding: var(--spacing-xxxl) 0 calc(var(--spacing-xxxl) + var(--spacing-lg)) 0;
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-primary) 0%,
+    color-mix(in srgb, var(--pram-gold-100) 45%, var(--pram-gray-050)) 25%,
+    color-mix(in srgb, var(--pram-gold-100) 60%, var(--pram-gray-050)) 50%,
+    color-mix(in srgb, var(--pram-gold-100) 35%, var(--pram-gray-050)) 80%,
+    var(--color-bg-primary) 100%
+  );
+  border-top: 1px solid var(--color-border-primary);
+  border-bottom: 1px solid var(--color-border-primary);
   position: relative;
+  overflow: hidden;
+}
+
+/* Ambient Radial Lighting */
+.feedback-bg-glow {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(
+    ellipse 75% 65% at 50% 35%,
+    color-mix(in srgb, var(--pram-gold-500) 14%, transparent) 0%,
+    color-mix(in srgb, var(--pram-gold-100) 25%, transparent) 55%,
+    transparent 85%
+  );
+  z-index: 1;
+}
+
+/* Decorative Background Paw Watermarks */
+.feedback-bg-paw-watermark {
+  position: absolute;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
+  z-index: 1;
+  user-select: none;
+  transition: opacity var(--transition-normal);
+}
+
+.feedback-bg-paw-left {
+  top: 8%;
+  left: max(2%, calc(50% - 460px));
+  transform: rotate(-16deg);
+}
+
+.feedback-bg-paw-right {
+  bottom: 8%;
+  right: max(2%, calc(50% - 480px));
+  transform: rotate(20deg);
+}
+
+@media (max-width: 768px) {
+  .feedback-bg-paw-watermark {
+    opacity: 0.4;
+  }
+  .feedback-bg-paw-left {
+    top: 3%;
+    left: -20px;
+    transform: rotate(-12deg) scale(0.75);
+  }
+  .feedback-bg-paw-right {
+    bottom: 2%;
+    right: -25px;
+    transform: rotate(15deg) scale(0.75);
+  }
 }
 
 .feedback-container {
   width: 100%;
-  max-width: 640px;
+  max-width: 660px;
   margin: 0 auto;
   padding: 0 var(--spacing-md);
+  position: relative;
+  z-index: 2;
 }
 
+/* Elevated Card Container */
 .feedback-card {
-  background-color: var(--color-bg-surface-alt);
-  border: 1px solid var(--color-border-primary);
-  border-radius: 1.25rem;
+  background: linear-gradient(
+    180deg,
+    var(--color-bg-surface) 0%,
+    color-mix(in srgb, var(--color-bg-surface-alt) 20%, var(--color-bg-surface)) 100%
+  );
+  border: 1px solid var(--color-border-bold);
+  border-radius: 1.5rem;
   padding: var(--spacing-xl);
-  box-shadow: var(--shadow-md);
+  box-shadow: 
+    0 12px 36px -8px color-mix(in srgb, var(--pram-gray-925) 8%, transparent),
+    0 4px 14px -2px color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
   position: relative;
-  transition: border-color var(--transition-normal);
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.feedback-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 20%;
+  right: 20%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--color-brand-secondary) 80%, transparent) 50%,
+    transparent 100%
+  );
+  border-radius: 9999px;
+  pointer-events: none;
 }
 
 .feedback-card:hover {
-  border-color: var(--color-border-bold);
+  border-color: color-mix(in srgb, var(--pram-gold-700) 60%, transparent);
+  box-shadow: 
+    0 16px 42px -10px color-mix(in srgb, var(--pram-gray-925) 10%, transparent),
+    0 6px 18px -2px color-mix(in srgb, var(--pram-gold-700) 10%, transparent);
 }
 
 /* Header within card */
@@ -49,7 +139,8 @@
   letter-spacing: var(--letter-spacing-wide);
   border-radius: 9999px;
   margin-bottom: var(--spacing-sm);
-  border: 1px solid var(--color-border-primary);
+  border: 1px solid var(--color-border-bold);
+  box-shadow: 0 1px 3px color-mix(in srgb, var(--pram-gold-700) 8%, transparent);
 }
 
 .feedback-title {
@@ -67,7 +158,7 @@
   font-size: var(--font-size-base);
   color: var(--color-text-secondary);
   line-height: var(--line-height-normal);
-  max-width: 500px;
+  max-width: 480px;
   margin: 0 auto;
 }
 
@@ -86,24 +177,28 @@
 
 .feedback-textarea {
   width: 100%;
-  min-height: 120px;
-  max-height: 240px;
+  min-height: 130px;
+  max-height: 260px;
   padding: var(--spacing-md);
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border-primary);
-  border-radius: 0.75rem;
+  border-radius: 0.875rem;
   color: var(--color-text-primary);
   font-family: var(--font-sans);
   font-size: var(--font-size-base);
   line-height: var(--line-height-normal);
   resize: vertical;
-  transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+  box-shadow: inset 0 2px 4px color-mix(in srgb, var(--pram-gray-925) 3%, transparent);
+  transition: border-color var(--transition-fast), box-shadow var(--transition-fast), background-color var(--transition-fast);
 }
 
 .feedback-textarea:focus {
   outline: none;
+  background-color: var(--color-bg-surface);
   border-color: var(--color-brand-primary);
-  box-shadow: 0 0 0 3px var(--color-brand-primary-soft);
+  box-shadow: 
+    inset 0 1px 2px color-mix(in srgb, var(--pram-gray-925) 2%, transparent),
+    0 0 0 3.5px var(--color-brand-primary-soft);
 }
 
 .feedback-textarea-meta {
@@ -141,8 +236,8 @@
   align-items: center;
   justify-content: center;
   gap: var(--spacing-xs);
-  padding: 0.8125rem 2.25rem;
-  min-width: 200px;
+  padding: 0.875rem 2.5rem;
+  min-width: 210px;
   background-color: var(--color-brand-primary);
   color: var(--color-text-primary-inverse);
   border: 1px solid transparent;
@@ -152,20 +247,21 @@
   font-weight: var(--font-weight-semibold);
   cursor: pointer;
   transition: all var(--transition-fast);
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 4px 12px color-mix(in srgb, var(--pram-gold-700) 25%, transparent);
   white-space: nowrap;
 }
 
 .feedback-submit-btn:hover:not(:disabled) {
   background-color: var(--pram-gold-500);
   transform: translateY(-1px);
-  box-shadow: var(--shadow-md);
+  box-shadow: 0 6px 16px color-mix(in srgb, var(--pram-gold-700) 35%, transparent);
 }
 
 .feedback-submit-btn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
   transform: none;
+  box-shadow: none;
 }
 
 /* Success state */
@@ -189,6 +285,7 @@
   align-items: center;
   justify-content: center;
   margin-bottom: var(--spacing-xs);
+  box-shadow: 0 2px 8px color-mix(in srgb, var(--pram-green-600) 15%, transparent);
 }
 
 .feedback-success-title {
