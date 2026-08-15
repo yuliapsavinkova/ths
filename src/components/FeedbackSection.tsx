@@ -1,9 +1,5 @@
 import React, { useState, FormEvent } from 'react';
 import { 
-  Lightbulb, 
-  MessageCircle, 
-  HelpCircle, 
-  Heart, 
   Send, 
   Check, 
   RotateCcw, 
@@ -12,27 +8,8 @@ import {
 } from 'lucide-react';
 import { PawIcon } from './Icons';
 
-type FeedbackCategory = 'Suggestion' | 'Thoughts' | 'Question' | 'Praise';
-
-interface CategoryOption {
-  id: FeedbackCategory;
-  label: string;
-  icon: React.ReactNode;
-}
-
-const CATEGORIES: CategoryOption[] = [
-  { id: 'Suggestion', label: 'Suggestion', icon: <Lightbulb size={14} /> },
-  { id: 'Thoughts', label: 'Thoughts', icon: <MessageCircle size={14} /> },
-  { id: 'Question', label: 'Question', icon: <HelpCircle size={14} /> },
-  { id: 'Praise', label: 'Praise', icon: <Heart size={14} /> }
-];
-
 export const FeedbackSection: React.FC = () => {
-  const [category, setCategory] = useState<FeedbackCategory>('Suggestion');
   const [message, setMessage] = useState<string>('');
-  const [name, setName] = useState<string>('');
-  const [email, setEmail] = useState<string>('');
-  
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -57,10 +34,7 @@ export const FeedbackSection: React.FC = () => {
           'Content-Type': 'application/json'
         },
         body: JSON.stringify({
-          message: message.trim(),
-          category,
-          name: name.trim(),
-          email: email.trim()
+          message: message.trim()
         })
       });
 
@@ -82,9 +56,6 @@ export const FeedbackSection: React.FC = () => {
 
   const handleReset = () => {
     setMessage('');
-    setName('');
-    setEmail('');
-    setCategory('Suggestion');
     setIsSuccess(false);
     setErrorMessage(null);
   };
@@ -101,10 +72,10 @@ export const FeedbackSection: React.FC = () => {
               <PawIcon size={12} /> Thoughts?
             </span>
             <h2 className="feedback-title" id="feedback-section-title">
-              Have Thoughts or Ideas?
+              Have Feedback or Suggestions?
             </h2>
             <p className="feedback-subtitle" id="feedback-subtitle-desc">
-              Have suggestions to make the site better, a quick question, or thoughts to share? I'd love to hear directly from you!
+              I'd love to hear from you.
             </p>
           </div>
 
@@ -114,10 +85,10 @@ export const FeedbackSection: React.FC = () => {
                 <Check size={28} />
               </div>
               <h3 className="feedback-success-title" id="feedback-success-heading">
-                Thank You for Your Thoughts!
+                Thank You for Your Feedback!
               </h3>
               <p className="feedback-success-desc" id="feedback-success-message">
-                Your message has been sent directly to my inbox. I deeply appreciate your time and feedback!
+                Your message has been sent directly to my inbox.
               </p>
               <button 
                 type="button" 
@@ -131,34 +102,8 @@ export const FeedbackSection: React.FC = () => {
           ) : (
             <form className="feedback-form" id="feedback-submission-form" onSubmit={handleSubmit} noValidate>
               
-              {/* Category selector */}
-              <div className="feedback-field" id="feedback-categories-group">
-                <span className="feedback-categories-label" id="feedback-categories-label-el">
-                  Category
-                </span>
-                <div className="feedback-categories-wrap" id="feedback-categories-pills-wrap" role="radiogroup" aria-label="Feedback category">
-                  {CATEGORIES.map(cat => (
-                    <button
-                      key={cat.id}
-                      type="button"
-                      id={`feedback-cat-${cat.id.toLowerCase().replace(/\s+/g, '-')}`}
-                      className={`feedback-category-btn ${category === cat.id ? 'active' : ''}`}
-                      onClick={() => setCategory(cat.id)}
-                      role="radio"
-                      aria-checked={category === cat.id}
-                    >
-                      {cat.icon}
-                      <span>{cat.label}</span>
-                    </button>
-                  ))}
-                </div>
-              </div>
-
-              {/* Message field */}
+              {/* Simplified Message field */}
               <div className="feedback-field" id="feedback-message-field-box">
-                <label htmlFor="feedback-message-input" className="feedback-label">
-                  Your Message <span className="feedback-required-mark">*</span>
-                </label>
                 <textarea
                   id="feedback-message-input"
                   className="feedback-textarea"
@@ -173,41 +118,7 @@ export const FeedbackSection: React.FC = () => {
                   required
                 />
                 <div className="feedback-textarea-meta">
-                  <span>Constructive thoughts are always welcome</span>
                   <span>{remainingChars} chars left</span>
-                </div>
-              </div>
-
-              {/* Sender info (optional) */}
-              <div className="feedback-inputs-row" id="feedback-contact-row">
-                <div className="feedback-field" id="feedback-name-field-box">
-                  <label htmlFor="feedback-name-input" className="feedback-label">
-                    Your Name <span className="feedback-label-optional">(Optional)</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="feedback-name-input"
-                    className="feedback-input"
-                    placeholder="e.g. Sarah"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                    maxLength={100}
-                  />
-                </div>
-
-                <div className="feedback-field" id="feedback-email-field-box">
-                  <label htmlFor="feedback-email-input" className="feedback-label">
-                    Your Email <span className="feedback-label-optional">(Optional, for reply)</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="feedback-email-input"
-                    className="feedback-input"
-                    placeholder="name@example.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    maxLength={120}
-                  />
                 </div>
               </div>
 
