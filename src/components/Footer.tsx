@@ -30,6 +30,7 @@ export const Footer: React.FC = () => {
             <li><a href="#testimonials-section">Reviews</a></li>
             <li><a href="#faq-section">FAQs</a></li>
             <li><a href="#booking-form-section">Book a Sit</a></li>
+            <li><a href="#feedback-section">Thoughts & Feedback</a></li>
           </ul>
         </div>
 

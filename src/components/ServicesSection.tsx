@@ -105,11 +105,11 @@ export const ServicesSection: React.FC = () => {
             </div>
           </div>
 
-          {/* Card 3: Specialised Care */}
+          {/* Card 3: Specialized Care */}
           <div className="app-card services-card" id="srv-card-special">
             <div className="app-card-image-wrapper services-card-image-wrapper">
               <img 
-                src={SITTER_IMAGES.includedCards.specialisedCare} 
+                src={SITTER_IMAGES.includedCards.specializedCare} 
                 alt="Caring for a gentle senior pet with love and precision" 
                 className="app-card-image services-card-image"
                 referrerPolicy="no-referrer"
@@ -120,7 +120,7 @@ export const ServicesSection: React.FC = () => {
                 <div className="app-card-icon-box services-card-icon-box">
                   <Shield size={20} />
                 </div>
-                <h3 className="app-card-title services-card-title">Specialised Care</h3>
+                <h3 className="app-card-title services-card-title">Specialized Care</h3>
               </div>
               <ul className="package-features">
                 <li className="package-feature-item">

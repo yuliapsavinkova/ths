@@ -11,6 +11,7 @@ import FAQAccordion from './components/FAQAccordion';
 import TestimonialsCarousel from './components/TestimonialsCarousel';
 import Footer from './components/Footer';
 import ShowcaseSection from './components/ShowcaseSection';
+import FeedbackSection from './components/FeedbackSection';
 import { PawIcon } from './components/Icons';
 
 export default function App() {
@@ -131,6 +132,9 @@ export default function App() {
 
           </div>
         </section>
+
+        {/* ─── Visitor Thoughts & Feedback Section ─────────────────────────────── */}
+        <FeedbackSection />
 
       </main>
 

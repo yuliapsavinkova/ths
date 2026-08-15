@@ -75,9 +75,7 @@
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   cursor: pointer;
-  transition:
-    border-color var(--transition-medium) ease,
-    box-shadow var(--transition-medium) ease;
+  transition: border-color var(--transition-medium) ease, box-shadow var(--transition-medium) ease;
   height: 100%;
 }
 
@@ -312,9 +310,7 @@
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
   color: var(--color-brand-primary);
-  transition:
-    color var(--transition-fast) ease,
-    font-weight var(--transition-fast) ease;
+  transition: color var(--transition-fast) ease, font-weight var(--transition-fast) ease;
 }
 
 .showcase-card:hover .showcase-card-action {

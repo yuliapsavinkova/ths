@@ -1,4 +1,4 @@
-import React, { useState, useEffect, FormEvent } from 'react';
+import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { PrivacyDisclosure } from './PrivacyDisclosure';
 import { InfoTooltip } from './InfoTooltip';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
@@ -47,8 +47,7 @@ const MILESTONE_PRESETS: MilestonePreset[] = [
   { days: 1, label: '1 Night', price: '$99' },
   { days: 7, label: '1 Week', price: '$299' },
   { days: 30, months: 1, label: '1 Month', price: '$999' },
-  { days: 60, months: 2, label: '2 Months', price: '10% Off' },
-  { days: 90, months: 3, label: '3 Months', price: '15% Off' }
+  { days: 60, months: 2, label: '2+ Months', price: '10% Off' }
 ];
 
 interface BookMySitProps {
@@ -122,6 +121,50 @@ export default function BookMySit({
   // ─── SYSTEM STATUS ───
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
+  // DOM Refs for smooth viewport alignment across mobile / iOS Safari
+  const widgetRef = useRef<HTMLDivElement | null>(null);
+  const successPanelRef = useRef<HTMLDivElement | null>(null);
+
+  // Reliable scroll helper to ensure the booking header and active content stay in view
+  const scrollToBookingTop = () => {
+    // Unfocus any active inputs or submit buttons to dismiss mobile keyboards
+    if (document.activeElement && 'blur' in document.activeElement) {
+      (document.activeElement as HTMLElement).blur();
+    }
+
+    const targetElement = 
+      document.getElementById('booking-section-header') ||
+      document.getElementById('booking-form-section') ||
+      widgetRef.current;
+
+    if (targetElement) {
+      const headerOffset = 90; // Clearance for mobile/desktop sticky header
+      const bodyRect = document.body.getBoundingClientRect().top;
+      const elementRect = targetElement.getBoundingClientRect().top;
+      const elementPosition = elementRect - bodyRect;
+      const offsetPosition = Math.max(0, elementPosition - headerOffset);
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
+  // Scroll to success panel immediately and after DOM reflow
+  useEffect(() => {
+    if (isSuccess) {
+      scrollToBookingTop();
+      const timer = setTimeout(() => {
+        scrollToBookingTop();
+        if (successPanelRef.current) {
+          successPanelRef.current.focus({ preventScroll: true });
+        }
+      }, 60);
+      return () => clearTimeout(timer);
+    }
+  }, [isSuccess]);
 
   // ─── PRICING BREAKDOWN ───
   const [pricing, setPricing] = useState<PricingBreakdown>({
@@ -274,9 +317,7 @@ export default function BookMySit({
     const subtotalItems = baseRate + petSurcharge + seniorSurcharge + medsSurcharge + gardenSurcharge;
 
     let discountPercent = 0;
-    if (duration >= 90) {
-      discountPercent = 0.15;
-    } else if (duration >= 60) {
+    if (duration >= 60) {
       discountPercent = 0.10;
     }
 
@@ -306,7 +347,7 @@ export default function BookMySit({
     setEndDate(defaultEnd.toISOString().split('T')[0]);
     setDuration(30);
 
-    setDogCount(1);
+    setDogCount(0);
     setCatCount(0);
     setOtherCount(0);
 
@@ -321,6 +362,12 @@ export default function BookMySit({
     setReferredBy('');
     setNotes('');
     setIsSuccess(false);
+
+    // Scroll to the start of the form immediately and after DOM expansion
+    scrollToBookingTop();
+    setTimeout(() => {
+      scrollToBookingTop();
+    }, 60);
   };
 
   const isFormValid = name.trim().length > 0 && email.trim().length > 0;
@@ -386,10 +433,16 @@ export default function BookMySit({
   };
 
   return (
-    <div id="bookmysit-app-widget" className="bms-flex-outer-container">
+    <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
 
       {isSuccess ? (
-        <div className="bms-success-panel">
+        <div 
+          ref={successPanelRef} 
+          tabIndex={-1} 
+          role="region" 
+          aria-label="Booking Request Received" 
+          className="bms-success-panel"
+        >
           <div className="bms-success-circle">
             <Check size={32} />
           </div>
@@ -829,7 +882,7 @@ export default function BookMySit({
 
                 {pricing.durationDiscount > 0 && (
                   <div className="bms-line-item bms-discount-line">
-                    <span className="bms-item-name">Long Sit Discount ({duration >= 90 ? '15% Off' : '10% Off'})</span>
+                    <span className="bms-item-name">Long Sit Discount (10% Off)</span>
                     <span className="bms-item-price">-${pricing.durationDiscount}</span>
                   </div>
                 )}

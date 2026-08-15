@@ -116,7 +116,7 @@ export const AboutSection: React.FC = () => {
               </h3>
               <div className="column-text">
                 <p className="large">
-                  I have spent my whole life around animals and have house-sat for years. I have cared for dogs, cats, other small pets, and homes without pets. I treat every home with the same love, care, and respect that I would want for my own.
+                  I have spent my whole life around animals and have house-sat for years. I have cared for dogs, cats, other small pets, and homes without pets.
                 </p>
                 <p className="large about-additional-para">
                   I will send you frequent photo and video updates while you're away so you always know how your pets are doing. I keep a close eye on your home's security and upkeep, and I have a clean background check and verified five-star reviews from other homeowners, so you can travel without any worries.

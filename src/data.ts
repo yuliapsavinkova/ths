@@ -191,7 +191,7 @@ export const SITTER_IMAGES = {
   includedCards: {
     dailyPetCare: "images/dallas-harper.webp",
     homePropertyCare: "images/home-property-care.webp",
-    specialisedCare: "images/spike.webp",
+    specializedCare: "images/spike.webp",
     noPetsProbs: "images/plants-sit.webp"
   }
 };

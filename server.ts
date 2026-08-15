@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
 import { handleBookingSubmit } from './server/routes/booking';
 import { handleSubscribe } from './server/routes/subscribe';
+import { handleFeedbackSubmit } from './server/routes/feedback';
 
 dotenv.config();
 
@@ -21,6 +22,9 @@ app.post('/api/submit-booking', handleBookingSubmit);
 
 // 2. Submit Newsletter Subscription via JSON file & optional Resend alert
 app.post('/api/subscribe', handleSubscribe);
+
+// 3. Submit Visitor Feedback / Thoughts via JSON storage & Resend alert
+app.post('/api/submit-feedback', handleFeedbackSubmit);
 
 
 // ----------------------------------------------------
