@@ -2,3 +2,6 @@ User-agent: *
 Allow: /
 
 Sitemap: https://yulia.sitterjourney.com/sitemap.xml
+# LLM & AI agent documentation
+# See https://yulia.sitterjourney.com/llms.txt
+

@@ -2,7 +2,8 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="color-scheme" content="dark light" />
 
     <title>Long-Term House Sitter in California | Live-In Pet & Home Care</title>
 
@@ -20,6 +21,23 @@
       href="https://yulia.sitterjourney.com/"
     />
 
+    <!-- Google Fonts Optimization: preconnect & non-blocking stylesheet -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;1,300;1,400&family=DM+Sans:wght@300;400;500;600&display=swap"
+    />
+
+    <!-- LCP Hero Image Preload for Instant Rendering -->
+    <link
+      rel="preload"
+      as="image"
+      href="/images/daisy.webp"
+      type="image/webp"
+      fetchpriority="high"
+    />
+
     <!-- Google Tag Manager / Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-CF1R3S1YY9"></script>
     <script>
@@ -31,13 +49,21 @@
       gtag('config', 'G-CF1R3S1YY9');
     </script>
 
-    <!-- Schema.org Structured Markup for local & service SEO (Rich Snippets, FAQ, Person, LocalBusiness) -->
+    <!-- Schema.org Structured Markup for local, service, and agentic search engines -->
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
         "@graph": [
           {
-            "@type": ["ProfessionalService", "HouseSitter"],
+            "@type": "WebSite",
+            "@id": "https://yulia.sitterjourney.com/#website",
+            "url": "https://yulia.sitterjourney.com/",
+            "name": "Yulia — Long-Term House & Pet Sitting in California",
+            "description": "Professional live-in house and pet sitting services across California with transparent rates and schedule availability.",
+            "inLanguage": "en-US"
+          },
+          {
+            "@type": ["ProfessionalService", "HouseSitter", "LocalBusiness"],
             "@id": "https://yulia.sitterjourney.com/#business",
             "name": "Yulia — Long-Term House & Pet Sitting",
             "url": "https://yulia.sitterjourney.com",
@@ -45,6 +71,8 @@
             "image": "https://yulia.sitterjourney.com/images/daisy.webp",
             "description": "Long-term live-in house and pet sitting across California. Monthly and extended stays for remote work, relocations, and pets requiring full-time presence and care.",
             "priceRange": "$$",
+            "currenciesAccepted": "USD",
+            "paymentAccepted": "Direct Booking, Wire, Zelle, Agreement",
             "telecommute": "True",
             "address": {
               "@type": "PostalAddress",
@@ -73,15 +101,37 @@
               "bestRating": "5",
               "worstRating": "1"
             },
+            "review": [
+              {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "James" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Having someone there full-time was completely different from any sitter we'd had before. She was truly there for our pets. Worth every penny."
+              },
+              {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Mia & Tom" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "We were nervous about leaving our dogs for three weeks, but everything was perfect. Frequent photos, zero stress. We returned to happy pets and a clean home."
+              },
+              {
+                "@type": "Review",
+                "author": { "@type": "Person", "name": "Marcus" },
+                "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" },
+                "reviewBody": "Yulia is a star. She watched our high-energy Border Collie. Her frequent updates and photos gave us complete peace of mind while we were abroad."
+              }
+            ],
             "founder": {
               "@type": "Person",
+              "@id": "https://yulia.sitterjourney.com/#person",
               "name": "Yulia Savinkova",
-              "jobTitle": "Professional House & Pet Sitter",
+              "jobTitle": "Professional House & Pet Sitter & Software Engineer",
               "url": "https://yulia.sitterjourney.com"
             },
             "sameAs": [
               "https://www.trustedhousesitters.com/house-and-pet-sitters/united-states/california/san-francisco/l/6526245/",
-              "https://yuliapsavinkova.github.io/"
+              "https://yuliapsavinkova.github.io/",
+              "https://sitterjourney.com"
             ]
           },
           {
@@ -110,10 +160,14 @@
             },
             "hasOfferCatalog": {
               "@type": "OfferCatalog",
-              "name": "House & Pet Sitting Services",
+              "name": "House & Pet Sitting Plans & Rates",
               "itemListElement": [
                 {
                   "@type": "Offer",
+                  "name": "Monthly Live-In Care Plan",
+                  "price": "999",
+                  "priceCurrency": "USD",
+                  "description": "Standard 30-day / monthly live-in house sitting and pet care plan.",
                   "itemOffered": {
                     "@type": "Service",
                     "name": "Full-Time Live-In Pet Care & Companionship"
@@ -121,17 +175,17 @@
                 },
                 {
                   "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Home Security & Plant Care Stewardship"
-                  }
+                  "name": "Weekly Live-In Care Plan",
+                  "price": "299",
+                  "priceCurrency": "USD",
+                  "description": "Standard 7-day live-in house sitting and pet care plan."
                 },
                 {
                   "@type": "Offer",
-                  "itemOffered": {
-                    "@type": "Service",
-                    "name": "Specialized Senior & Medication Pet Care"
-                  }
+                  "name": "Nightly Live-In Care Plan",
+                  "price": "99",
+                  "priceCurrency": "USD",
+                  "description": "Standard 1-night live-in house sitting and pet care rate."
                 }
               ]
             }

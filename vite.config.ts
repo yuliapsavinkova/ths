@@ -5,6 +5,20 @@ import {defineConfig} from 'vite';
 export default defineConfig(() => {
   return {
     plugins: [react()],
+    build: {
+      target: 'es2022',
+      cssCodeSplit: true,
+      minify: 'esbuild' as const,
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'vendor-react': ['react', 'react-dom'],
+            'vendor-icons': ['lucide-react'],
+            'vendor-motion': ['motion'],
+          },
+        },
+      },
+    },
     resolve: {
       alias: {
         '@': path.resolve(__dirname, '.'),

@@ -1,13 +1,55 @@
-# Yulia's Live-In House & Pet Sitting
+# Yulia — Professional Live-In House & Pet Sitting
 
-> Premium, professional live-in house and pet sitting services.
+> Premium full-time live-in house and pet sitting across California. Monthly, weekly, and custom extended stays for remote work, relocations, vacations, and pets requiring full-time presence, routine adherence, and medication care.
 
-This site offers a comprehensive overview of Yulia's live-in sitting services, including an interactive rates calculator, live schedule and calendar, custom sitting plans, and contact details.
+## Core Sitter Profile
+- **Sitter Name**: Yulia Savinkova
+- **Profession**: Professional House & Pet Sitter & Software Engineer
+- **Presence Model**: Live-in, full-time work-from-home (no long daytime absences)
+- **Base Location**: California, United States
+- **Direct Website**: https://yulia.sitterjourney.com/
+- **TrustedHousesitters Profile**: https://www.trustedhousesitters.com/house-and-pet-sitters/united-states/california/san-francisco/l/6526245/
+- **Background Verification**: Clean background check, 5-star verified homeowner reviews
+- **Direct Contact / Inquiries**: https://yulia.sitterjourney.com/#booking-form-section
 
-## Core Navigation
+## Services Included
+1. **Full-Time Live-In Pet Care**:
+   - Feeding, fresh water, medication administration (oral, topical, scheduled routines).
+   - Daily exercise, walks, enrichment, and constant companionship.
+   - Brushing, coat care, and strict adherence to owner house rules.
+   - Frequent photo and video updates sent to homeowners.
+2. **Home & Property Stewardship**:
+   - Home security presence (lived-in, active home deterrent).
+   - Plant and garden watering routines (indoor houseplants, patio, yard).
+   - Mail and package collection, trash/recycling bin management.
+   - Managing scheduled home maintenance visits and emergency coordination.
+3. **Specialized Care Capabilities**:
+   - Senior pet mobility support and medication adherence.
+   - High-energy and reactive dog handling.
+   - Shy or anxious rescue pet care.
+   - Plants-only and empty property care (no pets required).
 
-- [Yulia's Sitter Home](https://yulia.sitterjourney.com/) - Main portal for live-in house and pet sitting services.
-- [Services Guide](https://yulia.sitterjourney.com/#services-section) - Detailed information on pet care, home security, and custom sitting plans.
-- [Interactive Rates Calculator](https://yulia.sitterjourney.com/#calculator-section) - Estimate sitting costs based on pet types, counts, and booking durations.
-- [Availability Calendar](https://yulia.sitterjourney.com/#calendar-section) - Real-time look at current schedule, bookings, and open slots.
-- [Consultation Request Form](https://yulia.sitterjourney.com/#booking-form-section) - Direct inquiry form to book sitting arrangements.
+## Rates & Pricing Model
+- **1 Month (30 Days)**: $999 base (~$33.30/day)
+- **1 Week (7 Days)**: $299 base (~$42.71/day)
+- **1 Night**: $99 base
+- **Extended Stays (60+ Days / 2+ Months)**: 10% discount on entire booking
+- **Custom Add-Ons**:
+  - High-energy / reactive dogs: +$15/day
+  - Complex medical needs / medication: +$15/day
+  - Garden management / sensitive landscaping: +$10/day
+- **Currency**: USD
+
+## Coverage Areas in California
+San Francisco, Santa Barbara, Malibu, Santa Monica, Beverly Hills, Los Angeles, Huntington Beach, Newport Beach, Laguna Beach, Carlsbad, La Jolla, San Diego, and broader California regions. Distance is no barrier for monthly and extended sits.
+
+## Booking & Consultation Workflow
+1. Homeowner submits trip dates and pet details via the inquiry form: https://yulia.sitterjourney.com/#booking-form-section
+2. Introductory video call to align on routines, home care requirements, and expectations.
+3. Written agreement and mutual commitment confirmation.
+
+## Full Agent Documentation
+For complete machine-readable details, comprehensive FAQ, and sit history logs:
+- [Full LLM Knowledge Base](https://yulia.sitterjourney.com/llms-full.txt)
+- [Sitemap](https://yulia.sitterjourney.com/sitemap.xml)
+

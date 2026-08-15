@@ -34,6 +34,10 @@ export const BrandLogo: React.FC<BrandLogoProps> = ({
       <img
         src="/yulia_logo.svg"
         alt="Yulia Logo"
+        width={44}
+        height={44}
+        loading="eager"
+        decoding="async"
         className="brand-logo-icon-img"
         referrerPolicy="no-referrer"
       />

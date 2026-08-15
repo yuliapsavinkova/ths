@@ -176,6 +176,7 @@ export default function ShowcaseSection() {
                       {item.videoUrl ? (
                         <video 
                           src={`${item.videoUrl}#t=${item.videoThumbnailTime ?? 0.001}`}
+                          poster={item.imageUrl}
                           preload="metadata"
                           playsInline
                           muted
@@ -185,7 +186,10 @@ export default function ShowcaseSection() {
                         <img 
                           src={item.imageUrl} 
                           alt={item.title} 
+                          width={360}
+                          height={270}
                           loading="lazy"
+                          decoding="async"
                           referrerPolicy="no-referrer"
                           className="showcase-card-img"
                         />
@@ -328,6 +332,7 @@ export default function ShowcaseSection() {
                     {activeItem.videoUrl ? (
                       <video 
                         src={`${activeItem.videoUrl}#t=${activeItem.videoThumbnailTime ?? 0.001}`}
+                        poster={activeItem.imageUrl}
                         controls
                         playsInline
                         preload="metadata"
@@ -345,6 +350,9 @@ export default function ShowcaseSection() {
                       <img 
                         src={activeItem.imageUrl} 
                         alt={activeItem.title} 
+                        width={640}
+                        height={480}
+                        decoding="async"
                         referrerPolicy="no-referrer"
                         className="showcase-modal-main-img"
                       />

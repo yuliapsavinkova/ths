@@ -61,6 +61,10 @@ export const AboutSection: React.FC = () => {
                 src={SITTER_IMAGES.advantageTrip}
                 alt="Happy dog resting comfortably on a living room sofa" 
                 className="split-image"
+                width={400}
+                height={300}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />
@@ -99,6 +103,10 @@ export const AboutSection: React.FC = () => {
                 src={SITTER_IMAGES.ideaCards.whoIAm}
                 alt="Remote work setup with a cozy pet companion" 
                 className="split-image"
+                width={400}
+                height={300}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />
@@ -129,6 +137,10 @@ export const AboutSection: React.FC = () => {
                 src={SITTER_IMAGES.ideaCards.experienceTrust}
                 alt="A happy well-cared for pet showing trust" 
                 className="split-image"
+                width={400}
+                height={300}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
               <div className="split-image-accent" />

@@ -61,6 +61,11 @@ export const Hero: React.FC = () => {
             src={SITTER_IMAGES.hero} 
             alt="Yulia with a friendly dog" 
             className="hero-image"
+            width={480}
+            height={480}
+            loading="eager"
+            decoding="async"
+            fetchPriority="high"
             referrerPolicy="no-referrer"
             id="hero-main-img"
           />

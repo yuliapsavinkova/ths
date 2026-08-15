@@ -28,6 +28,10 @@ export const ServicesSection: React.FC = () => {
                 src={SITTER_IMAGES.includedCards.dailyPetCare} 
                 alt="A happy pet enjoying daily walks and attention" 
                 className="app-card-image services-card-image"
+                width={360}
+                height={240}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -70,6 +74,10 @@ export const ServicesSection: React.FC = () => {
                 src={SITTER_IMAGES.includedCards.homePropertyCare} 
                 alt="Meticulously maintained clean home with pool/plants stewardship" 
                 className="app-card-image services-card-image"
+                width={360}
+                height={240}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -112,6 +120,10 @@ export const ServicesSection: React.FC = () => {
                 src={SITTER_IMAGES.includedCards.specializedCare} 
                 alt="Caring for a gentle senior pet with love and precision" 
                 className="app-card-image services-card-image"
+                width={360}
+                height={240}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </div>
@@ -154,6 +166,10 @@ export const ServicesSection: React.FC = () => {
                 src={SITTER_IMAGES.includedCards.noPetsProbs} 
                 alt="A beautiful maintained yard/garden area representing empty home stewardship" 
                 className="app-card-image services-card-image"
+                width={360}
+                height={240}
+                loading="lazy"
+                decoding="async"
                 referrerPolicy="no-referrer"
               />
             </div>
