@@ -29,7 +29,7 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({
   className = '',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const wrapperRef = useRef<HTMLSpanElement>(null);
+  const wrapperRef = useRef<HTMLButtonElement>(null);
 
   const toggleTooltip = (e: React.MouseEvent) => {
     e.preventDefault();
@@ -64,13 +64,12 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({
   }, [isOpen]);
 
   return (
-    <span
+    <button
+      type="button"
       ref={wrapperRef}
       className={`app-tooltip-wrapper position-${position} align-${align} ${isOpen ? 'is-open' : ''} ${className}`.trim()}
       aria-label={ariaLabel}
       aria-expanded={isOpen}
-      tabIndex={0}
-      role="button"
       onClick={toggleTooltip}
       onKeyDown={(e) => {
         if (e.key === 'Enter' || e.key === ' ') {
@@ -79,11 +78,11 @@ export const InfoTooltip: React.FC<InfoTooltipProps> = ({
         }
       }}
     >
-      <Info size={iconSize} className="app-tooltip-icon" />
+      <Info size={iconSize} className="app-tooltip-icon" aria-hidden="true" />
       <span className="app-tooltip-box" role="tooltip">
         {content}
       </span>
-    </span>
+    </button>
   );
 };
 

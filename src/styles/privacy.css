@@ -185,3 +185,15 @@
   box-shadow: var(--shadow-md);
 }
 
+/* TrustedHousesitters specific disclosure styling */
+.privacy-disclosure-container.type-trustedhousesitters .privacy-box-content {
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-relaxed);
+}
+
+.privacy-disclosure-container.type-trustedhousesitters.theme-dark .privacy-box-content {
+  background-color: var(--color-bg-dark);
+  border: 1px solid var(--color-border-inverse-soft);
+}
+
