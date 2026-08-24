@@ -365,7 +365,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     category: 'dogs',
     description:
       'Nala is a sweet 12-year-old German Shepherd with a heart of gold. Due to her hip problems, she has difficulty going up and down stairs, so we take things nice and steady. She takes her daily medication easily. On walks around Aliso Viejo, she loves soaking up the sunshine—and since she isn’t super friendly to all dogs, we keep a calm, comfortable distance to keep every stroll peaceful.',
-    petName: 'Nala (German Shepherd Dog)',
+    petName: 'Nala (German Shepherd)',
     location: 'Aliso Viejo, CA',
     year: 2026,
     initialLikes: 56,
@@ -400,7 +400,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     title: 'Snuggles & Playtime with Dallas & Harper',
     category: 'dogs',
     description:
-      'Dallas (9-year-old Chihuahua) and Harper (8-year-old Australian Shepherd) were an absolute joy to care for! Dallas is a total snuggle bug—our blanket cuddles were the highlight of my days! Harper is sweet, playful, and loves being near you, making her company so comforting and fun. Both pups were easy to manage, and once you get used to staying aware around other dogs, everything flows smoothly.',
+      'Dallas (9-year-old Chihuahua) and Harper (8-year-old Australian Shepherd) were an absolute joy to care for! Dallas is a total snuggle bug—our blanket cuddles were the highlight of my days! Harper is sweet, playful, and loves being near you, making her company so comforting and fun. Both pups were easy to manage, and with attentive awareness on our walks around other dogs, every day went smoothly.',
     petName: 'Dallas (Chihuahua) & Harper (Australian Shepherd)',
     location: 'Long Beach, CA',
     year: 2025,
@@ -425,7 +425,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     category: 'dogs',
     description:
       'Randall is truly one of a kind. Calm, very smart, well-mannered, and well-behaved—he never pulls on walks, waits patiently in the mornings, and follows all commands. Beyond his perfect behavior, he’s endlessly sweet, gentle, and affectionate, loving belly rubs and sofa snuggles that melt your heart.',
-    petName: 'Randall (Pit Lab Mix)',
+    petName: 'Randall (Pitbull / Lab Mix)',
     location: 'Culver City, CA',
     year: 2025,
     initialLikes: 35,
@@ -436,8 +436,8 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     title: 'Pepper’s Outdoor Adventures',
     category: 'cats',
     description:
-      'Pepper is a remarkably self-sufficient cat who spends most of her days roaming outdoors in Austin. A feisty free spirit, she boldly picks fights with every other neighborhood cat—and even raccoons! Yet beneath her tough exterior, she is sweet in nature and loves cozying up when she returns home.',
-    petName: 'Pepper (Cat)',
+      'Pepper is an independent, free-spirited cat who loves roaming outdoors in Austin. Confident and adventurous, she fearlessly patrols her neighborhood territory, yet loves nothing more than curling up for cozy cuddles as soon as she comes home.',
+    petName: 'Pepper (Domestic Shorthair)',
     location: 'Austin, TX',
     year: 2025,
     initialLikes: 44,
