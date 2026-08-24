@@ -81,18 +81,7 @@ export const AboutSection: React.FC = () => {
               </h3>
               <div className="column-text">
                 <p className="large">
-                  I'm Yulia, a remote software engineer. I work full-time from the homes where I sit, which means I'm there throughout the day to keep your pets company. They won't have to spend long hours alone—their meals, walks, playtime, and any medications stay right on schedule. Plus, your home gets the security of having a responsible person living in it instead of sitting empty.
-                </p>
-                <p className="large about-additional-para">
-                  If you'd like to learn more about my professional background, you can{' '}
-                  <a 
-                    href="https://yuliapsavinkova.github.io/" 
-                    target="_blank" 
-                    rel="noopener noreferrer" 
-                    className="text-brand font-semibold text-underline"
-                  >
-                    view my portfolio
-                  </a>.
+                  I'm Yulia, a remote software engineer, so I'm home most of the time. When I'm house- and pet-sitting, your pets have consistent company throughout the day. Meals, walks, playtime, and any medications stay right on schedule, and I'm always nearby if something unexpected comes up. And your home gets the security of a responsible person living in it, rather than sitting empty.
                 </p>
               </div>
             </div>
