@@ -209,27 +209,35 @@
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-2xs);
   font-family: var(--font-sans);
   font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.05em;
-  padding: var(--spacing-badge-py) var(--spacing-badge-px);
+  letter-spacing: 0.02em;
+  height: 28px;
+  min-height: 28px;
+  padding: 0 var(--spacing-xs);
   background-color: var(--color-bg-surface);
   color: var(--color-text-primary);
-  border-radius: var(--radius-sm);
+  border-radius: var(--radius-full);
   border: 1px solid var(--color-border-primary);
   box-shadow: var(--shadow-xs);
   text-transform: capitalize;
 }
 
 .tag-emoji {
-  font-size: var(--font-size-xs);
+  font-size: 13px;
+  line-height: 1;
+  width: 14px;
+  height: 14px;
   display: inline-flex;
   align-items: center;
+  justify-content: center;
 }
 
 .tag-icon {
+  width: 14px;
+  height: 14px;
   display: inline-flex;
   align-items: center;
   justify-content: center;
@@ -241,15 +249,16 @@
   pointer-events: auto;
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xs);
-  padding: var(--spacing-badge-py) var(--spacing-badge-px);
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  min-width: 28px;
+  min-height: 28px;
+  padding: 0;
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-full);
   color: var(--color-text-secondary);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-semibold);
   cursor: pointer;
   box-shadow: var(--shadow-xs);
   transition: all var(--transition-fast) ease;
@@ -430,43 +439,119 @@
   }
 }
 
-/* Close button inside modal */
-.showcase-modal-close-btn {
+/* Unified Modal Header Controls Bar (Category Badge on Left, Action Buttons on Right) */
+.showcase-modal-top-bar {
   position: absolute;
-  top: var(--spacing-md-subtle);
-  right: var(--spacing-md-subtle);
-  z-index: calc(var(--z-modal) + 5);
+  top: var(--spacing-sm);
+  left: var(--spacing-sm);
+  right: var(--spacing-sm);
+  z-index: calc(var(--z-modal) + 10);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-xs);
+  pointer-events: none;
+}
+
+@media (--medium) {
+  .showcase-modal-top-bar {
+    top: var(--spacing-md);
+    left: var(--spacing-md);
+    right: var(--spacing-md);
+  }
+}
+
+.showcase-modal-top-actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  pointer-events: auto;
+}
+
+/* Category Badge Pill inside Modal */
+.showcase-modal-tag-pill {
+  pointer-events: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  height: 36px;
+  min-height: 36px;
+  padding: 0 var(--spacing-md-subtle);
+  font-family: var(--font-sans);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  letter-spacing: 0.02em;
+  background-color: var(--color-bg-surface);
+  color: var(--color-text-primary);
+  border-radius: var(--radius-full);
+  border: 1px solid var(--color-border-primary);
+  box-shadow: var(--shadow-sm);
+  text-transform: capitalize;
+  backdrop-filter: blur(4px);
+  transition: all var(--transition-fast) ease;
+}
+
+.showcase-modal-tag-pill .tag-emoji,
+.showcase-modal-tag-pill .tag-icon {
+  width: 16px;
+  height: 16px;
+  font-size: 16px;
+  line-height: 1;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Unified Modal Action Buttons (Close 'X' and Like 'Heart') */
+.showcase-modal-action-btn {
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  min-height: 36px;
+  border-radius: var(--radius-full);
   background-color: var(--color-bg-surface);
   border: 1px solid var(--color-border-primary);
   color: var(--color-text-primary);
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
-  border-radius: var(--radius-full);
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
   box-shadow: var(--shadow-sm);
   backdrop-filter: blur(4px);
+  padding: 0;
   transition: all var(--transition-fast) ease;
 }
 
-.showcase-modal-close-btn:hover {
-  background-color: var(--color-brand-primary);
-  color: var(--color-text-on-brand);
+.showcase-modal-action-btn:hover {
+  background-color: var(--color-bg-surface);
+  color: var(--color-brand-primary);
   border-color: var(--color-brand-primary);
+  box-shadow: var(--shadow-md);
   transform: scale(1.05);
 }
 
-@media (--medium) {
-  .showcase-modal-close-btn {
-    top: var(--spacing-md);
-    right: var(--spacing-md);
-    width: 44px;
-    height: 44px;
-  }
+.showcase-modal-action-btn:active {
+  transform: scale(0.98);
+}
+
+.showcase-modal-action-btn:focus-visible {
+  outline: 2px solid var(--color-brand-primary);
+  outline-offset: 2px;
+}
+
+/* Like button active/liked state */
+.showcase-modal-like-btn.liked {
+  background-color: var(--color-status-error-bg);
+  border-color: var(--color-status-error);
+  color: var(--color-status-error);
+}
+
+.showcase-modal-like-btn.liked:hover {
+  background-color: var(--color-status-error-bg);
+  border-color: var(--color-status-error);
+  color: var(--color-status-error);
+  transform: scale(1.05);
 }
 
 /* Modal Layout Columns (Responsive Flexbox on Mobile, Dual Column Grid on Tablet/Desktop) */
@@ -537,85 +622,6 @@
     border-radius: var(--radius-lg);
     box-shadow: var(--shadow-xl);
   }
-}
-
-/* Modal Overlay Media Badges */
-.showcase-modal-media-badges {
-  position: absolute;
-  top: var(--spacing-md-subtle);
-  left: var(--spacing-md-subtle);
-  right: calc(32px + var(--spacing-md-subtle) + var(--spacing-xs));
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: var(--spacing-xs);
-  z-index: var(--z-content);
-  pointer-events: none;
-}
-
-.showcase-modal-media-badges .showcase-modal-tag-pill,
-.showcase-modal-media-badges .showcase-card-like-pill {
-  pointer-events: auto;
-}
-
-@media (--medium) {
-  .showcase-modal-media-badges {
-    top: var(--spacing-md);
-    left: var(--spacing-md);
-    right: var(--spacing-md);
-  }
-}
-
-/* Unified Modal Pill Header Controls (Category Badge & Like Pill) */
-.showcase-modal-tag-pill,
-.showcase-modal-media-badges .showcase-card-like-pill {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: var(--spacing-xs);
-  height: 32px;
-  min-height: 32px;
-  padding: 0 var(--spacing-md-subtle);
-  font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-semibold);
-  letter-spacing: 0.02em;
-  background-color: var(--color-bg-surface);
-  color: var(--color-text-primary);
-  border-radius: var(--radius-full);
-  border: 1px solid var(--color-border-primary);
-  box-shadow: var(--shadow-sm);
-  text-transform: capitalize;
-  backdrop-filter: blur(4px);
-  transition: all var(--transition-fast) ease;
-}
-
-@media (--medium) {
-  .showcase-modal-tag-pill,
-  .showcase-modal-media-badges .showcase-card-like-pill {
-    height: 36px;
-    min-height: 36px;
-    padding: 0 var(--spacing-md);
-  }
-}
-
-/* Like button hover and active states inside modal */
-.showcase-modal-media-badges .showcase-card-like-pill:hover {
-  border-color: var(--color-brand-primary);
-  color: var(--color-brand-primary);
-  box-shadow: var(--shadow-md);
-}
-
-.showcase-modal-media-badges .showcase-card-like-pill.liked {
-  background-color: var(--color-status-error-bg);
-  border-color: var(--color-status-error);
-  color: var(--color-status-error);
-}
-
-.showcase-modal-media-badges .showcase-card-like-pill.liked:hover {
-  background-color: var(--color-status-error-bg);
-  border-color: var(--color-status-error);
-  color: var(--color-status-error);
 }
 
 /* Modal Text Details Column (Flexbox layout) */

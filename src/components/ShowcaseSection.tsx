@@ -327,14 +327,34 @@ export default function ShowcaseSection() {
                 className="showcase-modal-content"
                 onClick={(e) => e.stopPropagation()}
               >
-                {/* Modal close */}
-                <button 
-                  className="showcase-modal-close-btn"
-                  onClick={() => setSelectedItemIndex(null)}
-                  aria-label="Close modal"
-                >
-                  <X size={18} />
-                </button>
+                {/* Top Controls Bar: Category Badge (left) & Actions (Heart + Close) (right) */}
+                <div className="showcase-modal-top-bar">
+                  <span className="showcase-modal-tag-pill">
+                    {activeItem.category === 'videos' && <Video size={16} className="tag-icon" />}
+                    {activeItem.category === 'dogs' && <span className="tag-emoji">🐶</span>}
+                    {activeItem.category === 'cats' && <span className="tag-emoji">🐱</span>}
+                    <span className="tag-text">{activeItem.category}</span>
+                  </span>
+
+                  <div className="showcase-modal-top-actions">
+                    <button 
+                      className={`showcase-modal-action-btn showcase-modal-like-btn ${likedItems[activeItem.id] ? 'liked' : ''}`}
+                      onClick={(e) => handleLike(activeItem.id, e)}
+                      title={likedItems[activeItem.id] ? 'Unlike' : 'Love this'}
+                      aria-label={likedItems[activeItem.id] ? 'Unlike' : 'Love this'}
+                    >
+                      <Heart size={16} fill={likedItems[activeItem.id] ? 'currentColor' : 'none'} />
+                    </button>
+
+                    <button 
+                      className="showcase-modal-action-btn showcase-modal-close-btn"
+                      onClick={() => setSelectedItemIndex(null)}
+                      aria-label="Close modal"
+                    >
+                      <X size={16} />
+                    </button>
+                  </div>
+                </div>
 
                 {/* Dual Column Layout */}
                 <div className="showcase-modal-columns">
@@ -376,26 +396,6 @@ export default function ShowcaseSection() {
                         className="showcase-modal-main-img"
                       />
                     )}
-                    
-                    {/* Corner Quick Badges & Heart Like Button */}
-                    <div className="showcase-modal-media-badges">
-                      <span className="showcase-modal-tag-pill">
-                        {activeItem.category === 'videos' && <Video size={14} className="tag-icon" />}
-                        {activeItem.category === 'dogs' && <span className="tag-emoji">🐶</span>}
-                        {activeItem.category === 'cats' && <span className="tag-emoji">🐱</span>}
-                        <span className="tag-text">{activeItem.category}</span>
-                      </span>
-
-                      <button 
-                        className={`showcase-card-like-pill ${likedItems[activeItem.id] ? 'liked' : ''}`}
-                        onClick={(e) => handleLike(activeItem.id, e)}
-                        title={likedItems[activeItem.id] ? "Unlike" : "Love this"}
-                        aria-label={likedItems[activeItem.id] ? "Unlike" : "Love this"}
-                      >
-                        <Heart size={14} fill={likedItems[activeItem.id] ? 'currentColor' : 'none'} />
-                        {/* <span>{likesCount[activeItem.id] ?? activeItem.initialLikes}</span> */}
-                      </button>
-                    </div>
                   </div>
 
                   {/* Right Column: Narrative Content Area */}
