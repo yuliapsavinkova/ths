@@ -97,15 +97,15 @@ export const ServicesSection: React.FC = () => {
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Keeping the home tidy and clean</span>
-                </li>
-                <li className="package-feature-item">
-                  <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Regular photo and video updates</span>
+                  <span>Keeping home tidy and clean</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
                   <span>Reporting any home issues</span>
+                </li>
+                <li className="package-feature-item">
+                  <PawIcon size={14} className="services-paw-bullet" />
+                  <span>Regular photo and video updates</span>
                 </li>
               </ul>
             </div>
@@ -174,16 +174,16 @@ export const ServicesSection: React.FC = () => {
                 <div className="app-card-icon-box services-card-icon-box">
                   <Sparkles size={20} />
                 </div>
-                <h3 className="app-card-title services-card-title">No pets? No problem</h3>
+                <h3 className="app-card-title services-card-title">Other</h3>
               </div>
               <ul className="package-features">
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Plants-only sits welcome</span>
+                  <span>Fish, reptiles, or exotic animals</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Fish, reptiles, or exotic animals</span>
+                  <span>Plants-only sits welcome</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />

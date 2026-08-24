@@ -87,6 +87,16 @@ header.scrolled .brand-logo-component:hover {
   color: var(--color-brand-secondary);
 }
 
+@media (--large) {
+  .brand-logo-component--header {
+    font-size: var(--font-size-xl);
+  }
+  .brand-logo-component--header .brand-logo-icon-img {
+    width: 48px;
+    height: 48px;
+  }
+}
+
 header:not(.scrolled) .brand-logo-component--header {
   color: var(--color-brand-secondary);
 }

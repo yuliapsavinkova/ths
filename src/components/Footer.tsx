@@ -1,6 +1,5 @@
 import React from 'react';
 import { ExternalLink } from 'lucide-react';
-import { SITTER_BIO } from '../data';
 import { BrandLogo } from './BrandLogo';
 import { TRUSTED_HOUSESITTERS_REF_LINK } from './TrustedHousesittersBanner';
 
@@ -15,7 +14,7 @@ export const Footer: React.FC = () => {
           <p className="footer-brand-text" id="footer-brand-desc">
             Premium live-in pet and home care. Enjoy complete peace of mind while you're away with a trusted live-in sitter, an active work-from-home presence, and regular updates.
           </p>
-          <span className="footer-brand-copy" id="footer-brand-copy-text">
+          <span className="footer-brand-copy footer-copy-desktop" id="footer-brand-copy-desktop">
             <span className="footer-copy-domain">© {new Date().getFullYear()} yulia.sitterjourney.com</span>
             <span className="footer-copy-rights">&nbsp;&middot;&nbsp;All Rights Reserved</span>
           </span>
@@ -30,7 +29,6 @@ export const Footer: React.FC = () => {
             <li><a href="#testimonials-section">Reviews</a></li>
             <li><a href="#faq-section">FAQs</a></li>
             <li><a href="#booking-form-section">Book a Sit</a></li>
-            <li><a href="#feedback-section">Thoughts & Feedback</a></li>
           </ul>
         </div>
 
@@ -57,9 +55,14 @@ export const Footer: React.FC = () => {
               </a>
             </li>
           </ul>
-          <div className="footer-contact-info" id="footer-contact-info-el">
-            <span>Primary support: yulia.sitterjourney.com</span>
-          </div>
+        </div>
+
+        {/* Mobile-only Bottom Copyright */}
+        <div className="footer-mobile-copy-wrap" id="footer-mobile-copy-wrap">
+          <span className="footer-brand-copy footer-copy-mobile" id="footer-brand-copy-mobile">
+            <span className="footer-copy-domain">© {new Date().getFullYear()} yulia.sitterjourney.com</span>
+            <span className="footer-copy-rights">&nbsp;&middot;&nbsp;All Rights Reserved</span>
+          </span>
         </div>
 
       </div>

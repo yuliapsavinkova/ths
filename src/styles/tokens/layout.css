@@ -8,7 +8,7 @@
   /* Semantic Layout & Offset Tokens */
   --header-offset-mobile: 5.25rem;  /* ~84px ensures generous clearance under mobile header */
   --header-offset-tablet: 6rem;     /* ~96px scaled up for tablet header height */
-  --header-offset-desktop: 5.75rem; /* ~92px offset for spacious display */
+  --header-offset-desktop: 6.5rem;  /* ~104px offset for spacious laptop/desktop display */
 
   /* Border Radii */
   --radius-xs: 0.125rem;         /* 2px - precise micro-details */

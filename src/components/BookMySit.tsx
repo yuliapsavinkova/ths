@@ -6,22 +6,22 @@ import {
   getDatesDiff,
   calculateEndDateStr,
   calculateEndDateWithMonths,
-  formatStayDuration,
+  formatStayDuration
 } from '../utils/calendarUtils';
-import {
-  Calendar,
-  Heart,
-  Plus,
-  Minus,
-  User,
-  Mail,
-  Phone,
-  MapPin,
-  MessageSquare,
-  Check,
+import { 
+  Calendar, 
+  Heart, 
+  Plus, 
+  Minus, 
+  User, 
+  Mail, 
+  Phone, 
+  MapPin, 
+  MessageSquare, 
+  Check, 
   RotateCcw,
   Users,
-  Tag,
+  Tag
 } from 'lucide-react';
 
 interface PricingBreakdown {
@@ -47,7 +47,7 @@ const MILESTONE_PRESETS: MilestonePreset[] = [
   { days: 1, label: '1 Night', price: '$99' },
   { days: 7, label: '1 Week', price: '$299' },
   { days: 30, months: 1, label: '1 Month', price: '$999' },
-  { days: 60, months: 2, label: '2+ Months', price: '10% Off' },
+  { days: 60, months: 2, label: '2+ Months', price: '10% Off' }
 ];
 
 interface BookMySitProps {
@@ -67,7 +67,7 @@ export default function BookMySit({
   initialHasMedications = false,
   initialHasSeniorPets = false,
   initialStartDate = '',
-  initialEndDate = '',
+  initialEndDate = ''
 }: BookMySitProps) {
   // System date anchor for min picker limits
   const todayStr = new Date().toISOString().split('T')[0];
@@ -133,7 +133,7 @@ export default function BookMySit({
       (document.activeElement as HTMLElement).blur();
     }
 
-    const targetElement =
+    const targetElement = 
       document.getElementById('booking-section-header') ||
       document.getElementById('booking-form-section') ||
       widgetRef.current;
@@ -147,7 +147,7 @@ export default function BookMySit({
 
       window.scrollTo({
         top: offsetPosition,
-        behavior: 'smooth',
+        behavior: 'smooth'
       });
     }
   };
@@ -176,7 +176,7 @@ export default function BookMySit({
     gardenSurcharge: 0,
     durationDiscount: 0,
     total: 999,
-    perDay: 33.3,
+    perDay: 33.30
   });
 
   // Synchronize internal state with changes to props
@@ -319,16 +319,15 @@ export default function BookMySit({
     const petDailyRate = additionalPets * 10;
     const petSurcharge = Math.round(petDailyRate * duration);
 
-    const seniorSurcharge = hasSeniorPets ? Math.round(2.5 * duration) : 0;
-    const medsSurcharge = hasMedications ? Math.round(2.5 * duration) : 0;
-    const gardenSurcharge = largeGarden ? Math.round(2.5 * duration) : 0;
+    const seniorSurcharge = hasSeniorPets ? Math.round(2.50 * duration) : 0;
+    const medsSurcharge = hasMedications ? Math.round(2.50 * duration) : 0;
+    const gardenSurcharge = largeGarden ? Math.round(2.50 * duration) : 0;
 
-    const subtotalItems =
-      baseRate + petSurcharge + seniorSurcharge + medsSurcharge + gardenSurcharge;
+    const subtotalItems = baseRate + petSurcharge + seniorSurcharge + medsSurcharge + gardenSurcharge;
 
     let discountPercent = 0;
     if (duration >= 60) {
-      discountPercent = 0.1;
+      discountPercent = 0.10;
     }
 
     const durationDiscount = Math.round(subtotalItems * discountPercent);
@@ -344,7 +343,7 @@ export default function BookMySit({
       gardenSurcharge,
       durationDiscount,
       total,
-      perDay,
+      perDay
     });
   }, [duration, dogCount, catCount, otherCount, hasMedications, hasSeniorPets, largeGarden]);
 
@@ -388,18 +387,11 @@ export default function BookMySit({
 
     setIsSubmitting(true);
 
-    const derivedPetType =
-      (dogCount > 0 && catCount > 0) ||
-      (dogCount > 0 && otherCount > 0) ||
-      (catCount > 0 && otherCount > 0)
-        ? 'mixed'
-        : dogCount > 0
-          ? 'dog'
-          : catCount > 0
-            ? 'cat'
-            : otherCount > 0
-              ? 'other'
-              : 'none';
+    const derivedPetType = 
+      (dogCount > 0 && catCount > 0) || (dogCount > 0 && otherCount > 0) || (catCount > 0 && otherCount > 0) ? 'mixed' :
+      dogCount > 0 ? 'dog' :
+      catCount > 0 ? 'cat' :
+      otherCount > 0 ? 'other' : 'none';
 
     const payload = {
       name,
@@ -420,14 +412,14 @@ export default function BookMySit({
       largeGarden,
       notes,
       pricing,
-      source: 'bookmysit_v2',
+      source: 'bookmysit_v2'
     };
 
     try {
       const response = await fetch('/api/submit-booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(payload)
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -451,12 +443,13 @@ export default function BookMySit({
 
   return (
     <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
+
       {isSuccess ? (
-        <div
-          ref={successPanelRef}
-          tabIndex={-1}
-          role="region"
-          aria-label="Booking Request Received"
+        <div 
+          ref={successPanelRef} 
+          tabIndex={-1} 
+          role="region" 
+          aria-label="Booking Request Received" 
           className="bms-success-panel"
         >
           <div className="bms-success-circle">
@@ -464,9 +457,8 @@ export default function BookMySit({
           </div>
           <h4>Thank You!</h4>
           <p>
-            I've received your booking request for <strong>{formatDate(startDate)}</strong> to{' '}
-            <strong>{formatDate(endDate)}</strong> ({duration} {duration === 1 ? 'night' : 'nights'}
-            ). I'm looking forward to connecting with you!
+            I've received your booking request for{' '}
+            <strong>{formatDate(startDate)}</strong> to <strong>{formatDate(endDate)}</strong> ({duration} {duration === 1 ? 'night' : 'nights'}). I'm looking forward to connecting with you!
           </p>
           <div className="bms-success-summary-box">
             <div className="bms-summary-row bms-summary-total">
@@ -479,8 +471,7 @@ export default function BookMySit({
             </div>
           </div>
           <p className="bms-success-coordinator">
-            I will reach out to you within 24 hours to confirm availability and coordinate the
-            details.
+            I will reach out to you within 24 hours to confirm availability and coordinate the details.
           </p>
           <button type="button" onClick={handleReset} className="bms-reset-btn">
             <RotateCcw size={14} /> Calculate Another Stay
@@ -507,176 +498,172 @@ export default function BookMySit({
 
           <div className="bms-form-flex-container">
             <div className="bms-flex-col bms-col-left">
-              {/* STEP 1: DATES & STAY LENGTH */}
-              <div className="bms-step-group bms-step-1">
-                <div className="bms-step-title">
-                  <span className="bms-number">1</span>
-                  Travel Dates
-                </div>
-
-                <div className="bms-dates-row">
-                  <div className="bms-input-wrapper">
-                    <label htmlFor="bms-start-date-input" className="bms-input-icon-label">
-                      <Calendar size={12} /> Start Date
-                    </label>
-                    <input
-                      id="bms-start-date-input"
-                      type="date"
-                      required
-                      min={todayStr}
-                      value={startDate}
-                      onChange={(e) => handleStartDateChange(e.target.value)}
-                      className="bms-date-input"
-                      aria-label="Start date"
-                    />
-                  </div>
-                  <div className="bms-input-wrapper">
-                    <label htmlFor="bms-end-date-input" className="bms-input-icon-label">
-                      <Calendar size={12} /> End Date
-                    </label>
-                    <input
-                      id="bms-end-date-input"
-                      type="date"
-                      required
-                      min={startDate || todayStr}
-                      value={endDate}
-                      onChange={(e) => handleEndDateChange(e.target.value)}
-                      className="bms-date-input"
-                      aria-label="End date"
-                    />
-                  </div>
-                </div>
+            {/* STEP 1: DATES & STAY LENGTH */}
+            <div className="bms-step-group bms-step-1">
+              <div className="bms-step-title">
+                <span className="bms-number">1</span>
+                Travel Dates
               </div>
-
-              {/* STEP 2: PET COUNTS (Horizontal compact counter) */}
-              <div className="bms-step-group bms-step-2">
-                <div className="bms-step-title">
-                  <span className="bms-number">2</span>
-                  Pets
-                  <InfoTooltip
-                    content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)."
-                    iconSize={14}
-                    align="left"
-                    ariaLabel="Pet inclusion policy"
+              
+              <div className="bms-dates-row">
+                <div className="bms-input-wrapper">
+                  <label htmlFor="bms-start-date-input" className="bms-input-icon-label">
+                    <Calendar size={12} /> Start Date
+                  </label>
+                  <input
+                    id="bms-start-date-input"
+                    type="date"
+                    required
+                    min={todayStr}
+                    value={startDate}
+                    onChange={(e) => handleStartDateChange(e.target.value)}
+                    className="bms-date-input"
+                    aria-label="Start date"
                   />
                 </div>
-
-                <div className="bms-pet-counters-container">
-                  {/* Dog */}
-                  <div className={`bms-pet-row ${dogCount > 0 ? 'has-pets' : ''}`}>
-                    <div className="bms-pet-label-group">
-                      <span className="bms-pet-emoji">🐶</span>
-                      <span className="bms-pet-name">Dogs</span>
-                    </div>
-                    <div className="bms-pet-stepper">
-                      <button
-                        type="button"
-                        disabled={dogCount <= 0}
-                        onClick={() => setDogCount((p) => Math.max(0, p - 1))}
-                        className="bms-circle-btn"
-                        aria-label="Decrease dog count"
-                      >
-                        <Minus size={12} />
-                      </button>
-                      <span className="bms-counter-value">{dogCount}</span>
-                      <button
-                        type="button"
-                        disabled={dogCount + catCount + otherCount >= 6}
-                        onClick={() => setDogCount((p) => Math.min(6, p + 1))}
-                        className="bms-circle-btn"
-                        aria-label="Increase dog count"
-                      >
-                        <Plus size={12} />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Cat */}
-                  <div className={`bms-pet-row ${catCount > 0 ? 'has-pets' : ''}`}>
-                    <div className="bms-pet-label-group">
-                      <span className="bms-pet-emoji">🐱</span>
-                      <span className="bms-pet-name">Cats</span>
-                    </div>
-                    <div className="bms-pet-stepper">
-                      <button
-                        type="button"
-                        disabled={catCount <= 0}
-                        onClick={() => setCatCount((p) => Math.max(0, p - 1))}
-                        className="bms-circle-btn"
-                        aria-label="Decrease cat count"
-                      >
-                        <Minus size={12} />
-                      </button>
-                      <span className="bms-counter-value">{catCount}</span>
-                      <button
-                        type="button"
-                        disabled={dogCount + catCount + otherCount >= 6}
-                        onClick={() => setCatCount((p) => Math.min(6, p + 1))}
-                        className="bms-circle-btn"
-                        aria-label="Increase cat count"
-                      >
-                        <Plus size={12} />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Other */}
-                  <div className={`bms-pet-row ${otherCount > 0 ? 'has-pets' : ''}`}>
-                    <div className="bms-pet-label-group">
-                      <span className="bms-pet-emoji">🦜</span>
-                      <span className="bms-pet-name">Other</span>
-                    </div>
-                    <div className="bms-pet-stepper">
-                      <button
-                        type="button"
-                        disabled={otherCount <= 0}
-                        onClick={() => setOtherCount((p) => Math.max(0, p - 1))}
-                        className="bms-circle-btn"
-                        aria-label="Decrease other pet count"
-                      >
-                        <Minus size={12} />
-                      </button>
-                      <span className="bms-counter-value">{otherCount}</span>
-                      <button
-                        type="button"
-                        disabled={dogCount + catCount + otherCount >= 6}
-                        onClick={() => setOtherCount((p) => Math.min(6, p + 1))}
-                        className="bms-circle-btn"
-                        aria-label="Increase other pet count"
-                      >
-                        <Plus size={12} />
-                      </button>
-                    </div>
-                  </div>
-
-                  {/* Home Only */}
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setDogCount(0);
-                      setCatCount(0);
-                      setOtherCount(0);
-                    }}
-                    className={`bms-pet-row bms-home-only-tile ${
-                      dogCount === 0 && catCount === 0 && otherCount === 0 ? 'active' : ''
-                    }`}
-                  >
-                    <div className="bms-pet-label-group">
-                      <span className="bms-pet-emoji">🏡</span>
-                      <span className="bms-pet-name">Home Only</span>
-                    </div>
-                    <span className="bms-toggle-indicator">
-                      {dogCount === 0 && catCount === 0 && otherCount === 0 ? '✓' : ''}
-                    </span>
-                  </button>
+                <div className="bms-input-wrapper">
+                  <label htmlFor="bms-end-date-input" className="bms-input-icon-label">
+                    <Calendar size={12} /> End Date
+                  </label>
+                  <input
+                    id="bms-end-date-input"
+                    type="date"
+                    required
+                    min={startDate || todayStr}
+                    value={endDate}
+                    onChange={(e) => handleEndDateChange(e.target.value)}
+                    className="bms-date-input"
+                    aria-label="End date"
+                  />
                 </div>
               </div>
+            </div>
 
-              {/* 
+            {/* STEP 2: PET COUNTS (Horizontal compact counter) */}
+            <div className="bms-step-group bms-step-2">
+              <div className="bms-step-title">
+                <span className="bms-number">2</span>
+                Pets
+                <InfoTooltip 
+                  content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)." 
+                  iconSize={14}
+                  align="left"
+                  ariaLabel="Pet inclusion policy"
+                />
+              </div>
+
+              <div className="bms-pet-counters-container">
+                {/* Dog */}
+                <div className={`bms-pet-row ${dogCount > 0 ? 'has-pets' : ''}`}>
+                  <div className="bms-pet-label-group">
+                    <span className="bms-pet-emoji">🐶</span>
+                    <span className="bms-pet-name">Dogs</span>
+                  </div>
+                  <div className="bms-pet-stepper">
+                    <button
+                      type="button"
+                      disabled={dogCount <= 0}
+                      onClick={() => setDogCount(p => Math.max(0, p - 1))}
+                      className="bms-circle-btn"
+                      aria-label="Decrease dog count"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span className="bms-counter-value">{dogCount}</span>
+                    <button
+                      type="button"
+                      disabled={dogCount + catCount + otherCount >= 6}
+                      onClick={() => setDogCount(p => Math.min(6, p + 1))}
+                      className="bms-circle-btn"
+                      aria-label="Increase dog count"
+                    >
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Cat */}
+                <div className={`bms-pet-row ${catCount > 0 ? 'has-pets' : ''}`}>
+                  <div className="bms-pet-label-group">
+                    <span className="bms-pet-emoji">🐱</span>
+                    <span className="bms-pet-name">Cats</span>
+                  </div>
+                  <div className="bms-pet-stepper">
+                    <button
+                      type="button"
+                      disabled={catCount <= 0}
+                      onClick={() => setCatCount(p => Math.max(0, p - 1))}
+                      className="bms-circle-btn"
+                      aria-label="Decrease cat count"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span className="bms-counter-value">{catCount}</span>
+                    <button
+                      type="button"
+                      disabled={dogCount + catCount + otherCount >= 6}
+                      onClick={() => setCatCount(p => Math.min(6, p + 1))}
+                      className="bms-circle-btn"
+                      aria-label="Increase cat count"
+                    >
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Other */}
+                <div className={`bms-pet-row ${otherCount > 0 ? 'has-pets' : ''}`}>
+                  <div className="bms-pet-label-group">
+                    <span className="bms-pet-emoji">🦜</span>
+                    <span className="bms-pet-name">Other</span>
+                  </div>
+                  <div className="bms-pet-stepper">
+                    <button
+                      type="button"
+                      disabled={otherCount <= 0}
+                      onClick={() => setOtherCount(p => Math.max(0, p - 1))}
+                      className="bms-circle-btn"
+                      aria-label="Decrease other pet count"
+                    >
+                      <Minus size={12} />
+                    </button>
+                    <span className="bms-counter-value">{otherCount}</span>
+                    <button
+                      type="button"
+                      disabled={dogCount + catCount + otherCount >= 6}
+                      onClick={() => setOtherCount(p => Math.min(6, p + 1))}
+                      className="bms-circle-btn"
+                      aria-label="Increase other pet count"
+                    >
+                      <Plus size={12} />
+                    </button>
+                  </div>
+                </div>
+
+                {/* Home Only */}
+                <button
+                  type="button"
+                  onClick={() => { setDogCount(0); setCatCount(0); setOtherCount(0); }}
+                  className={`bms-pet-row bms-home-only-tile ${
+                    dogCount === 0 && catCount === 0 && otherCount === 0 ? 'active' : ''
+                  }`}
+                >
+                  <div className="bms-pet-label-group">
+                    <span className="bms-pet-emoji">🏡</span>
+                    <span className="bms-pet-name">Home Only</span>
+                  </div>
+                  <span className="bms-toggle-indicator">
+                    {dogCount === 0 && catCount === 0 && otherCount === 0 ? '✓' : ''}
+                  </span>
+                </button>
+              </div>
+            </div>
+
+            {/* 
               TEMPORARILY COMMENTED OUT - DO NOT DELETE:
               Step 3 (Specialized Care) is hidden for now and will be added back later.
             */}
-              {/* 
+            {/* 
             <div className="bms-step-group bms-step-3">
               <div className="bms-step-title">
                 <span className="bms-number">3</span>
@@ -731,257 +718,247 @@ export default function BookMySit({
             </div>
             */}
 
-              {/* STEP 3 (formerly STEP 4): CONTACT DETAILS */}
-              <div className="bms-step-group bms-step-4">
-                <div className="bms-step-title">
-                  <span className="bms-number">3</span>
-                  Contact Details
-                </div>
-                <div className="bms-fields-grid">
-                  <div className="bms-field">
-                    <label htmlFor="bms-name-input" className="bms-field-label">
-                      <User size={12} /> Name
-                    </label>
-                    <input
-                      id="bms-name-input"
-                      type="text"
-                      required
-                      autoComplete="name"
-                      placeholder="e.g. Sarah Jenkins"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      className="bms-text-input"
-                      aria-label="Your full name"
-                    />
-                  </div>
-
-                  <div className="bms-field">
-                    <label htmlFor="bms-email-input" className="bms-field-label">
-                      <Mail size={12} /> Email
-                    </label>
-                    <input
-                      id="bms-email-input"
-                      type="email"
-                      required
-                      autoComplete="email"
-                      placeholder="e.g. sarah@example.com"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      className="bms-text-input"
-                      aria-label="Your email address"
-                    />
-                  </div>
-
-                  <div className="bms-field">
-                    <label htmlFor="bms-phone-input" className="bms-field-label">
-                      <Phone size={12} /> Phone
-                    </label>
-                    <input
-                      id="bms-phone-input"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="e.g. (555) 234-5678"
-                      value={phone}
-                      onChange={(e) => setPhone(e.target.value)}
-                      className="bms-text-input"
-                      aria-label="Your phone number"
-                    />
-                  </div>
-
-                  <div className="bms-field">
-                    <label htmlFor="bms-location-input" className="bms-field-label">
-                      <MapPin size={12} /> Location
-                    </label>
-                    <input
-                      id="bms-location-input"
-                      type="text"
-                      placeholder="e.g. San Francisco, Mission District"
-                      value={location}
-                      onChange={(e) => setLocation(e.target.value)}
-                      className="bms-text-input"
-                      aria-label="Your location or neighborhood"
-                    />
-                  </div>
-
-                  <div className="bms-field col-span-2">
-                    <label htmlFor="bms-referredby-input" className="bms-field-label">
-                      <Users size={12} /> Referred by
-                    </label>
-                    <input
-                      id="bms-referredby-input"
-                      type="text"
-                      placeholder="e.g. Friend's referral, Instagram, Google search"
-                      value={referredBy}
-                      onChange={(e) => setReferredBy(e.target.value)}
-                      className="bms-text-input"
-                      aria-label="How you heard about Yulia"
-                    />
-                  </div>
-
-                  <div className="bms-field col-span-2">
-                    <label htmlFor="bms-notes-input" className="bms-field-label">
-                      <MessageSquare size={12} />
-                      Message
-                    </label>
-                    <textarea
-                      id="bms-notes-input"
-                      placeholder="Tell me about your trip, pet's routine, or any special needs..."
-                      rows={5}
-                      value={notes}
-                      onChange={(e) => setNotes(e.target.value)}
-                      className="bms-textarea"
-                      aria-label="Additional notes or details about your sit"
-                    />
-                  </div>
-                </div>
+            {/* STEP 3 (formerly STEP 4): CONTACT DETAILS */}
+            <div className="bms-step-group bms-step-4">
+              <div className="bms-step-title">
+                <span className="bms-number">3</span>
+                Contact Details
               </div>
-            </div>
-
-            <div className="bms-flex-col bms-col-right">
-              {/* STEP 5: REVIEW AND SUBMIT */}
-              <div className="bms-receipt-card bms-step-5">
-                <div className="bms-receipt-header">
-                  <div className="bms-step-title bms-review-title">
-                    <span>Review & Submit</span>
-                  </div>
-                  <div className="bms-nights-pill">
-                    <span>{formatStayDuration(duration, startDate, endDate)}</span>
-                  </div>
+              <div className="bms-fields-grid">
+                <div className="bms-field">
+                  <label htmlFor="bms-name-input" className="bms-field-label">
+                    <User size={12} /> Name
+                  </label>
+                  <input
+                    id="bms-name-input"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    placeholder="e.g. Sarah Jenkins"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    className="bms-text-input"
+                    aria-label="Your full name"
+                  />
                 </div>
 
-                {/* Dynamic Dates Badge */}
-                <div className="bms-receipt-dates">
-                  <div>
-                    <span className="bms-date-label">Check-in</span>
-                    <span className="bms-date-val">
-                      {startDate ? formatDate(startDate) : '---'}
-                    </span>
-                  </div>
-                  <div className="bms-arrow-sep">➔</div>
-                  <div>
-                    <span className="bms-date-label">Check-out</span>
-                    <span className="bms-date-val">{endDate ? formatDate(endDate) : '---'}</span>
-                  </div>
+                <div className="bms-field">
+                  <label htmlFor="bms-email-input" className="bms-field-label">
+                    <Mail size={12} /> Email
+                  </label>
+                  <input
+                    id="bms-email-input"
+                    type="email"
+                    required
+                    autoComplete="email"
+                    placeholder="e.g. sarah@example.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    className="bms-text-input"
+                    aria-label="Your email address"
+                  />
                 </div>
 
-                {/* Pets Summary Row */}
-                <div className="bms-receipt-pets">
-                  <div>
-                    <span className="bms-pets-label">Selected Pets</span>
-                    <span className="bms-pets-val">
-                      {dogCount + catCount + otherCount === 0
-                        ? 'No pets added'
-                        : [
-                            dogCount > 0 ? `${dogCount} ${dogCount === 1 ? 'Dog' : 'Dogs'}` : '',
-                            catCount > 0 ? `${catCount} ${catCount === 1 ? 'Cat' : 'Cats'}` : '',
-                            otherCount > 0
-                              ? `${otherCount} ${otherCount === 1 ? 'Other' : 'Others'}`
-                              : '',
-                          ]
-                            .filter(Boolean)
-                            .join(', ')}
-                    </span>
-                  </div>
+                <div className="bms-field">
+                  <label htmlFor="bms-phone-input" className="bms-field-label">
+                    <Phone size={12} /> Phone
+                  </label>
+                  <input
+                    id="bms-phone-input"
+                    type="tel"
+                    autoComplete="tel"
+                    placeholder="e.g. (555) 234-5678"
+                    value={phone}
+                    onChange={(e) => setPhone(e.target.value)}
+                    className="bms-text-input"
+                    aria-label="Your phone number"
+                  />
                 </div>
 
-                {/* Line items */}
-                <div className="bms-line-items">
-                  <div className="bms-line-item">
-                    <span className="bms-item-name">
-                      Base Rate ({formatStayDuration(duration, startDate, endDate)})
-                    </span>
-                    <span className="bms-item-price">${pricing.baseRate}</span>
-                  </div>
-
-                  {pricing.petSurcharge > 0 && (
-                    <div className="bms-line-item">
-                      <span className="bms-item-name">
-                        Pet Surcharge
-                        <InfoTooltip
-                          content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)."
-                          iconSize={13}
-                          align="left"
-                          ariaLabel="Pet surcharge details"
-                        />
-                      </span>
-                      <span className="bms-item-price">+${pricing.petSurcharge}</span>
-                    </div>
-                  )}
-
-                  {pricing.seniorSurcharge > 0 && (
-                    <div className="bms-line-item">
-                      <span className="bms-item-name">
-                        {SPECIALIZED_CARE_OPTIONS.highEnergy.label}
-                      </span>
-                      <span className="bms-item-price">+${pricing.seniorSurcharge}</span>
-                    </div>
-                  )}
-
-                  {pricing.medsSurcharge > 0 && (
-                    <div className="bms-line-item">
-                      <span className="bms-item-name">
-                        {SPECIALIZED_CARE_OPTIONS.medications.label}
-                      </span>
-                      <span className="bms-item-price">+${pricing.medsSurcharge}</span>
-                    </div>
-                  )}
-
-                  {pricing.gardenSurcharge > 0 && (
-                    <div className="bms-line-item">
-                      <span className="bms-item-name">{SPECIALIZED_CARE_OPTIONS.garden.label}</span>
-                      <span className="bms-item-price">+${pricing.gardenSurcharge}</span>
-                    </div>
-                  )}
-
-                  {pricing.durationDiscount > 0 && (
-                    <div className="bms-line-item bms-discount-line">
-                      <span className="bms-item-name">Long Sit Discount (10% Off)</span>
-                      <span className="bms-item-price">-${pricing.durationDiscount}</span>
-                    </div>
-                  )}
+                <div className="bms-field">
+                  <label htmlFor="bms-location-input" className="bms-field-label">
+                    <MapPin size={12} /> Location
+                  </label>
+                  <input
+                    id="bms-location-input"
+                    type="text"
+                    placeholder="e.g. San Francisco, Mission District"
+                    value={location}
+                    onChange={(e) => setLocation(e.target.value)}
+                    className="bms-text-input"
+                    aria-label="Your location or neighborhood"
+                  />
                 </div>
 
-                {/* Bottom section (Total Estimate & Submit CTA) */}
-                <div className="bms-receipt-bottom-group">
-                  <div className="bms-receipt-total">
-                    <div className="bms-total-row">
-                      <span className="bms-total-label">Total Estimate</span>
-                      <span className="bms-total-price">${pricing.total}</span>
-                    </div>
-                    <div className="bms-per-night">~${pricing.perDay.toFixed(2)}/night</div>
-                  </div>
+                <div className="bms-field col-span-2">
+                  <label htmlFor="bms-referredby-input" className="bms-field-label">
+                    <Users size={12} /> Referred by
+                  </label>
+                  <input
+                    id="bms-referredby-input"
+                    type="text"
+                    placeholder="e.g. Friend's referral, Instagram, Google search"
+                    value={referredBy}
+                    onChange={(e) => setReferredBy(e.target.value)}
+                    className="bms-text-input"
+                    aria-label="How you heard about Yulia"
+                  />
+                </div>
 
-                  {/* CTA submit button */}
-                  <button
-                    type="submit"
-                    disabled={isSubmitting || !isFormValid}
-                    className={`bms-submit-cta ${!isFormValid ? 'bms-submit-cta-disabled' : ''}`}
-                  >
-                    {isSubmitting ? (
-                      <span>Submitting Request...</span>
-                    ) : (
-                      <span>Submit Your Booking</span>
-                    )}
-                  </button>
-
-                  {/* Status note bar under button */}
-                  <div className="bms-cta-status-bar">
-                    {!isFormValid ? (
-                      <span className="bms-status-hint bms-status-pending">
-                        * Please enter your name &amp; email
-                      </span>
-                    ) : (
-                      <span className="bms-status-hint bms-status-ready">
-                        ✓ All required fields complete
-                      </span>
-                    )}
-                  </div>
+                <div className="bms-field col-span-2">
+                  <label htmlFor="bms-notes-input" className="bms-field-label">
+                    <MessageSquare size={12} />Message
+                  </label>
+                  <textarea
+                    id="bms-notes-input"
+                    placeholder="Tell me about your trip, pet's routine, or any special needs..."
+                    rows={5}
+                    value={notes}
+                    onChange={(e) => setNotes(e.target.value)}
+                    className="bms-textarea"
+                    aria-label="Additional notes or details about your sit"
+                  />
                 </div>
               </div>
             </div>
           </div>
-          <PrivacyDisclosure type="booking" align="center" />
-        </form>
+
+          <div className="bms-flex-col bms-col-right">
+            {/* STEP 5: REVIEW AND SUBMIT */}
+            <div className="bms-receipt-card bms-step-5">
+              <div className="bms-receipt-header">
+                <div className="bms-step-title bms-review-title">
+                  <span>Review & Submit</span>
+                </div>
+                <div className="bms-nights-pill">
+                  <span>{formatStayDuration(duration, startDate, endDate)}</span>
+                </div>
+              </div>
+
+              {/* Dynamic Dates Badge */}
+              <div className="bms-receipt-dates">
+                <div>
+                  <span className="bms-date-label">Check-in</span>
+                  <span className="bms-date-val">{startDate ? formatDate(startDate) : '---'}</span>
+                </div>
+                <div className="bms-arrow-sep">➔</div>
+                <div>
+                  <span className="bms-date-label">Check-out</span>
+                  <span className="bms-date-val">{endDate ? formatDate(endDate) : '---'}</span>
+                </div>
+              </div>
+
+              {/* Pets Summary Row */}
+              <div className="bms-receipt-pets">
+                <div>
+                  <span className="bms-pets-label">Selected Pets</span>
+                  <span className="bms-pets-val">
+                    {dogCount + catCount + otherCount === 0 ? (
+                      'No pets added'
+                    ) : (
+                      [
+                        dogCount > 0 ? `${dogCount} ${dogCount === 1 ? 'Dog' : 'Dogs'}` : '',
+                        catCount > 0 ? `${catCount} ${catCount === 1 ? 'Cat' : 'Cats'}` : '',
+                        otherCount > 0 ? `${otherCount} ${otherCount === 1 ? 'Other' : 'Others'}` : ''
+                      ].filter(Boolean).join(', ')
+                    )}
+                  </span>
+                </div>
+              </div>
+
+              {/* Line items */}
+              <div className="bms-line-items">
+                <div className="bms-line-item">
+                  <span className="bms-item-name">Base Rate ({formatStayDuration(duration, startDate, endDate)})</span>
+                  <span className="bms-item-price">${pricing.baseRate}</span>
+                </div>
+
+                {pricing.petSurcharge > 0 && (
+                  <div className="bms-line-item">
+                    <span className="bms-item-name">
+                      Pet Surcharge
+                      <InfoTooltip 
+                        content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)." 
+                        iconSize={13}
+                        align="left"
+                        ariaLabel="Pet surcharge details"
+                      />
+                    </span>
+                    <span className="bms-item-price">+${pricing.petSurcharge}</span>
+                  </div>
+                )}
+
+                {pricing.seniorSurcharge > 0 && (
+                  <div className="bms-line-item">
+                    <span className="bms-item-name">{SPECIALIZED_CARE_OPTIONS.highEnergy.label}</span>
+                    <span className="bms-item-price">+${pricing.seniorSurcharge}</span>
+                  </div>
+                )}
+
+                {pricing.medsSurcharge > 0 && (
+                  <div className="bms-line-item">
+                    <span className="bms-item-name">{SPECIALIZED_CARE_OPTIONS.medications.label}</span>
+                    <span className="bms-item-price">+${pricing.medsSurcharge}</span>
+                  </div>
+                )}
+
+                {pricing.gardenSurcharge > 0 && (
+                  <div className="bms-line-item">
+                    <span className="bms-item-name">{SPECIALIZED_CARE_OPTIONS.garden.label}</span>
+                    <span className="bms-item-price">+${pricing.gardenSurcharge}</span>
+                  </div>
+                )}
+
+                {pricing.durationDiscount > 0 && (
+                  <div className="bms-line-item bms-discount-line">
+                    <span className="bms-item-name">Long Sit Discount (10% Off)</span>
+                    <span className="bms-item-price">-${pricing.durationDiscount}</span>
+                  </div>
+                )}
+              </div>
+
+              {/* Bottom section (Total Estimate & Submit CTA) */}
+              <div className="bms-receipt-bottom-group">
+                <div className="bms-receipt-total">
+                  <div className="bms-total-row">
+                    <span className="bms-total-label">Total Estimate</span>
+                    <span className="bms-total-price">${pricing.total}</span>
+                  </div>
+                  <div className="bms-per-night">~${pricing.perDay.toFixed(2)}/night</div>
+                </div>
+
+                {/* CTA submit button */}
+                <button
+                  type="submit"
+                  disabled={isSubmitting || !isFormValid}
+                  className={`bms-submit-cta ${!isFormValid ? 'bms-submit-cta-disabled' : ''}`}
+                >
+                  {isSubmitting ? (
+                    <span>Submitting Request...</span>
+                  ) : (
+                    <span>Submit Your Booking</span>
+                  )}
+                </button>
+
+                {/* Status note bar under button */}
+                <div className="bms-cta-status-bar">
+                  {!isFormValid ? (
+                    <span className="bms-status-hint bms-status-pending">
+                      * Please enter your name &amp; email
+                    </span>
+                  ) : (
+                    <span className="bms-status-hint bms-status-ready">
+                      ✓ All required fields complete
+                    </span>
+                  )}
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+        <PrivacyDisclosure type="booking" align="center" />
+      </form>
       )}
     </div>
   );
