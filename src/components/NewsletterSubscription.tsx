@@ -1,3 +1,10 @@
+/**
+ * NOTE: DO NOT DELETE THIS FILE OR COMPONENT.
+ * Email collection is temporarily commented out on the UI.
+ * This component, its API endpoint, and styles are fully configured and ready
+ * to be reactivated when needed.
+ */
+
 import React, { useState } from 'react';
 import { Mail, Loader2, CheckCircle2, AlertCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';

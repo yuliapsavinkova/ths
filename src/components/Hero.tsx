@@ -48,8 +48,11 @@ export const Hero: React.FC = () => {
             </a>
           </div>
 
-          {/* Newsletter Subscription Box */}
-          <NewsletterSubscription variant="hero" />
+          {/* 
+            NOTE: DO NOT DELETE - Newsletter / email collection is temporarily commented out from the UI.
+            Uncomment <NewsletterSubscription variant="hero" /> below when ready to collect emails again.
+          */}
+          {/* <NewsletterSubscription variant="hero" /> */}
 
         </div>
 

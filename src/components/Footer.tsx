@@ -38,20 +38,20 @@ export const Footer: React.FC = () => {
           <ul className="footer-links-list">
             <li>
               <a 
-                href={TRUSTED_HOUSESITTERS_REF_LINK} 
-                target="_blank" 
-                rel="noopener noreferrer"
-              >
-                TrustedHousesitters Profile <ExternalLink size={12} />
-              </a>
-            </li>
-            <li>
-              <a 
                 href="https://sitterjourney.com" 
                 target="_blank" 
                 rel="noopener noreferrer"
               >
                 SitterJourney Blog <ExternalLink size={12} />
+              </a>
+            </li>
+            <li>
+              <a 
+                href={TRUSTED_HOUSESITTERS_REF_LINK} 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                TrustedHousesitters <ExternalLink size={12} />
               </a>
             </li>
           </ul>

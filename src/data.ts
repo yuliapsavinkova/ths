@@ -109,7 +109,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq1',
     question: 'Where do you sit?',
     answer:
-      'While I am based in California, I am open to sitting anywhere! For monthly or longer sits, distance is not a barrier.',
+      'While I am based in California, I am open to sitting anywhere for selected opportunities! For monthly or longer sits, distance is not a barrier.',
   },
   {
     id: 'faq2',
