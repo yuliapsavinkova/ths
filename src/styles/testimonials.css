@@ -103,8 +103,8 @@
 .carousel-arrow-btn {
   width: 2.75rem;
   height: 2.75rem;
-  min-width: 44px;
-  min-height: 44px;
+  min-width: var(--touch-target-compact);
+  min-height: var(--touch-target-compact);
   border-radius: var(--radius-full);
   border: 1px solid var(--color-border-bold);
   background: var(--color-bg-surface);
@@ -145,10 +145,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: var(--control-size-md);
+  height: var(--control-size-md);
+  min-width: var(--touch-target-compact);
+  min-height: var(--touch-target-compact);
 }
 
 .carousel-dot-active {
@@ -197,7 +197,7 @@
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
-  min-height: 44px;
+  min-height: var(--touch-target-compact);
   padding: var(--spacing-xs) var(--spacing-lg-subtle);
   border-radius: var(--radius-full);
   border: none;
@@ -256,7 +256,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   padding: 8px 0;
-  min-height: 44px;
+  min-height: var(--touch-target-compact);
   display: inline-flex;
   align-items: center;
   margin-top: var(--spacing-xxs);
@@ -396,8 +396,8 @@
 }
 
 .swipe-avatar {
-  width: 52px;
-  height: 52px;
+  width: var(--control-size-xl);
+  height: var(--control-size-xl);
   border-radius: var(--radius-full);
   border: 2.5px solid var(--color-bg-primary);
   object-fit: cover;
@@ -466,7 +466,7 @@
   text-decoration: underline;
   text-underline-offset: 4px;
   padding: var(--spacing-xs) var(--spacing-sm);
-  min-height: 44px;
+  min-height: var(--touch-target-compact);
   border: none;
   border-radius: var(--radius-md);
   background-color: transparent;

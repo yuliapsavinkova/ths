@@ -59,6 +59,7 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
           onClick={() => setIsOpen(!isOpen)}
           className="privacy-toggle-btn"
           aria-expanded={isOpen}
+          aria-label={`${displayLabel} details`}
         >
           <IconComponent size={13} className="privacy-icon" aria-hidden="true" />
           <span className="privacy-toggle-link">

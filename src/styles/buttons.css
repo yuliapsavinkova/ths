@@ -3,7 +3,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-height: 44px;
+  min-height: var(--touch-target-compact);
   font-family: var(--font-sans);
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-xs);

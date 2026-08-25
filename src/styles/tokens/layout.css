@@ -5,6 +5,16 @@
   --container-width-standard: 1024px;
   --container-width-wide: 1440px;
 
+  /* Tier 1: Base Component Sizing Scale (Single Source of Truth) */
+  --control-size-sm: 36px;
+  --control-size-md: 44px;
+  --control-size-lg: 48px;
+  --control-size-xl: 52px;
+
+  /* Tier 2: Semantic Touch Target Tokens (Aliased to Base Scale) */
+  --touch-target-compact: var(--control-size-md);     /* 44px - minimum compact target */
+  --touch-target-min: var(--control-size-lg);         /* 48px - standard accessible touch target (WCAG 2.5.5 / 2.5.8) */
+
   /* Semantic Layout & Offset Tokens */
   --header-offset-mobile: 5.25rem;  /* ~84px ensures generous clearance under mobile header */
   --header-offset-tablet: 6rem;     /* ~96px scaled up for tablet header height */

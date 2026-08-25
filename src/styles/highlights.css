@@ -44,7 +44,7 @@
   align-items: center;
   justify-content: center;
   width: 100%;
-  padding: var(--spacing-md) var(--spacing-2xs);
+  padding: var(--spacing-md) var(--spacing-xxs);
 }
 
 /* Header styling */
@@ -115,7 +115,7 @@
   justify-content: center;
   width: 100%;
   max-width: 680px;
-  padding: 0 var(--spacing-2xs);
+  padding: 0 var(--spacing-xxs);
 }
 
 /* WHEEL & ORBIT SYSTEM */
@@ -124,8 +124,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(2 * var(--orbit-radius, 105px) + 52px);
-  height: calc(2 * var(--orbit-radius, 105px) + 52px);
+  width: calc(2 * var(--orbit-radius, 105px) + var(--control-size-xl));
+  height: calc(2 * var(--orbit-radius, 105px) + var(--control-size-xl));
   max-width: calc(100vw - 12px);
   max-height: calc(100vw - 12px);
   margin: 0 auto;
@@ -194,15 +194,15 @@
 
 @media (--small) {
   .highlights-orbit-node {
-    width: 48px;
-    height: 48px;
+    width: var(--control-size-lg);
+    height: var(--control-size-lg);
   }
 }
 
 @media (--large) {
   .highlights-orbit-node {
-    width: 52px;
-    height: 52px;
+    width: var(--control-size-xl);
+    height: var(--control-size-xl);
   }
 }
 
@@ -318,8 +318,8 @@
 
 @media (--large) {
   .highlights-center-icon-badge {
-    width: 44px;
-    height: 44px;
+    width: var(--control-size-md);
+    height: var(--control-size-md);
     margin-bottom: var(--spacing-xs);
   }
 }
@@ -419,10 +419,10 @@
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  width: 44px;
-  height: 44px;
-  min-width: 44px;
-  min-height: 44px;
+  width: var(--control-size-md);
+  height: var(--control-size-md);
+  min-width: var(--touch-target-compact);
+  min-height: var(--touch-target-compact);
 }
 
 .highlights-inner-nav-btn:hover {

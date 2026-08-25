@@ -40,8 +40,8 @@
 
 @media (--medium) {
   .brand-logo-icon-img {
-    width: 44px;
-    height: 44px;
+    width: var(--control-size-md);
+    height: var(--control-size-md);
   }
 }
 
@@ -92,8 +92,8 @@ header.scrolled .brand-logo-component:hover {
     font-size: var(--font-size-xl);
   }
   .brand-logo-component--header .brand-logo-icon-img {
-    width: 48px;
-    height: 48px;
+    width: var(--control-size-lg);
+    height: var(--control-size-lg);
   }
 }
 
@@ -116,8 +116,8 @@ header.scrolled .brand-logo-component--header:hover {
 }
 
 header.scrolled .brand-logo-component--header .brand-logo-icon-img {
-  width: 36px;
-  height: 36px;
+  width: var(--control-size-sm);
+  height: var(--control-size-sm);
 }
 
 /* ------------------------------------------
@@ -134,8 +134,8 @@ header.scrolled .brand-logo-component--header .brand-logo-icon-img {
 }
 
 .brand-logo-component--footer .brand-logo-icon-img {
-  width: 48px;
-  height: 48px;
+  width: var(--control-size-lg);
+  height: var(--control-size-lg);
 }
 
 @media (--medium) {

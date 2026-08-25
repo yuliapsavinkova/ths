@@ -6,12 +6,12 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  min-width: 44px;
-  min-height: 44px;
-  width: 44px;
-  height: 44px;
+  min-width: var(--touch-target-compact);
+  min-height: var(--touch-target-compact);
+  width: var(--control-size-md);
+  height: var(--control-size-md);
   padding: 0;
-  margin: -10px 0 -10px var(--spacing-2xs);
+  margin: -10px 0 -10px var(--spacing-xxs);
   vertical-align: middle;
   outline: none;
   background: transparent;
