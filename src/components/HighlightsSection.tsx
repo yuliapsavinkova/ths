@@ -80,35 +80,35 @@ export const HighlightsSection: React.FC = () => {
 
   const highlights = [
     {
-      icon: <Laptop size={iconSize} id="highlight-icon-laptop" />,
-      title: "Remote Worker",
-      description: "Your pets have constant companionship all day long."
-    },
-    {
       icon: <PawIcon size={iconSize} id="highlight-icon-paw" />,
-      title: "10+ Years Experience",
-      description: "Over ten years of loving care for all kinds of pets."
+      title: '10+ Years Experience',
+      description: 'Over ten years of loving care for all kinds of pets.',
     },
     {
       icon: <ShieldCheck size={iconSize} id="highlight-icon-shield" />,
-      title: "Background-Checked",
-      description: "Verified safety and care for your home & pets."
+      title: 'Background-Checked',
+      description: 'Verified safety and care for your home & pets.',
     },
     {
       icon: <StarFive size={iconSize} id="highlight-icon-star" />,
-      title: "5-Star Reviews",
-      description: "Highly rated and trusted by homeowners."
+      title: '5-Star Reviews',
+      description: 'Highly rated and trusted by homeowners.',
+    },
+    {
+      icon: <Laptop size={iconSize} id="highlight-icon-laptop" />,
+      title: 'Remote Worker',
+      description: 'Your pets have constant companionship all day long.',
     },
     {
       icon: <Home size={iconSize} id="highlight-icon-home" />,
-      title: "Smart Home Tech",
-      description: "Experienced with smart systems and home security."
+      title: 'Smart Home Tech',
+      description: 'Experienced with smart systems and home security.',
     },
     {
       icon: <Video size={iconSize} id="highlight-icon-video" />,
-      title: "Frequent Updates",
-      description: "Photo and video updates for peace of mind."
-    }
+      title: 'Frequent Updates',
+      description: 'Photo and video updates for peace of mind.',
+    },
   ];
 
   const total = highlights.length;
@@ -120,7 +120,7 @@ export const HighlightsSection: React.FC = () => {
 
     const timer = setInterval(() => {
       setStepCount(prev => prev + 1);
-    }, 2200);
+    }, 5000);
 
     return () => clearInterval(timer);
   }, [isAutoSpinning]);
@@ -148,9 +148,14 @@ export const HighlightsSection: React.FC = () => {
     setStepCount(prev => prev + 1);
   };
 
-  const handleSelectNode = (index: number) => {
+  const handleSelectNode = (targetIndex: number) => {
     setIsAutoSpinning(false);
-    const diff = index - activeIndex;
+    let diff = (targetIndex - activeIndex) % total;
+    if (diff > total / 2) {
+      diff -= total;
+    } else if (diff < -total / 2) {
+      diff += total;
+    }
     setStepCount(prev => prev + diff);
   };
 
