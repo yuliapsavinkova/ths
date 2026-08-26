@@ -1,0 +1,8 @@
+/* ─── CENTRALIZED DESIGN TOKENS ENTRY POINT ─── */
+@import './colors.css';
+@import './typography.css';
+@import './spacing.css';
+@import './motion.css';
+@import './layout.css';
+@import './breakpoints.css';
+@import './paw-sizes.css';

@@ -1,13 +1,17 @@
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { PrivacyDisclosure } from './PrivacyDisclosure';
 import { InfoTooltip } from './InfoTooltip';
+import { BookingConfirmation } from './BookingConfirmation';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
 import {
   getDatesDiff,
   calculateEndDateStr,
   calculateEndDateWithMonths,
-  formatStayDuration
+  formatStayDuration,
+  formatHumanDate
 } from '../utils/calendarUtils';
+import { calculateBookingPricing, PricingBreakdown } from '../utils/pricingUtils';
+import { BookingRequest } from '../types';
 import { 
   Calendar, 
   Heart, 
@@ -18,23 +22,9 @@ import {
   Phone, 
   MapPin, 
   MessageSquare, 
-  Check, 
-  RotateCcw,
   Users,
   Tag
 } from 'lucide-react';
-
-interface PricingBreakdown {
-  baseRate: number;
-  petSurcharge: number;
-  petSurchargePerNight: number;
-  seniorSurcharge: number;
-  medsSurcharge: number;
-  gardenSurcharge: number;
-  durationDiscount: number;
-  total: number;
-  perDay: number;
-}
 
 interface MilestonePreset {
   days?: number;
@@ -121,6 +111,7 @@ export default function BookMySit({
   // ─── SYSTEM STATUS ───
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [submittedBooking, setSubmittedBooking] = useState<BookingRequest | null>(null);
 
   // DOM Refs for smooth viewport alignment across mobile / iOS Safari
   const widgetRef = useRef<HTMLDivElement | null>(null);
@@ -290,61 +281,16 @@ export default function BookMySit({
 
   // Pricing Engine (ensuring line items and totals add up with 100% mathematical consistency)
   useEffect(() => {
-    let baseVal = 0;
-    if (duration <= 1) {
-      baseVal = 99;
-    } else if (duration < 7) {
-      // Linear scale between 1 night ($99) and 7 nights ($299)
-      baseVal = 99 + (duration - 1) * ((299 - 99) / 6);
-    } else if (duration < 30) {
-      // Weekly scale: $299 per full week (7 days) + pro-rated daily rate ($299 / 7) for extra days, capped at monthly rate ($999)
-      const weeks = Math.floor(duration / 7);
-      const extraDays = duration % 7;
-      const weeklyTotal = weeks * 299 + extraDays * (299 / 7);
-      baseVal = Math.min(weeklyTotal, 999);
-    } else {
-      // Monthly scale: $999 per 30 days + pro-rated weekly/daily rate for remaining days
-      const months = Math.floor(duration / 30);
-      const remDays = duration % 30;
-      const remWeeks = Math.floor(remDays / 7);
-      const remExtraDays = remDays % 7;
-      const remCost = Math.min(remWeeks * 299 + remExtraDays * (299 / 7), 999);
-      baseVal = months * 999 + remCost;
-    }
-    const baseRate = Math.round(baseVal);
-
-    // 2 pets of any kind always included, any additional pet +$10/night
-    const totalPets = dogCount + catCount + otherCount;
-    const additionalPets = Math.max(0, totalPets - 2);
-    const petDailyRate = additionalPets * 10;
-    const petSurcharge = Math.round(petDailyRate * duration);
-
-    const seniorSurcharge = hasSeniorPets ? Math.round(2.50 * duration) : 0;
-    const medsSurcharge = hasMedications ? Math.round(2.50 * duration) : 0;
-    const gardenSurcharge = largeGarden ? Math.round(2.50 * duration) : 0;
-
-    const subtotalItems = baseRate + petSurcharge + seniorSurcharge + medsSurcharge + gardenSurcharge;
-
-    let discountPercent = 0;
-    if (duration >= 60) {
-      discountPercent = 0.10;
-    }
-
-    const durationDiscount = Math.round(subtotalItems * discountPercent);
-    const total = Math.max(0, subtotalItems - durationDiscount);
-    const perDay = Number((total / Math.max(1, duration)).toFixed(2));
-
-    setPricing({
-      baseRate,
-      petSurcharge,
-      petSurchargePerNight: petDailyRate,
-      seniorSurcharge,
-      medsSurcharge,
-      gardenSurcharge,
-      durationDiscount,
-      total,
-      perDay
+    const computedPricing = calculateBookingPricing({
+      duration,
+      dogCount,
+      catCount,
+      otherCount,
+      hasSeniorPets,
+      hasMedications,
+      largeGarden
     });
+    setPricing(computedPricing);
   }, [duration, dogCount, catCount, otherCount, hasMedications, hasSeniorPets, largeGarden]);
 
   const handleReset = () => {
@@ -370,6 +316,7 @@ export default function BookMySit({
     setLocation('');
     setReferredBy('');
     setNotes('');
+    setSubmittedBooking(null);
     setIsSuccess(false);
 
     // Scroll to the start of the form immediately and after DOM expansion
@@ -381,19 +328,14 @@ export default function BookMySit({
 
   const isFormValid = name.trim().length > 0 && email.trim().length > 0;
 
-  const handleSubmit = async (e: FormEvent) => {
-    e.preventDefault();
-    if (!isFormValid) return;
-
-    setIsSubmitting(true);
-
+  const getCurrentBookingData = (): BookingRequest => {
     const derivedPetType = 
       (dogCount > 0 && catCount > 0) || (dogCount > 0 && otherCount > 0) || (catCount > 0 && otherCount > 0) ? 'mixed' :
       dogCount > 0 ? 'dog' :
       catCount > 0 ? 'cat' :
       otherCount > 0 ? 'other' : 'none';
 
-    const payload = {
+    return {
       name,
       email,
       phone,
@@ -411,15 +353,24 @@ export default function BookMySit({
       hasSeniorPets,
       largeGarden,
       notes,
-      pricing,
-      source: 'bookmysit_v2'
+      pricing
     };
+  };
+
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!isFormValid) return;
+
+    setIsSubmitting(true);
+
+    const bookingPayload = getCurrentBookingData();
+    setSubmittedBooking(bookingPayload);
 
     try {
       const response = await fetch('/api/submit-booking', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify({ ...bookingPayload, source: 'bookmysit_v2' })
       });
       if (response.ok) {
         setIsSuccess(true);
@@ -434,49 +385,14 @@ export default function BookMySit({
     }
   };
 
-  const formatDate = (dateStr: string) => {
-    if (!dateStr) return '';
-    const date = new Date(dateStr + 'T00:00:00');
-    if (isNaN(date.getTime())) return dateStr;
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-  };
-
   return (
     <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
 
       {isSuccess ? (
-        <div 
-          ref={successPanelRef} 
-          tabIndex={-1} 
-          role="region" 
-          aria-label="Booking Request Received" 
-          className="bms-success-panel"
-        >
-          <div className="bms-success-circle">
-            <Check size={32} />
-          </div>
-          <h4>Thank You!</h4>
-          <p>
-            I've received your booking request for{' '}
-            <strong>{formatDate(startDate)}</strong> to <strong>{formatDate(endDate)}</strong> ({duration} {duration === 1 ? 'night' : 'nights'}). I'm looking forward to connecting with you!
-          </p>
-          <div className="bms-success-summary-box">
-            <div className="bms-summary-row bms-summary-total">
-              <span>Total Estimated Stay Cost:</span>
-              <span className="bms-receipt-total-span">${pricing.total}</span>
-            </div>
-            <div className="bms-summary-row bms-summary-rate">
-              <span>Average Nightly Rate:</span>
-              <span>${pricing.perDay.toFixed(2)}/night</span>
-            </div>
-          </div>
-          <p className="bms-success-coordinator">
-            I will reach out to you within 24 hours to confirm availability and coordinate the details.
-          </p>
-          <button type="button" onClick={handleReset} className="bms-reset-btn">
-            <RotateCcw size={14} /> Calculate Another Stay
-          </button>
-        </div>
+        <BookingConfirmation
+          booking={submittedBooking || getCurrentBookingData()}
+          onReset={handleReset}
+        />
       ) : (
         <form onSubmit={handleSubmit} className="w-full">
           {/* Quick Estimates Price Tags Bar */}
@@ -839,12 +755,12 @@ export default function BookMySit({
               <div className="bms-receipt-dates">
                 <div>
                   <span className="bms-date-label">Check-in</span>
-                  <span className="bms-date-val">{startDate ? formatDate(startDate) : '---'}</span>
+                  <span className="bms-date-val">{startDate ? formatHumanDate(startDate) : '---'}</span>
                 </div>
                 <div className="bms-arrow-sep">➔</div>
                 <div>
                   <span className="bms-date-label">Check-out</span>
-                  <span className="bms-date-val">{endDate ? formatDate(endDate) : '---'}</span>
+                  <span className="bms-date-val">{endDate ? formatHumanDate(endDate) : '---'}</span>
                 </div>
               </div>
 

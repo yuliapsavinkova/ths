@@ -295,54 +295,6 @@ main > section:not(.hero):nth-of-type(even) {
   text-align: left;
 }
 
-/* Stack & Flex Layout Utilities to replace inline style markup */
-.stack-xs {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xs);
-}
-
-.stack-sm {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-sm);
-}
-
-.stack-md {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-md);
-}
-
-.stack-lg {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-lg);
-}
-
-.stack-xl {
-  display: flex;
-  flex-direction: column;
-  gap: var(--spacing-xl);
-}
-
-.text-brand {
-  color: var(--color-brand-primary);
-}
-
-.align-center {
-  align-items: center;
-}
-
-.justify-center {
-  justify-content: center;
-}
-
-.mx-auto {
-  margin-left: auto;
-  margin-right: auto;
-}
-
 /* AI Guide Badge Button */
 .ai-guide-button-badge {
   display: inline-flex;
@@ -364,31 +316,6 @@ main > section:not(.hero):nth-of-type(even) {
 .ai-guide-button-badge:hover {
   background: var(--color-border-primary);
   border-color: var(--color-brand-primary);
-}
-
-/* Micro-utility Classes */
-.shrink-0 {
-  flex-shrink: 0;
-}
-
-.gap-xs {
-  gap: var(--spacing-xs);
-}
-
-.gap-sm {
-  gap: var(--spacing-sm);
-}
-
-.shadow-lg {
-  box-shadow: var(--shadow-lg);
-}
-
-.font-semibold {
-  font-weight: var(--font-weight-semibold);
-}
-
-.text-underline {
-  text-decoration: underline;
 }
 
 /* ─── CONSISTENT MULTI-STEP LAYOUTS ─── */

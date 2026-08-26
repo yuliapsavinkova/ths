@@ -1,0 +1,59 @@
+/* ─── BASE KEYFRAME ANIMATIONS & GLOW UTILITIES ─── */
+
+@keyframes glow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.2);
+    box-shadow: 0 0 8px 3px var(--color-border-bold);
+  }
+}
+
+@keyframes glow-green {
+  0%, 100% {
+    opacity: 0.6;
+    transform: scale(1);
+    box-shadow: none;
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.25);
+    box-shadow: 0 0 10px 4px var(--color-status-success-strong);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes glow-utility-breathe {
+  0%, 100% {
+    box-shadow: 0 0 14px var(--color-glow-soft);
+    border-color: var(--color-glow-medium);
+  }
+  50% {
+    box-shadow: 0 0 28px var(--color-glow-vibrant);
+    border-color: var(--color-glow-bold);
+  }
+}
+
+.glow-active {
+  animation: glow 3s ease-in-out infinite;
+}
+
+.glow-green-active {
+  animation: glow-green 2.5s ease-in-out infinite;
+}
+
+.animate-spin-slow {
+  animation: spin 8s linear infinite;
+}
+
+.glow-utility {
+  animation: glow-utility-breathe 3.5s infinite ease-in-out;
+}

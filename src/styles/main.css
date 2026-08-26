@@ -1,7 +1,11 @@
-/* MAIN CSS ENTRPOINT */
-@import './variables.css';
-@import './fonts.css';
-@import './base.css';
+/* ─── MAIN STYLESHEET ─── */
+/* 1. Tokens Layer (Design tokens & custom media) */
+@import './tokens/index.css';
+
+/* 2. Base Layer (Resets, typography, utilities, animations) */
+@import './base/index.css';
+
+/* 3. Component & Section Styles */
 @import './badge-circle.css';
 @import './layout.css';
 @import './card.css';
@@ -24,5 +28,3 @@
 @import './tooltip.css';
 @import './trustedhousesitters-banner.css';
 @import './feedback.css';
-
-

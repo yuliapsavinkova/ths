@@ -3,6 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { getResendClient } from '../services/resend';
 import { CONFIG } from '../config';
+import { generateNewsletterEmailHtml } from '../../src/utils/newsletterEmail';
 
 export async function handleSubscribe(req: Request, res: Response) {
   let body = req.body;
@@ -26,7 +27,7 @@ export async function handleSubscribe(req: Request, res: Response) {
   console.log(`Received newsletter subscription for: ${email}`);
 
   const recipient = process.env.SITTER_EMAIL_TO || CONFIG.SITTER_EMAIL_TO;
-  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM || 'onboarding@resend.dev';
+  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM;
 
   try {
     // A. Locally persist the email to subscribers.json if filesystem is writable
@@ -65,19 +66,7 @@ export async function handleSubscribe(req: Request, res: Response) {
           from: sender,
           to: recipient,
           subject: `New Newsletter Subscriber: ${email}`,
-        html: `
-          <div style="font-family: sans-serif; padding: 24px; color: #333; max-width: 600px; margin: 0 auto; border: 1px solid #e5e7eb; border-radius: 8px;">
-            <h2 style="color: #bc9c5d; margin-top: 0; font-size: 20px; border-bottom: 2px solid #f3f4f6; padding-bottom: 12px;">New Newsletter Subscriber!</h2>
-            <p style="font-size: 15px; line-height: 1.5; color: #4b5563;">You have a new subscriber for your California availability and monthly updates:</p>
-            <div style="font-size: 18px; font-weight: bold; background-color: #fcfaf7; color: #bc9c5d; padding: 12px 20px; border-radius: 6px; display: inline-block; border: 1px solid #f3ebd8; margin: 12px 0;">
-              ${email}
-            </div>
-            <p style="font-size: 15px; line-height: 1.5; color: #4b5563;">Total active local subscribers: <strong>${subscribers.length}</strong></p>
-            <p style="font-size: 12px; color: #9ca3af; margin-top: 32px; border-top: 1px solid #f3f4f6; padding-top: 12px;">
-              This notification was automatically sent by your Home & Pet Sitter Web Applet.
-            </p>
-          </div>
-        `
+          html: generateNewsletterEmailHtml(email, subscribers.length)
         });
         emailSent = true;
         console.log('Newsletter subscription email notification sent successfully via Resend');

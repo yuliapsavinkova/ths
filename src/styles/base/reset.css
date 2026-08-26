@@ -1,0 +1,145 @@
+/* ─── BASE RESET & VIEWPORT DEFAULTS ─── */
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--header-offset-mobile);
+  box-sizing: border-box;
+  background-color: var(--color-bg-dark);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+@media (--medium) {
+  html {
+    scroll-padding-top: var(--header-offset-tablet);
+  }
+}
+
+@media (--large) {
+  html {
+    scroll-padding-top: var(--header-offset-desktop);
+  }
+}
+
+/* Ensure all anchor target sections offset properly when scrolled via nav */
+section[id],
+div[id$="-section"],
+div[id$="-root"] {
+  scroll-margin-top: var(--header-offset-mobile);
+}
+
+@media (--medium) {
+  section[id],
+  div[id$="-section"],
+  div[id$="-root"] {
+    scroll-margin-top: var(--header-offset-tablet);
+  }
+}
+
+@media (--large) {
+  section[id],
+  div[id$="-section"],
+  div[id$="-root"] {
+    scroll-margin-top: var(--header-offset-desktop);
+  }
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-sans);
+  font-size: var(--font-size-base);
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  line-height: var(--line-height-relaxed);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+/* Accessible Focus States */
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+}
+
+/* Form Elements Normalization */
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: inherit;
+  color: inherit;
+}
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+  background-color: transparent;
+  background-image: none;
+}
+
+/* Media Elements */
+img,
+picture,
+video,
+canvas {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+svg {
+  vertical-align: middle;
+}
+
+/* Table Defaults */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: var(--radius-sm);
+}
+
+body:hover::-webkit-scrollbar-thumb,
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-brand-secondary);
+}
+
+/* Selection */
+::selection {
+  background-color: var(--color-brand-secondary);
+  color: var(--color-text-primary);
+}

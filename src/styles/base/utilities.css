@@ -1,0 +1,77 @@
+/* ─── BASE STRUCTURAL & TEXT UTILITIES ─── */
+
+/* Text Alignment */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+.text-brand { color: var(--color-brand-primary); }
+.text-underline { text-decoration: underline; }
+
+/* Display Primitives */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.flex { display: flex; }
+.grid { display: grid; }
+.hidden { display: none; }
+.shrink-0 { flex-shrink: 0; }
+
+/* Accessible Screen-Reader Utility */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Flex Alignment & Positioning Helpers */
+.align-center { align-items: center; }
+.justify-center { justify-content: center; }
+.mx-auto {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Micro Flex Stacks */
+.stack-xs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xs);
+}
+
+.stack-sm {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+}
+
+.stack-md {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.stack-lg {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-lg);
+}
+
+.stack-xl {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xl);
+}
+
+/* Gap Helpers */
+.gap-xs { gap: var(--spacing-xs); }
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
+/* Common Elevation Utility */
+.shadow-lg { box-shadow: var(--shadow-lg); }

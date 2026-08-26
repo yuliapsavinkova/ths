@@ -1,8 +1,3 @@
-/* CENTRALIZED VARIABLE HUB */
-@import "./tokens/colors.css";
-@import "./tokens/typography.css";
-@import "./tokens/spacing.css";
-@import "./tokens/motion.css";
-@import "./tokens/layout.css";
-@import "./tokens/breakpoints.css";
-@import "./tokens/paw-sizes.css";
+/* CENTRALIZED VARIABLE HUB - RE-EXPORTS TOKENS INDEX */
+@import "./tokens/index.css";
+

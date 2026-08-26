@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getResendClient } from '../services/resend';
-import { generateBookingEmailHtml } from '../../src/utils/bookingEmail';
+import { generateBookingEmailHtml, generateBookingConfirmationEmailHtml } from '../../src/utils/bookingEmail';
 import { CONFIG } from '../config';
 
 export async function handleBookingSubmit(req: Request, res: Response) {
@@ -40,13 +40,21 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     });
   }
 
-  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM || 'onboarding@resend.dev';
+  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM;
+  if (!sender) {
+    console.error('Missing SITTER_EMAIL_FROM');
+    return res.status(500).json({
+      success: false,
+      message: 'SITTER_EMAIL_FROM is not configured in Vercel Environment Variables.'
+    });
+  }
 
   try {
     const resend = getResendClient();
     const emailHtml = generateBookingEmailHtml(booking);
 
-    const data = await resend.emails.send({
+    // 1. Send detailed notification alert to the sitter
+    const { data: sitterData, error: sitterError } = await resend.emails.send({
       from: sender,
       to: recipient,
       subject: `New Sit Request from ${booking.name || 'Client'} (${booking.location || 'Location'})`,
@@ -54,13 +62,51 @@ export async function handleBookingSubmit(req: Request, res: Response) {
       replyTo: booking.email || recipient
     });
 
-    console.log('Email sent successfully via Resend:', data);
+    if (sitterError) {
+      console.error('Resend error delivering sitter notification:', sitterError);
+      return res.status(500).json({
+        success: false,
+        message: sitterError.message || 'Resend error delivering sitter notification.',
+        resendError: sitterError
+      });
+    }
+
+    console.log('Sitter notification email sent successfully via Resend:', sitterData);
+
+    // 2. Send instant confirmation / thank you email to the client if an email is provided
+    let clientConfirmationSent = false;
+    let clientDeliveryNote: string | undefined;
+
+    if (booking.email && typeof booking.email === 'string' && booking.email.includes('@')) {
+      try {
+        const clientEmailHtml = generateBookingConfirmationEmailHtml(booking);
+        const { data: clientData, error: clientError } = await resend.emails.send({
+          from: sender,
+          to: booking.email.trim(),
+          subject: 'Thank You for Your Request!',
+          html: clientEmailHtml,
+          replyTo: recipient,
+        });
+
+        if (clientError) {
+          console.warn('Resend client confirmation notice (Note: onboarding@resend.dev requires a custom verified domain on Resend to send to non-account recipients):', clientError);
+          clientDeliveryNote = clientError.message;
+        } else {
+          console.log('Client confirmation email sent successfully:', clientData);
+          clientConfirmationSent = true;
+        }
+      } catch (clientEmailErr) {
+        console.error('Failed to send confirmation email to client:', clientEmailErr);
+      }
+    }
 
     return res.status(200).json({
       success: true,
       message: 'Booking request captured and email alert sent successfully.',
       bookingId: Math.random().toString(36).substring(2, 9),
-      resendData: data
+      resendData: sitterData,
+      clientConfirmationSent,
+      clientDeliveryNote
     });
   } catch (error: unknown) {
     console.error('Error sending email via Resend:', error);
@@ -72,3 +118,4 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     });
   }
 }
+

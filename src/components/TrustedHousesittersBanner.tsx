@@ -15,14 +15,14 @@ export const TrustedHousesittersBanner: React.FC<TrustedHousesittersBannerProps>
   className = '',
   onClick,
 }) => {
-  const promoText = 'Interested in a free housesitter? Get 25% off TrustedHousesitters!';
+  const promoText = 'Interested in a free sitter? Join TrustedHousesitters with 25% off';
 
   const bannerText = (
     <span className="th-banner-message">
-      <span className="th-banner-line">Interested in a free housesitter?</span>
+      <span className="th-banner-line">Interested in a free sitter?</span>
       <span className="th-banner-line">
         <span>
-          Get <strong>25% off</strong> TrustedHousesitters!
+          Join TrustedHousesitters with <strong>25% off</strong>
         </span>
         <ExternalLink size={14} className="th-banner-icon" aria-hidden="true" />
       </span>
