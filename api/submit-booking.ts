@@ -4,7 +4,7 @@ import {
   BookingRequest,
   generateBookingEmailHtml,
   generateBookingConfirmationEmailHtml,
-} from '../server/utils/bookingEmail';
+} from './utils/bookingEmail';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Always handle CORS

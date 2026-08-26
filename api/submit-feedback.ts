@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { FeedbackPayload, generateFeedbackEmailHtml } from '../server/utils/feedbackEmail';
+import { FeedbackPayload, generateFeedbackEmailHtml } from './utils/feedbackEmail';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
