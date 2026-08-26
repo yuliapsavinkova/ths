@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { getResendClient } from '../services/resend';
-import { generateBookingEmailHtml, generateBookingConfirmationEmailHtml } from '../../src/utils/bookingEmail';
+import { generateBookingEmailHtml, generateBookingConfirmationEmailHtml } from '../utils/bookingEmail';
 import { CONFIG } from '../config';
 
 export async function handleBookingSubmit(req: Request, res: Response) {

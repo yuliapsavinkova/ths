@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { getResendClient } from '../services/resend';
 import { CONFIG } from '../config';
-import { FeedbackPayload, generateFeedbackEmailHtml } from '../../src/utils/feedbackEmail';
+import { FeedbackPayload, generateFeedbackEmailHtml } from '../utils/feedbackEmail';
 
 export type { FeedbackPayload };
 export { generateFeedbackEmailHtml };
@@ -81,13 +81,12 @@ export async function handleFeedbackSubmit(req: Request, res: Response) {
     try {
       const resend = getResendClient();
       const emailHtml = generateFeedbackEmailHtml(feedbackData);
-      const subjectCategory = feedbackData.category ? `[${feedbackData.category}]` : '[Thoughts]';
-      const senderName = feedbackData.name?.trim() ? feedbackData.name.trim() : 'Website Visitor';
+      const senderInfo = feedbackData.email?.trim() ? `from ${feedbackData.email.trim()}` : 'from Website Visitor';
 
       resendData = await resend.emails.send({
         from: sender,
         to: recipient,
-        subject: `💡 New Feedback ${subjectCategory} from ${senderName}`,
+        subject: `💡 New Website Feedback ${senderInfo}`,
         html: emailHtml,
         replyTo: feedbackData.email?.trim() || recipient
       });

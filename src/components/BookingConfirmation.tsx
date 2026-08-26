@@ -1,7 +1,7 @@
 import React from 'react';
 import { BookingRequest } from '../types';
 import { formatHumanDate } from '../utils/calendarUtils';
-import { formatBookingDuration, formatPetTypeLabel } from '../utils/bookingEmail';
+import { formatBookingDuration, formatPetTypeLabel } from '../utils/formatUtils';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
 import { Check, RotateCcw } from 'lucide-react';
 

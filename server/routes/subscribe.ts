@@ -3,7 +3,7 @@ import path from 'path';
 import fs from 'fs';
 import { getResendClient } from '../services/resend';
 import { CONFIG } from '../config';
-import { generateNewsletterEmailHtml } from '../../src/utils/newsletterEmail';
+import { generateNewsletterEmailHtml } from '../utils/newsletterEmail';
 
 export async function handleSubscribe(req: Request, res: Response) {
   let body = req.body;

@@ -1,6 +1,10 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { generateBookingEmailHtml, generateBookingConfirmationEmailHtml } from '../src/utils/bookingEmail';
+import {
+  BookingRequest,
+  generateBookingEmailHtml,
+  generateBookingConfirmationEmailHtml,
+} from '../server/utils/bookingEmail';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   // Always handle CORS
@@ -15,12 +19,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method !== 'POST') {
     return res.status(405).json({
       success: false,
-      message: 'Method Not Allowed'
+      message: 'Method Not Allowed',
     });
   }
 
   try {
-    let booking = req.body;
+    let booking: BookingRequest = req.body;
     if (typeof booking === 'string') {
       try {
         booking = JSON.parse(booking);
@@ -32,7 +36,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (!booking || typeof booking !== 'object') {
       return res.status(400).json({
         success: false,
-        message: 'Invalid or missing JSON payload.'
+        message: 'Invalid or missing JSON payload.',
       });
     }
 
@@ -41,7 +45,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Missing RESEND_API_KEY in Vercel Environment Variables');
       return res.status(500).json({
         success: false,
-        message: 'RESEND_API_KEY environment variable is not configured on Vercel.'
+        message: 'RESEND_API_KEY environment variable is not configured on Vercel.',
       });
     }
 
@@ -50,7 +54,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Missing SITTER_EMAIL_TO in Vercel Environment Variables');
       return res.status(500).json({
         success: false,
-        message: 'SITTER_EMAIL_TO environment variable is not configured on Vercel.'
+        message: 'SITTER_EMAIL_TO environment variable is not configured on Vercel.',
       });
     }
 
@@ -59,7 +63,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       console.error('Missing SITTER_EMAIL_FROM in environment variables.');
       return res.status(500).json({
         success: false,
-        message: 'SITTER_EMAIL_FROM is not configured in Vercel Environment Variables.'
+        message: 'SITTER_EMAIL_FROM is not configured in Vercel Environment Variables.',
       });
     }
 
@@ -72,7 +76,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       to: recipient,
       subject: `New Sit Request from ${booking.name || 'Client'} (${booking.location || 'Location'})`,
       html: emailHtml,
-      replyTo: booking.email || recipient
+      replyTo: booking.email || recipient,
     });
 
     if (error) {
@@ -80,7 +84,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       return res.status(500).json({
         success: false,
         message: error.message || 'Resend failed to send email notification.',
-        resendError: error
+        resendError: error,
       });
     }
 
@@ -107,7 +111,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       message: 'Booking request captured and email alert sent successfully.',
       bookingId: Math.random().toString(36).substring(2, 9),
       resendData: data,
-      clientConfirmationSent
+      clientConfirmationSent,
     });
   } catch (error: unknown) {
     console.error('Serverless function exception in /api/submit-booking:', error);
@@ -115,7 +119,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     return res.status(500).json({
       success: false,
       message: 'Serverless function execution error.',
-      error: errorMessage
+      error: errorMessage,
     });
   }
 }

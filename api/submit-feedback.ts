@@ -1,6 +1,6 @@
 import type { VercelRequest, VercelResponse } from '@vercel/node';
 import { Resend } from 'resend';
-import { FeedbackPayload, generateFeedbackEmailHtml } from '../src/utils/feedbackEmail';
+import { FeedbackPayload, generateFeedbackEmailHtml } from '../server/utils/feedbackEmail';
 
 export default async function handler(req: VercelRequest, res: VercelResponse) {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -55,13 +55,12 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
       try {
         const resend = new Resend(apiKey);
         const emailHtml = generateFeedbackEmailHtml(feedbackData);
-        const subjectCategory = feedbackData.category ? `[${feedbackData.category}]` : '[Thoughts]';
-        const senderName = feedbackData.name?.trim() ? feedbackData.name.trim() : 'Website Visitor';
+        const senderInfo = feedbackData.email?.trim() ? `from ${feedbackData.email.trim()}` : 'from Website Visitor';
 
         const { data, error } = await resend.emails.send({
           from: sender,
           to: recipient,
-          subject: `💡 New Feedback ${subjectCategory} from ${senderName}`,
+          subject: `💡 New Website Feedback ${senderInfo}`,
           html: emailHtml,
           replyTo: feedbackData.email?.trim() || recipient
         });

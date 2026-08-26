@@ -4,12 +4,14 @@ import {
   Check, 
   RotateCcw, 
   AlertCircle,
-  Sparkles
+  Sparkles,
+  Mail,
 } from 'lucide-react';
 import { PawIcon } from './Icons';
 
 export const FeedbackSection: React.FC = () => {
   const [message, setMessage] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -31,11 +33,12 @@ export const FeedbackSection: React.FC = () => {
       const response = await fetch('/api/submit-feedback', {
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          message: message.trim()
-        })
+          message: message.trim(),
+          email: email.trim() || undefined,
+        }),
       });
 
       const data = await response.json().catch(() => null);
@@ -56,6 +59,7 @@ export const FeedbackSection: React.FC = () => {
 
   const handleReset = () => {
     setMessage('');
+    setEmail('');
     setIsSuccess(false);
     setErrorMessage(null);
   };
@@ -81,7 +85,7 @@ export const FeedbackSection: React.FC = () => {
               <PawIcon size={12} /> Thoughts?
             </span>
             <h2 className="feedback-title" id="feedback-section-title">
-              Have Feedback or Suggestions?
+              Have Question, Feedback or Suggestions?
             </h2>
             <p className="feedback-subtitle" id="feedback-subtitle-desc">
               I'd love to hear from you.
@@ -111,16 +115,35 @@ export const FeedbackSection: React.FC = () => {
           ) : (
             <form className="feedback-form" id="feedback-submission-form" onSubmit={handleSubmit} noValidate>
               
-              {/* Simplified Message field */}
+              {/* Optional Email field */}
+              <div className="feedback-field" id="feedback-email-field-box">
+                <label htmlFor="feedback-email-input" className="feedback-label" id="feedback-email-label">
+                  Your Email (optional)
+                </label>
+                <div className="feedback-input-wrapper" id="feedback-email-input-wrapper">
+                  <Mail size={16} className="feedback-input-icon" aria-hidden="true" />
+                  <input
+                    type="email"
+                    id="feedback-email-input"
+                    className="feedback-input"
+                    placeholder="name@example.com (if you'd like a reply)"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                    autoComplete="email"
+                  />
+                </div>
+              </div>
+
+              {/* Message field */}
               <div className="feedback-field" id="feedback-message-field-box">
                 <label htmlFor="feedback-message-input" className="sr-only">
-                  Share your thoughts, ideas, or suggestions
+                  Your questions, thoughts, ideas, or suggestions...
                 </label>
                 <textarea
                   id="feedback-message-input"
                   className="feedback-textarea"
-                  placeholder="Share your thoughts, ideas, or suggestions..."
-                  aria-label="Share your thoughts, ideas, or suggestions"
+                  placeholder="Your questions, thoughts, ideas, or suggestions..."
+                  aria-label="Your questions, thoughts, ideas, or suggestions..."
                   value={message}
                   onChange={(e) => {
                     if (e.target.value.length <= maxChars) {
