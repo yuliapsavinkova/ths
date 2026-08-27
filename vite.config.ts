@@ -25,8 +25,9 @@ export default defineConfig(() => {
       },
     },
     server: {
+      host: '0.0.0.0',
       port: 3000,
-      allowedHosts: ['pamphlet-foothold-risk.ngrok-free.dev'],
+      allowedHosts: true as const,
       proxy: {
         '/api': {
           target: `http://localhost:${process.env.PORT || 3000}`,

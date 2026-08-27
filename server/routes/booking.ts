@@ -89,7 +89,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
         });
 
         if (clientError) {
-          console.warn('Resend client confirmation notice (Note: onboarding@resend.dev requires a custom verified domain on Resend to send to non-account recipients):', clientError);
+          console.warn('Resend client confirmation notice:', clientError);
           clientDeliveryNote = clientError.message;
         } else {
           console.log('Client confirmation email sent successfully:', clientData);
