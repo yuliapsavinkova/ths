@@ -22,9 +22,13 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
   className = '',
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const currentTheme = theme || (type === 'newsletter' || type === 'trustedhousesitters' ? 'dark' : 'light');
+  const currentTheme =
+    theme || (type === 'newsletter' || type === 'trustedhousesitters' ? 'dark' : 'light');
 
-  const defaultContent: Record<string, { label: string; full: React.ReactNode; icon: 'shield' | 'info' }> = {
+  const defaultContent: Record<
+    string,
+    { label: string; full: React.ReactNode; icon: 'shield' | 'info' }
+  > = {
     booking: {
       label: 'Privacy Notice',
       full: 'I only use your contact details to reply directly to your sitting requests. Your information is never shared or sold.',
@@ -39,7 +43,8 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
       label: 'Learn More',
       full: (
         <span>
-          <strong>TrustedHousesitters</strong> is a trusted global network connecting pet owners with verified, background-checked sitters who care for pets for free in exchange for a place to stay.
+          <strong>TrustedHousesitters</strong> is a global community of pet lovers exchanging
+          in-home pet care for unique home-stays around the world.
         </span>
       ),
       icon: 'info',
@@ -52,7 +57,9 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
   const IconComponent = activeData.icon === 'info' ? Info : ShieldCheck;
 
   return (
-    <div className={`privacy-disclosure-container theme-${currentTheme} align-${align} type-${type} ${className}`.trim()}>
+    <div
+      className={`privacy-disclosure-container theme-${currentTheme} align-${align} type-${type} ${className}`.trim()}
+    >
       <div className="privacy-toggle-wrapper">
         <button
           type="button"
@@ -62,9 +69,7 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
           aria-label={`${displayLabel} details`}
         >
           <IconComponent size={13} className="privacy-icon" aria-hidden="true" />
-          <span className="privacy-toggle-link">
-            {displayLabel}
-          </span>
+          <span className="privacy-toggle-link">{displayLabel}</span>
           <motion.span
             animate={{ rotate: isOpen ? 180 : 0 }}
             transition={{ duration: 0.2 }}
@@ -84,9 +89,7 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
             transition={{ duration: 0.2, ease: 'easeInOut' }}
             className="overflow-hidden"
           >
-            <div className="privacy-box-content">
-              {displayContent}
-            </div>
+            <div className="privacy-box-content">{displayContent}</div>
           </motion.div>
         )}
       </AnimatePresence>
@@ -95,5 +98,3 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
 };
 
 export default PrivacyDisclosure;
-
-
