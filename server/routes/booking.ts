@@ -22,6 +22,17 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     });
   }
 
+  // Sanitize and limit field lengths to prevent abuse
+  const sanitizedBooking = {
+    ...booking,
+    name: String(booking.name || '').slice(0, 150).trim(),
+    email: String(booking.email || '').slice(0, 150).trim(),
+    phone: String(booking.phone || '').slice(0, 50).trim(),
+    location: String(booking.location || '').slice(0, 150).trim(),
+    referredBy: String(booking.referredBy || '').slice(0, 200).trim(),
+    notes: String(booking.notes || '').slice(0, 3000).trim(),
+  };
+
   const apiKey = process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
   if (!apiKey) {
     console.error('Missing RESEND_API_KEY');
@@ -51,15 +62,15 @@ export async function handleBookingSubmit(req: Request, res: Response) {
 
   try {
     const resend = getResendClient();
-    const emailHtml = generateBookingEmailHtml(booking);
+    const emailHtml = generateBookingEmailHtml(sanitizedBooking);
 
     // 1. Send detailed notification alert to the sitter
     const { data: sitterData, error: sitterError } = await resend.emails.send({
       from: sender,
       to: recipient,
-      subject: `New Sit Request from ${booking.name || 'Client'} (${booking.location || 'Location'})`,
+      subject: `New Sit Request from ${sanitizedBooking.name || 'Client'} (${sanitizedBooking.location || 'Location'})`,
       html: emailHtml,
-      replyTo: booking.email || recipient
+      replyTo: sanitizedBooking.email || recipient
     });
 
     if (sitterError) {
@@ -77,12 +88,12 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     let clientConfirmationSent = false;
     let clientDeliveryNote: string | undefined;
 
-    if (booking.email && typeof booking.email === 'string' && booking.email.includes('@')) {
+    if (sanitizedBooking.email && typeof sanitizedBooking.email === 'string' && sanitizedBooking.email.includes('@')) {
       try {
-        const clientEmailHtml = generateBookingConfirmationEmailHtml(booking);
+        const clientEmailHtml = generateBookingConfirmationEmailHtml(sanitizedBooking);
         const { data: clientData, error: clientError } = await resend.emails.send({
           from: sender,
-          to: booking.email.trim(),
+          to: sanitizedBooking.email.trim(),
           subject: 'Thank You for Your Request!',
           html: clientEmailHtml,
           replyTo: recipient,

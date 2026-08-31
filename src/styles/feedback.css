@@ -180,7 +180,7 @@
   align-items: center;
   gap: var(--spacing-xxs);
   font-family: var(--font-sans);
-  font-size: var(--font-size-xs);
+  font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -189,30 +189,10 @@
   margin-bottom: var(--spacing-xxs);
 }
 
-.feedback-input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  width: 100%;
-}
-
-.feedback-input-icon {
-  position: absolute;
-  left: var(--spacing-md);
-  color: var(--color-text-secondary);
-  pointer-events: none;
-  transition: color var(--transition-fast);
-}
-
-.feedback-input-wrapper:focus-within .feedback-input-icon {
-  color: var(--color-brand-primary);
-}
-
 .feedback-input {
   box-sizing: border-box;
   width: 100%;
   padding: 0.75rem var(--spacing-md);
-  padding-left: calc(var(--spacing-md) + 24px);
   background-color: var(--color-bg-primary);
   border: 1px solid var(--color-border-bold);
   border-radius: var(--radius-lg);
@@ -297,15 +277,6 @@
   box-shadow: 
     inset 0 1px 2px color-mix(in srgb, var(--pram-gray-925) 2%, transparent),
     0 0 0 3px var(--color-brand-primary-soft);
-}
-
-.feedback-textarea-meta {
-  display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  margin-top: var(--spacing-xxs);
 }
 
 /* Error message */

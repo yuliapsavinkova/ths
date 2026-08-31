@@ -7,7 +7,6 @@ import {
   getDatesDiff,
   calculateEndDateStr,
   calculateEndDateWithMonths,
-  formatStayDuration,
   formatHumanDate
 } from '../utils/calendarUtils';
 import { calculateBookingPricing, PricingBreakdown } from '../utils/pricingUtils';
@@ -222,35 +221,41 @@ export default function BookMySit({
   const handleStartDateChange = (val: string) => {
     setStartDate(val);
     if (val) {
-      const computedEnd = calculateEndDateStr(val, duration);
-      setEndDate(computedEnd);
-    }
-  };
-
-  const handleEndDateChange = (val: string) => {
-    setEndDate(val);
-    if (val && startDate) {
-      const s = new Date(startDate + 'T00:00:00');
-      const e = new Date(val + 'T00:00:00');
-      if (e <= s) {
-        // Enforce at least 1 night
-        const adjustedEnd = calculateEndDateStr(startDate, 1);
-        setEndDate(adjustedEnd);
-        setDuration(1);
+      if (!endDate || endDate <= val) {
+        const computedEnd = calculateEndDateStr(val, Math.max(1, duration));
+        setEndDate(computedEnd);
       } else {
-        const computedNights = getDatesDiff(startDate, val);
-        setDuration(computedNights);
+        const computedNights = getDatesDiff(val, endDate);
+        setDuration(Math.max(1, computedNights));
       }
     }
   };
 
+  const handleEndDateChange = (val: string) => {
+    if (!val) {
+      setEndDate('');
+      return;
+    }
+    const currentStart = startDate || todayStr;
+    if (val <= currentStart) {
+      // Enforce at least 1 night
+      const adjustedEnd = calculateEndDateStr(currentStart, 1);
+      setEndDate(adjustedEnd);
+      setDuration(1);
+    } else {
+      setEndDate(val);
+      const computedNights = getDatesDiff(currentStart, val);
+      setDuration(Math.max(1, computedNights));
+    }
+  };
+
   const handleMilestoneSelect = (item: MilestonePreset) => {
-    const start = startDate || new Date().toISOString().split('T')[0];
+    const start = startDate || todayStr;
     if (!startDate) {
       setStartDate(start);
     }
     let end = '';
-    let nightsCount = 0;
+    let nightsCount = 1;
     if (item.months) {
       end = calculateEndDateWithMonths(start, item.months);
       nightsCount = getDatesDiff(start, end);
@@ -259,7 +264,7 @@ export default function BookMySit({
       nightsCount = item.days;
     }
     setEndDate(end);
-    setDuration(nightsCount);
+    setDuration(Math.max(1, nightsCount));
   };
 
   const isPresetActive = (item: MilestonePreset) => {
@@ -267,8 +272,11 @@ export default function BookMySit({
       return duration >= 60;
     }
     if (item.months === 1) {
-      const currentFormatted = formatStayDuration(duration, startDate, endDate).toLowerCase();
-      return (currentFormatted === '1 month' || duration === 30) && duration < 60;
+      if (startDate && endDate) {
+        const exactOneMonthEnd = calculateEndDateWithMonths(startDate, 1);
+        if (endDate === exactOneMonthEnd) return true;
+      }
+      return duration >= 28 && duration <= 31;
     }
     if (item.days === 7) {
       return duration === 7;
@@ -326,7 +334,7 @@ export default function BookMySit({
     }, 60);
   };
 
-  const isFormValid = name.trim().length > 0 && email.trim().length > 0;
+  const isFormValid = name.trim().length > 0 && email.trim().length > 0 && duration >= 1 && Boolean(startDate) && Boolean(endDate);
 
   const getCurrentBookingData = (): BookingRequest => {
     const derivedPetType = 
@@ -343,7 +351,7 @@ export default function BookMySit({
       referredBy,
       startDate,
       endDate,
-      duration,
+      duration: Math.max(1, duration),
       petCount: dogCount + catCount + otherCount,
       petType: derivedPetType,
       dogCount,
@@ -445,7 +453,7 @@ export default function BookMySit({
                     id="bms-end-date-input"
                     type="date"
                     required
-                    min={startDate || todayStr}
+                    min={calculateEndDateStr(startDate || todayStr, 1)}
                     value={endDate}
                     onChange={(e) => handleEndDateChange(e.target.value)}
                     className="bms-date-input"
@@ -650,9 +658,10 @@ export default function BookMySit({
                     type="text"
                     required
                     autoComplete="name"
-                    placeholder="e.g. Sarah Jenkins"
+                    placeholder="e.g. John Smith"
                     value={name}
                     onChange={(e) => setName(e.target.value)}
+                    maxLength={150}
                     className="bms-text-input"
                     aria-label="Your full name"
                   />
@@ -667,9 +676,10 @@ export default function BookMySit({
                     type="email"
                     required
                     autoComplete="email"
-                    placeholder="e.g. sarah@example.com"
+                    placeholder="e.g. john@mail.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
+                    maxLength={150}
                     className="bms-text-input"
                     aria-label="Your email address"
                   />
@@ -686,6 +696,7 @@ export default function BookMySit({
                     placeholder="e.g. (555) 234-5678"
                     value={phone}
                     onChange={(e) => setPhone(e.target.value)}
+                    maxLength={50}
                     className="bms-text-input"
                     aria-label="Your phone number"
                   />
@@ -698,14 +709,16 @@ export default function BookMySit({
                   <input
                     id="bms-location-input"
                     type="text"
-                    placeholder="e.g. San Francisco, Mission District"
+                    placeholder="e.g. San Francisco"
                     value={location}
                     onChange={(e) => setLocation(e.target.value)}
+                    maxLength={150}
                     className="bms-text-input"
                     aria-label="Your location or neighborhood"
                   />
                 </div>
 
+                {/* 
                 <div className="bms-field col-span-2">
                   <label htmlFor="bms-referredby-input" className="bms-field-label">
                     <Users size={12} /> Referred by
@@ -716,10 +729,12 @@ export default function BookMySit({
                     placeholder="e.g. Friend's referral, Instagram, Google search"
                     value={referredBy}
                     onChange={(e) => setReferredBy(e.target.value)}
+                    maxLength={200}
                     className="bms-text-input"
                     aria-label="How you heard about Yulia"
                   />
                 </div>
+                */}
 
                 <div className="bms-field col-span-2">
                   <label htmlFor="bms-notes-input" className="bms-field-label">
@@ -731,6 +746,7 @@ export default function BookMySit({
                     rows={5}
                     value={notes}
                     onChange={(e) => setNotes(e.target.value)}
+                    maxLength={3000}
                     className="bms-textarea"
                     aria-label="Additional notes or details about your sit"
                   />
@@ -747,7 +763,7 @@ export default function BookMySit({
                   <span>Review & Submit</span>
                 </div>
                 <div className="bms-nights-pill">
-                  <span>{formatStayDuration(duration, startDate, endDate)}</span>
+                  <span>{duration} {duration === 1 ? 'night' : 'nights'}</span>
                 </div>
               </div>
 
@@ -785,7 +801,7 @@ export default function BookMySit({
               {/* Line items */}
               <div className="bms-line-items">
                 <div className="bms-line-item">
-                  <span className="bms-item-name">Base Rate ({formatStayDuration(duration, startDate, endDate)})</span>
+                  <span className="bms-item-name">Base Rate ({duration} {duration === 1 ? 'night' : 'nights'})</span>
                   <span className="bms-item-price">${pricing.baseRate}</span>
                 </div>
 

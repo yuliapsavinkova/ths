@@ -14,8 +14,7 @@ export const Footer: React.FC = () => {
           <div className="footer-col footer-col-brand" id="footer-brand-container">
             <BrandLogo variant="footer" id="footer-brand-title-el" />
             <p className="footer-brand-text" id="footer-brand-desc">
-              Premium live-in pet and home care. Enjoy complete peace of mind while you're away with a
-              trusted live-in sitter, an active work-from-home presence, and regular updates.
+              Premium house & pet sitting. Enjoy complete peace of mind while you're away with a trusted live-in sitter, attentive care for your pets and home, and regular updates.
             </p>
           </div>
 
@@ -60,7 +59,11 @@ export const Footer: React.FC = () => {
         {/* Row 2: 1 Column Independent Copyright Line */}
         <div className="footer-bottom" id="footer-bottom-wrap">
           <p className="footer-copyright" id="footer-copyright-text">
-            © {new Date().getFullYear()} yulia.sitterjourney.com · All Rights Reserved
+            <span className="footer-copyright-item">© {new Date().getFullYear()} yulia.sitterjourney.com</span>
+            <span className="footer-copyright-item footer-copyright-rights">
+              <span className="footer-copyright-separator" aria-hidden="true">·</span>
+              All Rights Reserved
+            </span>
           </p>
         </div>
 

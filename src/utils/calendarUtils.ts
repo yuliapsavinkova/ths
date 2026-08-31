@@ -117,16 +117,21 @@ export const calculateEndDateStr = (startStr: string, nights: number): string =>
 
 /**
  * Calculates end date (YYYY-MM-DD) from a start date adding exact calendar months.
+ * Accurately handles variable month lengths (28, 29, 30, 31) and leap years by clamping
+ * to the last valid day of the target month (e.g. Jan 31 + 1 month -> Feb 28 or Feb 29).
  */
 export const calculateEndDateWithMonths = (startStr: string, monthsToAdd: number): string => {
   if (!startStr) return '';
   const [year, month, day] = startStr.split('-').map(Number);
   if (isNaN(year) || isNaN(month) || isNaN(day)) return '';
-  const date = new Date(year, month - 1 + monthsToAdd, day);
-  const yyyy = date.getFullYear();
-  const mm = String(date.getMonth() + 1).padStart(2, '0');
-  const dd = String(date.getDate()).padStart(2, '0');
-  return `${yyyy}-${mm}-${dd}`;
+  
+  const totalMonths = month - 1 + monthsToAdd;
+  const targetYear = year + Math.floor(totalMonths / 12);
+  const targetMonthIndex = ((totalMonths % 12) + 12) % 12;
+  const maxDays = getDaysInMonth(targetYear, targetMonthIndex);
+  const targetDay = Math.min(day, maxDays);
+  
+  return formatDateStr(targetYear, targetMonthIndex, targetDay);
 };
 
 /**

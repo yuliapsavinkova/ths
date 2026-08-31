@@ -16,9 +16,6 @@ export const FeedbackSection: React.FC = () => {
   const [isSuccess, setIsSuccess] = useState<boolean>(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
-  const maxChars = 1000;
-  const remainingChars = maxChars - message.length;
-
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     if (!message.trim()) {
@@ -118,20 +115,19 @@ export const FeedbackSection: React.FC = () => {
               {/* Optional Email field */}
               <div className="feedback-field" id="feedback-email-field-box">
                 <label htmlFor="feedback-email-input" className="feedback-label" id="feedback-email-label">
-                  Your Email (optional)
+                  <Mail size={12} /> Email (optional)
                 </label>
-                <div className="feedback-input-wrapper" id="feedback-email-input-wrapper">
-                  <Mail size={16} className="feedback-input-icon" aria-hidden="true" />
-                  <input
-                    type="email"
-                    id="feedback-email-input"
-                    className="feedback-input"
-                    placeholder="name@example.com (if you'd like a reply)"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    autoComplete="email"
-                  />
-                </div>
+                <input
+                  type="email"
+                  id="feedback-email-input"
+                  className="feedback-input"
+                  placeholder="e.g. john@mail.com"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  maxLength={150}
+                  autoComplete="email"
+                  aria-label="Email (optional)"
+                />
               </div>
 
               {/* Message field */}
@@ -145,17 +141,11 @@ export const FeedbackSection: React.FC = () => {
                   placeholder="Your questions, thoughts, ideas, or suggestions..."
                   aria-label="Your questions, thoughts, ideas, or suggestions..."
                   value={message}
-                  onChange={(e) => {
-                    if (e.target.value.length <= maxChars) {
-                      setMessage(e.target.value);
-                    }
-                  }}
+                  onChange={(e) => setMessage(e.target.value)}
+                  maxLength={3000}
                   rows={4}
                   required
                 />
-                <div className="feedback-textarea-meta">
-                  <span>{remainingChars} chars left</span>
-                </div>
               </div>
 
               {/* Error banner if any */}

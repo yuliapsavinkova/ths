@@ -16,7 +16,7 @@ export const Hero: React.FC = () => {
         <div className="hero-content" id="hero-content-col">
           <div className="hero-tagline-wrapper" id="hero-tagline-wrap">
             <span className="hero-tagline">
-              <PawIcon size={14} /> Premium Pet & Home Care
+              <PawIcon size={14} /> Premium House & Pet Sitting
             </span>
           </div>
 
@@ -27,7 +27,7 @@ export const Hero: React.FC = () => {
           </h1>
 
           <p className="hero-text" id="hero-lead-text">
-            Planning a business trip, vacation, or extended time away? I provide live-in house sitting, pet care, plant watering, and home security, so you can travel with peace of mind.
+            Planning a business trip, vacation, or extended time away? I provide live-in house sitting, pet care, plant watering, and home security, so you can travel with complete peace of mind.
           </p>
 
           {/* Call to Actions - At bottom of Hero */}

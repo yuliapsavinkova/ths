@@ -18,20 +18,26 @@ export async function handleFeedbackSubmit(req: Request, res: Response) {
     }
   }
 
-  const message = body?.message?.trim();
-  if (!message) {
+  const rawMessage = typeof body?.message === 'string' ? body.message.trim() : '';
+  if (!rawMessage) {
     return res.status(400).json({
       success: false,
       message: 'Please provide a feedback message before submitting.'
     });
   }
 
+  const message = rawMessage.slice(0, 3000);
+  const email = typeof body?.email === 'string' ? body.email.slice(0, 150).trim() : '';
+  const name = typeof body?.name === 'string' ? body.name.slice(0, 150).trim() : '';
+  const category = typeof body?.category === 'string' ? body.category.slice(0, 100).trim() : 'General Feedback';
+  const rating = typeof body?.rating === 'string' ? body.rating.slice(0, 50).trim() : '';
+
   const feedbackData: FeedbackPayload = {
     message,
-    category: body?.category || 'General Feedback',
-    name: body?.name || '',
-    email: body?.email || '',
-    rating: body?.rating || ''
+    category,
+    name,
+    email,
+    rating
   };
 
   console.log('[Feedback] Received feedback submission:', {

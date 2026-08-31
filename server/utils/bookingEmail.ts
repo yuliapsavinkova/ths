@@ -21,15 +21,6 @@ export function formatHumanDate(dateStr?: string): string {
   }
 }
 
-export function formatStayDuration(days: number): string {
-  if (days <= 0) return '0 days';
-  if (days < 7) return `${days} ${days === 1 ? 'day' : 'days'}`;
-  const weeks = Math.floor(days / 7);
-  const remDays = days % 7;
-  if (remDays === 0) return `${weeks} ${weeks === 1 ? 'week' : 'weeks'}`;
-  return `${weeks} ${weeks === 1 ? 'week' : 'weeks'} + ${remDays} ${remDays === 1 ? 'day' : 'days'}`;
-}
-
 export function formatPetTypeLabel(booking: BookingRequest): string {
   if (booking.dogCount !== undefined || booking.catCount !== undefined || booking.otherCount !== undefined) {
     const parts: string[] = [];
@@ -40,15 +31,15 @@ export function formatPetTypeLabel(booking: BookingRequest): string {
       parts.push(`${booking.catCount} ${booking.catCount === 1 ? 'Cat' : 'Cats'}`);
     }
     if (booking.otherCount && booking.otherCount > 0) {
-      parts.push(`${booking.otherCount} Other`);
+      parts.push(`${booking.otherCount} ${booking.otherCount === 1 ? 'Other' : 'Others'}`);
     }
     if (parts.length > 0) {
-      return `${booking.petCount} (${parts.join(', ')})`;
+      return parts.join(', ');
     }
-    return `${booking.petCount} Pets`;
+    return booking.petCount && booking.petCount > 0 ? `${booking.petCount} Pets` : 'No Pets';
   }
   
-  if (booking.petType === 'none') return 'No Pets';
+  if (booking.petType === 'none' || booking.petCount === 0) return 'No Pets';
   if (booking.petType === 'mixed') return `${booking.petCount} Mixed Pets`;
   if (booking.petType === 'other') return `${booking.petCount} Other (fish, parrots, reptiles...)`;
   if (booking.petType === 'dog') return `${booking.petCount} ${booking.petCount === 1 ? 'Dog' : 'Dogs'}`;
@@ -117,11 +108,7 @@ export function formatBookingDuration(booking: BookingRequest): string {
     return 'Not specified';
   }
   const nights = booking.duration;
-  if (nights < 7) {
-    return `${nights} ${nights === 1 ? 'night' : 'nights'}`;
-  }
-  const humanDuration = formatStayDuration(nights);
-  return `${nights} nights (${humanDuration})`;
+  return `${nights} ${nights === 1 ? 'night' : 'nights'}`;
 }
 
 export function formatStayDetailsHtml(booking: BookingRequest): string {
