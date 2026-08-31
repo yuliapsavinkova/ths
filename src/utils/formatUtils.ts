@@ -18,16 +18,16 @@ export function formatPetTypeLabel(booking: BookingRequest): string {
     if (parts.length > 0) {
       return parts.join(', ');
     }
-    return booking.petCount && booking.petCount > 0 ? `${booking.petCount} Pets` : 'No Pets';
+    return 'No Pets';
   }
   
-  if (booking.petType === 'none' || booking.petCount === 0) return 'No Pets';
-  if (booking.petType === 'mixed') return `${booking.petCount} Mixed Pets`;
-  if (booking.petType === 'other') return `${booking.petCount} Other (fish, parrots, reptiles...)`;
+  if (booking.petType === 'none' || !booking.petCount || booking.petCount <= 0) return 'No Pets';
   if (booking.petType === 'dog') return `${booking.petCount} ${booking.petCount === 1 ? 'Dog' : 'Dogs'}`;
   if (booking.petType === 'cat') return `${booking.petCount} ${booking.petCount === 1 ? 'Cat' : 'Cats'}`;
+  if (booking.petType === 'other') return `${booking.petCount} ${booking.petCount === 1 ? 'Other' : 'Others'}`;
+  if (booking.petType === 'mixed') return `${booking.petCount} Mixed Pets`;
   
-  return `${booking.petCount} ${booking.petType || 'Pets'}`;
+  return `${booking.petCount} Pets`;
 }
 
 /**
