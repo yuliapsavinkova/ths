@@ -80,11 +80,11 @@ export default function ShowcaseSection() {
 
   const {
     containerRef: deckContainerRef,
-    scrollProgress,
+    progressBarRef,
     scrollPrev,
     scrollNext,
     isAtStart,
-    isAtEnd
+    isAtEnd,
   } = useCarousel(filteredItems.length, activeCategory);
 
   // Modal navigation
@@ -297,8 +297,8 @@ export default function ShowcaseSection() {
             <div className="swipe-progress-track-wrapper" id="showcase-progress-track-wrapper">
               <div className="swipe-progress-track">
                 <div
+                  ref={progressBarRef}
                   className="swipe-progress-bar"
-                  style={{ left: `${scrollProgress}px` }}
                 />
               </div>
             </div>

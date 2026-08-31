@@ -2,6 +2,7 @@ import { useState, useEffect, useRef, useCallback } from 'react';
 
 export function useCarousel(itemCount: number, resetDependency?: any) {
   const containerRef = useRef<HTMLDivElement>(null);
+  const progressBarRef = useRef<HTMLDivElement>(null);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAtStart, setIsAtStart] = useState(true);
@@ -14,6 +15,9 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
     const maxScroll = el.scrollWidth - el.clientWidth;
     if (maxScroll <= 5) {
       setScrollProgress(0);
+      if (progressBarRef.current) {
+        progressBarRef.current.style.left = '0px';
+      }
       setActiveIndex(0);
       setIsAtStart(true);
       setIsAtEnd(true);
@@ -26,6 +30,9 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
 
     const progress = Math.min(95, Math.max(0, (currentScroll / maxScroll) * 95));
     setScrollProgress(progress);
+    if (progressBarRef.current) {
+      progressBarRef.current.style.left = `${progress}px`;
+    }
 
     const children = Array.from(el.children) as HTMLElement[];
     if (children.length > 0) {
@@ -133,13 +140,14 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
 
   return {
     containerRef,
+    progressBarRef,
     scrollProgress,
     activeIndex,
     scrollPrev,
     scrollNext,
     handleScroll,
     isAtStart,
-    isAtEnd
+    isAtEnd,
   };
 }
 

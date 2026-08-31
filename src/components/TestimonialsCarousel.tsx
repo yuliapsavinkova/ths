@@ -6,11 +6,11 @@ import { useCarousel } from '../utils/carouselUtils';
 export default function TestimonialsCarousel() {
   const {
     containerRef: deckContainerRef,
-    scrollProgress,
+    progressBarRef,
     scrollPrev,
     scrollNext,
     isAtStart,
-    isAtEnd
+    isAtEnd,
   } = useCarousel(TESTIMONIALS.length);
 
   return (
@@ -51,8 +51,8 @@ export default function TestimonialsCarousel() {
         <div className="swipe-progress-track-wrapper" id="testimonials-progress-track-wrapper">
           <div className="swipe-progress-track">
             <div
+              ref={progressBarRef}
               className="swipe-progress-bar"
-              style={{ left: `${scrollProgress}px` }}
             />
           </div>
         </div>
@@ -132,15 +132,15 @@ function SwipeTestimonialCard({ item }: { item: typeof TESTIMONIALS[0] }) {
       <div className="swipe-testimonial-text-container">
         <p className="swipe-testimonial-text">
           "{displayQuote}"
-          {!isExpanded && isLong && <span className="text-gray-400 font-sans ml-1">...</span>}
+          {!isExpanded && isLong && <span className="swipe-ellipsis">...</span>}
         </p>
         {isLong && (
           <button 
             className="swipe-read-more-btn"
             onClick={() => setIsExpanded(!isExpanded)}
-            aria-label={isExpanded ? "Read less review" : "Read full review"}
+            aria-label={isExpanded ? 'Read less review' : 'Read full review'}
           >
-            {isExpanded ? "Read less" : "Read more"}
+            {isExpanded ? 'Read less' : 'Read more'}
           </button>
         )}
       </div>

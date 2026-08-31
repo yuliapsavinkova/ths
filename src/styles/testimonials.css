@@ -423,6 +423,12 @@
   margin: 0;
 }
 
+.swipe-ellipsis {
+  color: var(--color-text-secondary);
+  font-family: var(--font-sans);
+  margin-left: var(--spacing-xxs);
+}
+
 @media (--medium) {
   .swipe-testimonial-text {
     font-size: var(--font-size-base);
