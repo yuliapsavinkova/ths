@@ -17,51 +17,58 @@
 
   /* Clean, rich glass box-shadow with vibrant brand secondary glow */
   border: none;
-  box-shadow: 
+  box-shadow:
     inset 0 0 0 1px color-mix(in srgb, var(--color-brand-secondary) 40%, transparent),
-    0 10px 30px var(--color-bg-dark-translucent-soft), 
+    0 10px 30px var(--color-bg-dark-translucent-soft),
     0 0 20px color-mix(in srgb, var(--color-brand-secondary) 35%, transparent);
 
-  transition: background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition:
+    background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+    color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* Active State for Selected Badge Circles */
 .badge-circle.is-active,
 button.badge-circle.is-active {
-  box-shadow: 
+  box-shadow:
     inset 0 0 0 1.5px var(--color-brand-secondary),
-    0 12px 35px var(--color-bg-dark-translucent-strong), 
+    0 12px 35px var(--color-bg-dark-translucent-strong),
     0 0 36px color-mix(in srgb, var(--color-brand-secondary) 75%, transparent),
     0 0 60px color-mix(in srgb, var(--color-brand-secondary) 40%, transparent);
   background: radial-gradient(
-    circle at 30% 30%, 
-    color-mix(in srgb, var(--color-brand-secondary) 35%, transparent) 0%, 
+    circle at 30% 30%,
+    color-mix(in srgb, var(--color-brand-secondary) 35%, transparent) 0%,
     color-mix(in srgb, var(--color-bg-dark) 65%, transparent) 100%
   );
 }
 
-/* Shared Pulsing Ambient Glow Animation */
-@keyframes badge-glow-pulse {
-  0% {
-    box-shadow: 
-      inset 0 0 0 1px color-mix(in srgb, var(--color-brand-secondary) 30%, transparent),
-      0 10px 30px var(--color-bg-dark-translucent-soft), 
-      0 0 16px color-mix(in srgb, var(--color-brand-secondary) 25%, transparent);
-  }
-  100% {
-    box-shadow: 
-      inset 0 0 0 1.5px color-mix(in srgb, var(--color-brand-secondary) 75%, transparent),
-      0 14px 35px var(--color-bg-dark-translucent-strong), 
-      0 0 32px color-mix(in srgb, var(--color-brand-secondary) 65%, transparent),
-      0 0 55px color-mix(in srgb, var(--color-brand-secondary) 35%, transparent);
-  }
+/* GPU-Accelerated Pulsing Ambient Glow Animation
+   Uses a dedicated pseudo-element layer with opacity transitions (no duplicate inner borders or scale offsets)
+   so WebKit / iPadOS animates smoothly on the hardware compositor thread with a single crisp edge */
+.badge-circle-pulse::before,
+.badge-circle-animated::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  pointer-events: none;
+  box-shadow:
+    0 12px 35px var(--color-bg-dark-translucent-strong),
+    0 0 30px color-mix(in srgb, var(--color-brand-secondary) 60%, transparent),
+    0 0 55px color-mix(in srgb, var(--color-brand-secondary) 30%, transparent);
+  opacity: 0.2;
+  animation: badge-glow-breathe 3.5s ease-in-out infinite alternate;
+  will-change: opacity;
+  z-index: 0;
 }
 
-/* Reusable Pulsing Utility Classes */
-.badge-circle-pulse,
-.badge-circle-animated {
-  animation: badge-glow-pulse 3s ease-in-out infinite alternate;
+@keyframes badge-glow-breathe {
+  0% {
+    opacity: 0.15;
+  }
+  100% {
+    opacity: 0.85;
+  }
 }
 
 /* Inner Layout Utility for Centering Content inside Badge Circles */
