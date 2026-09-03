@@ -26,30 +26,10 @@
   --line-height-normal: 1.5;
   --line-height-relaxed: 1.625;
 
-  /* Fonts with matched fallback metrics to eliminate FOUT and layout shifts */
+  /* Fonts */
   --font-sans:
-    'DM Sans', 'DM Sans Fallback', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
-    'Helvetica Neue', Arial, sans-serif;
-  --font-serif:
-    'Cormorant Garamond', 'Cormorant Fallback', Garamond, 'Times New Roman', Georgia, serif;
+    'DM Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-}
-
-/* Fallback font metric overrides for zero-layout-shift (CLS = 0) font swapping */
-@font-face {
-  font-family: 'DM Sans Fallback';
-  src: local('Arial');
-  ascent-override: 95%;
-  descent-override: 25%;
-  line-gap-override: 0%;
-  size-adjust: 100%;
-}
-
-@font-face {
-  font-family: 'Cormorant Fallback';
-  src: local('Times New Roman'), local('Georgia');
-  ascent-override: 85%;
-  descent-override: 22%;
-  line-gap-override: 0%;
-  size-adjust: 105%;
 }

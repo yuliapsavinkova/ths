@@ -25,25 +25,6 @@ export default function App() {
 
   const [scrolled, setScrolled] = useState<boolean>(false);
 
-  // Guarantee clean top alignment on initial page load on iPhone / iOS Safari
-  useEffect(() => {
-    if (typeof window !== 'undefined' && 'scrollRestoration' in window.history) {
-      window.history.scrollRestoration = 'manual';
-    }
-
-    if (!window.location.hash) {
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-
-      // Compensate for iOS Safari initial layout recalculation and dynamic chrome shifts
-      const raf = requestAnimationFrame(() => {
-        if (!window.location.hash && window.scrollY > 0 && window.scrollY < 120) {
-          window.scrollTo({ top: 0, left: 0, behavior: 'instant' as ScrollBehavior });
-        }
-      });
-      return () => cancelAnimationFrame(raf);
-    }
-  }, []);
-
   useEffect(() => {
     const handleScroll = () => {
       if (window.scrollY > 30) {
