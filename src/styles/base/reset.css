@@ -1,46 +1,59 @@
 /* ─── BASE RESET & VIEWPORT DEFAULTS ─── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-offset-mobile);
   box-sizing: border-box;
   background-color: var(--color-bg-dark);
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
-@media (--medium) {
-  html {
-    scroll-padding-top: var(--header-offset-tablet);
-  }
-}
-
-@media (--large) {
-  html {
-    scroll-padding-top: var(--header-offset-desktop);
-  }
-}
-
-/* Ensure all anchor target sections offset properly when scrolled via nav */
-section[id],
-div[id$="-section"],
-div[id$="-root"] {
+/* Ensure only anchor target content sections offset properly when scrolled via nav */
+#about-section,
+#services-section,
+#highlights-section,
+#testimonials-section,
+#showcase-album-section,
+#faq-section,
+#booking-form-section,
+#feedback-section {
   scroll-margin-top: var(--header-offset-mobile);
 }
 
 @media (--medium) {
-  section[id],
-  div[id$="-section"],
-  div[id$="-root"] {
+  #about-section,
+  #services-section,
+  #highlights-section,
+  #testimonials-section,
+  #showcase-album-section,
+  #faq-section,
+  #booking-form-section,
+  #feedback-section {
     scroll-margin-top: var(--header-offset-tablet);
   }
 }
 
 @media (--large) {
-  section[id],
-  div[id$="-section"],
-  div[id$="-root"] {
+  #about-section,
+  #services-section,
+  #highlights-section,
+  #testimonials-section,
+  #showcase-album-section,
+  #faq-section,
+  #booking-form-section,
+  #feedback-section {
     scroll-margin-top: var(--header-offset-desktop);
   }
+}
+
+/* Explicitly prevent roots, hero, and main from having any scroll offset on page load */
+html,
+body,
+#root,
+#app-root,
+#main-content,
+.hero,
+#hero-section-el {
+  scroll-margin-top: 0;
 }
 
 *,
@@ -60,7 +73,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
   line-height: var(--line-height-relaxed);
-  overflow-x: hidden;
+  overflow-x: clip;
   width: 100%;
 }
 
@@ -83,9 +96,9 @@ textarea {
 }
 
 button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
+[type='button'],
+[type='reset'],
+[type='submit'] {
   -webkit-appearance: button;
   background-color: transparent;
   background-image: none;

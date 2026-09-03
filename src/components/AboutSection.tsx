@@ -115,14 +115,14 @@ export const AboutSection: React.FC = () => {
               </h3>
               <div className="column-text">
                 <p className="large">
-                  I have spent my whole life around animals and have house-sat for years. I have
-                  cared for dogs, cats, other small pets, and homes without pets.
+                  I’ve spent my whole life around animals and have been house-sitting for years.
+                  I’ve cared for dogs, cats, other small pets, and homes without pets.
                 </p>
                 <p className="large about-additional-para">
-                  I will send you frequent photo and video updates while you're away so you always
-                  know how your pets are doing. I keep a close eye on your home's security and
-                  upkeep, and I have a clean background check and verified five-star reviews from
-                  other homeowners, so you can travel without any worries.
+                  You’ll receive frequent photo and video updates, so you always know how your pets
+                  are doing. I keep a close eye on your home’s security and upkeep, and with a clean
+                  background check and verified five-star reviews from other homeowners, you can
+                  travel with complete peace of mind.
                 </p>
               </div>
             </div>
