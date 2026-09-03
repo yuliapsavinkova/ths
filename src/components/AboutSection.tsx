@@ -84,7 +84,7 @@ export const AboutSection: React.FC = () => {
                   I'm Yulia, a remote software engineer, so I'm home most of the time. When I'm
                   house- and pet-sitting, your pets have consistent company throughout the day.
                   Meals, walks, playtime, and any medications stay right on schedule, and I'm always
-                  nearby if something unexpected comes up. And your home gets the security of a
+                  nearby if something unexpected comes up. Your home also gets the security of a
                   responsible person living in it, rather than sitting empty.
                 </p>
               </div>
