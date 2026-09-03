@@ -11,7 +11,6 @@ export const Hero: React.FC = () => {
       <div className="hero-overlay" />
 
       <div className="wrap-wide hero-grid" id="hero-grid-el">
-        
         {/* Left Column: Text & Call to Actions */}
         <div className="hero-content" id="hero-content-col">
           <div className="hero-tagline-wrapper" id="hero-tagline-wrap">
@@ -20,30 +19,27 @@ export const Hero: React.FC = () => {
             </span>
           </div>
 
-            <h1 className="hero-title" id="hero-main-title">
+          <h1 className="hero-title" id="hero-main-title">
             Trusted Live-In
             <br />
             <span>House & Pet Sitter</span>
           </h1>
 
           <p className="hero-text" id="hero-lead-text">
-            Planning a business trip, vacation, or extended time away? I provide live-in house sitting, pet care, plant watering, and home security, so you can travel with complete peace of mind.
+            Planning a business trip, vacation, or extended time away? I provide professional
+            live-in care for your home and pets, so you can travel with complete peace of mind.
           </p>
 
           {/* Call to Actions - At bottom of Hero */}
           <div className="hero-ctas" id="hero-buttons-container">
-            <a 
-              href="#booking-form-section" 
+            <a
+              href="#booking-form-section"
               className="btn btn-fill btn-auto-sm shadow-lg"
               id="hero-btn-propose"
             >
               Book a Sit
             </a>
-            <a 
-              href="#about-section" 
-              className="btn btn-outline btn-auto-sm"
-              id="hero-btn-learn"
-            >
+            <a href="#about-section" className="btn btn-outline btn-auto-sm" id="hero-btn-learn">
               Learn more
             </a>
           </div>
@@ -53,16 +49,15 @@ export const Hero: React.FC = () => {
             Uncomment <NewsletterSubscription variant="hero" /> below when ready to collect emails again.
           */}
           {/* <NewsletterSubscription variant="hero" /> */}
-
         </div>
 
         {/* Right Column: Hero Image (Yulia with Dog) */}
         <div className="hero-image-wrapper" id="hero-img-wrap">
           <div className="hero-image-bg-glow" />
           <div className="badge-circle hero-image-ring badge-circle-animated" />
-          <img 
-            src={SITTER_IMAGES.hero} 
-            alt="Yulia with a friendly dog" 
+          <img
+            src={SITTER_IMAGES.hero}
+            alt="Yulia with a friendly dog"
             className="hero-image"
             width={480}
             height={480}
@@ -75,7 +70,6 @@ export const Hero: React.FC = () => {
           {/* Elegant Glowing Rate Badge Circle (Can be easily enabled/disabled here) */}
           <RateBadgeCircle />
         </div>
-
       </div>
 
       {/* Centered Promo Banner at the bottom of Hero */}
