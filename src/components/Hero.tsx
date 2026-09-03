@@ -27,7 +27,8 @@ export const Hero: React.FC = () => {
 
           <p className="hero-text" id="hero-lead-text">
             Planning a business trip, vacation, or extended time away? I provide professional
-            live-in care for your home and pets, so you can travel with complete peace of mind.
+            live-in care for your home, pets, and plants, so you can travel with complete peace of
+            mind.
           </p>
 
           {/* Call to Actions - At bottom of Hero */}
