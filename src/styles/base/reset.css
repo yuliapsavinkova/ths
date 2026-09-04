@@ -1,46 +1,59 @@
 /* ─── BASE RESET & VIEWPORT DEFAULTS ─── */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: var(--header-offset-mobile);
   box-sizing: border-box;
   background-color: var(--color-bg-dark);
   overflow-x: hidden;
   width: 100%;
 }
 
-@media (--medium) {
-  html {
-    scroll-padding-top: var(--header-offset-tablet);
-  }
-}
-
-@media (--large) {
-  html {
-    scroll-padding-top: var(--header-offset-desktop);
-  }
-}
-
-/* Ensure all anchor target sections offset properly when scrolled via nav */
-section[id],
-div[id$='-section'],
-div[id$='-root'] {
+/* Ensure only navigation anchor target sections offset properly under sticky header */
+#about-section,
+#services-section,
+#highlights-section,
+#testimonials-section,
+#showcase-album-section,
+#faq-section,
+#booking-form-section,
+#feedback-section {
   scroll-margin-top: var(--header-offset-mobile);
 }
 
 @media (--medium) {
-  section[id],
-  div[id$='-section'],
-  div[id$='-root'] {
+  #about-section,
+  #services-section,
+  #highlights-section,
+  #testimonials-section,
+  #showcase-album-section,
+  #faq-section,
+  #booking-form-section,
+  #feedback-section {
     scroll-margin-top: var(--header-offset-tablet);
   }
 }
 
 @media (--large) {
-  section[id],
-  div[id$='-section'],
-  div[id$='-root'] {
+  #about-section,
+  #services-section,
+  #highlights-section,
+  #testimonials-section,
+  #showcase-album-section,
+  #faq-section,
+  #booking-form-section,
+  #feedback-section {
     scroll-margin-top: var(--header-offset-desktop);
   }
+}
+
+/* Explicitly ensure roots, hero, and top containers have zero scroll margin on load */
+html,
+body,
+#root,
+#app-root,
+#main-content,
+.hero,
+#hero-section-el {
+  scroll-margin-top: 0;
 }
 
 *,

@@ -215,6 +215,10 @@ export const SCHEDULE: MonthAvailability[] = [
 
 export const COVERAGE_AREAS = [
   'San Francisco',
+  'Bay Area',
+  'Los Gatos',
+  'San Jose',
+  'Saratoga',
   'Santa Barbara',
   'Malibu',
   'Santa Monica',

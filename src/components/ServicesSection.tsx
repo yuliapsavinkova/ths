@@ -7,14 +7,11 @@ export const ServicesSection: React.FC = () => {
   return (
     <section id="services-section">
       <div className="wrap stack-xl" id="services-section-wrap">
-        
         <div className="section-header" id="services-header">
           <span className="section-tag">
             <PawIcon size={14} /> Services
           </span>
-          <h2 className="section-title">
-            What Is Included
-          </h2>
+          <h2 className="section-title">What Is Included</h2>
           <p className="section-subtitle">
             A comprehensive list of professional live-in care and home management services.
           </p>
@@ -24,9 +21,9 @@ export const ServicesSection: React.FC = () => {
           {/* Card 1: Daily Pet Care */}
           <div className="app-card services-card" id="srv-card-pet">
             <div className="app-card-image-wrapper services-card-image-wrapper">
-              <img 
-                src={SITTER_IMAGES.includedCards.dailyPetCare} 
-                alt="A happy pet enjoying daily walks and attention" 
+              <img
+                src={SITTER_IMAGES.includedCards.dailyPetCare}
+                alt="A happy pet enjoying daily walks and attention"
                 className="app-card-image services-card-image"
                 width={360}
                 height={240}
@@ -48,15 +45,15 @@ export const ServicesSection: React.FC = () => {
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Daily walks and exercise</span>
+                  <span>Daily walks & exercise</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Brushing and grooming</span>
+                  <span>Brushing & grooming</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Playtime and companionship</span>
+                  <span>Playtime & companionship</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
@@ -69,9 +66,9 @@ export const ServicesSection: React.FC = () => {
           {/* Card 2: Home & Property Care */}
           <div className="app-card services-card" id="srv-card-home">
             <div className="app-card-image-wrapper services-card-image-wrapper">
-              <img 
-                src={SITTER_IMAGES.includedCards.homePropertyCare} 
-                alt="Meticulously maintained clean home with pool/plants stewardship" 
+              <img
+                src={SITTER_IMAGES.includedCards.homePropertyCare}
+                alt="Meticulously maintained clean home with pool/plants stewardship"
                 className="app-card-image services-card-image"
                 width={360}
                 height={240}
@@ -89,23 +86,23 @@ export const ServicesSection: React.FC = () => {
               <ul className="package-features">
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Watering plants</span>
+                  <span>Watering & care for plants</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Collecting mail</span>
+                  <span>Collecting mail & packages</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Keeping home tidy and clean</span>
+                  <span>Keeping home clean & tidy</span>
+                </li>
+                <li className="package-feature-item">
+                  <PawIcon size={14} className="services-paw-bullet" />
+                  <span>Managing security & alarms</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
                   <span>Reporting any home issues</span>
-                </li>
-                <li className="package-feature-item">
-                  <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Regular photo and video updates</span>
                 </li>
               </ul>
             </div>
@@ -114,9 +111,9 @@ export const ServicesSection: React.FC = () => {
           {/* Card 3: Specialized Care */}
           <div className="app-card services-card" id="srv-card-special">
             <div className="app-card-image-wrapper services-card-image-wrapper">
-              <img 
-                src={SITTER_IMAGES.includedCards.specializedCare} 
-                alt="Caring for a gentle senior pet with love and precision" 
+              <img
+                src={SITTER_IMAGES.includedCards.specializedCare}
+                alt="Caring for a gentle senior pet with love and precision"
                 className="app-card-image services-card-image"
                 width={360}
                 height={240}
@@ -150,7 +147,7 @@ export const ServicesSection: React.FC = () => {
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Puppies and kittens</span>
+                  <span>Puppies & kittens</span>
                 </li>
               </ul>
             </div>
@@ -159,9 +156,9 @@ export const ServicesSection: React.FC = () => {
           {/* Card 4: Additional Services */}
           <div className="app-card services-card" id="srv-card-nopets">
             <div className="app-card-image-wrapper services-card-image-wrapper">
-              <img 
-                src={SITTER_IMAGES.includedCards.noPetsProbs} 
-                alt="A beautiful maintained yard/garden area representing empty home stewardship" 
+              <img
+                src={SITTER_IMAGES.includedCards.noPetsProbs}
+                alt="A beautiful maintained yard/garden area representing empty home stewardship"
                 className="app-card-image services-card-image"
                 width={360}
                 height={240}
@@ -174,34 +171,33 @@ export const ServicesSection: React.FC = () => {
                 <div className="app-card-icon-box services-card-icon-box">
                   <Sparkles size={20} />
                 </div>
-                <h3 className="app-card-title services-card-title">Other</h3>
+                <h3 className="app-card-title services-card-title">Other Care</h3>
               </div>
               <ul className="package-features">
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Fish, reptiles, or exotic animals</span>
+                  <span>Bunnies, hamsters, parrots & chickens</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Plants-only sits welcome</span>
+                  <span>Fish, turtles, lizards & dragons</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Empty homes requiring presence</span>
+                  <span>Coordinating maintenance visits</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Managing scheduled maintenance visits</span>
+                  <span>Light garden & patio care</span>
                 </li>
                 <li className="package-feature-item">
                   <PawIcon size={14} className="services-paw-bullet" />
-                  <span>Light garden care</span>
+                  <span>Regular photo & video updates</span>
                 </li>
               </ul>
             </div>
           </div>
         </div>
-
       </div>
     </section>
   );

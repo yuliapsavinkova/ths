@@ -365,8 +365,17 @@
   transition: color var(--transition-fast) ease;
 }
 
+.bms-tag-price.bms-tag-price-green {
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-bold);
+}
+
 .bms-price-tag-pill.active .bms-tag-price {
   color: color-mix(in srgb, var(--color-text-primary-inverse) 92%, transparent);
+}
+
+.bms-price-tag-pill.active .bms-tag-price.bms-tag-price-green {
+  color: var(--color-status-success-vibrant);
 }
 
 /* Step 2: Pet Counters Container (2x2 grid on desktop, 1-col on mobile) */
@@ -444,6 +453,17 @@
 }
 
 .bms-home-only-tile.active .bms-toggle-indicator {
+  color: var(--color-brand-primary);
+}
+
+.bms-pet-discount-text {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-brand-primary);
+  white-space: nowrap;
+}
+
+.bms-home-only-tile.active .bms-pet-discount-text {
   color: var(--color-brand-primary);
 }
 
@@ -819,6 +839,22 @@
   gap: var(--spacing-xxs);
 }
 
+.bms-item-name .app-tooltip-wrapper {
+  width: auto;
+  min-width: auto;
+  height: auto;
+  min-height: auto;
+  margin: 0;
+  padding: 0 var(--spacing-xxs);
+}
+
+.bms-tooltip-multiline {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  white-space: nowrap;
+}
+
 .bms-item-sub-count {
   font-size: var(--font-size-xs);
   opacity: 0.95;
@@ -883,6 +919,11 @@
   font-family: var(--font-mono);
   text-align: right;
   opacity: 0.85;
+}
+
+.bms-per-night-amount {
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-bold);
 }
 
 /* Status note bar placed under button */
@@ -1073,6 +1114,11 @@
   color: var(--color-text-secondary);
   font-weight: var(--font-weight-regular);
   font-size: var(--font-size-xs);
+}
+
+.bms-confirmation-subval-amount {
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-bold);
 }
 
 .bms-confirmation-badge-list {

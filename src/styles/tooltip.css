@@ -30,7 +30,10 @@
 .app-tooltip-icon {
   color: var(--color-brand-primary);
   opacity: 0.85;
-  transition: opacity var(--transition-fast) ease, color var(--transition-fast) ease, transform var(--transition-fast) ease;
+  transition:
+    opacity var(--transition-fast) ease,
+    color var(--transition-fast) ease,
+    transform var(--transition-fast) ease;
 }
 
 .app-tooltip-wrapper:hover .app-tooltip-icon,
@@ -48,17 +51,20 @@
   background-color: var(--color-bg-dark);
   color: var(--color-text-primary-inverse);
   font-family: var(--font-sans);
-  font-size: var(--font-size-sm);
+  font-size: var(--font-size-xs);
   font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-normal);
-  padding: var(--spacing-sm) var(--spacing-md-subtle);
-  border-radius: var(--radius-md);
+  line-height: var(--line-height-snug);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
   border: 1px solid var(--color-border-bold);
-  box-shadow: var(--shadow-lg);
+  box-shadow: var(--shadow-md);
   pointer-events: none;
   opacity: 0;
   visibility: hidden;
-  transition: opacity var(--transition-normal), transform var(--transition-normal), visibility var(--transition-normal);
+  transition:
+    opacity var(--transition-normal),
+    transform var(--transition-normal),
+    visibility var(--transition-normal);
   z-index: var(--z-modal);
   text-align: left;
   white-space: normal;
@@ -75,7 +81,7 @@
 }
 
 .app-tooltip-box::after {
-  content: "";
+  content: '';
   position: absolute;
   border-style: solid;
 }

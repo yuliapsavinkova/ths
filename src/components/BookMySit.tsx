@@ -30,13 +30,14 @@ interface MilestonePreset {
   months?: number;
   label: string;
   price: string;
+  isGreen?: boolean;
 }
 
 const MILESTONE_PRESETS: MilestonePreset[] = [
   { days: 1, label: '1 Night', price: '$99' },
-  { days: 7, label: '1 Week', price: '$299' },
-  { days: 30, months: 1, label: '1 Month', price: '$999' },
-  { days: 60, months: 2, label: '2+ Months', price: '10% Off' }
+  { days: 7, label: '1 Week', price: '$299', isGreen: true },
+  { days: 30, months: 1, label: '1 Month', price: '$999', isGreen: true },
+  { days: 60, months: 2, label: '2+ Months', price: '10% Off' },
 ];
 
 interface BookMySitProps {
@@ -80,17 +81,20 @@ export default function BookMySit({
 
   // ─── PET PROFILE STATE ───
   const [dogCount, setDogCount] = useState<number>(() => {
-    if (initialPetType === 'dog') return initialPetCount;
-    if (initialPetType === 'mixed') return Math.max(1, Math.floor(initialPetCount / 2));
+    const safeCount = Math.min(4, Math.max(0, initialPetCount));
+    if (initialPetType === 'dog') return safeCount;
+    if (initialPetType === 'mixed') return Math.max(1, Math.floor(safeCount / 2));
     return 0;
   });
   const [catCount, setCatCount] = useState<number>(() => {
-    if (initialPetType === 'cat') return initialPetCount;
-    if (initialPetType === 'mixed') return Math.max(1, Math.ceil(initialPetCount / 2));
+    const safeCount = Math.min(4, Math.max(0, initialPetCount));
+    if (initialPetType === 'cat') return safeCount;
+    if (initialPetType === 'mixed') return Math.max(1, Math.ceil(safeCount / 2));
     return 0;
   });
   const [otherCount, setOtherCount] = useState<number>(() => {
-    if (initialPetType === 'other') return initialPetCount;
+    const safeCount = Math.min(4, Math.max(0, initialPetCount));
+    if (initialPetType === 'other') return safeCount;
     return 0;
   });
 
@@ -165,6 +169,7 @@ export default function BookMySit({
     medsSurcharge: 0,
     gardenSurcharge: 0,
     durationDiscount: 0,
+    homeOnlyDiscount: 0,
     total: 999,
     perDay: 33.30
   });
@@ -177,22 +182,23 @@ export default function BookMySit({
   }, [initialStartDate, initialEndDate, initialDuration]);
 
   useEffect(() => {
+    const safeCount = Math.min(4, Math.max(0, initialPetCount));
     if (initialPetType === 'dog') {
-      setDogCount(initialPetCount);
+      setDogCount(safeCount);
       setCatCount(0);
       setOtherCount(0);
     } else if (initialPetType === 'cat') {
       setDogCount(0);
-      setCatCount(initialPetCount);
+      setCatCount(safeCount);
       setOtherCount(0);
     } else if (initialPetType === 'mixed') {
-      setDogCount(Math.max(1, Math.floor(initialPetCount / 2)));
-      setCatCount(Math.max(1, Math.ceil(initialPetCount / 2)));
+      setDogCount(Math.max(1, Math.floor(safeCount / 2)));
+      setCatCount(Math.max(1, Math.ceil(safeCount / 2)));
       setOtherCount(0);
     } else if (initialPetType === 'other') {
       setDogCount(0);
       setCatCount(0);
-      setOtherCount(initialPetCount);
+      setOtherCount(safeCount);
     } else {
       setDogCount(0);
       setCatCount(0);
@@ -334,7 +340,13 @@ export default function BookMySit({
     }, 60);
   };
 
-  const isFormValid = name.trim().length > 0 && email.trim().length > 0 && duration >= 1 && Boolean(startDate) && Boolean(endDate);
+  const isFormValid =
+    name.trim().length > 0 &&
+    email.trim().length > 0 &&
+    duration >= 1 &&
+    Boolean(startDate) &&
+    Boolean(endDate) &&
+    dogCount + catCount + otherCount <= 4;
 
   const getCurrentBookingData = (): BookingRequest => {
     const derivedPetType = 
@@ -414,7 +426,7 @@ export default function BookMySit({
                   className={`app-pill-btn bms-price-tag-pill ${isPresetActive(item) ? 'active' : ''}`}
                 >
                   <span className="bms-tag-label">{item.label}</span>
-                  <span className="bms-tag-price">{item.price}</span>
+                  <span className={`bms-tag-price ${item.isGreen ? 'bms-tag-price-green' : ''}`}>{item.price}</span>
                 </button>
               ))}
             </div>
@@ -467,13 +479,7 @@ export default function BookMySit({
             <div className="bms-step-group bms-step-2">
               <div className="bms-step-title">
                 <span className="bms-number">2</span>
-                Pets
-                <InfoTooltip 
-                  content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)." 
-                  iconSize={14}
-                  align="left"
-                  ariaLabel="Pet inclusion policy"
-                />
+                Pets (4 max)
               </div>
 
               <div className="bms-pet-counters-container">
@@ -496,8 +502,8 @@ export default function BookMySit({
                     <span className="bms-counter-value">{dogCount}</span>
                     <button
                       type="button"
-                      disabled={dogCount + catCount + otherCount >= 6}
-                      onClick={() => setDogCount(p => Math.min(6, p + 1))}
+                      disabled={dogCount + catCount + otherCount >= 4}
+                      onClick={() => setDogCount(p => Math.min(4, p + 1))}
                       className="bms-circle-btn"
                       aria-label="Increase dog count"
                     >
@@ -525,8 +531,8 @@ export default function BookMySit({
                     <span className="bms-counter-value">{catCount}</span>
                     <button
                       type="button"
-                      disabled={dogCount + catCount + otherCount >= 6}
-                      onClick={() => setCatCount(p => Math.min(6, p + 1))}
+                      disabled={dogCount + catCount + otherCount >= 4}
+                      onClick={() => setCatCount(p => Math.min(4, p + 1))}
                       className="bms-circle-btn"
                       aria-label="Increase cat count"
                     >
@@ -554,8 +560,8 @@ export default function BookMySit({
                     <span className="bms-counter-value">{otherCount}</span>
                     <button
                       type="button"
-                      disabled={dogCount + catCount + otherCount >= 6}
-                      onClick={() => setOtherCount(p => Math.min(6, p + 1))}
+                      disabled={dogCount + catCount + otherCount >= 4}
+                      onClick={() => setOtherCount(p => Math.min(4, p + 1))}
                       className="bms-circle-btn"
                       aria-label="Increase other pet count"
                     >
@@ -575,6 +581,7 @@ export default function BookMySit({
                   <div className="bms-pet-label-group">
                     <span className="bms-pet-emoji">🏡</span>
                     <span className="bms-pet-name">Home Only</span>
+                    <span className="bms-pet-discount-text">(10% off)</span>
                   </div>
                   <span className="bms-toggle-indicator">
                     {dogCount === 0 && catCount === 0 && otherCount === 0 ? '✓' : ''}
@@ -809,8 +816,13 @@ export default function BookMySit({
                   <div className="bms-line-item">
                     <span className="bms-item-name">
                       Pet Surcharge
-                      <InfoTooltip 
-                        content="First two pets are included. After that, $300/month ($10/day) for each additional pet (up to 6 pets max)." 
+                      <InfoTooltip
+                        content={
+                          <span className="bms-tooltip-multiline">
+                            <span>Two pets included</span>
+                            <span>+$10/day each additional</span>
+                          </span>
+                        }
                         iconSize={13}
                         align="left"
                         ariaLabel="Pet surcharge details"
@@ -841,6 +853,13 @@ export default function BookMySit({
                   </div>
                 )}
 
+                {pricing.homeOnlyDiscount > 0 && (
+                  <div className="bms-line-item bms-discount-line">
+                    <span className="bms-item-name">Home Only Discount (10% Off)</span>
+                    <span className="bms-item-price">-${pricing.homeOnlyDiscount}</span>
+                  </div>
+                )}
+
                 {pricing.durationDiscount > 0 && (
                   <div className="bms-line-item bms-discount-line">
                     <span className="bms-item-name">Long Sit Discount (10% Off)</span>
@@ -856,7 +875,7 @@ export default function BookMySit({
                     <span className="bms-total-label">Total Estimate</span>
                     <span className="bms-total-price">${pricing.total}</span>
                   </div>
-                  <div className="bms-per-night">~${pricing.perDay.toFixed(2)}/night</div>
+                  <div className="bms-per-night">~<span className="bms-per-night-amount">${pricing.perDay.toFixed(2)}</span>/night</div>
                 </div>
 
                 {/* CTA submit button */}

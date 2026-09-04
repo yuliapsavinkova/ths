@@ -6,6 +6,7 @@ export interface PricingBreakdown {
   medsSurcharge: number;
   gardenSurcharge: number;
   durationDiscount: number;
+  homeOnlyDiscount: number;
   total: number;
   perDay: number;
 }
@@ -58,8 +59,8 @@ export function calculateBookingPricing({
   }
   const baseRate = Math.round(baseVal);
 
-  // 2 pets of any kind always included, any additional pet +$10/night
-  const totalPets = dogCount + catCount + otherCount;
+  // 2 pets of any kind always included, any additional pet +$10/night (up to 4 pets max)
+  const totalPets = Math.min(4, Math.max(0, dogCount + catCount + otherCount));
   const additionalPets = Math.max(0, totalPets - 2);
   const petDailyRate = additionalPets * 10;
   const petSurcharge = Math.round(petDailyRate * safeDuration);
@@ -76,7 +77,8 @@ export function calculateBookingPricing({
   }
 
   const durationDiscount = Math.round(subtotalItems * discountPercent);
-  const total = Math.max(0, subtotalItems - durationDiscount);
+  const homeOnlyDiscount = totalPets === 0 ? Math.round(baseRate * 0.1) : 0;
+  const total = Math.max(0, subtotalItems - durationDiscount - homeOnlyDiscount);
   const perDay = Number((total / safeDuration).toFixed(2));
 
   return {
@@ -87,6 +89,7 @@ export function calculateBookingPricing({
     medsSurcharge,
     gardenSurcharge,
     durationDiscount,
+    homeOnlyDiscount,
     total,
     perDay,
   };

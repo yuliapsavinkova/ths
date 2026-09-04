@@ -13,6 +13,7 @@ export interface PricingBreakdown {
   medsSurcharge: number;
   gardenSurcharge: number;
   durationDiscount: number;
+  homeOnlyDiscount?: number;
   total: number;
   perDay: number;
 }
@@ -86,4 +87,3 @@ export interface ShowcaseItem {
   year: number;
   initialLikes: number;
 }
-

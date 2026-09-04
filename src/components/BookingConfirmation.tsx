@@ -34,7 +34,8 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
       {/* Header & Warm Intro Pledge */}
       <h4 className="bms-success-title">Thank You for Your Request!</h4>
       <p className="bms-success-subtitle">
-        Thank you, {clientFirstName}! Your request has been received. I will review my schedule and get back to you within 24 hours.
+        Thank you, {clientFirstName}! Your request has been received. I will review my schedule and
+        get back to you within 24 hours.
       </p>
 
       {/* Standardized Cards Container */}
@@ -115,9 +116,7 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
         {booking.notes && booking.notes.trim() && (
           <div className="bms-confirmation-card">
             <h5 className="bms-confirmation-card-title">Notes</h5>
-            <p className="bms-confirmation-notes-box">
-              &ldquo;{booking.notes.trim()}&rdquo;
-            </p>
+            <p className="bms-confirmation-notes-box">&ldquo;{booking.notes.trim()}&rdquo;</p>
           </div>
         )}
 
@@ -142,22 +141,35 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
 
               {p.seniorSurcharge !== undefined && p.seniorSurcharge > 0 && (
                 <div className="bms-confirmation-row">
-                  <span className="bms-confirmation-label">{SPECIALIZED_CARE_OPTIONS.highEnergy.label}:</span>
+                  <span className="bms-confirmation-label">
+                    {SPECIALIZED_CARE_OPTIONS.highEnergy.label}:
+                  </span>
                   <span className="bms-confirmation-value">+${p.seniorSurcharge}</span>
                 </div>
               )}
 
               {p.medsSurcharge !== undefined && p.medsSurcharge > 0 && (
                 <div className="bms-confirmation-row">
-                  <span className="bms-confirmation-label">{SPECIALIZED_CARE_OPTIONS.medications.label}:</span>
+                  <span className="bms-confirmation-label">
+                    {SPECIALIZED_CARE_OPTIONS.medications.label}:
+                  </span>
                   <span className="bms-confirmation-value">+${p.medsSurcharge}</span>
                 </div>
               )}
 
               {p.gardenSurcharge !== undefined && p.gardenSurcharge > 0 && (
                 <div className="bms-confirmation-row">
-                  <span className="bms-confirmation-label">{SPECIALIZED_CARE_OPTIONS.garden.label}:</span>
+                  <span className="bms-confirmation-label">
+                    {SPECIALIZED_CARE_OPTIONS.garden.label}:
+                  </span>
                   <span className="bms-confirmation-value">+${p.gardenSurcharge}</span>
+                </div>
+              )}
+
+              {p.homeOnlyDiscount !== undefined && p.homeOnlyDiscount > 0 && (
+                <div className="bms-confirmation-row bms-confirmation-savings-row">
+                  <span className="bms-confirmation-label">Home Only Discount (10% Off):</span>
+                  <span className="bms-confirmation-value">-${p.homeOnlyDiscount}</span>
                 </div>
               )}
 
@@ -176,7 +188,10 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
               {p.perDay !== undefined && (
                 <div className="bms-confirmation-row bms-confirmation-rate-row">
                   <span className="bms-confirmation-label">Average Nightly Rate</span>
-                  <span className="bms-confirmation-subval">~${p.perDay.toFixed(2)} / night</span>
+                  <span className="bms-confirmation-subval">
+                    ~<span className="bms-confirmation-subval-amount">${p.perDay.toFixed(2)}</span>{' '}
+                    / night
+                  </span>
                 </div>
               )}
             </div>
@@ -185,7 +200,8 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
 
         {/* Next Steps Note */}
         <div className="bms-confirmation-next-steps">
-          🕒 <strong>Next step:</strong> I will review my calendar and email or call you within 24 hours to confirm availability and coordinate details.
+          🕒 <strong>Next step:</strong> I will review my calendar and email or call you within 24
+          hours to confirm availability and coordinate details.
         </div>
       </div>
 
