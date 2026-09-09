@@ -33,15 +33,13 @@ interface MilestonePreset {
   days?: number;
   months?: number;
   label: string;
+  sublabel: string;
   price: string;
-  isGreen?: boolean;
 }
 
 const MILESTONE_PRESETS: MilestonePreset[] = [
-  { days: 1, label: '1 Night', price: '$99' },
-  { days: 7, label: '1 Week', price: '$299', isGreen: true },
-  { days: 30, months: 1, label: '1 Month', price: '$999', isGreen: true },
-  { days: 60, months: 2, label: '2+ Months', price: '10% Off' },
+  { days: 7, label: '1 Week', sublabel: '7 Nights', price: '$299' },
+  { days: 30, months: 1, label: '1 Month', sublabel: '30 Nights', price: '$999' },
 ];
 
 interface BookMySitProps {
@@ -280,9 +278,6 @@ export default function BookMySit({
   };
 
   const isPresetActive = (item: MilestonePreset) => {
-    if (item.label === '2+ Months' || (item.months && item.months >= 2)) {
-      return duration >= 60;
-    }
     if (item.months === 1) {
       if (startDate && endDate) {
         const exactOneMonthEnd = calculateEndDateWithMonths(startDate, 1);
@@ -292,9 +287,6 @@ export default function BookMySit({
     }
     if (item.days === 7) {
       return duration === 7;
-    }
-    if (item.days === 1) {
-      return duration === 1;
     }
     return duration === item.days;
   };
@@ -426,18 +418,23 @@ export default function BookMySit({
         <form onSubmit={handleSubmit} className="w-full">
           {/* Quick Estimates Price Tags Bar */}
           <div className="bms-quick-estimates-bar">
-            <div className="bms-price-tags-row">
-              {MILESTONE_PRESETS.map((item) => (
-                <button
-                  key={item.label}
-                  type="button"
-                  onClick={() => handleMilestoneSelect(item)}
-                  className={`app-pill-btn bms-price-tag-pill ${isPresetActive(item) ? 'active' : ''}`}
-                >
-                  <span className="bms-tag-label">{item.label}</span>
-                  <span className={`bms-tag-price ${item.isGreen ? 'bms-tag-price-green' : ''}`}>{item.price}</span>
-                </button>
-              ))}
+            <div className="bms-price-tags-row" role="group" aria-label="Stay duration shortcuts">
+              {MILESTONE_PRESETS.map((item) => {
+                const active = isPresetActive(item);
+                return (
+                  <button
+                    key={item.label}
+                    type="button"
+                    onClick={() => handleMilestoneSelect(item)}
+                    className={`app-pill-btn bms-price-tag-pill ${active ? 'active' : ''}`}
+                    aria-pressed={active}
+                    title={`Click to set duration to ${item.label} (${item.sublabel})`}
+                  >
+                    <span className="bms-tag-label">{item.label}</span>
+                    <span className="bms-tag-price">{item.price}</span>
+                  </button>
+                );
+              })}
             </div>
           </div>
 
@@ -623,7 +620,6 @@ export default function BookMySit({
                   <div className="bms-pet-label-group">
                     <span className="bms-pet-emoji">🏡</span>
                     <span className="bms-pet-name">Home Only</span>
-                    <span className="bms-pet-discount-text">(10% off)</span>
                   </div>
                   <span className="bms-toggle-indicator">
                     {dogCount === 0 && catCount === 0 && otherCount === 0 ? '✓' : ''}
@@ -844,8 +840,9 @@ export default function BookMySit({
                       <InfoTooltip
                         content={
                           <span className="bms-tooltip-multiline">
-                            <span>Two pets included</span>
-                            <span>+$10/day each additional</span>
+                            <span>1st pet included in base rate</span>
+                            <span>+$10/day per dog</span>
+                            <span>+$5/day per cat or other</span>
                           </span>
                         }
                         iconSize={13}
@@ -875,20 +872,6 @@ export default function BookMySit({
                   <div className="bms-line-item">
                     <span className="bms-item-name">{SPECIALIZED_CARE_OPTIONS.garden.label}</span>
                     <span className="bms-item-price">+${pricing.gardenSurcharge}</span>
-                  </div>
-                )}
-
-                {pricing.homeOnlyDiscount > 0 && (
-                  <div className="bms-line-item bms-discount-line">
-                    <span className="bms-item-name">Home Only Discount (10% Off)</span>
-                    <span className="bms-item-price">-${pricing.homeOnlyDiscount}</span>
-                  </div>
-                )}
-
-                {pricing.durationDiscount > 0 && (
-                  <div className="bms-line-item bms-discount-line">
-                    <span className="bms-item-name">Long Sit Discount (10% Off)</span>
-                    <span className="bms-item-price">-${pricing.durationDiscount}</span>
                   </div>
                 )}
 

@@ -24,14 +24,57 @@ export interface PricingCalculationParams {
 }
 
 /**
+ * Cumulative base price lookup table for 1 to 30 nights.
+ * - Days 1–7: Hardcoded introductory & weekly tiers ($99, $160, $200, $240, $260, $280, $299)
+ * - Days 8–21: Standard weekly scaling (~$42.71/night -> $897 at 3 weeks)
+ * - Days 22–30: Smooth glide to 1-month milestone ($11.33/night -> $999 at 30 nights)
+ */
+export const BASE_PRICE_BY_NIGHT: Record<number, number> = {
+  1: 99,
+  2: 160,
+  3: 200,
+  4: 240,
+  5: 260,
+  6: 280,
+  7: 299,
+  8: 342,
+  9: 384,
+  10: 427,
+  11: 470,
+  12: 513,
+  13: 555,
+  14: 598,
+  15: 641,
+  16: 683,
+  17: 726,
+  18: 769,
+  19: 812,
+  20: 854,
+  21: 897,
+  22: 908,
+  23: 920,
+  24: 931,
+  25: 942,
+  26: 954,
+  27: 965,
+  28: 976,
+  29: 988,
+  30: 999,
+};
+
+/** Beyond 30 nights, rate continues based on the $999/month daily rate (~$33.30/night) */
+export const RATE_PER_NIGHT_AFTER_30 = 33;
+
+/**
  * Pure mathematical calculation engine for booking pricing.
- * Calculates base rate, multi-tier durations, pet surcharges, add-on surcharges, repeat client discounts, and long-stay discounts.
+ * Look up base rate from table (1-30 nights) or pro-rates beyond 30 nights.
+ * Handles pet surcharges (1st pet free), optional add-ons, and client discounts.
  */
 export function calculateBookingPricing({
   duration,
-  dogCount,
-  catCount,
-  otherCount,
+  dogCount = 0,
+  catCount = 0,
+  otherCount = 0,
   hasSeniorPets = false,
   hasMedications = false,
   largeGarden = false,
@@ -39,48 +82,39 @@ export function calculateBookingPricing({
 }: PricingCalculationParams): PricingBreakdown {
   const safeDuration = Math.max(1, duration);
 
-  let baseVal = 0;
-  if (safeDuration <= 1) {
-    baseVal = 99;
-  } else if (safeDuration < 7) {
-    // Linear scale between 1 night ($99) and 7 nights ($299)
-    baseVal = 99 + (safeDuration - 1) * ((299 - 99) / 6);
-  } else if (safeDuration < 30) {
-    // Weekly scale: $299 per full week (7 days) + pro-rated daily rate ($299 / 7) for extra days, capped at monthly rate ($999)
-    const weeks = Math.floor(safeDuration / 7);
-    const extraDays = safeDuration % 7;
-    const weeklyTotal = weeks * 299 + extraDays * (299 / 7);
-    baseVal = Math.min(weeklyTotal, 999);
-  } else {
-    // Monthly scale: $999 per 30 days + pro-rated weekly/daily rate for remaining days
-    const months = Math.floor(safeDuration / 30);
-    const remDays = safeDuration % 30;
-    const remWeeks = Math.floor(remDays / 7);
-    const remExtraDays = remDays % 7;
-    const remCost = Math.min(remWeeks * 299 + remExtraDays * (299 / 7), 999);
-    baseVal = months * 999 + remCost;
+  // 1. Base Rate from cumulative table or pro-rated monthly rate after 30 nights
+  const baseRate =
+    safeDuration <= 30
+      ? (BASE_PRICE_BY_NIGHT[safeDuration] ?? 99)
+      : (BASE_PRICE_BY_NIGHT[30] + Math.round((safeDuration - 30) * (BASE_PRICE_BY_NIGHT[30] / 30)));
+
+  // 2. Base rate includes 1 pet of any kind free (deducted from highest priority type)
+  let chargeableDogs = Math.max(0, dogCount);
+  let chargeableCats = Math.max(0, catCount);
+  let chargeableOthers = Math.max(0, otherCount);
+
+  if (chargeableDogs > 0) {
+    chargeableDogs -= 1;
+  } else if (chargeableCats > 0) {
+    chargeableCats -= 1;
+  } else if (chargeableOthers > 0) {
+    chargeableOthers -= 1;
   }
-  const baseRate = Math.round(baseVal);
 
-  // 2 pets of any kind always included, any additional pet +$10/night (up to 4 pets max)
-  const totalPets = Math.min(4, Math.max(0, dogCount + catCount + otherCount));
-  const additionalPets = Math.max(0, totalPets - 2);
-  const petDailyRate = additionalPets * 10;
+  const petDailyRate = chargeableDogs * 10 + chargeableCats * 5 + chargeableOthers * 5;
   const petSurcharge = Math.round(petDailyRate * safeDuration);
+  const totalPets = Math.max(0, dogCount + catCount + otherCount);
 
+  // 3. Add-on surcharges
   const seniorSurcharge = hasSeniorPets ? Math.round(2.5 * safeDuration) : 0;
   const medsSurcharge = hasMedications ? Math.round(2.5 * safeDuration) : 0;
   const gardenSurcharge = largeGarden ? Math.round(2.5 * safeDuration) : 0;
 
   const subtotalItems = baseRate + petSurcharge + seniorSurcharge + medsSurcharge + gardenSurcharge;
 
-  let discountPercent = 0;
-  if (safeDuration >= 60) {
-    discountPercent = 0.1;
-  }
-
-  const durationDiscount = Math.round(subtotalItems * discountPercent);
-  const homeOnlyDiscount = totalPets === 0 ? Math.round(baseRate * 0.1) : 0;
+  // 4. Client discounts (e.g. repeat clients)
+  const durationDiscount = 0;
+  const homeOnlyDiscount = 0;
   const repeatClientDiscount = isRepeatClient ? Math.round(subtotalItems * 0.1) : 0;
   const total = Math.max(0, subtotalItems - durationDiscount - homeOnlyDiscount - repeatClientDiscount);
   const perDay = Number((total / safeDuration).toFixed(2));

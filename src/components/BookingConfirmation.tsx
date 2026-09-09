@@ -171,20 +171,6 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
                 </div>
               )}
 
-              {p.homeOnlyDiscount !== undefined && p.homeOnlyDiscount > 0 && (
-                <div className="bms-confirmation-row bms-confirmation-savings-row">
-                  <span className="bms-confirmation-label">Home Only Discount (10% Off):</span>
-                  <span className="bms-confirmation-value">-${p.homeOnlyDiscount}</span>
-                </div>
-              )}
-
-              {p.durationDiscount !== undefined && p.durationDiscount > 0 && (
-                <div className="bms-confirmation-row bms-confirmation-savings-row">
-                  <span className="bms-confirmation-label">Long-Stay Savings (10% Off):</span>
-                  <span className="bms-confirmation-value">-${p.durationDiscount}</span>
-                </div>
-              )}
-
               {p.repeatClientDiscount !== undefined && p.repeatClientDiscount > 0 && (
                 <div className="bms-confirmation-row bms-confirmation-savings-row">
                   <span className="bms-confirmation-label">Repeat Client Loyalty (10% Off):</span>

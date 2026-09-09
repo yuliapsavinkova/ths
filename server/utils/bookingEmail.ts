@@ -189,16 +189,6 @@ export function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>): strin
           <td style="padding: 4px 0; color: #666666;">Garden / Plant Care:</td>
           <td style="padding: 4px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.gardenSurcharge}</td>
         </tr>` : ''}
-        ${p.homeOnlyDiscount ? `
-        <tr>
-          <td style="padding: 4px 0; color: #2e7d32;">Home Only Discount (10% Off):</td>
-          <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.homeOnlyDiscount}</td>
-        </tr>` : ''}
-        ${p.durationDiscount ? `
-        <tr>
-          <td style="padding: 4px 0; color: #2e7d32;">Long-Stay Savings:</td>
-          <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.durationDiscount}</td>
-        </tr>` : ''}
         ${p.repeatClientDiscount ? `
         <tr>
           <td style="padding: 4px 0; color: #2e7d32;">Repeat Client Loyalty (10% Off):</td>

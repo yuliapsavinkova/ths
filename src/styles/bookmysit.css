@@ -325,23 +325,63 @@
 }
 
 .bms-price-tags-row {
-  display: flex;
+  display: inline-flex;
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-xs, 8px);
-  width: 100%;
-  max-width: 680px;
-  padding: 4px 2px;
+  gap: var(--spacing-sm, 12px);
+  width: auto;
+  max-width: 100%;
+  padding: 2px 4px;
 }
 
-/* Quick Estimate Pills - Extends shared .app-pill-btn from pills.css */
+/* Quick Estimate Shortcut Pills - 2-Line Layout (Price under Label) & Compact (Do Not Stretch) */
 .bms-price-tag-pill {
+  display: inline-flex;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   gap: 3px;
-  padding: var(--spacing-xs) var(--spacing-sm);
-  min-width: 68px;
-  flex: 1 1 auto;
+  padding: 8px 24px;
+  min-width: 96px;
+  flex: 0 0 auto;
+  width: auto;
+  border-radius: var(--radius-full);
+  border: 1.5px solid var(--color-border-bold);
+  background-color: var(--color-bg-surface);
+  box-shadow: var(--shadow-xs);
+  cursor: pointer;
+  transition: transform var(--transition-fast) cubic-bezier(0.16, 1, 0.3, 1),
+    background-color var(--transition-fast) ease,
+    border-color var(--transition-fast) ease,
+    box-shadow var(--transition-fast) ease,
+    color var(--transition-fast) ease;
+  user-select: none;
+}
+
+.bms-price-tag-pill:hover {
+  border-color: var(--color-brand-primary);
+  background-color: var(--color-bg-surface-alt);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-sm);
+}
+
+.bms-price-tag-pill:active {
+  transform: translateY(0) scale(0.97);
+  box-shadow: var(--shadow-xs);
+}
+
+.bms-price-tag-pill.active {
+  background-color: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: var(--color-text-primary-inverse);
+  box-shadow: var(--shadow-sm);
+  transform: none;
+}
+
+.bms-price-tag-pill.active:hover {
+  transform: translateY(-1px);
+  box-shadow: var(--shadow-md);
 }
 
 .bms-tag-label {
@@ -349,34 +389,31 @@
   font-weight: var(--font-weight-bold);
   white-space: nowrap;
   line-height: 1.1;
-  color: inherit;
+  color: var(--color-text-primary);
+  transition: color var(--transition-fast) ease;
 }
 
 .bms-price-tag-pill.active .bms-tag-label {
   color: var(--color-text-primary-inverse);
 }
 
+/* Regular Price Color (Eliminated green for regular clean typography) */
 .bms-tag-price {
-  font-size: var(--font-size-2xs);
-  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
   font-family: var(--font-mono);
-  color: var(--color-brand-primary);
+  color: var(--color-text-secondary);
   white-space: nowrap;
   line-height: 1.1;
   transition: color var(--transition-fast) ease;
 }
 
-.bms-tag-price.bms-tag-price-green {
-  color: var(--color-status-success);
-  font-weight: var(--font-weight-bold);
+.bms-price-tag-pill:hover .bms-tag-price {
+  color: var(--color-brand-primary);
 }
 
 .bms-price-tag-pill.active .bms-tag-price {
-  color: color-mix(in srgb, var(--color-text-primary-inverse) 92%, transparent);
-}
-
-.bms-price-tag-pill.active .bms-tag-price.bms-tag-price-green {
-  color: var(--color-status-success-vibrant);
+  color: var(--color-text-primary-inverse);
 }
 
 /* Step 2: Pet Counters Container (2x2 grid on desktop, 1-col on mobile) */
@@ -1450,28 +1487,31 @@
 
 /* Calculator Receipt Estimate & Non-Binding Notice */
 .bms-estimate-disclosure {
-  display: flex;
-  align-items: flex-start;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
   gap: var(--spacing-xs);
   background: var(--color-bg-tertiary);
   border: 1px solid var(--color-border-primary);
-  border-radius: var(--radius-sm);
-  padding: var(--spacing-xs) var(--spacing-sm);
-  margin-top: var(--spacing-xs);
+  border-radius: var(--radius-full);
+  padding: 4px var(--spacing-sm);
+  margin-top: var(--spacing-2xs, 4px);
   font-size: var(--font-size-2xs);
   color: var(--color-text-secondary);
-  line-height: 1.45;
-  text-align: left;
+  line-height: 1.4;
+  text-align: center;
+  max-width: 100%;
+  box-sizing: border-box;
 }
 
 .bms-estimate-disclosure-icon {
   flex-shrink: 0;
   color: var(--color-brand-primary);
-  margin-top: 1px;
 }
 
 .bms-estimate-disclosure-text {
-  flex: 1;
+  flex: 0 1 auto;
 }
 
 /* Confirmation Screen Estimate Notice */
