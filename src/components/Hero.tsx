@@ -3,7 +3,6 @@ import { PawIcon } from './Icons';
 import { SITTER_IMAGES } from '../data';
 import RateBadgeCircle from './RateBadgeCircle';
 import NewsletterSubscription from './NewsletterSubscription';
-import { TrustedHousesittersBanner } from './TrustedHousesittersBanner';
 
 export const Hero: React.FC = () => {
   return (
@@ -71,11 +70,6 @@ export const Hero: React.FC = () => {
           {/* Elegant Glowing Rate Badge Circle (Can be easily enabled/disabled here) */}
           <RateBadgeCircle />
         </div>
-      </div>
-
-      {/* Centered Promo Banner at the bottom of Hero */}
-      <div className="wrap-wide hero-bottom-banner" id="hero-banner-wrap">
-        <TrustedHousesittersBanner variant="banner" />
       </div>
     </section>
   );

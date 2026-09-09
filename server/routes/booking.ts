@@ -1,4 +1,6 @@
 import { Request, Response } from 'express';
+import path from 'path';
+import fs from 'fs';
 import { getResendClient } from '../services/resend';
 import { generateBookingEmailHtml, generateBookingConfirmationEmailHtml } from '../utils/bookingEmail';
 import { CONFIG } from '../config';
@@ -18,7 +20,7 @@ export async function handleBookingSubmit(req: Request, res: Response) {
   if (!booking || typeof booking !== 'object') {
     return res.status(400).json({
       success: false,
-      message: 'Invalid booking data received.'
+      message: 'Invalid booking data received.',
     });
   }
 
@@ -30,103 +32,107 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     phone: String(booking.phone || '').slice(0, 50).trim(),
     location: String(booking.location || '').slice(0, 150).trim(),
     referredBy: String(booking.referredBy || '').slice(0, 200).trim(),
+    isRepeatClient: Boolean(booking.isRepeatClient),
     notes: String(booking.notes || '').slice(0, 3000).trim(),
   };
 
-  const apiKey = process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error('Missing RESEND_API_KEY');
-    return res.status(500).json({
-      success: false,
-      message: 'RESEND_API_KEY is not configured in Vercel Environment Variables.'
-    });
-  }
+  const bookingId = Math.random().toString(36).substring(2, 9);
 
-  const recipient = process.env.SITTER_EMAIL_TO || CONFIG.SITTER_EMAIL_TO;
-  if (!recipient) {
-    console.error('Missing SITTER_EMAIL_TO');
-    return res.status(500).json({
-      success: false,
-      message: 'SITTER_EMAIL_TO is not configured in Vercel Environment Variables.'
-    });
-  }
-
-  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM;
-  if (!sender) {
-    console.error('Missing SITTER_EMAIL_FROM');
-    return res.status(500).json({
-      success: false,
-      message: 'SITTER_EMAIL_FROM is not configured in Vercel Environment Variables.'
-    });
-  }
-
+  // 1. Locally persist booking to bookings.json if filesystem is available
   try {
-    const resend = getResendClient();
-    const emailHtml = generateBookingEmailHtml(sanitizedBooking);
+    const filePath = path.join(process.cwd(), 'bookings.json');
+    let bookingsList: Array<Record<string, unknown>> = [];
 
-    // 1. Send detailed notification alert to the sitter
-    const { data: sitterData, error: sitterError } = await resend.emails.send({
-      from: sender,
-      to: recipient,
-      subject: `New Sit Request from ${sanitizedBooking.name || 'Client'} (${sanitizedBooking.location || 'Location'})`,
-      html: emailHtml,
-      replyTo: sanitizedBooking.email || recipient
-    });
-
-    if (sitterError) {
-      console.error('Resend error delivering sitter notification:', sitterError);
-      return res.status(500).json({
-        success: false,
-        message: sitterError.message || 'Resend error delivering sitter notification.',
-        resendError: sitterError
-      });
-    }
-
-    console.log('Sitter notification email sent successfully via Resend:', sitterData);
-
-    // 2. Send instant confirmation / thank you email to the client if an email is provided
-    let clientConfirmationSent = false;
-    let clientDeliveryNote: string | undefined;
-
-    if (sanitizedBooking.email && typeof sanitizedBooking.email === 'string' && sanitizedBooking.email.includes('@')) {
+    if (fs.existsSync(filePath)) {
       try {
-        const clientEmailHtml = generateBookingConfirmationEmailHtml(sanitizedBooking);
-        const { data: clientData, error: clientError } = await resend.emails.send({
-          from: sender,
-          to: sanitizedBooking.email.trim(),
-          subject: 'Thank You for Your Request!',
-          html: clientEmailHtml,
-          replyTo: recipient,
-        });
-
-        if (clientError) {
-          console.warn('Resend client confirmation notice:', clientError);
-          clientDeliveryNote = clientError.message;
-        } else {
-          console.log('Client confirmation email sent successfully:', clientData);
-          clientConfirmationSent = true;
-        }
-      } catch (clientEmailErr) {
-        console.error('Failed to send confirmation email to client:', clientEmailErr);
+        const fileData = await fs.promises.readFile(filePath, 'utf-8');
+        bookingsList = JSON.parse(fileData);
+      } catch (parseErr) {
+        console.warn('Error reading existing bookings.json, resetting list:', parseErr);
+        bookingsList = [];
       }
     }
 
-    return res.status(200).json({
-      success: true,
-      message: 'Booking request captured and email alert sent successfully.',
-      bookingId: Math.random().toString(36).substring(2, 9),
-      resendData: sitterData,
-      clientConfirmationSent,
-      clientDeliveryNote
-    });
-  } catch (error: unknown) {
-    console.error('Error sending email via Resend:', error);
-    const errorMessage = error instanceof Error ? error.message : String(error);
-    return res.status(500).json({
-      success: false,
-      message: 'Failed to send booking email notification.',
-      error: errorMessage
-    });
+    const newRecord = {
+      id: bookingId,
+      timestamp: new Date().toISOString(),
+      ...sanitizedBooking,
+    };
+
+    bookingsList.push(newRecord);
+    await fs.promises.writeFile(filePath, JSON.stringify(bookingsList, null, 2));
+    console.log(`[Booking] Saved booking locally. Total stored: ${bookingsList.length}`);
+  } catch (fsError) {
+    console.warn('[Booking] Could not write to bookings.json (read-only runtime):', fsError);
   }
+
+  const apiKey = process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
+  const recipient = process.env.SITTER_EMAIL_TO || CONFIG.SITTER_EMAIL_TO;
+  const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM;
+
+  let sitterData = null;
+  let clientConfirmationSent = false;
+  let clientDeliveryNote: string | undefined;
+
+  // 2. Dispatch email notification via Resend if credentials are present
+  if (apiKey && recipient && sender) {
+    try {
+      const resend = getResendClient();
+      const emailHtml = generateBookingEmailHtml(sanitizedBooking);
+
+      // Send detailed notification alert to the sitter
+      const { data, error: sitterError } = await resend.emails.send({
+        from: sender,
+        to: recipient,
+        subject: `New Sit Request from ${sanitizedBooking.name || 'Client'} (${sanitizedBooking.location || 'Location'})`,
+        html: emailHtml,
+        replyTo: sanitizedBooking.email || recipient,
+      });
+
+      if (sitterError) {
+        console.warn('Resend error delivering sitter notification:', sitterError);
+      } else {
+        sitterData = data;
+        console.log('Sitter notification email sent successfully via Resend:', sitterData);
+      }
+
+      // Send instant confirmation / thank you email to the client if an email is provided
+      if (sanitizedBooking.email && typeof sanitizedBooking.email === 'string' && sanitizedBooking.email.includes('@')) {
+        try {
+          const clientEmailHtml = generateBookingConfirmationEmailHtml(sanitizedBooking);
+          const { data: clientData, error: clientError } = await resend.emails.send({
+            from: sender,
+            to: sanitizedBooking.email.trim(),
+            subject: 'Thank You for Your Request!',
+            html: clientEmailHtml,
+            replyTo: recipient,
+          });
+
+          if (clientError) {
+            console.warn('Resend client confirmation notice:', clientError);
+            clientDeliveryNote = clientError.message;
+          } else {
+            console.log('Client confirmation email sent successfully:', clientData);
+            clientConfirmationSent = true;
+          }
+        } catch (clientEmailErr) {
+          console.error('Failed to send confirmation email to client:', clientEmailErr);
+        }
+      }
+    } catch (error: unknown) {
+      console.warn('[Booking] Resend dispatch exception:', error);
+    }
+  } else {
+    console.warn('[Booking] RESEND_API_KEY, SITTER_EMAIL_TO, or SITTER_EMAIL_FROM not configured. Booking saved without email dispatch.');
+  }
+
+  return res.status(200).json({
+    success: true,
+    message: 'Booking request captured successfully.',
+    bookingId,
+    resendData: sitterData,
+    clientConfirmationSent,
+    clientDeliveryNote,
+  });
 }
 

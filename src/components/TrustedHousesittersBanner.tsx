@@ -1,8 +1,9 @@
 import React from 'react';
-import { ExternalLink } from 'lucide-react';
-import { PrivacyDisclosure } from './PrivacyDisclosure';
+import { ExternalLink, BookOpen } from 'lucide-react';
 
 export const TRUSTED_HOUSESITTERS_REF_LINK = 'https://www.trustedhousesitters.com/refer/raf943607/';
+export const ARTICLE_EXCHANGE_VS_PRO_LINK = 'https://sitterjourney.com/blog/exchange-vs-professional-house-sitting';
+export const ARTICLE_FREE_VS_PRO_LINK = ARTICLE_EXCHANGE_VS_PRO_LINK;
 
 export interface TrustedHousesittersBannerProps {
   variant?: 'banner' | 'card';
@@ -15,39 +16,28 @@ export const TrustedHousesittersBanner: React.FC<TrustedHousesittersBannerProps>
   className = '',
   onClick,
 }) => {
-  const promoText = 'Interested in a free sitter? Join TrustedHousesitters with 25% off';
-
-  const bannerText = (
-    <span className="th-banner-message">
-      <span className="th-banner-line">Interested in a free sitter?</span>
-      <span className="th-banner-line">
-        <span>
-          Join TrustedHousesitters with <strong>25% off</strong>
-        </span>
-        <ExternalLink size={14} className="th-banner-icon" aria-hidden="true" />
-      </span>
-    </span>
-  );
+  const guideTitle = 'Exchange vs. Professional House Sitting: Which Is Right for You?';
 
   if (variant === 'card') {
     return (
       <div className={`th-promo-card ${className}`.trim()}>
+        <div className="th-promo-card-header">
+          <span className="th-card-hook">Trying to decide between exchange and professional house sitting?</span>
+        </div>
         <a
-          href={TRUSTED_HOUSESITTERS_REF_LINK}
+          href={ARTICLE_EXCHANGE_VS_PRO_LINK}
           target="_blank"
           rel="noopener noreferrer"
-          className="th-promo-card-link"
+          className="th-promo-card-guide-link"
           onClick={onClick}
-          aria-label={promoText}
+          aria-label={`Read my guide: ${guideTitle}`}
         >
-          {bannerText}
+          <BookOpen size={14} className="th-card-book-icon" aria-hidden="true" />
+          <span className="th-card-guide-text">
+            Read my guide: <strong>Exchange vs. Professional Sitting</strong>
+          </span>
+          <ExternalLink size={12} className="th-banner-icon" aria-hidden="true" />
         </a>
-        <PrivacyDisclosure
-          type="trustedhousesitters"
-          align="center"
-          theme="light"
-          className="th-card-disclosure"
-        />
       </div>
     );
   }
@@ -55,29 +45,35 @@ export const TrustedHousesittersBanner: React.FC<TrustedHousesittersBannerProps>
   return (
     <div className={`th-banner-wrapper ${className}`.trim()}>
       <div className="th-banner">
-        <a
-          href={TRUSTED_HOUSESITTERS_REF_LINK}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="th-banner-link"
-          onClick={onClick}
-          aria-label={promoText}
-        >
-          <div className="th-banner-content">
-            {bannerText}
+        <div className="th-banner-content">
+          <div className="th-banner-message">
+            <span className="th-banner-line th-banner-hook">
+              Trying to decide between exchange and professional house sitting?
+            </span>
+            <span className="th-banner-line th-banner-action-line">
+              <a
+                href={ARTICLE_EXCHANGE_VS_PRO_LINK}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="th-banner-guide-link"
+                onClick={onClick}
+                aria-label={`Read my guide: ${guideTitle}`}
+              >
+                <BookOpen size={13} className="th-guide-book-icon" aria-hidden="true" />
+                <span className="th-guide-text">
+                  Read my guide: <strong>Exchange vs. Professional House Sitting</strong>
+                </span>
+                <ExternalLink size={12} className="th-banner-icon" aria-hidden="true" />
+              </a>
+            </span>
           </div>
-        </a>
-        <PrivacyDisclosure
-          type="trustedhousesitters"
-          align="center"
-          theme="dark"
-          className="th-banner-disclosure"
-        />
+        </div>
       </div>
     </div>
   );
 };
 
 export default TrustedHousesittersBanner;
+
 
 

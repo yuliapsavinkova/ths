@@ -27,12 +27,12 @@ export const PrivacyDisclosure: React.FC<PrivacyDisclosureProps> = ({
   const defaultContent: Record<string, { label: string; full: React.ReactNode; icon: 'shield' | 'info' }> = {
     booking: {
       label: 'Privacy Notice',
-      full: 'I only use your contact details to reply directly to your sitting requests. Your information is never shared or sold.',
+      full: 'Your contact info is only used to reply to your sitting requests.',
       icon: 'shield',
     },
     newsletter: {
       label: 'Privacy Notice',
-      full: 'I only use your email to send my monthly availability and updates. I never sell or share your contact info.',
+      full: 'Your email is only used to send my monthly availability and updates.',
       icon: 'shield',
     },
     trustedhousesitters: {

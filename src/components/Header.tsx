@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
-import { TrustedHousesittersBanner } from './TrustedHousesittersBanner';
 
 interface HeaderProps {
   scrolled: boolean;
@@ -79,12 +78,6 @@ export const Header: React.FC<HeaderProps> = ({ scrolled }) => {
                   Book a Sit
                 </a>
               </div>
-
-              {/* TrustedHousesitters Promo Banner in Mobile Drawer (Below Book a Sit) */}
-              <TrustedHousesittersBanner 
-                variant="card" 
-                onClick={closeMobileMenu} 
-              />
             </div>
           </nav>
         </div>

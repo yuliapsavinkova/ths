@@ -22,7 +22,11 @@ import {
   MapPin, 
   MessageSquare, 
   Users,
-  Tag
+  Tag,
+  Gift,
+  Sparkles,
+  Check,
+  Info
 } from 'lucide-react';
 
 interface MilestonePreset {
@@ -103,12 +107,13 @@ export default function BookMySit({
   const [hasSeniorPets, setHasSeniorPets] = useState<boolean>(initialHasSeniorPets);
   const [largeGarden, setLargeGarden] = useState<boolean>(false);
 
-  // ─── CONTACT DETAILS ───
+  // ─── CONTACT & CLIENT PERKS ───
   const [name, setName] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [location, setLocation] = useState<string>('');
   const [referredBy, setReferredBy] = useState<string>('');
+  const [isRepeatClient, setIsRepeatClient] = useState<boolean>(false);
   const [notes, setNotes] = useState<string>('');
 
   // ─── SYSTEM STATUS ───
@@ -170,6 +175,7 @@ export default function BookMySit({
     gardenSurcharge: 0,
     durationDiscount: 0,
     homeOnlyDiscount: 0,
+    repeatClientDiscount: 0,
     total: 999,
     perDay: 33.30
   });
@@ -302,10 +308,11 @@ export default function BookMySit({
       otherCount,
       hasSeniorPets,
       hasMedications,
-      largeGarden
+      largeGarden,
+      isRepeatClient
     });
     setPricing(computedPricing);
-  }, [duration, dogCount, catCount, otherCount, hasMedications, hasSeniorPets, largeGarden]);
+  }, [duration, dogCount, catCount, otherCount, hasMedications, hasSeniorPets, largeGarden, isRepeatClient]);
 
   const handleReset = () => {
     const today = new Date();
@@ -329,6 +336,7 @@ export default function BookMySit({
     setPhone('');
     setLocation('');
     setReferredBy('');
+    setIsRepeatClient(false);
     setNotes('');
     setSubmittedBooking(null);
     setIsSuccess(false);
@@ -361,6 +369,7 @@ export default function BookMySit({
       phone,
       location,
       referredBy,
+      isRepeatClient,
       startDate,
       endDate,
       duration: Math.max(1, duration),
@@ -429,6 +438,39 @@ export default function BookMySit({
                   <span className={`bms-tag-price ${item.isGreen ? 'bms-tag-price-green' : ''}`}>{item.price}</span>
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Client Perks & Referral Program Announcement Bar (Permanent 2-Line Layout) */}
+          <div className="bms-perks-announcement-bar" id="bms-perks-announcement">
+            <div className="bms-perk-row bms-perk-row-repeat">
+              <label
+                htmlFor="bms-repeat-client-toggle"
+                className={`bms-perk-repeat-toggle ${isRepeatClient ? 'is-active' : ''}`}
+              >
+                <input
+                  id="bms-repeat-client-toggle"
+                  type="checkbox"
+                  checked={isRepeatClient}
+                  onChange={(e) => setIsRepeatClient(e.target.checked)}
+                  className="bms-perk-native-checkbox"
+                />
+                <span className="bms-perk-custom-box" aria-hidden="true">
+                  {isRepeatClient && <Check size={11} strokeWidth={3} />}
+                </span>
+                <span className="bms-perk-text">
+                  <strong>Repeat Clients:</strong> Enjoy <strong>10% off</strong> your entire stay
+                </span>
+              </label>
+            </div>
+
+            <div className="bms-perk-row bms-perk-row-referral" id="bms-referral-ad-banner">
+              <div className="bms-perk-item bms-perk-referral">
+                <span className="bms-perk-icon-wrap bms-perk-gift"><Gift size={14} /></span>
+                <span className="bms-perk-text">
+                  <strong>Referral Perk:</strong> Recommend your trusted friend or neighbor and <strong>your next sit is on me!</strong>
+                </span>
+              </div>
             </div>
           </div>
 
@@ -655,6 +697,7 @@ export default function BookMySit({
                 <span className="bms-number">3</span>
                 Contact Details
               </div>
+
               <div className="bms-fields-grid">
                 <div className="bms-field">
                   <label htmlFor="bms-name-input" className="bms-field-label">
@@ -724,24 +767,6 @@ export default function BookMySit({
                     aria-label="Your location or neighborhood"
                   />
                 </div>
-
-                {/* 
-                <div className="bms-field col-span-2">
-                  <label htmlFor="bms-referredby-input" className="bms-field-label">
-                    <Users size={12} /> Referred by
-                  </label>
-                  <input
-                    id="bms-referredby-input"
-                    type="text"
-                    placeholder="e.g. Friend's referral, Instagram, Google search"
-                    value={referredBy}
-                    onChange={(e) => setReferredBy(e.target.value)}
-                    maxLength={200}
-                    className="bms-text-input"
-                    aria-label="How you heard about Yulia"
-                  />
-                </div>
-                */}
 
                 <div className="bms-field col-span-2">
                   <label htmlFor="bms-notes-input" className="bms-field-label">
@@ -866,6 +891,13 @@ export default function BookMySit({
                     <span className="bms-item-price">-${pricing.durationDiscount}</span>
                   </div>
                 )}
+
+                {pricing.repeatClientDiscount > 0 && (
+                  <div className="bms-line-item bms-discount-line" id="bms-receipt-repeat-discount">
+                    <span className="bms-item-name">Repeat Client Loyalty (10% Off)</span>
+                    <span className="bms-item-price">-${pricing.repeatClientDiscount}</span>
+                  </div>
+                )}
               </div>
 
               {/* Bottom section (Total Estimate & Submit CTA) */}
@@ -902,6 +934,14 @@ export default function BookMySit({
                       ✓ All required fields complete
                     </span>
                   )}
+                </div>
+
+                {/* Non-binding Estimate Disclosure */}
+                <div className="bms-estimate-disclosure" id="bms-receipt-estimate-disclosure">
+                  <Info size={13} className="bms-estimate-disclosure-icon" aria-hidden="true" />
+                  <span className="bms-estimate-disclosure-text">
+                    <strong>Estimate only:</strong> Final rates confirmed during intro call.
+                  </span>
                 </div>
               </div>
 

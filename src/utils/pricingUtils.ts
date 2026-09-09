@@ -7,6 +7,7 @@ export interface PricingBreakdown {
   gardenSurcharge: number;
   durationDiscount: number;
   homeOnlyDiscount: number;
+  repeatClientDiscount: number;
   total: number;
   perDay: number;
 }
@@ -19,11 +20,12 @@ export interface PricingCalculationParams {
   hasSeniorPets?: boolean;
   hasMedications?: boolean;
   largeGarden?: boolean;
+  isRepeatClient?: boolean;
 }
 
 /**
  * Pure mathematical calculation engine for booking pricing.
- * Calculates base rate, multi-tier durations, pet surcharges, add-on surcharges, and long-stay discounts.
+ * Calculates base rate, multi-tier durations, pet surcharges, add-on surcharges, repeat client discounts, and long-stay discounts.
  */
 export function calculateBookingPricing({
   duration,
@@ -33,6 +35,7 @@ export function calculateBookingPricing({
   hasSeniorPets = false,
   hasMedications = false,
   largeGarden = false,
+  isRepeatClient = false,
 }: PricingCalculationParams): PricingBreakdown {
   const safeDuration = Math.max(1, duration);
 
@@ -78,7 +81,8 @@ export function calculateBookingPricing({
 
   const durationDiscount = Math.round(subtotalItems * discountPercent);
   const homeOnlyDiscount = totalPets === 0 ? Math.round(baseRate * 0.1) : 0;
-  const total = Math.max(0, subtotalItems - durationDiscount - homeOnlyDiscount);
+  const repeatClientDiscount = isRepeatClient ? Math.round(subtotalItems * 0.1) : 0;
+  const total = Math.max(0, subtotalItems - durationDiscount - homeOnlyDiscount - repeatClientDiscount);
   const perDay = Number((total / safeDuration).toFixed(2));
 
   return {
@@ -90,6 +94,7 @@ export function calculateBookingPricing({
     gardenSurcharge,
     durationDiscount,
     homeOnlyDiscount,
+    repeatClientDiscount,
     total,
     perDay,
   };

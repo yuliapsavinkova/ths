@@ -124,6 +124,14 @@ export const FAQS: FaqItem[] = [
       "Routine and presence. Staying in the home keeps your pets' schedule consistent and avoids the stress that comes from long gaps alone.",
   },
   {
+    id: 'faq-exchange',
+    question: 'Trying to decide between exchange and professional house sitting?',
+    answer:
+      'Exchange platforms (like TrustedHousesitters) can be a wonderful budget-friendly option for easygoing pets and homeowners with flexible needs. If your pets have medical needs, separation anxiety, strict routines, or you simply want guaranteed accountability and dedicated remote-work presence, a professional in-home sitter ensures customized, round-the-clock peace of mind.',
+    linkText: 'Read my guide: Exchange vs. Professional House Sitting →',
+    linkUrl: 'https://sitterjourney.com/blog/exchange-vs-professional-house-sitting',
+  },
+  {
     id: 'faq4',
     question: 'How do we confirm a booking?',
     answer: 'We schedule a video call, agree on expectations, and confirm with an agreement.',
@@ -141,6 +149,18 @@ export const FAQS: FaqItem[] = [
     question: 'What happens in an emergency?',
     answer:
       'I contact you immediately and follow your provided veterinary or emergency instructions.',
+  },
+  {
+    id: 'faq7',
+    question: 'Are you a repeat client? Do you offer returning discounts?',
+    answer:
+      'Yes! Returning clients receive a 10% loyalty discount off their entire booking. Simply check the "I Am a Repeat Client" option when submitting your trip details.',
+  },
+  {
+    id: 'faq8',
+    question: 'How does the friend or neighbor referral reward work?',
+    answer:
+      'Recommend your trusted friend or neighbor and your next sit is on me! When a homeowner you introduce books a stay with me, your entire next sit is 100% complimentary as a heartfelt thank-you for your referral.',
   },
 ];
 

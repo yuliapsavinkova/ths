@@ -3,7 +3,7 @@ import { BookingRequest } from '../types';
 import { formatHumanDate } from '../utils/calendarUtils';
 import { formatBookingDuration, formatPetTypeLabel } from '../utils/formatUtils';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
-import { Check, RotateCcw } from 'lucide-react';
+import { Check, RotateCcw, Gift, Sparkles, Info } from 'lucide-react';
 
 interface BookingConfirmationProps {
   booking: BookingRequest;
@@ -103,10 +103,15 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
               <span className="bms-confirmation-label">Location / Area:</span>
               <span className="bms-confirmation-value">{booking.location || 'Not provided'}</span>
             </div>
-            {booking.referredBy && (
+            {booking.isRepeatClient && (
               <div className="bms-confirmation-row">
-                <span className="bms-confirmation-label">Referred By:</span>
-                <span className="bms-confirmation-value">{booking.referredBy}</span>
+                <span className="bms-confirmation-label">Client Status:</span>
+                <span className="bms-confirmation-value">
+                  <span className="bms-confirmation-badge-pill">
+                    <Sparkles size={11} className="bms-inline-icon" />
+                    Repeat Client (10% Loyalty Discount Applied)
+                  </span>
+                </span>
               </div>
             )}
           </div>
@@ -180,6 +185,13 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
                 </div>
               )}
 
+              {p.repeatClientDiscount !== undefined && p.repeatClientDiscount > 0 && (
+                <div className="bms-confirmation-row bms-confirmation-savings-row">
+                  <span className="bms-confirmation-label">Repeat Client Loyalty (10% Off):</span>
+                  <span className="bms-confirmation-value">-${p.repeatClientDiscount}</span>
+                </div>
+              )}
+
               <div className="bms-confirmation-total-row">
                 <span className="bms-confirmation-total-label">Total Estimated Cost</span>
                 <span className="bms-confirmation-total-value">${p.total}</span>
@@ -198,10 +210,34 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
           </div>
         )}
 
+        {/* Non-binding Estimate Notice */}
+        <div className="bms-confirmation-estimate-card" id="bms-confirmation-estimate-notice">
+          <Info size={16} className="bms-confirmation-estimate-icon" aria-hidden="true" />
+          <div className="bms-confirmation-estimate-content">
+            <strong>Estimate only:</strong> Final rates and booking are confirmed during our intro call.
+          </div>
+        </div>
+
         {/* Next Steps Note */}
         <div className="bms-confirmation-next-steps">
           🕒 <strong>Next step:</strong> I will review my calendar and email or call you within 24
           hours to confirm availability and coordinate details.
+        </div>
+
+        {/* Friend & Neighbor Referral Reward Banner */}
+        <div className="bms-confirmation-referral-card" id="bms-confirm-referral-perk">
+          <div className="bms-confirmation-referral-icon">
+            <Gift size={22} />
+          </div>
+          <div className="bms-confirmation-referral-content">
+            <h5 className="bms-confirmation-referral-title">
+              Recommend your trusted friend or neighbor and your next sit is on me!
+            </h5>
+            <p className="bms-confirmation-referral-text">
+              Have a neighbor or friend planning a trip? When they book and complete their stay with me, your entire next sit is 100% complimentary.
+              <span className="bms-confirmation-referral-disclaimer">Subject to calendar availability.</span>
+            </p>
+          </div>
         </div>
       </div>
 

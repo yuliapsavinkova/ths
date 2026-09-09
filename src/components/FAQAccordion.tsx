@@ -1,14 +1,18 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FAQS } from '../data';
-import { 
-  ChevronDown, 
-  MapPin, 
-  Home, 
-  Clock, 
-  CalendarRange, 
-  ShieldCheck, 
-  AlertTriangle 
+import {
+  ChevronDown,
+  MapPin,
+  Home,
+  Clock,
+  CalendarRange,
+  ShieldCheck,
+  AlertTriangle,
+  Scale,
+  Percent,
+  Gift,
+  HelpCircle,
 } from 'lucide-react';
 
 const getFAQIcon = (id: string) => {
@@ -19,14 +23,20 @@ const getFAQIcon = (id: string) => {
       return Home;
     case 'faq3':
       return Clock;
+    case 'faq-exchange':
+      return Scale;
     case 'faq4':
       return CalendarRange;
     case 'faq5':
       return ShieldCheck;
     case 'faq6':
       return AlertTriangle;
+    case 'faq7':
+      return Percent;
+    case 'faq8':
+      return Gift;
     default:
-      return Home;
+      return HelpCircle;
   }
 };
 

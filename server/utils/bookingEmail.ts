@@ -93,10 +93,15 @@ export function formatClientDetailsHtml(booking: BookingRequest): string {
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Location / Area:</td>
           <td style="padding: 6px 0; color: #1a1a1a; font-weight: 500;">${booking.location || 'Not provided'}</td>
         </tr>
+        ${booking.isRepeatClient ? `
+        <tr>
+          <td style="padding: 6px 0; color: #666666; font-weight: 500;">Client Status:</td>
+          <td style="padding: 6px 0; color: #2e7d32; font-weight: 600;">Repeat Client (10% Loyalty Discount Applied)</td>
+        </tr>` : ''}
         ${booking.referredBy ? `
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Referred By:</td>
-          <td style="padding: 6px 0; color: #1a1a1a;">${booking.referredBy}</td>
+          <td style="padding: 6px 0; color: #1a1a1a;">${booking.referredBy} <span style="color: #b08c40; font-size: 12px; font-weight: 500;">(Eligible for complimentary next sit)</span></td>
         </tr>` : ''}
       </table>
     </div>
@@ -184,10 +189,20 @@ export function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>): strin
           <td style="padding: 4px 0; color: #666666;">Garden / Plant Care:</td>
           <td style="padding: 4px 0; color: #1a1a1a; text-align: right; font-weight: 500;">+$${p.gardenSurcharge}</td>
         </tr>` : ''}
+        ${p.homeOnlyDiscount ? `
+        <tr>
+          <td style="padding: 4px 0; color: #2e7d32;">Home Only Discount (10% Off):</td>
+          <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.homeOnlyDiscount}</td>
+        </tr>` : ''}
         ${p.durationDiscount ? `
         <tr>
           <td style="padding: 4px 0; color: #2e7d32;">Long-Stay Savings:</td>
           <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.durationDiscount}</td>
+        </tr>` : ''}
+        ${p.repeatClientDiscount ? `
+        <tr>
+          <td style="padding: 4px 0; color: #2e7d32;">Repeat Client Loyalty (10% Off):</td>
+          <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.repeatClientDiscount}</td>
         </tr>` : ''}
         <tr style="border-top: 1px solid #f0f2f5; font-size: 15px;">
           <td style="padding: 10px 0 4px 0; color: #1a1a1a; font-weight: 700;">Total Estimated Cost:</td>
@@ -200,6 +215,9 @@ export function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>): strin
           </td>
         </tr>` : ''}
       </table>
+      <div style="background-color: #f7f8fa; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px; margin-top: 14px; font-size: 12px; color: #555555; line-height: 1.5;">
+        <strong style="color: #2d3748;">📌 Estimate only:</strong> Final rates and booking are confirmed during our intro call.
+      </div>
     </div>
   `;
 }
@@ -257,6 +275,18 @@ export function generateBookingConfirmationEmailHtml(booking: BookingRequest): s
       ${formatClientDetailsHtml(booking)}
       ${formatNotesHtml(booking.notes)}
       ${formatPricingBreakdownHtml(p)}
+
+      <div style="background-color: #faf7f2; border: 1px dashed #d4c5ad; border-radius: 8px; padding: 14px 18px; margin-top: 18px; text-align: left;">
+        <div style="font-weight: 600; font-size: 14px; color: #7d5b1d; margin-bottom: 4px;">
+          🎁 Recommend a friend or neighbor &amp; your next sit is on me!
+        </div>
+        <p style="margin: 0; font-size: 13px; color: #4a4439; line-height: 1.5;">
+          Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your entire next sit is 100% complimentary!
+        </p>
+        <div style="font-size: 11px; color: #8a7350; margin-top: 6px; font-style: italic;">
+          Subject to calendar availability.
+        </div>
+      </div>
 
       <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #666666; line-height: 1.6;">
         <div style="margin-bottom: 4px;">

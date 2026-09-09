@@ -17,7 +17,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  max-width: 560px;
+  max-width: 680px;
   width: 100%;
   background: transparent;
   border: none;
@@ -28,36 +28,6 @@
   gap: var(--spacing-xxs);
 }
 
-.th-banner-link {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: var(--spacing-xxs) var(--spacing-sm);
-  background: transparent;
-  border: none;
-  border-radius: var(--radius-md);
-  box-shadow: none;
-  text-decoration: none;
-  cursor: pointer;
-  outline: none;
-  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
-  overflow: visible;
-  color: var(--color-brand-cream);
-  touch-action: manipulation;
-  -webkit-tap-highlight-color: transparent;
-  position: relative;
-}
-
-.th-banner-link:hover {
-  opacity: 0.92;
-  transform: translateY(-1px);
-}
-
-.th-banner-link:focus-visible {
-  outline: 2px solid var(--color-brand-secondary);
-  outline-offset: 2px;
-}
-
 .th-banner-content {
   display: flex;
   align-items: center;
@@ -66,6 +36,7 @@
   font-family: var(--font-sans);
   font-size: var(--font-size-sm);
   color: var(--color-brand-cream);
+  width: 100%;
 }
 
 .th-banner-message {
@@ -73,11 +44,11 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 2px;
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-tight);
+  gap: 4px;
+  line-height: var(--line-height-normal);
   color: var(--color-brand-cream);
   text-align: center;
+  width: 100%;
 }
 
 .th-banner-line {
@@ -87,18 +58,55 @@
   text-align: center;
   position: relative;
   overflow: visible;
-  line-height: var(--line-height-tight);
-  gap: var(--spacing-xs);
 }
 
-.th-banner-message strong {
-  font-weight: var(--font-weight-bold);
+.th-banner-hook {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-normal);
+  color: var(--color-brand-cream);
+  opacity: 0.92;
+  letter-spacing: 0.2px;
+}
+
+.th-banner-action-line {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  margin-top: 2px;
+}
+
+.th-banner-guide-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-brand-cream);
+  text-decoration: none;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  outline: none;
+  transition: opacity var(--transition-fast) ease, transform var(--transition-fast) ease;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.th-banner-guide-link strong {
   color: var(--color-brand-secondary);
-  background-color: transparent;
-  padding: 0;
-  border-radius: 0;
+  font-weight: var(--font-weight-bold);
   text-decoration: underline;
   text-underline-offset: 3px;
+}
+
+.th-banner-guide-link:hover {
+  opacity: 0.95;
+  transform: translateY(-1px);
+}
+
+.th-guide-book-icon {
+  color: var(--color-brand-secondary);
+  flex-shrink: 0;
 }
 
 .th-banner-icon {
@@ -109,24 +117,54 @@
   margin-left: 2px;
 }
 
-.th-banner-link:hover .th-banner-icon,
-.th-promo-card-link:hover .th-banner-icon {
+.th-banner-guide-link:hover .th-banner-icon {
   transform: translate(2px, -2px);
 }
 
-.th-banner-disclosure {
-  width: 100%;
-  margin-top: var(--spacing-xs);
+.th-banner-divider {
+  color: var(--color-brand-secondary);
+  opacity: 0.6;
+  font-size: var(--font-size-xs);
+  padding: 0 2px;
+  user-select: none;
 }
 
-.th-banner-disclosure .privacy-disclosure-container {
-  margin-top: 0;
+.th-banner-discount-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-brand-cream);
+  font-size: var(--font-size-xs);
+  opacity: 0.85;
+  text-decoration: none;
+  transition: opacity var(--transition-fast) ease, color var(--transition-fast) ease;
+  cursor: pointer;
+  outline: none;
 }
 
-.th-banner-disclosure .privacy-box-content {
-  max-width: 480px;
-  margin-left: auto;
-  margin-right: auto;
+.th-banner-discount-link strong {
+  color: var(--color-brand-secondary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.th-banner-discount-link:hover {
+  opacity: 1;
+  color: var(--color-brand-secondary);
+}
+
+.th-banner-discount-link:hover strong {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+.th-discount-icon {
+  color: var(--color-brand-secondary);
+  flex-shrink: 0;
+  transition: transform var(--transition-fast) ease;
+}
+
+.th-banner-discount-link:hover .th-discount-icon {
+  transform: translate(1px, -1px);
 }
 
 /* 2. Standalone Card Variant (e.g. Mobile Drawer Menu) */
@@ -143,7 +181,7 @@
   box-shadow: var(--shadow-sm);
   position: relative;
   overflow: visible;
-  gap: var(--spacing-xxs);
+  gap: var(--spacing-xs);
   width: 100%;
 }
 
@@ -153,44 +191,74 @@
   box-shadow: var(--shadow-md);
 }
 
-.th-promo-card-link {
+.th-promo-card-header {
+  text-align: center;
+}
+
+.th-card-hook {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  line-height: var(--line-height-tight);
+}
+
+.th-promo-card-guide-link {
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  gap: var(--spacing-xs);
   padding: var(--spacing-xs) var(--spacing-sm);
-  text-decoration: none;
-  color: var(--color-text-primary);
-  outline: none;
+  background: var(--color-bg-surface-alt);
+  border: 1px solid var(--color-border-subtle);
   border-radius: var(--radius-sm);
+  color: var(--color-text-primary);
+  text-decoration: none;
+  font-size: var(--font-size-xs);
+  transition: all var(--transition-fast) ease;
+  outline: none;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
 }
 
-.th-promo-card-link:focus-visible {
-  outline: 2px solid var(--color-brand-primary);
-  outline-offset: 2px;
-}
-
-.th-promo-card .th-banner-message {
-  color: var(--color-text-primary);
-  font-size: var(--font-size-xs);
-  text-align: center;
-}
-
-.th-promo-card .th-banner-message strong {
+.th-promo-card-guide-link:hover {
+  border-color: var(--color-brand-primary);
   color: var(--color-brand-primary);
 }
 
-.th-promo-card .th-banner-icon {
+.th-promo-card-guide-link strong {
   color: var(--color-brand-primary);
 }
 
-.th-card-disclosure {
-  width: 100%;
-  margin-top: var(--spacing-xs);
+.th-card-book-icon {
+  color: var(--color-brand-primary);
+  flex-shrink: 0;
 }
 
-.th-card-disclosure .privacy-box-content {
-  text-align: center;
-  font-size: var(--font-size-xs);
+.th-card-guide-text {
+  line-height: var(--line-height-tight);
 }
+
+.th-promo-card-perk {
+  text-align: center;
+}
+
+.th-card-discount-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  transition: color var(--transition-fast) ease;
+}
+
+.th-card-discount-link strong {
+  color: var(--color-brand-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.th-card-discount-link:hover {
+  color: var(--color-brand-primary);
+}
+

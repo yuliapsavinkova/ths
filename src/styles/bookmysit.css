@@ -143,7 +143,8 @@
   .bms-step-4 .bms-fields-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: var(--spacing-xs);
+    row-gap: var(--spacing-md-subtle);
+    column-gap: var(--spacing-sm);
   }
 }
 
@@ -155,7 +156,7 @@
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xs);
+  gap: var(--spacing-sm);
   box-shadow: none;
   transition: none;
   width: 100%;
@@ -230,7 +231,7 @@
 .bms-input-icon-label {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-xxs);
+  gap: var(--spacing-xs);
   font-size: var(--font-size-2xs);
   font-weight: var(--font-weight-bold);
   text-transform: uppercase;
@@ -258,7 +259,7 @@
 .bms-input-wrapper {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxs);
+  gap: var(--spacing-sm-subtle);
   width: 100%;
   max-width: 100%;
   min-width: 0;
@@ -636,7 +637,8 @@
 .bms-fields-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-xs);
+  row-gap: var(--spacing-md-subtle);
+  column-gap: var(--spacing-sm);
   width: 100%;
   max-width: 100%;
   box-sizing: border-box;
@@ -645,7 +647,7 @@
 .bms-field {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xxs);
+  gap: var(--spacing-sm-subtle);
   width: 100%;
   min-width: 0;
 }
@@ -657,6 +659,8 @@
 @media (--small) {
   .bms-fields-grid {
     grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--spacing-md-subtle);
+    column-gap: var(--spacing-sm);
   }
   .bms-field.col-span-2 {
     grid-column: span 2;
@@ -1243,4 +1247,254 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+/* ==========================================================================
+   CLIENT PERKS & REFERRAL PROGRAM ENHANCEMENTS
+   ========================================================================== */
+
+/* Top Announcement & Selection Bar - Stably Two Lines All The Time */
+.bms-perks-announcement-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xxs);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-xs) var(--spacing-md);
+  margin-bottom: var(--spacing-md);
+  box-shadow: var(--shadow-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-primary);
+  text-align: center;
+}
+
+.bms-perk-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 24px;
+}
+
+.bms-perk-repeat-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  cursor: pointer;
+  user-select: none;
+  padding: var(--spacing-xxs) var(--spacing-sm);
+  border-radius: var(--radius-sm);
+  transition: background-color 0.15s ease, color 0.15s ease;
+}
+
+.bms-perk-repeat-toggle:hover {
+  background: var(--color-bg-tertiary);
+}
+
+.bms-perk-repeat-toggle.is-active {
+  background: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary);
+}
+
+.bms-perk-native-checkbox {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+.bms-perk-custom-box {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  border: 1.5px solid var(--color-border-bold);
+  border-radius: var(--radius-xs);
+  background: var(--color-bg-surface);
+  color: var(--color-text-primary-inverse);
+  transition: background-color 0.15s ease, border-color 0.15s ease;
+  flex-shrink: 0;
+}
+
+.bms-perk-repeat-toggle.is-active .bms-perk-custom-box {
+  background: var(--color-brand-primary);
+  border-color: var(--color-brand-primary);
+  color: var(--color-text-primary-inverse);
+}
+
+.bms-perk-active-badge {
+  display: inline-flex;
+  align-items: center;
+  background: var(--color-brand-primary);
+  color: var(--color-text-primary-inverse);
+  font-size: var(--font-size-2xs);
+  font-weight: var(--font-weight-bold);
+  padding: 1px var(--spacing-xs);
+  border-radius: var(--radius-full);
+  margin-left: var(--spacing-xxs);
+  letter-spacing: 0.02em;
+}
+
+.bms-perk-item {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-xs);
+  line-height: 1.4;
+}
+
+.bms-perk-text {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xxs);
+}
+
+.bms-perk-icon-wrap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  color: var(--color-brand-primary);
+  flex-shrink: 0;
+  vertical-align: middle;
+}
+
+.bms-perk-icon-wrap svg {
+  display: block;
+}
+
+.bms-perk-icon-wrap.bms-perk-gift {
+  color: var(--color-status-success);
+}
+
+.bms-perk-separator {
+  color: var(--color-border-bold);
+  opacity: 0.6;
+  font-size: var(--font-size-xs);
+}
+
+/* Confirmation View Badges & Referral Box */
+.bms-confirmation-badge-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+  background: var(--color-brand-primary-subtle);
+  color: var(--color-brand-primary);
+  border: 1px solid var(--color-border-primary);
+  padding: var(--spacing-xxs) var(--spacing-xs);
+  border-radius: var(--radius-sm);
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-2xs);
+}
+
+.bms-confirmation-referral-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  box-shadow: var(--shadow-sm);
+}
+
+.bms-confirmation-referral-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  background: var(--color-status-success-bg);
+  color: var(--color-status-success);
+  flex-shrink: 0;
+}
+
+.bms-confirmation-referral-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-xxs);
+}
+
+.bms-confirmation-referral-title {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  line-height: 1.35;
+}
+
+.bms-confirmation-referral-text {
+  margin: 0;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+}
+
+.bms-confirmation-referral-disclaimer {
+  display: block;
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-secondary);
+  margin-top: var(--spacing-xxs);
+  font-style: italic;
+  opacity: 0.85;
+}
+
+/* Calculator Receipt Estimate & Non-Binding Notice */
+.bms-estimate-disclosure {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-xs);
+  background: var(--color-bg-tertiary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-sm);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  margin-top: var(--spacing-xs);
+  font-size: var(--font-size-2xs);
+  color: var(--color-text-secondary);
+  line-height: 1.45;
+  text-align: left;
+}
+
+.bms-estimate-disclosure-icon {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+  margin-top: 1px;
+}
+
+.bms-estimate-disclosure-text {
+  flex: 1;
+}
+
+/* Confirmation Screen Estimate Notice */
+.bms-confirmation-estimate-card {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-sm);
+  background: var(--color-bg-secondary);
+  border: 1px solid var(--color-border-primary);
+  border-radius: var(--radius-md);
+  padding: var(--spacing-sm) var(--spacing-md);
+  margin-top: var(--spacing-sm);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  line-height: 1.5;
+}
+
+.bms-confirmation-estimate-icon {
+  flex-shrink: 0;
+  color: var(--color-brand-primary);
+  margin-top: 2px;
+}
+
+.bms-confirmation-estimate-content {
+  flex: 1;
 }

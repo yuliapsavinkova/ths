@@ -5,14 +5,15 @@ import { SITTER_IMAGES, TESTIMONIALS } from '../data';
 export const AboutSection: React.FC = () => {
   const coreReviews = TESTIMONIALS.filter((item) => item.core);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
 
   useEffect(() => {
-    if (coreReviews.length <= 1) return;
+    if (coreReviews.length <= 1 || isPaused) return;
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % coreReviews.length);
-    }, 6000);
+    }, 15000); // 15 seconds: plenty of time to read long quotes comfortably
     return () => clearInterval(interval);
-  }, [coreReviews.length]);
+  }, [coreReviews.length, isPaused]);
 
   const activeReview = coreReviews[currentIndex] || TESTIMONIALS[0];
 
@@ -144,7 +145,14 @@ export const AboutSection: React.FC = () => {
 
         {/* Pullquote (Centered / Rotating) */}
         {activeReview && (
-          <div className="pullquote about-pullquote-container" id="about-pullquote">
+          <div
+            className="pullquote about-pullquote-container"
+            id="about-pullquote"
+            onMouseEnter={() => setIsPaused(true)}
+            onMouseLeave={() => setIsPaused(false)}
+            onFocus={() => setIsPaused(true)}
+            onBlur={() => setIsPaused(false)}
+          >
             <div key={activeReview.id} className="pullquote-fade-active">
               <p className="pullquote-text">"{activeReview.quote}"</p>
               <cite className="pullquote-author">

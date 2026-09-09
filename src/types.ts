@@ -14,6 +14,7 @@ export interface PricingBreakdown {
   gardenSurcharge: number;
   durationDiscount: number;
   homeOnlyDiscount?: number;
+  repeatClientDiscount?: number;
   total: number;
   perDay: number;
 }
@@ -24,6 +25,7 @@ export interface BookingRequest {
   phone?: string;
   location: string;
   referredBy?: string;
+  isRepeatClient?: boolean;
   startDate?: string;
   endDate?: string;
   duration?: number;
