@@ -63,7 +63,7 @@ export default function App() {
 
         {/* ─── Client Testimonials / Reviews Carousel ─────────────────────────────── */}
         <section id="testimonials-section">
-          <div className="wrap-ultrawide stack-xl" id="testimonials-section-wrap">
+          <div className="wrap-ultrawide" id="testimonials-section-wrap">
             <div className="section-header" id="testimonials-section-header">
               <span className="section-tag">
                 <PawIcon size={14} /> Reviews
@@ -98,9 +98,9 @@ export default function App() {
           </div>
         </section>
 
-        {/* ─── Rates, Planning, and Booking Section ─────────────────────────────── */}
+        {/* ─── Rates, Planning, and Booking Sections ─────────────────────────────── */}
         <section id="booking-form-section">
-          <div className="wrap stack-xl" id="booking-section-wrap">
+          <div className="wrap" id="booking-section-wrap">
             <div className="section-header" id="booking-section-header">
               <span className="section-tag">
                 <PawIcon size={14} /> Book A Sit

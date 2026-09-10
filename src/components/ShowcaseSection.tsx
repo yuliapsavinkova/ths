@@ -17,16 +17,16 @@ export default function ShowcaseSection() {
   useEffect(() => {
     const initialLikes: Record<string, number> = {};
     const initialLiked: Record<string, boolean> = {};
-    
-    SHOWCASE_ITEMS.forEach(item => {
+
+    SHOWCASE_ITEMS.forEach((item) => {
       // Load from localStorage if present
       const storedLikes = localStorage.getItem(`showcase_likes_${item.id}`);
       const storedLiked = localStorage.getItem(`showcase_liked_${item.id}`);
-      
+
       initialLikes[item.id] = storedLikes ? parseInt(storedLikes, 10) : item.initialLikes;
       initialLiked[item.id] = storedLiked === 'true';
     });
-    
+
     setLikesCount(initialLikes);
     setLikedItems(initialLiked);
   }, []);
@@ -36,11 +36,11 @@ export default function ShowcaseSection() {
     { value: 'all', label: 'All', icon: <PawIcon size={14} className="category-icon" /> },
     { value: 'dogs', label: 'Dogs', icon: <span className="category-emoji">🐶</span> },
     { value: 'cats', label: 'Cats', icon: <span className="category-emoji">🐱</span> },
-    { value: 'videos', label: 'Videos', icon: <Video size={14} className="category-icon" /> }
+    { value: 'videos', label: 'Videos', icon: <Video size={14} className="category-icon" /> },
   ];
 
   // Filtering items based on category
-  const filteredItems = SHOWCASE_ITEMS.filter(item => {
+  const filteredItems = SHOWCASE_ITEMS.filter((item) => {
     return activeCategory === 'all' || item.category === activeCategory;
   });
 
@@ -66,14 +66,14 @@ export default function ShowcaseSection() {
 
   const handleLike = (id: string, e?: React.MouseEvent) => {
     if (e) e.stopPropagation(); // Prevent opening lightbox if clicking heart on card
-    
+
     const isLiked = !likedItems[id];
     const currentLikes = likesCount[id] || 0;
     const newLikes = isLiked ? currentLikes + 1 : currentLikes - 1;
-    
-    setLikedItems(prev => ({ ...prev, [id]: isLiked }));
-    setLikesCount(prev => ({ ...prev, [id]: newLikes }));
-    
+
+    setLikedItems((prev) => ({ ...prev, [id]: isLiked }));
+    setLikesCount((prev) => ({ ...prev, [id]: newLikes }));
+
     localStorage.setItem(`showcase_liked_${id}`, String(isLiked));
     localStorage.setItem(`showcase_likes_${id}`, String(newLikes));
   };
@@ -90,7 +90,7 @@ export default function ShowcaseSection() {
   // Modal navigation
   const handlePrev = () => {
     if (selectedItemIndex === null) return;
-    setSelectedItemIndex(prev => {
+    setSelectedItemIndex((prev) => {
       if (prev === null) return null;
       return prev === 0 ? filteredItems.length - 1 : prev - 1;
     });
@@ -98,7 +98,7 @@ export default function ShowcaseSection() {
 
   const handleNext = () => {
     if (selectedItemIndex === null) return;
-    setSelectedItemIndex(prev => {
+    setSelectedItemIndex((prev) => {
       if (prev === null) return null;
       return prev === filteredItems.length - 1 ? 0 : prev + 1;
     });
@@ -112,7 +112,7 @@ export default function ShowcaseSection() {
       if (e.key === 'ArrowLeft') handlePrev();
       if (e.key === 'ArrowRight') handleNext();
     };
-    
+
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
   }, [selectedItemIndex, filteredItems]);
@@ -121,16 +121,13 @@ export default function ShowcaseSection() {
 
   return (
     <section id="showcase-album-section">
-      <div className="wrap-ultrawide stack-xl" id="showcase-wrap">
-        
+      <div className="wrap-ultrawide" id="showcase-wrap">
         {/* Header Block */}
         <div className="section-header" id="showcase-header">
           <span className="section-tag">
             <PawIcon size={14} /> Gallery
           </span>
-          <h2 className="section-title">
-            The Showcase Album
-          </h2>
+          <h2 className="section-title">The Showcase Album</h2>
           <p className="section-subtitle">
             Stories, photos, and highlights from my house sits and the pets I've cared for.
           </p>
@@ -141,7 +138,7 @@ export default function ShowcaseSection() {
           {/* Category Tabs */}
           <div className="showcase-categories-scroll">
             <div className="showcase-categories" role="tablist">
-              {categories.map(cat => (
+              {categories.map((cat) => (
                 <button
                   key={cat.value}
                   role="tab"
@@ -164,9 +161,9 @@ export default function ShowcaseSection() {
         <div className="swipe-deck-wrapper" id="showcase-swipe-deck-box">
           <div className="swipe-deck-inner-wrapper">
             {/* Left Nav Button */}
-            <button 
-              className="carousel-nav-btn prev" 
-              onClick={scrollPrev} 
+            <button
+              className="carousel-nav-btn prev"
+              onClick={scrollPrev}
               disabled={isAtStart || filteredItems.length === 0}
               aria-label="Previous card"
             >
@@ -178,7 +175,7 @@ export default function ShowcaseSection() {
               {filteredItems.map((item, index) => {
                 const isLiked = !!likedItems[item.id];
                 const likes = likesCount[item.id] ?? item.initialLikes;
-                
+
                 return (
                   <div
                     key={item.id}
@@ -188,9 +185,9 @@ export default function ShowcaseSection() {
                   >
                     {/* Image container */}
                     <div className="showcase-card-media">
-                      <img 
-                        src={item.imageUrl} 
-                        alt={item.title} 
+                      <img
+                        src={item.imageUrl}
+                        alt={item.title}
                         width={360}
                         height={270}
                         loading="lazy"
@@ -202,17 +199,24 @@ export default function ShowcaseSection() {
                       {item.videoUrl && (
                         <div className="showcase-card-video-badge" aria-hidden="true">
                           <div className="showcase-card-play-btn">
-                            <Play size={22} className="showcase-card-play-icon" fill="currentColor" />
+                            <Play
+                              size={22}
+                              className="showcase-card-play-icon"
+                              fill="currentColor"
+                            />
                           </div>
                         </div>
                       )}
-                      
+
                       {/* Floating Zoom Indicator on Hover */}
                       <div className="showcase-card-overlay">
                         <div className="showcase-zoom-indicator">
                           {item.videoUrl ? (
                             <>
-                              <Play size={16} className="showcase-zoom-icon showcase-zoom-icon-play" />
+                              <Play
+                                size={16}
+                                className="showcase-zoom-icon showcase-zoom-icon-play"
+                              />
                               <span className="showcase-zoom-label">Watch Video</span>
                             </>
                           ) : (
@@ -223,7 +227,7 @@ export default function ShowcaseSection() {
                           )}
                         </div>
                       </div>
-                      
+
                       {/* Likes & Category Badges */}
                       <div className="showcase-card-badges">
                         <span className="showcase-card-tag-pill">
@@ -232,10 +236,10 @@ export default function ShowcaseSection() {
                           {item.category === 'cats' && <span className="tag-emoji">🐱</span>}
                           <span className="tag-text">{item.category}</span>
                         </span>
-                        <button 
+                        <button
                           className={`showcase-card-like-pill ${isLiked ? 'liked' : ''}`}
                           onClick={(e) => handleLike(item.id, e)}
-                          title={isLiked ? "Unlike" : "Love this"}
+                          title={isLiked ? 'Unlike' : 'Love this'}
                         >
                           <Heart size={13} fill={isLiked ? 'currentColor' : 'none'} />
                           {/* <span>{likes}</span> */}
@@ -246,16 +250,16 @@ export default function ShowcaseSection() {
                     {/* Text Details */}
                     <div className="showcase-card-details">
                       <div className="showcase-card-header">
-                        <span className="showcase-card-location">{item.location} • {item.year}</span>
+                        <span className="showcase-card-location">
+                          {item.location} • {item.year}
+                        </span>
                       </div>
                       <h3 className="showcase-card-title">{item.title}</h3>
                       <p className="showcase-card-pet-name">
                         {item.category === 'videos' ? '🎥' : '🐾'} {item.petName}
                       </p>
-                      <p className="showcase-card-excerpt">
-                        {item.description}
-                      </p>
-                      
+                      <p className="showcase-card-excerpt">{item.description}</p>
+
                       <div className="showcase-card-footer">
                         <span className="showcase-card-action">Read story →</span>
                       </div>
@@ -266,9 +270,9 @@ export default function ShowcaseSection() {
             </div>
 
             {/* Right Nav Button */}
-            <button 
-              className="carousel-nav-btn next" 
-              onClick={scrollNext} 
+            <button
+              className="carousel-nav-btn next"
+              onClick={scrollNext}
               disabled={isAtEnd || filteredItems.length === 0}
               aria-label="Next card"
             >
@@ -281,8 +285,8 @@ export default function ShowcaseSection() {
               <div className="showcase-empty-icon">📂</div>
               <h3>No matching memories found</h3>
               <p>Try resetting your active category filter to see all logs.</p>
-              <button 
-                className="btn btn-secondary" 
+              <button
+                className="btn btn-secondary"
                 onClick={() => {
                   setActiveCategory('all');
                 }}
@@ -296,10 +300,7 @@ export default function ShowcaseSection() {
             /* Centered Progress Track */
             <div className="swipe-progress-track-wrapper" id="showcase-progress-track-wrapper">
               <div className="swipe-progress-track">
-                <div
-                  ref={progressBarRef}
-                  className="swipe-progress-bar"
-                />
+                <div ref={progressBarRef} className="swipe-progress-bar" />
               </div>
             </div>
           )}
@@ -308,7 +309,7 @@ export default function ShowcaseSection() {
         {/* Lightbox / Immersive Story Modal */}
         <AnimatePresence>
           {activeItem && (
-            <motion.div 
+            <motion.div
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
@@ -319,7 +320,7 @@ export default function ShowcaseSection() {
               aria-modal="true"
               id="showcase-modal-portal"
             >
-              <motion.div 
+              <motion.div
                 initial={{ opacity: 0, scale: 0.95, y: 15 }}
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: 15 }}
@@ -337,7 +338,7 @@ export default function ShowcaseSection() {
                   </span>
 
                   <div className="showcase-modal-top-actions">
-                    <button 
+                    <button
                       className={`showcase-modal-action-btn showcase-modal-like-btn ${likedItems[activeItem.id] ? 'liked' : ''}`}
                       onClick={(e) => handleLike(activeItem.id, e)}
                       title={likedItems[activeItem.id] ? 'Unlike' : 'Love this'}
@@ -346,7 +347,7 @@ export default function ShowcaseSection() {
                       <Heart size={16} fill={likedItems[activeItem.id] ? 'currentColor' : 'none'} />
                     </button>
 
-                    <button 
+                    <button
                       className="showcase-modal-action-btn showcase-modal-close-btn"
                       onClick={() => setSelectedItemIndex(null)}
                       aria-label="Close modal"
@@ -358,11 +359,10 @@ export default function ShowcaseSection() {
 
                 {/* Dual Column Layout */}
                 <div className="showcase-modal-columns">
-                  
                   {/* Left Column: Premium Media Area */}
                   <div className="showcase-modal-media-col">
                     {activeItem.videoUrl ? (
-                      <video 
+                      <video
                         ref={videoRef}
                         key={`showcase-video-${activeItem.id}`}
                         src={activeItem.videoUrl}
@@ -387,9 +387,9 @@ export default function ShowcaseSection() {
                         Your browser does not support playing this video.
                       </video>
                     ) : (
-                      <img 
-                        src={activeItem.imageUrl} 
-                        alt={activeItem.title} 
+                      <img
+                        src={activeItem.imageUrl}
+                        alt={activeItem.title}
                         width={640}
                         height={480}
                         decoding="async"
@@ -401,7 +401,6 @@ export default function ShowcaseSection() {
                   {/* Right Column: Narrative Content Area */}
                   <div className="showcase-modal-text-col">
                     <div className="showcase-modal-text-wrapper">
-                      
                       {/* Location & Year meta */}
                       <div className="showcase-modal-meta">
                         <span className="showcase-modal-loc-text">{activeItem.location}</span>
@@ -414,7 +413,9 @@ export default function ShowcaseSection() {
 
                       {/* Pet Name directly under title (matching card hierarchy) */}
                       <p className="showcase-modal-pet-name">
-                        <span className="pet-icon">{activeItem.category === 'videos' ? '🎥' : '🐾'}</span>
+                        <span className="pet-icon">
+                          {activeItem.category === 'videos' ? '🎥' : '🐾'}
+                        </span>
                         <span>{activeItem.petName}</span>
                       </p>
 
@@ -422,13 +423,12 @@ export default function ShowcaseSection() {
                       <div className="showcase-modal-story-section">
                         <p className="showcase-modal-description">{activeItem.description}</p>
                       </div>
-
                     </div>
 
                     {/* Footer bar with Prev/Next navigation and pagination */}
                     <div className="showcase-modal-footer">
-                      <button 
-                        className="showcase-modal-nav-link-btn" 
+                      <button
+                        className="showcase-modal-nav-link-btn"
                         onClick={handlePrev}
                         aria-label="Previous story"
                       >
@@ -436,11 +436,13 @@ export default function ShowcaseSection() {
                       </button>
 
                       <div className="showcase-modal-pagination-number">
-                        Slide <strong>{selectedItemIndex !== null ? selectedItemIndex + 1 : 0}</strong> of <strong>{filteredItems.length}</strong>
+                        Slide{' '}
+                        <strong>{selectedItemIndex !== null ? selectedItemIndex + 1 : 0}</strong> of{' '}
+                        <strong>{filteredItems.length}</strong>
                       </div>
 
-                      <button 
-                        className="showcase-modal-nav-link-btn" 
+                      <button
+                        className="showcase-modal-nav-link-btn"
                         onClick={handleNext}
                         aria-label="Next story"
                       >
@@ -448,13 +450,11 @@ export default function ShowcaseSection() {
                       </button>
                     </div>
                   </div>
-
                 </div>
               </motion.div>
             </motion.div>
           )}
         </AnimatePresence>
-
       </div>
     </section>
   );
