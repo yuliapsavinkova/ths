@@ -3,7 +3,8 @@ import { BookingRequest } from '../types';
 import { formatHumanDate } from '../utils/calendarUtils';
 import { formatBookingDuration, formatPetTypeLabel } from '../utils/formatUtils';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
-import { Check, RotateCcw, Gift, Sparkles, Info } from 'lucide-react';
+import { Check, RotateCcw, Sparkles, Info } from 'lucide-react';
+import ReferralPerkCard from './ReferralPerkCard';
 
 interface BookingConfirmationProps {
   booking: BookingRequest;
@@ -211,20 +212,7 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
         </div>
 
         {/* Friend & Neighbor Referral Reward Banner */}
-        <div className="bms-confirmation-referral-card" id="bms-confirm-referral-perk">
-          <div className="bms-confirmation-referral-icon">
-            <Gift size={22} />
-          </div>
-          <div className="bms-confirmation-referral-content">
-            <h5 className="bms-confirmation-referral-title">
-              Recommend your trusted friend or neighbor and your next sit is on me!
-            </h5>
-            <p className="bms-confirmation-referral-text">
-              Have a neighbor or friend planning a trip? When they book and complete their stay with me, your entire next sit is 100% complimentary.
-              <span className="bms-confirmation-referral-disclaimer">Subject to calendar availability.</span>
-            </p>
-          </div>
-        </div>
+        <ReferralPerkCard id="bms-confirm-referral-perk" />
       </div>
 
       {/* Calculate Another Stay CTA */}

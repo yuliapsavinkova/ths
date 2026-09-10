@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { PrivacyDisclosure } from './PrivacyDisclosure';
 import { InfoTooltip } from './InfoTooltip';
 import { BookingConfirmation } from './BookingConfirmation';
+import ReferralPerkCard from './ReferralPerkCard';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
 import {
   getDatesDiff,
@@ -25,7 +26,6 @@ import {
   Tag,
   Gift,
   Sparkles,
-  Check,
   Info
 } from 'lucide-react';
 
@@ -438,39 +438,6 @@ export default function BookMySit({
             </div>
           </div>
 
-          {/* Client Perks & Referral Program Announcement Bar (Permanent 2-Line Layout) */}
-          <div className="bms-perks-announcement-bar" id="bms-perks-announcement">
-            <div className="bms-perk-row bms-perk-row-repeat">
-              <label
-                htmlFor="bms-repeat-client-toggle"
-                className={`bms-perk-repeat-toggle ${isRepeatClient ? 'is-active' : ''}`}
-              >
-                <input
-                  id="bms-repeat-client-toggle"
-                  type="checkbox"
-                  checked={isRepeatClient}
-                  onChange={(e) => setIsRepeatClient(e.target.checked)}
-                  className="bms-perk-native-checkbox"
-                />
-                <span className="bms-perk-custom-box" aria-hidden="true">
-                  {isRepeatClient && <Check size={11} strokeWidth={3} />}
-                </span>
-                <span className="bms-perk-text">
-                  <strong>Repeat Clients:</strong> Enjoy <strong>10% off</strong> your entire stay
-                </span>
-              </label>
-            </div>
-
-            <div className="bms-perk-row bms-perk-row-referral" id="bms-referral-ad-banner">
-              <div className="bms-perk-item bms-perk-referral">
-                <span className="bms-perk-icon-wrap bms-perk-gift"><Gift size={14} /></span>
-                <span className="bms-perk-text">
-                  <strong>Referral Perk:</strong> Recommend your trusted friend or neighbor and <strong>your next sit is on me!</strong>
-                </span>
-              </div>
-            </div>
-          </div>
-
           <div className="bms-form-flex-container">
             <div className="bms-flex-col bms-col-left">
             {/* STEP 1: DATES & STAY LENGTH */}
@@ -875,12 +842,29 @@ export default function BookMySit({
                   </div>
                 )}
 
-                {pricing.repeatClientDiscount > 0 && (
-                  <div className="bms-line-item bms-discount-line" id="bms-receipt-repeat-discount">
-                    <span className="bms-item-name">Repeat Client Loyalty (10% Off)</span>
-                    <span className="bms-item-price">-${pricing.repeatClientDiscount}</span>
-                  </div>
-                )}
+                {/* Repeat Client Loyalty Discount (Combined Checkbox & Line Item) */}
+                <label
+                  htmlFor="bms-repeat-client-toggle"
+                  className={`bms-line-item bms-repeat-client-line ${isRepeatClient ? 'is-active' : ''}`}
+                  id="bms-receipt-repeat-discount-row"
+                >
+                  <span className="bms-item-name bms-repeat-item-name">
+                    <input
+                      id="bms-repeat-client-toggle"
+                      type="checkbox"
+                      checked={isRepeatClient}
+                      onChange={(e) => setIsRepeatClient(e.target.checked)}
+                      onClick={(e) => e.stopPropagation()}
+                      className="bms-checkbox"
+                    />
+                    <span>Repeat Client</span>
+                  </span>
+                  <span className={`bms-item-price bms-repeat-item-price ${isRepeatClient ? 'bms-discount-active' : 'bms-discount-dormant'}`}>
+                    {isRepeatClient && pricing.repeatClientDiscount > 0
+                      ? `-$${pricing.repeatClientDiscount}`
+                      : '10% off'}
+                  </span>
+                </label>
               </div>
 
               {/* Bottom section (Total Estimate & Submit CTA) */}
@@ -931,6 +915,10 @@ export default function BookMySit({
             </div>
           </div>
         </div>
+
+        {/* Friend & Neighbor Referral Reward Card */}
+        <ReferralPerkCard id="bms-form-referral-perk" />
+
         <PrivacyDisclosure type="booking" align="center" />
       </form>
       )}

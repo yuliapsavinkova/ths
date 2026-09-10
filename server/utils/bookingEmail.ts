@@ -267,13 +267,16 @@ export function generateBookingConfirmationEmailHtml(booking: BookingRequest): s
       ${formatPricingBreakdownHtml(p)}
 
       <div style="background-color: #faf7f2; border: 1px dashed #d4c5ad; border-radius: 8px; padding: 14px 18px; margin-top: 18px; text-align: left;">
-        <div style="font-weight: 600; font-size: 14px; color: #7d5b1d; margin-bottom: 4px;">
-          🎁 Recommend a friend or neighbor &amp; your next sit is on me!
+        <div style="margin-bottom: 6px;">
+          <span style="display: inline-block; background-color: #f2e9dc; color: #7d5b1d; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px;">Referral Perk</span>
         </div>
-        <p style="margin: 0; font-size: 13px; color: #4a4439; line-height: 1.5;">
+        <div style="font-weight: 700; font-size: 14px; color: #2d241e; margin-bottom: 6px; line-height: 1.35;">
+          🎁 Recommend your trusted friend or neighbor and your next sit is on me!
+        </div>
+        <p style="margin: 0 0 6px 0; font-size: 13px; color: #4a4439; line-height: 1.5;">
           Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your entire next sit is 100% complimentary!
         </p>
-        <div style="font-size: 11px; color: #8a7350; margin-top: 6px; font-style: italic;">
+        <div style="font-size: 11px; color: #8a7350; font-style: italic;">
           Subject to calendar availability.
         </div>
       </div>

@@ -160,7 +160,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq8',
     question: 'How does the friend or neighbor referral reward work?',
     answer:
-      'Recommend your trusted friend or neighbor and your next sit is on me! When a homeowner you introduce books a stay with me, your entire next sit is 100% complimentary as a heartfelt thank-you for your referral.',
+      'Recommend your trusted friend or neighbor and your next sit is on me! Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your entire next sit is 100% complimentary! (Subject to calendar availability.)',
   },
 ];
 
