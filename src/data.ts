@@ -154,13 +154,13 @@ export const FAQS: FaqItem[] = [
     id: 'faq7',
     question: 'Are you a repeat client? Do you offer returning discounts?',
     answer:
-      'Yes! Returning clients receive a 10% loyalty discount off their entire booking. Simply check the "I Am a Repeat Client" option when submitting your trip details.',
+      'Yes! Returning clients receive a 10% discount off their entire booking. Simply check the "Repeat Client" option when submitting your trip details.',
   },
   {
     id: 'faq8',
     question: 'How does the friend or neighbor referral reward work?',
     answer:
-      'Recommend your trusted friend or neighbor and your next sit is on me! Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your entire next sit is 100% complimentary! (Subject to calendar availability.)',
+      'Recommend your trusted friend or neighbor and your next sit is on me! Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your next sit is complimentary! (Subject to calendar availability.)',
   },
 ];
 

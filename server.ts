@@ -17,6 +17,11 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 // API ENDPOINTS
 // ----------------------------------------------------
 
+// Health check endpoint
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 // 1. Submit Booking Request via Resend Email Service
 app.post('/api/submit-booking', handleBookingSubmit);
 

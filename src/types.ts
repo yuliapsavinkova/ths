@@ -20,6 +20,7 @@ export interface PricingBreakdown {
 }
 
 export interface BookingRequest {
+  id?: string;
   name: string;
   email: string;
   phone?: string;

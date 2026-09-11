@@ -7,7 +7,8 @@ interface PricingBreakdown {
   seniorSurcharge: number;
   medsSurcharge: number;
   gardenSurcharge: number;
-  durationDiscount: number;
+  durationDiscount?: number;
+  repeatClientDiscount?: number;
   total: number;
   perDay: number;
 }
@@ -25,11 +26,15 @@ interface BookingRequest {
   seniorCare?: boolean;
   medication?: boolean;
   gardenCare?: boolean;
+  hasSeniorPets?: boolean;
+  hasMedications?: boolean;
+  largeGarden?: boolean;
   name?: string;
   email?: string;
   phone?: string;
   location?: string;
   referredBy?: string;
+  isRepeatClient?: boolean;
   notes?: string;
   status?: 'pending' | 'confirmed' | 'rejected' | 'completed';
   createdAt?: string;
@@ -127,10 +132,20 @@ function formatClientDetailsHtml(booking: BookingRequest): string {
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Location / Area:</td>
           <td style="padding: 6px 0; color: #1a1a1a; font-weight: 500;">${booking.location || 'Not provided'}</td>
         </tr>
+        ${booking.isRepeatClient ? `
+        <tr>
+          <td style="padding: 6px 0; color: #666666; font-weight: 500;">Client Status:</td>
+          <td style="padding: 6px 0; color: #2e7d32; font-weight: 600;">Repeat Client (10% Discount Applied)</td>
+        </tr>` : ''}
         ${booking.referredBy ? `
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Referred By:</td>
-          <td style="padding: 6px 0; color: #1a1a1a;">${booking.referredBy}</td>
+          <td style="padding: 6px 0; color: #1a1a1a;">
+            <strong>${booking.referredBy}</strong>
+            <span style="display: block; color: #2e7d32; font-size: 12px; font-weight: 600; margin-top: 2px;">
+              🎁 Eligible for complimentary next sit through Friend &amp; Neighbor Referral Perk
+            </span>
+          </td>
         </tr>` : ''}
       </table>
     </div>
@@ -184,10 +199,17 @@ function formatNotesHtml(notes?: string): string {
   `;
 }
 
-function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>): string {
+function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>, booking?: BookingRequest): string {
   if (!p || p.total === undefined) {
     return '';
   }
+
+  const isRepeat = Boolean(booking?.isRepeatClient || (p.repeatClientDiscount && p.repeatClientDiscount > 0));
+  const repeatDiscount = (p.repeatClientDiscount && p.repeatClientDiscount > 0)
+    ? p.repeatClientDiscount
+    : (isRepeat && p.baseRate
+      ? Math.round(((p.baseRate || 0) + (p.petSurcharge || 0) + (p.seniorSurcharge || 0) + (p.medsSurcharge || 0) + (p.gardenSurcharge || 0)) * 0.1)
+      : 0);
 
   return `
     <div style="background-color: #ffffff; padding: 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-bottom: 16px;">
@@ -223,17 +245,44 @@ function formatPricingBreakdownHtml(p?: Partial<PricingBreakdown>): string {
           <td style="padding: 4px 0; color: #2e7d32;">Long-Stay Savings:</td>
           <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 500;">-$${p.durationDiscount}</td>
         </tr>` : ''}
+        ${isRepeat ? `
+        <tr>
+          <td style="padding: 4px 0; color: #2e7d32; font-weight: 500;">Repeat Client (10% Off):</td>
+          <td style="padding: 4px 0; color: #2e7d32; text-align: right; font-weight: 600;">-${repeatDiscount > 0 ? `$${repeatDiscount}` : '10% Off'}</td>
+        </tr>` : ''}
         <tr style="border-top: 1px solid #f0f2f5; font-size: 15px;">
           <td style="padding: 10px 0 4px 0; color: #1a1a1a; font-weight: 700;">Total Estimated Cost:</td>
           <td style="padding: 10px 0 4px 0; color: #b08c40; text-align: right; font-weight: 700; font-size: 18px;">$${p.total}</td>
         </tr>
         ${p.perDay !== undefined ? `
         <tr>
-          <td style="padding: 2px 0 4px 0; color: #888888; font-size: 12px;" colspan="2">
-            Average daily rate: ~$${p.perDay.toFixed(2)} / night
+          <td style="padding: 4px 0 4px 0; font-size: 13px;" colspan="2">
+            <span style="color: #666666;">Average daily rate:</span> <span style="color: #2e7d32; font-weight: 700;">~$${p.perDay.toFixed(2)} / night</span>
           </td>
         </tr>` : ''}
       </table>
+      <div style="background-color: #f7f8fa; border: 1px solid #e2e8f0; border-radius: 6px; padding: 10px 14px; margin-top: 14px; font-size: 12px; color: #555555; line-height: 1.5;">
+        <strong style="color: #2d3748;">📌 Estimate only:</strong> Final rates and booking are confirmed during our intro call.
+      </div>
+    </div>
+  `;
+}
+
+function formatReferralPerkHtml(): string {
+  return `
+    <div style="background-color: #faf7f2; border: 1px dashed #d4c5ad; border-radius: 8px; padding: 14px 18px; margin: 0 0 16px 0; text-align: left;">
+      <div style="margin-bottom: 6px;">
+        <span style="display: inline-block; background-color: #f2e9dc; color: #7d5b1d; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px;">Referral Perk</span>
+      </div>
+      <div style="font-weight: 700; font-size: 14px; color: #2d241e; margin-bottom: 6px; line-height: 1.35;">
+        🎁 Recommend your trusted friend or neighbor and your next sit is on me!
+      </div>
+      <p style="margin: 0 0 6px 0; font-size: 13px; color: #4a4439; line-height: 1.5;">
+        Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your next sit is complimentary!
+      </p>
+      <div style="font-size: 11px; color: #8a7350; font-style: italic;">
+        Subject to calendar availability.
+      </div>
     </div>
   `;
 }
@@ -248,13 +297,17 @@ function generateBookingEmailHtml(booking: BookingRequest): string {
         <p style="color: #666666; font-size: 14px; margin: 6px 0 0 0;">Yulia's House Sitting & Pet Care Services</p>
       </div>
       
+      ${formatReferralPerkHtml()}
       ${formatStayDetailsHtml(booking)}
       ${formatClientDetailsHtml(booking)}
       ${formatNotesHtml(booking.notes)}
-      ${formatPricingBreakdownHtml(p)}
+      ${formatPricingBreakdownHtml(p, booking)}
 
       <div style="text-align: center; margin-top: 24px; font-size: 12px; color: #888888; line-height: 1.6;">
         Yulia House & Pet Sitting • Professional & Dedicated Care
+      </div>
+      <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #fafafa;">
+        ${booking.id ? `Ref: ${booking.id}` : ''}
       </div>
     </div>
   `;
@@ -287,10 +340,11 @@ function generateBookingConfirmationEmailHtml(booking: BookingRequest): string {
         </p>
       </div>
 
+      ${formatReferralPerkHtml()}
       ${formatStayDetailsHtml(booking)}
       ${formatClientDetailsHtml(booking)}
       ${formatNotesHtml(booking.notes)}
-      ${formatPricingBreakdownHtml(p)}
+      ${formatPricingBreakdownHtml(p, booking)}
 
       <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #666666; line-height: 1.6;">
         <div style="margin-bottom: 4px;">
@@ -299,6 +353,9 @@ function generateBookingConfirmationEmailHtml(booking: BookingRequest): string {
         <div style="font-size: 12px; color: #888888; margin-top: 6px;">
           Yulia House & Pet Sitting • Professional & Dedicated Care
         </div>
+      </div>
+      <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #fafafa;">
+        ${booking.id ? `Ref: ${booking.id}` : ''}
       </div>
     </div>
   `;
@@ -337,6 +394,26 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
         message: 'Invalid or missing JSON payload.',
       });
     }
+
+    // Ensure repeat client status and pricing are correctly structured
+    booking.isRepeatClient = Boolean(booking.isRepeatClient);
+    const rawPricing = booking.pricing || ({} as PricingBreakdown);
+    let repeatDiscount = Number(rawPricing.repeatClientDiscount || 0);
+    if (booking.isRepeatClient && (!repeatDiscount || repeatDiscount <= 0)) {
+      const base = Number(rawPricing.baseRate || 0);
+      const pet = Number(rawPricing.petSurcharge || 0);
+      const senior = Number(rawPricing.seniorSurcharge || 0);
+      const meds = Number(rawPricing.medsSurcharge || 0);
+      const garden = Number(rawPricing.gardenSurcharge || 0);
+      const subtotal = base + pet + senior + meds + garden;
+      if (subtotal > 0) {
+        repeatDiscount = Math.round(subtotal * 0.1);
+      }
+    }
+    booking.pricing = {
+      ...rawPricing,
+      ...(repeatDiscount > 0 ? { repeatClientDiscount: repeatDiscount } : {}),
+    };
 
     const apiKey = process.env.RESEND_API_KEY;
     if (!apiKey) {
@@ -391,10 +468,15 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     if (booking.email && typeof booking.email === 'string' && booking.email.includes('@')) {
       try {
         const clientEmailHtml = generateBookingConfirmationEmailHtml(booking);
+        const clientFirstName = booking.name ? booking.name.trim().split(' ')[0] : '';
+        const clientSubject = booking.startDate
+          ? `Thank You for Your Request${clientFirstName ? `, ${clientFirstName}` : ''}! (${formatHumanDate(booking.startDate)})`
+          : `Thank You for Your Request${clientFirstName ? `, ${clientFirstName}` : ''}!`;
+
         await resend.emails.send({
           from: sender,
           to: booking.email.trim(),
-          subject: 'Thank You for Your Request!',
+          subject: clientSubject,
           html: clientEmailHtml,
           replyTo: recipient,
         });

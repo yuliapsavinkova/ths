@@ -41,6 +41,9 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
 
       {/* Standardized Cards Container */}
       <div className="bms-confirmation-wrapper">
+        {/* Friend & Neighbor Referral Reward Banner */}
+        <ReferralPerkCard id="bms-confirm-referral-perk" />
+
         {/* Stay & Care Details Card */}
         <div className="bms-confirmation-card">
           <h5 className="bms-confirmation-card-title">Stay &amp; Care Details</h5>
@@ -110,7 +113,18 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
                 <span className="bms-confirmation-value">
                   <span className="bms-confirmation-badge-pill">
                     <Sparkles size={11} className="bms-inline-icon" />
-                    Repeat Client (10% Loyalty Discount Applied)
+                    Repeat Client (10% Discount Applied)
+                  </span>
+                </span>
+              </div>
+            )}
+            {booking.referredBy && booking.referredBy.trim() && (
+              <div className="bms-confirmation-row bms-confirmation-row-referral">
+                <span className="bms-confirmation-label">Referred By:</span>
+                <span className="bms-confirmation-value">
+                  <span>{booking.referredBy.trim()}</span>
+                  <span className="bms-confirmation-badge-pill bms-referral-tag">
+                    🎁 Eligible for Referral Perk
                   </span>
                 </span>
               </div>
@@ -172,10 +186,21 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
                 </div>
               )}
 
-              {p.repeatClientDiscount !== undefined && p.repeatClientDiscount > 0 && (
+              {p.durationDiscount !== undefined && p.durationDiscount > 0 && (
                 <div className="bms-confirmation-row bms-confirmation-savings-row">
-                  <span className="bms-confirmation-label">Repeat Client Loyalty (10% Off):</span>
-                  <span className="bms-confirmation-value">-${p.repeatClientDiscount}</span>
+                  <span className="bms-confirmation-label">Long-Stay Savings:</span>
+                  <span className="bms-confirmation-value">-${p.durationDiscount}</span>
+                </div>
+              )}
+
+              {((p.repeatClientDiscount !== undefined && p.repeatClientDiscount > 0) || booking.isRepeatClient) && (
+                <div className="bms-confirmation-row bms-confirmation-savings-row">
+                  <span className="bms-confirmation-label">Repeat Client (10% Off):</span>
+                  <span className="bms-confirmation-value">
+                    {p.repeatClientDiscount && p.repeatClientDiscount > 0
+                      ? `-$${p.repeatClientDiscount}`
+                      : '10% Off'}
+                  </span>
                 </div>
               )}
 
@@ -210,9 +235,6 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
           🕒 <strong>Next step:</strong> I will review my calendar and email or call you within 24
           hours to confirm availability and coordinate details.
         </div>
-
-        {/* Friend & Neighbor Referral Reward Banner */}
-        <ReferralPerkCard id="bms-confirm-referral-perk" />
       </div>
 
       {/* Calculate Another Stay CTA */}

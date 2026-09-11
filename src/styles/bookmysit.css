@@ -947,7 +947,7 @@
   padding-top: var(--spacing-md);
 }
 
-/* Repeat Client Loyalty Discount Line Item (in receipt breakdown) */
+/* Repeat Client Discount Line Item (in receipt breakdown) */
 .bms-repeat-client-line {
   cursor: pointer;
   user-select: none;
@@ -962,7 +962,7 @@
 }
 
 .bms-repeat-client-line.is-active {
-  background-color: var(--color-brand-primary-subtle);
+  background-color: var(--color-status-success-bg);
 }
 
 .bms-repeat-item-name {
@@ -976,7 +976,7 @@
 }
 
 .bms-repeat-client-line.is-active .bms-repeat-item-name {
-  color: var(--color-brand-primary);
+  color: var(--color-status-success);
   font-weight: var(--font-weight-bold);
 }
 
@@ -984,18 +984,19 @@
   font-family: var(--font-mono);
   font-weight: var(--font-weight-bold);
   font-size: var(--font-size-sm);
+  color: var(--color-status-success);
   transition: color var(--transition-fast, 0.15s) ease;
 }
 
 .bms-discount-active {
-  color: var(--color-brand-primary);
+  color: var(--color-status-success);
 }
 
 .bms-discount-dormant {
-  color: var(--color-text-secondary);
+  color: var(--color-status-success);
   font-size: var(--font-size-xs);
-  font-weight: var(--font-weight-medium);
-  opacity: 0.85;
+  font-weight: var(--font-weight-semibold);
+  opacity: 0.95;
 }
 
 .bms-receipt-total {
@@ -1026,15 +1027,15 @@
 
 .bms-per-night {
   font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
-  font-weight: var(--font-weight-medium);
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-semibold);
   font-family: var(--font-mono);
   text-align: right;
-  opacity: 0.85;
+  opacity: 1;
 }
 
 .bms-per-night-amount {
-  color: var(--color-brand-primary);
+  color: var(--color-status-success);
   font-weight: var(--font-weight-bold);
 }
 
@@ -1170,6 +1171,7 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   margin: var(--spacing-xs) 0;
+  text-align: left;
 }
 
 .bms-confirmation-card {
@@ -1297,8 +1299,13 @@
 
 .bms-confirmation-rate-row {
   font-size: var(--font-size-xs);
-  color: var(--color-text-secondary);
+  color: var(--color-status-success);
   margin-top: -4px;
+}
+
+.bms-confirmation-rate-row .bms-confirmation-subval {
+  color: var(--color-status-success);
+  font-weight: var(--font-weight-semibold);
 }
 
 .bms-confirmation-next-steps {
@@ -1375,6 +1382,19 @@
   font-size: var(--font-size-2xs);
 }
 
+.bms-confirmation-row-referral .bms-confirmation-value {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-xxs);
+}
+
+.bms-referral-tag {
+  color: var(--color-status-success);
+  background-color: var(--color-status-success-bg);
+  border-color: var(--color-status-success-border);
+}
+
 .bms-referral-card,
 .bms-confirmation-referral-card {
   display: flex;
@@ -1389,6 +1409,11 @@
   box-shadow: var(--shadow-sm);
   text-align: left;
   width: 100%;
+}
+
+.bms-confirmation-wrapper .bms-referral-card {
+  margin-top: 0;
+  margin-bottom: var(--spacing-xs);
 }
 
 .bms-referral-icon-wrap,
@@ -1493,15 +1518,16 @@
 .bms-confirmation-estimate-card {
   display: flex;
   align-items: flex-start;
-  gap: var(--spacing-sm);
+  gap: var(--spacing-sm-subtle, 6px);
   background: var(--color-bg-secondary);
   border: 1px solid var(--color-border-primary);
   border-radius: var(--radius-md);
   padding: var(--spacing-sm) var(--spacing-md);
-  margin-top: var(--spacing-sm);
+  margin-top: var(--spacing-xs);
   font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
   line-height: 1.5;
+  text-align: left;
 }
 
 .bms-confirmation-estimate-icon {
@@ -1512,4 +1538,5 @@
 
 .bms-confirmation-estimate-content {
   flex: 1;
+  text-align: left;
 }

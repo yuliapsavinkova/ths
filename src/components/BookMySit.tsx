@@ -842,7 +842,7 @@ export default function BookMySit({
                   </div>
                 )}
 
-                {/* Repeat Client Loyalty Discount (Combined Checkbox & Line Item) */}
+                {/* Repeat Client Discount (Combined Checkbox & Line Item) */}
                 <label
                   htmlFor="bms-repeat-client-toggle"
                   className={`bms-line-item bms-repeat-client-line ${isRepeatClient ? 'is-active' : ''}`}

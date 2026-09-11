@@ -24,8 +24,7 @@ export default function ReferralPerkCard({
         </div>
         <p className="bms-referral-text">
           Know someone who travels or needs trusted live-in care? When you recommend a trusted friend
-          or neighbor and they complete a booked stay with me, your entire next sit is 100%
-          complimentary!
+          or neighbor and they complete a booked stay with me, your next sit is complimentary!
         </p>
         <span className="bms-referral-disclaimer">Subject to calendar availability.</span>
       </div>
