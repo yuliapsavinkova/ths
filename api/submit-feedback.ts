@@ -22,8 +22,8 @@ function generateFeedbackEmailHtml(feedback: FeedbackPayload): string {
         <span style="display: inline-block; padding: 4px 12px; background-color: #f3ebd8; color: #b08c40; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 9999px; margin-bottom: 8px;">
           Website Feedback
         </span>
-        <h2 style="color: #1a1a1a; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New Website Feedback & Questions</h2>
-        <p style="color: #666666; font-size: 13px; margin: 6px 0 0 0;">Yulia's House Sitting & Pet Care Website</p>
+        <h2 style="color: #1a1a1a; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New Visitor Feedback &amp; Questions</h2>
+        <p style="color: #666666; font-size: 13px; margin: 6px 0 0 0;">Yulia's House Sitting &amp; Pet Care Website</p>
       </div>
 
       <!-- Feedback Content Box -->
@@ -38,12 +38,22 @@ function generateFeedbackEmailHtml(feedback: FeedbackPayload): string {
       <div style="background-color: #ffffff; padding: 18px 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 15px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 8px; margin-bottom: 12px;">Submitted Details</h3>
         <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5;">
+          ${feedback.name?.trim() ? `
+          <tr>
+            <td style="padding: 5px 0; color: #666666; width: 130px; font-weight: 500;">Name:</td>
+            <td style="padding: 5px 0; color: #1a1a1a; font-weight: 600;">${feedback.name.trim()}</td>
+          </tr>` : ''}
           <tr>
             <td style="padding: 5px 0; color: #666666; width: 130px; font-weight: 500;">Email:</td>
             <td style="padding: 5px 0; color: #1a1a1a;">
               ${feedback.email?.trim() ? `<a href="mailto:${feedback.email.trim()}" style="color: #b08c40; text-decoration: none; font-weight: 500;">${feedback.email.trim()}</a>` : 'Not provided (Anonymous)'}
             </td>
           </tr>
+          ${feedback.category?.trim() ? `
+          <tr>
+            <td style="padding: 5px 0; color: #666666; font-weight: 500;">Category:</td>
+            <td style="padding: 5px 0; color: #1a1a1a;">${feedback.category.trim()}</td>
+          </tr>` : ''}
           <tr>
             <td style="padding: 5px 0; color: #666666; font-weight: 500;">Submitted Time:</td>
             <td style="padding: 5px 0; color: #666666; font-size: 13px;">${submittedAt} (PT)</td>

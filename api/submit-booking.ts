@@ -33,7 +33,6 @@ interface BookingRequest {
   email?: string;
   phone?: string;
   location?: string;
-  referredBy?: string;
   isRepeatClient?: boolean;
   notes?: string;
   status?: 'pending' | 'confirmed' | 'rejected' | 'completed';
@@ -95,13 +94,13 @@ function formatStayDatesHtml(startDate?: string, endDate?: string): string {
     <tr>
       <td style="padding: 6px 0; color: #666666; width: 140px; font-weight: 500;">Start Date:</td>
       <td style="padding: 6px 0; color: #1a1a1a; font-weight: 600;">
-        ${startDate ? `<span style="color: #1a1a1a;">${startHuman}</span> <span style="color: #888888; font-weight: 400; font-size: 13px;">(${startDate})</span>` : 'Not specified'}
+        ${startDate ? `<span style="color: #1a1a1a;">${startHuman}</span>` : 'Not specified'}
       </td>
     </tr>
     <tr>
       <td style="padding: 6px 0; color: #666666; font-weight: 500;">End Date:</td>
       <td style="padding: 6px 0; color: #1a1a1a; font-weight: 600;">
-        ${endDate ? `<span style="color: #1a1a1a;">${endHuman}</span> <span style="color: #888888; font-weight: 400; font-size: 13px;">(${endDate})</span>` : 'Not specified'}
+        ${endDate ? `<span style="color: #1a1a1a;">${endHuman}</span>` : 'Not specified'}
       </td>
     </tr>
   `;
@@ -116,36 +115,26 @@ function formatClientDetailsHtml(booking: BookingRequest): string {
       <table style="width: 100%; border-collapse: collapse; font-size: 14px; line-height: 1.5;">
         <tr>
           <td style="padding: 6px 0; color: #666666; width: 140px; font-weight: 500;">Name:</td>
-          <td style="padding: 6px 0; color: #1a1a1a; font-weight: 600;">${booking.name || 'Not provided'}</td>
+          <td style="padding: 6px 0; color: #1a1a1a; font-weight: 600;">${booking.name || ''}</td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Email:</td>
           <td style="padding: 6px 0; color: #1a1a1a;">
-            ${booking.email ? `<a href="mailto:${booking.email}" style="color: #b08c40; text-decoration: none; font-weight: 500;">${booking.email}</a>` : 'Not provided'}
+            ${booking.email ? `<a href="mailto:${booking.email}" style="color: #b08c40; text-decoration: none; font-weight: 500;">${booking.email}</a>` : ''}
           </td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Phone:</td>
-          <td style="padding: 6px 0; color: #1a1a1a;">${booking.phone ? `<a href="tel:${booking.phone}" style="color: #1a1a1a; text-decoration: none;">${booking.phone}</a>` : 'Not provided'}</td>
+          <td style="padding: 6px 0; color: #1a1a1a;">${booking.phone ? `<a href="tel:${booking.phone}" style="color: #1a1a1a; text-decoration: none;">${booking.phone}</a>` : ''}</td>
         </tr>
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Location / Area:</td>
-          <td style="padding: 6px 0; color: #1a1a1a; font-weight: 500;">${booking.location || 'Not provided'}</td>
+          <td style="padding: 6px 0; color: #1a1a1a; font-weight: 500;">${booking.location || ''}</td>
         </tr>
         ${booking.isRepeatClient ? `
         <tr>
           <td style="padding: 6px 0; color: #666666; font-weight: 500;">Client Status:</td>
           <td style="padding: 6px 0; color: #2e7d32; font-weight: 600;">Repeat Client (10% Discount Applied)</td>
-        </tr>` : ''}
-        ${booking.referredBy ? `
-        <tr>
-          <td style="padding: 6px 0; color: #666666; font-weight: 500;">Referred By:</td>
-          <td style="padding: 6px 0; color: #1a1a1a;">
-            <strong>${booking.referredBy}</strong>
-            <span style="display: block; color: #2e7d32; font-size: 12px; font-weight: 600; margin-top: 2px;">
-              🎁 Eligible for complimentary next sit through Friend &amp; Neighbor Referral Perk
-            </span>
-          </td>
         </tr>` : ''}
       </table>
     </div>
@@ -192,7 +181,7 @@ function formatNotesHtml(notes?: string): string {
       <h3 style="margin-top: 0; color: #1a1a1a; font-size: 16px; font-weight: 600; border-bottom: 1px solid #f0f2f5; padding-bottom: 10px; margin-bottom: 12px;">
         Notes
       </h3>
-      <p style="margin: 0; font-size: 14px; color: #333333; line-height: 1.6; white-space: pre-wrap; font-style: italic; background-color: #fcfaf7; padding: 12px; border-radius: 8px; border-left: 3px solid #b08c40;">
+      <p style="margin: 0; font-size: 14px; color: #333333; line-height: 1.6; white-space: pre-wrap; font-style: italic; background-color: #fcfaf7; padding: 12px 14px; border-radius: 8px; border-left: 3px solid #b08c40;">
         "${notes.trim()}"
       </p>
     </div>
@@ -275,10 +264,10 @@ function formatReferralPerkHtml(): string {
         <span style="display: inline-block; background-color: #f2e9dc; color: #7d5b1d; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px;">Referral Perk</span>
       </div>
       <div style="font-weight: 700; font-size: 14px; color: #2d241e; margin-bottom: 6px; line-height: 1.35;">
-        🎁 Recommend your trusted friend or neighbor and your next sit is on me!
+        🎁 Recommend your friend or neighbor and your next sit is on me!
       </div>
       <p style="margin: 0 0 6px 0; font-size: 13px; color: #4a4439; line-height: 1.5;">
-        Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your next sit is complimentary!
+        Know someone who travels or needs a trusted house &amp; pet sitter? When you recommend a friend or neighbor and they complete a booked stay with me, your next sit is complimentary!
       </p>
       <div style="font-size: 11px; color: #8a7350; font-style: italic;">
         Subject to calendar availability.
@@ -288,6 +277,7 @@ function formatReferralPerkHtml(): string {
 }
 
 function generateBookingEmailHtml(booking: BookingRequest): string {
+  const durationStr = formatBookingDuration(booking);
   const p = booking.pricing;
 
   return `
@@ -296,15 +286,21 @@ function generateBookingEmailHtml(booking: BookingRequest): string {
         <h2 style="color: #b08c40; margin: 0; font-size: 24px; font-weight: 600; letter-spacing: -0.5px;">New Booking Request</h2>
         <p style="color: #666666; font-size: 14px; margin: 6px 0 0 0;">Yulia's House Sitting & Pet Care Services</p>
       </div>
-      
+
+      <div style="background-color: #ffffff; padding: 18px 20px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-bottom: 16px;">
+        <p style="margin: 0; font-size: 15px; color: #1a1a1a; line-height: 1.5;">
+          You received a new booking request for <strong>${booking.startDate ? formatHumanDate(booking.startDate) : 'selected dates'}</strong> to <strong>${booking.endDate ? formatHumanDate(booking.endDate) : 'selected end date'}</strong> (${durationStr}).
+        </p>
+      </div>
+
       ${formatReferralPerkHtml()}
       ${formatStayDetailsHtml(booking)}
       ${formatClientDetailsHtml(booking)}
       ${formatNotesHtml(booking.notes)}
       ${formatPricingBreakdownHtml(p, booking)}
 
-      <div style="text-align: center; margin-top: 24px; font-size: 12px; color: #888888; line-height: 1.6;">
-        Yulia House & Pet Sitting • Professional & Dedicated Care
+      <div style="text-align: center; margin-top: 24px; font-size: 12px; color: #999999; line-height: 1.5;">
+        <p style="margin: 0;">Yulia's House Sitting &amp; Pet Care Services</p>
       </div>
       <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #fafafa;">
         ${booking.id ? `Ref: ${booking.id}` : ''}
@@ -328,16 +324,13 @@ function generateBookingConfirmationEmailHtml(booking: BookingRequest): string {
       <div style="background-color: #ffffff; padding: 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-bottom: 16px;">
         <h3 style="margin-top: 0; color: #1a1a1a; font-size: 18px; font-weight: 600; margin-bottom: 12px;">Hi ${clientFirstName},</h3>
         <p style="margin: 0 0 14px 0; font-size: 15px; color: #333333; line-height: 1.6;">
-          Thank you for reaching out! I've received your booking request for <strong>${booking.startDate ? formatHumanDate(booking.startDate) : 'your selected dates'}</strong> to <strong>${booking.endDate ? formatHumanDate(booking.endDate) : 'selected end date'}</strong> (${durationStr}). I'm looking forward to connecting with you!
+          Thank you for reaching out! I've received your booking request for <strong>${booking.startDate ? formatHumanDate(booking.startDate) : 'your selected dates'}</strong> to <strong>${booking.endDate ? formatHumanDate(booking.endDate) : 'selected end date'}</strong> (${durationStr}). I look forward to connecting with you and caring for your home and pets!
         </p>
-        <div style="background-color: #fcfaf7; border-left: 3px solid #b08c40; padding: 12px 16px; border-radius: 4px; margin: 16px 0;">
+        <div style="background-color: #fcfaf7; border-left: 3px solid #b08c40; padding: 12px 16px; border-radius: 4px; margin-top: 14px;">
           <p style="margin: 0; font-size: 14px; color: #1a1a1a; font-weight: 500; line-height: 1.5;">
-            🕒 <strong>What happens next:</strong> I will review my calendar and reach out to you directly <strong>within 24 hours</strong> to confirm availability and coordinate the details.
+            🕒 <strong>What happens next:</strong> I will review my calendar and reach out to you directly <strong>within 24 hours</strong> to confirm availability and coordinate details.
           </p>
         </div>
-        <p style="margin: 0; font-size: 14px; color: #666666; line-height: 1.6;">
-          I look forward to meeting you and giving your home and pets the attentive, loving care they deserve.
-        </p>
       </div>
 
       ${formatReferralPerkHtml()}
@@ -346,13 +339,18 @@ function generateBookingConfirmationEmailHtml(booking: BookingRequest): string {
       ${formatNotesHtml(booking.notes)}
       ${formatPricingBreakdownHtml(p, booking)}
 
-      <div style="text-align: center; margin-top: 24px; font-size: 13px; color: #666666; line-height: 1.6;">
-        <div style="margin-bottom: 4px;">
-          💬 <strong>Questions or updates?</strong> You can simply reply directly to this email or reach out to <a href="mailto:sitterjourney@gmail.com" style="color: #b08c40; text-decoration: none; font-weight: 600;">sitterjourney@gmail.com</a>.
+      <div style="background-color: #ffffff; padding: 22px 24px; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.02); border: 1px solid #eef0f2; margin-top: 16px; text-align: left;">
+        <div style="font-size: 15px; color: #333333; line-height: 1.6; margin-bottom: 14px;">
+          Warm regards,<br>
+          <strong style="color: #1a1a1a; font-size: 16px; display: inline-block; margin-top: 4px;">Yulia</strong>
         </div>
-        <div style="font-size: 12px; color: #888888; margin-top: 6px;">
-          Yulia House & Pet Sitting • Professional & Dedicated Care
+        <div style="border-top: 1px solid #f0f2f5; padding-top: 14px; font-size: 13px; color: #555555; line-height: 1.5;">
+          💬 <strong>Questions or updates?</strong> Reply directly to this email or contact me at <a href="mailto:sitterjourney@gmail.com" style="color: #b08c40; text-decoration: none; font-weight: 600;">sitterjourney@gmail.com</a> anytime.
         </div>
+      </div>
+
+      <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #999999; line-height: 1.5;">
+        <p style="margin: 0;">Yulia's House Sitting &amp; Pet Care Services</p>
       </div>
       <div style="display: none; max-height: 0px; overflow: hidden; font-size: 1px; line-height: 1px; color: #fafafa;">
         ${booking.id ? `Ref: ${booking.id}` : ''}
