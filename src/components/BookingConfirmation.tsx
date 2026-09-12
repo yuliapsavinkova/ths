@@ -35,9 +35,13 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
       {/* Header & Warm Intro Pledge */}
       <h4 className="bms-success-title">Thank You for Your Request!</h4>
       <p className="bms-success-subtitle">
-        Thank you, {clientFirstName}! Your request has been received. I will review my schedule and
-        get back to you within 24 hours.
+        Thank you, {clientFirstName}! Your booking request has been received. A confirmation copy has been sent to your email.
       </p>
+
+      {/* What Happens Next Note - right under intro subtitle matching email */}
+      <div className="bms-confirmation-next-steps">
+        🕒 <strong>What happens next:</strong> I will review my calendar and reach out to you directly within 24 hours to confirm availability and coordinate details.
+      </div>
 
       {/* Standardized Cards Container */}
       <div className="bms-confirmation-wrapper">
@@ -50,15 +54,11 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
           <div className="bms-confirmation-table">
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Start Date:</span>
-              <span className="bms-confirmation-value">
-                {startHuman} <span className="bms-confirmation-subval">({booking.startDate})</span>
-              </span>
+              <span className="bms-confirmation-value">{startHuman}</span>
             </div>
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">End Date:</span>
-              <span className="bms-confirmation-value">
-                {endHuman} <span className="bms-confirmation-subval">({booking.endDate})</span>
-              </span>
+              <span className="bms-confirmation-value">{endHuman}</span>
             </div>
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Duration:</span>
@@ -93,19 +93,19 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
           <div className="bms-confirmation-table">
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Name:</span>
-              <span className="bms-confirmation-value">{booking.name || 'Not provided'}</span>
+              <span className="bms-confirmation-value">{booking.name || ''}</span>
             </div>
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Email:</span>
-              <span className="bms-confirmation-value">{booking.email || 'Not provided'}</span>
+              <span className="bms-confirmation-value">{booking.email || ''}</span>
             </div>
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Phone:</span>
-              <span className="bms-confirmation-value">{booking.phone || 'Not provided'}</span>
+              <span className="bms-confirmation-value">{booking.phone || ''}</span>
             </div>
             <div className="bms-confirmation-row">
               <span className="bms-confirmation-label">Location / Area:</span>
-              <span className="bms-confirmation-value">{booking.location || 'Not provided'}</span>
+              <span className="bms-confirmation-value">{booking.location || ''}</span>
             </div>
             {booking.isRepeatClient && (
               <div className="bms-confirmation-row">
@@ -114,17 +114,6 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
                   <span className="bms-confirmation-badge-pill">
                     <Sparkles size={11} className="bms-inline-icon" />
                     Repeat Client (10% Discount Applied)
-                  </span>
-                </span>
-              </div>
-            )}
-            {booking.referredBy && booking.referredBy.trim() && (
-              <div className="bms-confirmation-row bms-confirmation-row-referral">
-                <span className="bms-confirmation-label">Referred By:</span>
-                <span className="bms-confirmation-value">
-                  <span>{booking.referredBy.trim()}</span>
-                  <span className="bms-confirmation-badge-pill bms-referral-tag">
-                    🎁 Eligible for Referral Perk
                   </span>
                 </span>
               </div>
@@ -228,12 +217,6 @@ export function BookingConfirmation({ booking, onReset }: BookingConfirmationPro
           <div className="bms-confirmation-estimate-content">
             <strong>Estimate only:</strong> Final rates and booking are confirmed during our intro call.
           </div>
-        </div>
-
-        {/* Next Steps Note */}
-        <div className="bms-confirmation-next-steps">
-          🕒 <strong>Next step:</strong> I will review my calendar and email or call you within 24
-          hours to confirm availability and coordinate details.
         </div>
       </div>
 

@@ -13,7 +13,7 @@ export const ServicesSection: React.FC = () => {
           </span>
           <h2 className="section-title">What Is Included</h2>
           <p className="section-subtitle">
-            A comprehensive list of professional live-in care and home management services.
+            A comprehensive list of professional house &amp; pet sitting services.
           </p>
         </div>
 

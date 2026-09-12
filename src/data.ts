@@ -160,7 +160,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq8',
     question: 'How does the friend or neighbor referral reward work?',
     answer:
-      'Recommend your trusted friend or neighbor and your next sit is on me! Know someone who travels or needs trusted live-in care? When you recommend a trusted friend or neighbor and they complete a booked stay with me, your next sit is complimentary! (Subject to calendar availability.)',
+      'Recommend your friend or neighbor and your next sit is on me! Know someone who travels or needs a trusted house & pet sitter? When you recommend a friend or neighbor and they complete a booked stay with me, your next sit is complimentary! (Subject to calendar availability.)',
   },
 ];
 
@@ -255,7 +255,7 @@ export const COVERAGE_AREAS = [
 export const SITTER_BIO = {
   name: 'Yulia',
   title: 'Live-In House & Pet Sitter',
-  tagline: 'Live-in pet and home care.',
+  tagline: 'Professional house and pet sitting.',
   basePrice: 999,
   currency: 'USD',
   profileLink:

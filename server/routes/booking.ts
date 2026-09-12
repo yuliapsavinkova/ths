@@ -50,7 +50,6 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     email: String(booking.email || '').slice(0, 150).trim(),
     phone: String(booking.phone || '').slice(0, 50).trim(),
     location: String(booking.location || '').slice(0, 150).trim(),
-    referredBy: String(booking.referredBy || '').slice(0, 200).trim(),
     isRepeatClient,
     notes: String(booking.notes || '').slice(0, 3000).trim(),
     pricing: {

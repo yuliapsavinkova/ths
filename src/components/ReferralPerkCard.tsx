@@ -19,11 +19,11 @@ export default function ReferralPerkCard({
         <div className="bms-referral-header">
           <span className="bms-referral-badge">Referral Perk</span>
           <h4 className="bms-referral-title">
-            Recommend your trusted friend or neighbor and your next sit is on me!
+            Recommend your friend or neighbor and your next sit is on me!
           </h4>
         </div>
         <p className="bms-referral-text">
-          Know someone who travels or needs trusted live-in care? When you recommend a trusted friend
+          Know someone who travels or needs a trusted house &amp; pet sitter? When you recommend a friend
           or neighbor and they complete a booked stay with me, your next sit is complimentary!
         </p>
         <span className="bms-referral-disclaimer">Subject to calendar availability.</span>

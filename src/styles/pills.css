@@ -64,7 +64,6 @@
 
 /* ─── Shared Interactive Pill & Tab Buttons Design System ─── */
 .app-pill-btn,
-.bms-price-tag-pill,
 .showcase-tab-btn {
   display: inline-flex;
   align-items: center;
@@ -89,7 +88,6 @@
 }
 
 .app-pill-btn:hover,
-.bms-price-tag-pill:hover,
 .showcase-tab-btn:hover {
   border-color: var(--color-brand-primary);
   background-color: var(--color-bg-surface-alt);
@@ -98,24 +96,20 @@
 }
 
 .app-pill-btn:focus-visible,
-.bms-price-tag-pill:focus-visible,
 .showcase-tab-btn:focus-visible {
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 2px;
 }
 
 .app-pill-btn:active,
-.bms-price-tag-pill:active,
 .showcase-tab-btn:active {
   box-shadow: var(--shadow-xs);
   transform: translateY(1px);
 }
 
 .app-pill-btn.active,
-.bms-price-tag-pill.active,
 .showcase-tab-btn.active,
 .app-pill-btn[aria-selected="true"],
-.bms-price-tag-pill[aria-selected="true"],
 .showcase-tab-btn[aria-selected="true"] {
   background-color: var(--color-brand-primary);
   border-color: var(--color-brand-primary);
@@ -126,7 +120,6 @@
 .app-pill-btn .app-pill-icon,
 .app-pill-btn .showcase-tab-icon,
 .app-pill-btn svg,
-.bms-price-tag-pill .app-pill-icon,
 .showcase-tab-btn .showcase-tab-icon,
 .showcase-tab-btn svg {
   display: inline-flex;
@@ -139,7 +132,6 @@
 .app-pill-btn.active .app-pill-icon,
 .app-pill-btn.active .showcase-tab-icon,
 .app-pill-btn.active svg,
-.bms-price-tag-pill.active .app-pill-icon,
 .showcase-tab-btn.active .showcase-tab-icon,
 .showcase-tab-btn.active svg,
 .app-pill-btn[aria-selected="true"] .app-pill-icon,

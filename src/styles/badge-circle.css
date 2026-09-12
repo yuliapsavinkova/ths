@@ -9,6 +9,9 @@
   aspect-ratio: 1 / 1;
   border-radius: 50%;
   box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   /* Translucent glass backdrop using tokens */
   background: var(--color-bg-glass-circle);
@@ -83,6 +86,67 @@ button.badge-circle.is-active {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  padding: var(--spacing-xs);
+  padding: var(--badge-content-padding, var(--spacing-xs));
+  box-sizing: border-box;
   pointer-events: none;
+}
+
+/* Interactive Clickable Rate Rows inside Badge Circle */
+.badge-rate-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  padding-top: var(--badge-btn-pt, 4px);
+  padding-bottom: var(--badge-btn-pb, 7px);
+  padding-left: var(--badge-btn-px, 12px);
+  padding-right: var(--badge-btn-px, 12px);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  pointer-events: auto;
+  transition:
+    transform var(--transition-fast) cubic-bezier(0.16, 1, 0.3, 1),
+    background-color var(--transition-fast) ease,
+    border-color var(--transition-fast) ease,
+    box-shadow var(--transition-fast) ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  display: inline-flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: var(--badge-rate-row-gap, 4px);
+  line-height: var(--line-height-none);
+  box-sizing: border-box;
+  transform-origin: center center;
+}
+
+.badge-rate-btn:hover {
+  background-color: rgba(255, 255, 255, 0.16);
+  border-color: rgba(255, 255, 255, 0.28);
+  transform: scale(1.04);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+}
+
+.badge-rate-btn:active {
+  transform: scale(0.98);
+}
+
+.badge-rate-btn.is-active {
+  background-color: color-mix(in srgb, var(--color-brand-secondary) 25%, transparent);
+  border-color: var(--color-brand-secondary);
+  box-shadow: 0 0 14px color-mix(in srgb, var(--color-brand-secondary) 50%, transparent);
+}
+
+.badge-rate-btn.is-active:hover {
+  background-color: color-mix(in srgb, var(--color-brand-secondary) 35%, transparent);
+  border-color: var(--color-brand-secondary);
+  transform: scale(1.04);
+}
+
+.badge-rate-btn.is-active .badge-price {
+  color: var(--color-text-primary-inverse);
+  text-shadow: 0 0 8px var(--color-brand-secondary);
+}
+
+.badge-rate-btn.is-active .badge-unit {
+  color: var(--color-text-primary-inverse);
+  font-weight: var(--font-weight-bold);
 }

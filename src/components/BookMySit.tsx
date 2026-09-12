@@ -110,7 +110,6 @@ export default function BookMySit({
   const [email, setEmail] = useState<string>('');
   const [phone, setPhone] = useState<string>('');
   const [location, setLocation] = useState<string>('');
-  const [referredBy, setReferredBy] = useState<string>('');
   const [isRepeatClient, setIsRepeatClient] = useState<boolean>(false);
   const [notes, setNotes] = useState<string>('');
 
@@ -291,6 +290,22 @@ export default function BookMySit({
     return duration === item.days;
   };
 
+  // Listen for milestone selections from hero rate badge circle
+  useEffect(() => {
+    const handleMilestoneEvent = (e: Event) => {
+      const customEvent = e as CustomEvent<{ type?: 'week' | 'month'; days?: number }>;
+      if (customEvent.detail?.type === 'week' || customEvent.detail?.days === 7) {
+        handleMilestoneSelect(MILESTONE_PRESETS[0]);
+      } else if (customEvent.detail?.type === 'month' || customEvent.detail?.days === 30) {
+        handleMilestoneSelect(MILESTONE_PRESETS[1]);
+      }
+    };
+    window.addEventListener('bms-select-milestone', handleMilestoneEvent);
+    return () => {
+      window.removeEventListener('bms-select-milestone', handleMilestoneEvent);
+    };
+  }, [startDate]);
+
   // Pricing Engine (ensuring line items and totals add up with 100% mathematical consistency)
   useEffect(() => {
     const computedPricing = calculateBookingPricing({
@@ -327,7 +342,6 @@ export default function BookMySit({
     setEmail('');
     setPhone('');
     setLocation('');
-    setReferredBy('');
     setIsRepeatClient(false);
     setNotes('');
     setSubmittedBooking(null);
@@ -360,7 +374,6 @@ export default function BookMySit({
       email,
       phone,
       location,
-      referredBy,
       isRepeatClient,
       startDate,
       endDate,
@@ -408,7 +421,6 @@ export default function BookMySit({
 
   return (
     <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
-
       {isSuccess ? (
         <BookingConfirmation
           booking={submittedBooking || getCurrentBookingData()}
@@ -416,28 +428,6 @@ export default function BookMySit({
         />
       ) : (
         <form onSubmit={handleSubmit} className="w-full">
-          {/* Quick Estimates Price Tags Bar */}
-          <div className="bms-quick-estimates-bar">
-            <div className="bms-price-tags-row" role="group" aria-label="Stay duration shortcuts">
-              {MILESTONE_PRESETS.map((item) => {
-                const active = isPresetActive(item);
-                return (
-                  <button
-                    key={item.label}
-                    type="button"
-                    onClick={() => handleMilestoneSelect(item)}
-                    className={`app-pill-btn bms-price-tag-pill ${active ? 'active' : ''}`}
-                    aria-pressed={active}
-                    title={`Click to set duration to ${item.label} (${item.sublabel})`}
-                  >
-                    <span className="bms-tag-label">{item.label}</span>
-                    <span className="bms-tag-price">{item.price}</span>
-                  </button>
-                );
-              })}
-            </div>
-          </div>
-
           <div className="bms-form-flex-container">
             <div className="bms-flex-col bms-col-left">
             {/* STEP 1: DATES & STAY LENGTH */}

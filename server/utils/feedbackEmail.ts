@@ -19,8 +19,8 @@ export function generateFeedbackEmailHtml(feedback: FeedbackPayload): string {
         <span style="display: inline-block; padding: 4px 12px; background-color: #f3ebd8; color: #b08c40; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; border-radius: 9999px; margin-bottom: 8px;">
           Website Feedback
         </span>
-        <h2 style="color: #1a1a1a; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New Website Feedback & Questions</h2>
-        <p style="color: #666666; font-size: 13px; margin: 6px 0 0 0;">Yulia's House Sitting & Pet Care Website</p>
+        <h2 style="color: #1a1a1a; margin: 0; font-size: 22px; font-weight: 700; letter-spacing: -0.5px;">New Visitor Feedback &amp; Questions</h2>
+        <p style="color: #666666; font-size: 13px; margin: 6px 0 0 0;">Yulia's House Sitting &amp; Pet Care Website</p>
       </div>
 
       <!-- Feedback Content Box -->

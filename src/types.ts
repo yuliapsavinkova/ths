@@ -25,7 +25,6 @@ export interface BookingRequest {
   email: string;
   phone?: string;
   location: string;
-  referredBy?: string;
   isRepeatClient?: boolean;
   startDate?: string;
   endDate?: string;

@@ -5,6 +5,22 @@ import RateBadgeCircle from './RateBadgeCircle';
 import NewsletterSubscription from './NewsletterSubscription';
 
 export const Hero: React.FC = () => {
+  const handleSelectWeek = () => {
+    const el = document.getElementById('booking-form-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    window.dispatchEvent(new CustomEvent('bms-select-milestone', { detail: { type: 'week', days: 7 } }));
+  };
+
+  const handleSelectMonth = () => {
+    const el = document.getElementById('booking-form-section');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+    window.dispatchEvent(new CustomEvent('bms-select-milestone', { detail: { type: 'month', days: 30 } }));
+  };
+
   return (
     <section className="hero" id="hero-section-el">
       <div className="hero-overlay" />
@@ -67,8 +83,12 @@ export const Hero: React.FC = () => {
             id="hero-main-img"
           />
 
-          {/* Elegant Glowing Rate Badge Circle (Can be easily enabled/disabled here) */}
-          <RateBadgeCircle />
+          {/* Elegant Glowing Rate Badge Circle (Interactive - click price to fill dates) */}
+          <RateBadgeCircle
+            interactive={true}
+            onSelectWeek={handleSelectWeek}
+            onSelectMonth={handleSelectMonth}
+          />
         </div>
       </div>
     </section>
