@@ -438,7 +438,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     description:
       'Maebe is a playful and athletic girl with endless energy and a big personality! She loves to run, jump, and chase after anything that catches her attention. When she’s ready to slow down, she’s sweet and affectionate and loves spending time with her people.',
     petName: 'Maebe',
-    location: 'Oakland, CA',
+    location: 'Santa Cruz, CA',
     year: 2026,
     initialLikes: 63,
   },
