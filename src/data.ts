@@ -360,30 +360,6 @@ export const LIMITED_DATE_RANGES: DateRange[] = [
 export const SHOWCASE_ITEMS: ShowcaseItem[] = [
   {
     id: 's1',
-    imageUrl: '/images/spike.webp',
-    title: 'Mighty Spike: Tiny Body, Big Attitude!',
-    category: 'dogs',
-    description:
-      'Don’t let the protective cone fool you—Spike is a 1-year-old teacup Biewer Yorkie with the heart of a lion! Fresh off his neuter surgery, this pocket-sized dynamo didn’t let a satellite dish around his neck slow him down for even a second. Between marathon games of fetch across the loft, endless lap snuggles, and standing tall to courageously bark at dogs ten times his size on our Downtown walks, Spike proved that true bravado comes in tiny, irresistible packages.',
-    petName: 'Spike (Teacup Biewer Yorkie)',
-    location: 'Downtown Los Angeles, CA',
-    year: 2026,
-    initialLikes: 42,
-  },
-  {
-    id: 's2',
-    imageUrl: '/images/felix.webp',
-    title: 'Beach Adventures with Felix',
-    category: 'dogs',
-    description:
-      'Felix is a 6-year-old Golden Retriever who is the sweetest, gentlest giant you could ever meet. He is purely kind-hearted and thrives on early morning and evening beach strolls around Santa Barbara. He absolutely adores swimming and has fantastic off-leash recall—though you do have to keep a watchful eye on him, or he might just slyly steal an unsuspecting picnicker’s lunch!',
-    petName: 'Felix (Golden Retriever)',
-    location: 'Santa Barbara, CA',
-    year: 2026,
-    initialLikes: 28,
-  },
-  {
-    id: 's3',
     imageUrl: '/images/nala.webp',
     title: 'Gentle Moments with Nala',
     category: 'dogs',
@@ -395,7 +371,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     initialLikes: 56,
   },
   {
-    id: 's4',
+    id: 's2',
     imageUrl: '/images/toast.webp',
     title: 'Sunny Lounging with Toast',
     category: 'cats',
@@ -407,7 +383,43 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     initialLikes: 63,
   },
   {
+    id: 's3',
+    imageUrl: '/images/felix.webp',
+    title: 'Beach Adventures with Felix',
+    category: 'dogs',
+    description:
+      'Felix is a 6-year-old Golden Retriever who is the sweetest, gentlest giant you could ever meet. He is purely kind-hearted and thrives on early morning and evening beach strolls around Santa Barbara. He absolutely adores swimming and has fantastic off-leash recall—though you do have to keep a watchful eye on him, or he might just slyly steal an unsuspecting picnicker’s lunch!',
+    petName: 'Felix (Golden Retriever)',
+    location: 'Santa Barbara, CA',
+    year: 2026,
+    initialLikes: 28,
+  },
+  {
+    id: 's4',
+    imageUrl: '/images/kentucky.webp',
+    title: 'Sweet Cuddles with Kentucky',
+    category: 'cats',
+    description:
+      'Kentucky is the sweetest little cuddle bug! She loves nothing more than curling up on top of her human, whether in their lap or on their chest, and soaking up all the love and attention. Once she settles in, she’s perfectly content to stay there for a cozy cuddle session.',
+    petName: 'Kentucky (Tabby)',
+    location: 'Boulder Creek, CA',
+    year: 2026,
+    initialLikes: 23,
+  },
+  {
     id: 's5',
+    imageUrl: '/images/spike.webp',
+    title: 'Mighty Spike: Tiny Body, Big Attitude!',
+    category: 'dogs',
+    description:
+      'Don’t let the protective cone fool you—Spike is a 1-year-old teacup Biewer Yorkie with the heart of a lion! Fresh off his neuter surgery, this pocket-sized dynamo didn’t let a satellite dish around his neck slow him down for even a second. Between marathon games of fetch across the loft, endless lap snuggles, and standing tall to courageously bark at dogs ten times his size on our Downtown walks, Spike proved that true bravado comes in tiny, irresistible packages.',
+    petName: 'Spike (Teacup Biewer Yorkie)',
+    location: 'Downtown Los Angeles, CA',
+    year: 2026,
+    initialLikes: 42,
+  },
+  {
+    id: 's6',
     imageUrl: '/images/squid.webp',
     title: 'Cozy Cuddles with Squid',
     category: 'dogs',
@@ -420,6 +432,18 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
   },
   {
     id: 's7',
+    imageUrl: '/images/maebe.webp',
+    title: 'Playing with Little Girl Maebe',
+    category: 'cats',
+    description:
+      'Maebe is a playful and athletic girl with endless energy and a big personality! She loves to run, jump, and chase after anything that catches her attention. When she’s ready to slow down, she’s sweet and affectionate and loves spending time with her people.',
+    petName: 'Maebe',
+    location: 'Oakland, CA',
+    year: 2026,
+    initialLikes: 63,
+  },
+  {
+    id: 's8',
     imageUrl: '/images/dallas-harper.webp',
     title: 'Snuggles & Playtime with Dallas & Harper',
     category: 'dogs',
@@ -430,20 +454,20 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     year: 2025,
     initialLikes: 47,
   },
+  // {
+  //   id: 's9',
+  //   imageUrl: '/images/rufus.webp',
+  //   title: 'Rufus the Gentle Giant',
+  //   category: 'dogs',
+  //   description:
+  //     'Had an amazing time caring for Rufus in Laguna Beach, with truly stunning views from Top of the World! Every walk was scenic and enjoyable. Rufus will steal your heart—he’s intelligent, goofy, and endlessly entertaining. He follows you everywhere and instantly becomes your best friend, making every day full of laughs and smiles.',
+  //   petName: 'Rufus (Australian Goldendoodle)',
+  //   location: 'Laguna Beach, CA',
+  //   year: 2025,
+  //   initialLikes: 51,
+  // },
   {
-    id: 's8',
-    imageUrl: '/images/rufus.webp',
-    title: 'Rufus the Gentle Giant',
-    category: 'dogs',
-    description:
-      'Had an amazing time caring for Rufus in Laguna Beach, with truly stunning views from Top of the World! Every walk was scenic and enjoyable. Rufus will steal your heart—he’s intelligent, goofy, and endlessly entertaining. He follows you everywhere and instantly becomes your best friend, making every day full of laughs and smiles.',
-    petName: 'Rufus (Australian Goldendoodle)',
-    location: 'Laguna Beach, CA',
-    year: 2025,
-    initialLikes: 51,
-  },
-  {
-    id: 's9',
+    id: 's10',
     imageUrl: '/images/randal.webp',
     title: 'Heartwarming Days with Randall',
     category: 'dogs',
@@ -455,7 +479,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     initialLikes: 35,
   },
   {
-    id: 's10',
+    id: 's11',
     imageUrl: '/images/pepper.webp',
     title: 'Pepper’s Outdoor Adventures',
     category: 'cats',
@@ -467,7 +491,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     initialLikes: 44,
   },
   {
-    id: 's11',
+    id: 's12',
     imageUrl: '/images/rufus-video.webp',
     videoUrl: '/videos/rufus-walk.mov',
     videoThumbnailTime: 38.0,
