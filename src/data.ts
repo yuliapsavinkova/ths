@@ -498,7 +498,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     title: 'Top of the World Walks with Rufus',
     category: 'videos',
     description:
-      'Top of the World walks with unbelievable scenery! Rufus, a playful Australian Goldendoodle, loves soaking in the breathtaking views and fresh coastal breezes along every trail.',
+      'Top of the World walks with unbelievable scenery and fresh coastal breezes! I had an amazing time caring for Rufus, a playful Australian Goldendoodle who will steal your heart. He’s intelligent, goofy, and endlessly entertaining, follows you everywhere, and quickly becomes your best friend. Every walk with him was scenic and enjoyable, making each day full of laughs and smiles.',
     petName: 'Rufus (Australian Goldendoodle)',
     location: 'Laguna Beach, CA',
     year: 2025,
