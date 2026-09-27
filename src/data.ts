@@ -506,7 +506,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
   },
   {
     id: 's13',
-    imageUrl: '/images/pepper.webp',
+    imageUrl: '/images/pepper-video.webp',
     videoUrl: '/videos/pepper-jump.mov',
     videoThumbnailTime: 38.0,
     title: 'Pepper’s Outdoor Adventures',
