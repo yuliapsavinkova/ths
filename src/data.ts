@@ -261,7 +261,7 @@ export const SITTER_BIO = {
   profileLink:
     'https://www.trustedhousesitters.com/house-and-pet-sitters/united-states/california/san-francisco/l/6526245/',
   location: 'United States',
-  aboutText: `I provide premium live-in house and pet sitting. I work remotely, which ensures continuous companionship for your pets, precise routine execution, and complete household security. From senior pet medication schedules to complex garden watering and property management, I offer a reliable, professional experience centered on mutual commitment.`,
+  aboutText: `I provide trusted live-in house and pet sitting. I work remotely, which ensures continuous companionship for your pets, precise routine execution, and complete household security. From senior pet medication schedules to complex garden watering and property management, I offer a reliable, professional experience centered on mutual commitment.`,
 };
 
 export const SITTER_IMAGES = {

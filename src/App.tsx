@@ -45,7 +45,7 @@ export default function App() {
 
   return (
     <div id="app-root">
-      {/* ─── Premium Header / Top Bar ─────────────────────────────── */}
+      {/* ─── Header / Top Bar ─────────────────────────────── */}
       <Header scrolled={scrolled} />
 
       <main id="main-content">

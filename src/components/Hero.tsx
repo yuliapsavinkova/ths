@@ -10,7 +10,9 @@ export const Hero: React.FC = () => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-    window.dispatchEvent(new CustomEvent('bms-select-milestone', { detail: { type: 'week', days: 7 } }));
+    window.dispatchEvent(
+      new CustomEvent('bms-select-milestone', { detail: { type: 'week', days: 7 } }),
+    );
   };
 
   const handleSelectMonth = () => {
@@ -18,7 +20,9 @@ export const Hero: React.FC = () => {
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
-    window.dispatchEvent(new CustomEvent('bms-select-milestone', { detail: { type: 'month', days: 30 } }));
+    window.dispatchEvent(
+      new CustomEvent('bms-select-milestone', { detail: { type: 'month', days: 30 } }),
+    );
   };
 
   return (
