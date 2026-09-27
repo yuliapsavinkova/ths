@@ -504,4 +504,18 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     year: 2025,
     initialLikes: 74,
   },
+  {
+    id: 's13',
+    imageUrl: '/images/pepper.webp',
+    videoUrl: '/videos/pepper-jump.mov',
+    videoThumbnailTime: 38.0,
+    title: 'Pepper’s Outdoor Adventures',
+    category: 'videos',
+    description:
+      'Fearless Pepper takes outdoor adventure to the next level with this incredible leap! This athletic American Shorthair launches herself into a daring descent with impressive confidence and precision. One thing is certain—Pepper knows how to make an entrance! 🐾',
+    petName: 'Pepper (American Shorthair)',
+    location: 'Austin, TX',
+    year: 2025,
+    initialLikes: 74,
+  },
 ];
