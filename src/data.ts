@@ -512,7 +512,7 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     title: 'Pepper’s Outdoor Adventures',
     category: 'videos',
     description:
-      'Fearless Pepper takes outdoor adventure to the next level with this incredible leap! This athletic American Shorthair launches herself into a daring descent with impressive confidence and precision. One thing is certain—Pepper knows how to make an entrance! 🐾',
+      'Fearless Pepper takes outdoor adventure to the next level with this incredible leap! This athletic American Shorthair launches herself into a daring descent with impressive confidence and precision. One thing is certain — Pepper knows how to make an entrance! 🐾',
     petName: 'Pepper (American Shorthair)',
     location: 'Austin, TX',
     year: 2025,
