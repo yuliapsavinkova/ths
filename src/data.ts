@@ -518,4 +518,18 @@ export const SHOWCASE_ITEMS: ShowcaseItem[] = [
     year: 2025,
     initialLikes: 74,
   },
+  {
+    id: 's14',
+    imageUrl: '/images/tuffy-nap.webp',
+    videoUrl: '/videos/tuffy-nap.mov',
+    videoThumbnailTime: 31.5,
+    title: 'Workday Nap Champion: Tuffy',
+    category: 'videos',
+    description:
+      'My ultimate remote work coworker! No matter what my day throws at me—back-to-back Zoom calls, typing away at my laptop, or brewing another cup of coffee—Tuffy remains entirely unbothered, curled up in pure bliss taking an all-day nap. Talk about work-life balance goals! 😴💻',
+    petName: 'Tuffy',
+    location: 'California',
+    year: 2026,
+    initialLikes: 58,
+  },
 ];
