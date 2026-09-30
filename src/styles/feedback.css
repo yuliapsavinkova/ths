@@ -32,43 +32,7 @@
   z-index: 1;
 }
 
-/* Decorative Background Paw Watermarks */
-.feedback-bg-paw-watermark {
-  position: absolute;
-  pointer-events: none;
-  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
-  z-index: 1;
-  user-select: none;
-  transition: opacity var(--transition-normal);
-}
-
-.feedback-bg-paw-left {
-  top: 8%;
-  left: max(2%, calc(50% - 460px));
-  transform: rotate(-16deg);
-}
-
-.feedback-bg-paw-right {
-  bottom: 8%;
-  right: max(2%, calc(50% - 480px));
-  transform: rotate(20deg);
-}
-
-@media (max-width: 768px) {
-  .feedback-bg-paw-watermark {
-    opacity: 0.4;
-  }
-  .feedback-bg-paw-left {
-    top: 3%;
-    left: -20px;
-    transform: rotate(-12deg) scale(0.75);
-  }
-  .feedback-bg-paw-right {
-    bottom: 2%;
-    right: -25px;
-    transform: rotate(15deg) scale(0.75);
-  }
-}
+/* Decorative Background Paw Watermarks are managed centrally via watermarks.css */
 
 .feedback-container {
   width: 100%;

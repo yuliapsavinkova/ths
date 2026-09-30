@@ -178,7 +178,7 @@ export const HighlightsSection: React.FC = () => {
             Highlights at a Glance
           </h2>
           <p className="section-subtitle highlights-subtitle" id="highlights-section-subtitle">
-            Live-in house sitting and premium pet care tailored to your home.
+            Live-in house sitting and loving pet care tailored to your home.
           </p>
         </div>
 

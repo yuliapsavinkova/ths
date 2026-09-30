@@ -1,0 +1,241 @@
+/* ─── REUSABLE DECORATIVE PAW WATERMARK UTILITY SYSTEM ─── */
+
+/* Base Styles (Mobile-First) */
+.paw-watermark {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: var(--z-content);
+  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
+  opacity: 0.45;
+  transition: opacity var(--transition-normal);
+}
+
+.paw-watermark svg {
+  display: block;
+}
+
+/* ─── Color & Illumination Variants ─── */
+.paw-watermark-gold {
+  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
+}
+
+.paw-watermark-soft {
+  color: color-mix(in srgb, var(--color-brand-secondary) 8%, transparent);
+}
+
+.paw-watermark-glow {
+  color: color-mix(in srgb, var(--color-brand-secondary) 18%, transparent);
+  filter: drop-shadow(
+    0 2px 14px color-mix(in srgb, var(--color-brand-primary-bold) 25%, transparent)
+  );
+}
+
+/* ─── Positional Classes (Mobile-First Base) ─── */
+.paw-watermark-left {
+  top: 3%;
+  left: -20px;
+  transform: rotate(-12deg) scale(0.75);
+}
+
+.paw-watermark-right {
+  bottom: 2%;
+  right: -25px;
+  transform: rotate(15deg) scale(0.75);
+}
+
+.paw-watermark-top {
+  top: 2%;
+  left: 50%;
+  transform: translateX(-50%) rotate(4deg) scale(0.75);
+}
+
+.paw-watermark-bottom {
+  bottom: 2%;
+  left: 50%;
+  transform: translateX(-50%) rotate(-6deg) scale(0.75);
+}
+
+.paw-watermark-top-left {
+  top: 2%;
+  left: -15px;
+  transform: rotate(-15deg) scale(0.75);
+}
+
+.paw-watermark-top-right {
+  top: 2%;
+  right: -15px;
+  transform: rotate(15deg) scale(0.75);
+}
+
+.paw-watermark-bottom-left {
+  bottom: 2%;
+  left: -15px;
+  transform: rotate(-10deg) scale(0.75);
+}
+
+.paw-watermark-bottom-right {
+  bottom: 2%;
+  right: -20px;
+  transform: rotate(15deg) scale(0.75);
+}
+
+/* ─── Desktop & Tablet Enhancements (Custom Media Tokens) ─── */
+@media (--medium) {
+  .paw-watermark {
+    opacity: 1;
+  }
+
+  .paw-watermark-left {
+    top: 8%;
+    left: max(2%, calc(50% - 460px));
+    transform: rotate(-16deg) scale(1);
+  }
+
+  .paw-watermark-right {
+    bottom: 8%;
+    right: max(2%, calc(50% - 480px));
+    transform: rotate(20deg) scale(1);
+  }
+
+  .paw-watermark-top {
+    top: 4%;
+    transform: translateX(-50%) rotate(6deg) scale(1);
+  }
+
+  .paw-watermark-bottom {
+    bottom: 4%;
+    transform: translateX(-50%) rotate(-8deg) scale(1);
+  }
+
+  .paw-watermark-top-left {
+    top: 6%;
+    left: max(2%, calc(50% - 460px));
+    transform: rotate(-18deg) scale(1);
+  }
+
+  .paw-watermark-top-right {
+    top: 6%;
+    right: max(2%, calc(50% - 480px));
+    transform: rotate(18deg) scale(1);
+  }
+
+  .paw-watermark-bottom-left {
+    bottom: 6%;
+    left: max(2%, calc(50% - 460px));
+    transform: rotate(-12deg) scale(1);
+  }
+
+  .paw-watermark-bottom-right {
+    bottom: 6%;
+    right: max(2%, calc(50% - 480px));
+    transform: rotate(20deg) scale(1);
+  }
+}
+
+/* ─── Hero Circle Watermark (Completely On Top & Enlarged) ───
+   Positioned top-left of the hero image frame, sitting completely on top of the
+   circular photo and dashed ring, diagonally across from the "Rates From" circle */
+.hero-circle-paw-watermark {
+  position: absolute;
+  top: 1%;
+  left: -2%;
+  z-index: var(--z-content);
+  transform: rotate(-22deg);
+  /* color: color-mix(in srgb, var(--color-brand-secondary) 24%, transparent); */
+  pointer-events: none;
+  user-select: none;
+  opacity: 1;
+  transition: all var(--transition-normal);
+}
+
+.hero-circle-paw-watermark svg {
+  width: 7.5rem;
+  height: auto;
+  filter: drop-shadow(0 4px 16px color-mix(in srgb, var(--color-brand-primary) 35%, transparent));
+}
+
+@media (--small) {
+  .hero-circle-paw-watermark {
+    top: 1%;
+    left: -2%;
+  }
+
+  .hero-circle-paw-watermark svg {
+    width: 9rem;
+  }
+}
+
+@media (--medium) {
+  .hero-circle-paw-watermark {
+    top: 0%;
+    left: -3%;
+  }
+
+  .hero-circle-paw-watermark svg {
+    width: 10.5rem;
+  }
+}
+
+@media (--large) {
+  .hero-circle-paw-watermark {
+    top: -2%;
+    left: -5%;
+  }
+
+  .hero-circle-paw-watermark svg {
+    width: 12.5rem;
+  }
+}
+
+@media (--xlarge) {
+  .hero-circle-paw-watermark {
+    top: -3%;
+    left: -6%;
+  }
+
+  .hero-circle-paw-watermark svg {
+    width: 14rem;
+  }
+}
+
+/* ─── Backward Compatibility Aliases for Feedback ─── */
+.feedback-bg-paw-watermark {
+  position: absolute;
+  pointer-events: none;
+  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
+  z-index: var(--z-content);
+  user-select: none;
+  opacity: 0.45;
+  transition: opacity var(--transition-normal);
+}
+
+.feedback-bg-paw-left {
+  top: 3%;
+  left: -20px;
+  transform: rotate(-12deg) scale(0.75);
+}
+
+.feedback-bg-paw-right {
+  bottom: 2%;
+  right: -25px;
+  transform: rotate(15deg) scale(0.75);
+}
+
+@media (--medium) {
+  .feedback-bg-paw-watermark {
+    opacity: 1;
+  }
+
+  .feedback-bg-paw-left {
+    top: 8%;
+    left: max(2%, calc(50% - 460px));
+    transform: rotate(-16deg) scale(1);
+  }
+
+  .feedback-bg-paw-right {
+    bottom: 8%;
+    right: max(2%, calc(50% - 480px));
+    transform: rotate(20deg) scale(1);
+  }
+}

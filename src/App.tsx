@@ -27,7 +27,7 @@ export default function App() {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 30) {
+      if (window.scrollY > 220) {
         setScrolled(true);
       } else {
         setScrolled(false);

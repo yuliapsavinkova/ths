@@ -1,4 +1,4 @@
-import { BookingRequest, PricingBreakdown } from '../../src/types';
+import type { BookingRequest, PricingBreakdown } from '../../src/types.ts';
 
 export type { BookingRequest, PricingBreakdown };
 

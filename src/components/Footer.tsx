@@ -7,14 +7,14 @@ export const Footer: React.FC = () => {
   return (
     <footer className="footer" id="footer-section-el">
       <div className="wrap-wide footer-inner" id="footer-inner-wrap">
-        
         {/* Row 1: 3 Columns */}
         <div className="footer-columns" id="footer-columns-wrap">
           {/* Column 1: Sitter brand */}
           <div className="footer-col footer-col-brand" id="footer-brand-container">
             <BrandLogo variant="footer" id="footer-brand-title-el" />
             <p className="footer-brand-text" id="footer-brand-desc">
-              Premium house & pet sitting. Enjoy complete peace of mind while you're away with a trusted live-in sitter, attentive care for your pets and home, and regular updates.
+              Enjoy complete peace of mind while you're away with a trusted live-in sitter,
+              attentive care for your pets and home, and regular updates.
             </p>
           </div>
 
@@ -22,11 +22,21 @@ export const Footer: React.FC = () => {
           <div className="footer-col footer-col-nav" id="footer-nav-col">
             <span className="footer-col-title">Navigation</span>
             <ul className="footer-links-list">
-              <li><a href="#about-section">About</a></li>
-              <li><a href="#services-section">Services</a></li>
-              <li><a href="#testimonials-section">Reviews</a></li>
-              <li><a href="#faq-section">FAQs</a></li>
-              <li><a href="#booking-form-section">Book a Sit</a></li>
+              <li>
+                <a href="#about-section">About</a>
+              </li>
+              <li>
+                <a href="#services-section">Services</a>
+              </li>
+              <li>
+                <a href="#testimonials-section">Reviews</a>
+              </li>
+              <li>
+                <a href="#faq-section">FAQs</a>
+              </li>
+              <li>
+                <a href="#booking-form-section">Book a Sit</a>
+              </li>
             </ul>
           </div>
 
@@ -35,20 +45,12 @@ export const Footer: React.FC = () => {
             <span className="footer-col-title">External Networks</span>
             <ul className="footer-links-list">
               <li>
-                <a 
-                  href="https://sitterjourney.com" 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
+                <a href="https://sitterjourney.com" target="_blank" rel="noopener noreferrer">
                   SitterJourney Blog <ExternalLink size={12} />
                 </a>
               </li>
               <li>
-                <a 
-                  href={TRUSTED_HOUSESITTERS_REF_LINK} 
-                  target="_blank" 
-                  rel="noopener noreferrer"
-                >
+                <a href={TRUSTED_HOUSESITTERS_REF_LINK} target="_blank" rel="noopener noreferrer">
                   TrustedHousesitters <ExternalLink size={12} />
                 </a>
               </li>
@@ -59,14 +61,17 @@ export const Footer: React.FC = () => {
         {/* Row 2: 1 Column Independent Copyright Line */}
         <div className="footer-bottom" id="footer-bottom-wrap">
           <p className="footer-copyright" id="footer-copyright-text">
-            <span className="footer-copyright-item">© {new Date().getFullYear()} yulia.sitterjourney.com</span>
+            <span className="footer-copyright-item">
+              © {new Date().getFullYear()} yulia.sitterjourney.com
+            </span>
             <span className="footer-copyright-item footer-copyright-rights">
-              <span className="footer-copyright-separator" aria-hidden="true">·</span>
+              <span className="footer-copyright-separator" aria-hidden="true">
+                ·
+              </span>
               All Rights Reserved
             </span>
           </p>
         </div>
-
       </div>
     </footer>
   );

@@ -3,6 +3,7 @@ import { PawIcon } from './Icons';
 import { SITTER_IMAGES } from '../data';
 import RateBadgeCircle from './RateBadgeCircle';
 import NewsletterSubscription from './NewsletterSubscription';
+// import { PawWatermark } from './PawWatermark';
 
 export const Hero: React.FC = () => {
   const handleSelectWeek = () => {
@@ -34,7 +35,8 @@ export const Hero: React.FC = () => {
         <div className="hero-content" id="hero-content-col">
           <div className="hero-tagline-wrapper" id="hero-tagline-wrap">
             <span className="hero-tagline">
-              <PawIcon size={14} /> Premium House & Pet Sitting
+              <PawIcon size={14} />
+              <span className="hero-tagline-text">Professional House &amp; Pet Care</span>
             </span>
           </div>
 
@@ -75,6 +77,15 @@ export const Hero: React.FC = () => {
         <div className="hero-image-wrapper" id="hero-img-wrap">
           <div className="hero-image-bg-glow" />
           <div className="badge-circle hero-image-ring badge-circle-animated" />
+
+          {/* Decorative Paw Watermark (Behind the image, peeking from top-left of circle) */}
+          {/* <PawWatermark
+            position="hero-circle"
+            size={160}
+            variant="glow"
+            id="hero-circle-paw-watermark"
+          /> */}
+
           <img
             src={SITTER_IMAGES.hero}
             alt="Yulia with a friendly dog"

@@ -1,13 +1,13 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { getResendClient } from '../services/resend';
+import { getResendClient } from '../services/resend.ts';
 import {
   generateBookingEmailHtml,
   generateBookingConfirmationEmailHtml,
   formatHumanDate,
-} from '../utils/bookingEmail';
-import { CONFIG } from '../config';
+} from '../utils/bookingEmail.ts';
+import { CONFIG } from '../config.ts';
 
 export async function handleBookingSubmit(req: Request, res: Response) {
   let booking = req.body;
@@ -46,12 +46,22 @@ export async function handleBookingSubmit(req: Request, res: Response) {
 
   const sanitizedBooking = {
     ...booking,
-    name: String(booking.name || '').slice(0, 150).trim(),
-    email: String(booking.email || '').slice(0, 150).trim(),
-    phone: String(booking.phone || '').slice(0, 50).trim(),
-    location: String(booking.location || '').slice(0, 150).trim(),
+    name: String(booking.name || '')
+      .slice(0, 150)
+      .trim(),
+    email: String(booking.email || '')
+      .slice(0, 150)
+      .trim(),
+    phone: String(booking.phone || '')
+      .slice(0, 50)
+      .trim(),
+    location: String(booking.location || '')
+      .slice(0, 150)
+      .trim(),
     isRepeatClient,
-    notes: String(booking.notes || '').slice(0, 3000).trim(),
+    notes: String(booking.notes || '')
+      .slice(0, 3000)
+      .trim(),
     pricing: {
       ...rawPricing,
       ...(repeatDiscount > 0 ? { repeatClientDiscount: repeatDiscount } : {}),
@@ -119,10 +129,16 @@ export async function handleBookingSubmit(req: Request, res: Response) {
       }
 
       // Send instant confirmation / thank you email to the client if an email is provided
-      if (sanitizedBooking.email && typeof sanitizedBooking.email === 'string' && sanitizedBooking.email.includes('@')) {
+      if (
+        sanitizedBooking.email &&
+        typeof sanitizedBooking.email === 'string' &&
+        sanitizedBooking.email.includes('@')
+      ) {
         try {
           const clientEmailHtml = generateBookingConfirmationEmailHtml(sanitizedBooking);
-          const clientFirstName = sanitizedBooking.name ? sanitizedBooking.name.trim().split(' ')[0] : '';
+          const clientFirstName = sanitizedBooking.name
+            ? sanitizedBooking.name.trim().split(' ')[0]
+            : '';
           const clientSubject = sanitizedBooking.startDate
             ? `Thank You for Your Request${clientFirstName ? `, ${clientFirstName}` : ''}! (${formatHumanDate(sanitizedBooking.startDate)})`
             : `Thank You for Your Request${clientFirstName ? `, ${clientFirstName}` : ''}!`;
@@ -150,7 +166,9 @@ export async function handleBookingSubmit(req: Request, res: Response) {
       console.warn('[Booking] Resend dispatch exception:', error);
     }
   } else {
-    console.warn('[Booking] RESEND_API_KEY, SITTER_EMAIL_TO, or SITTER_EMAIL_FROM not configured. Booking saved without email dispatch.');
+    console.warn(
+      '[Booking] RESEND_API_KEY, SITTER_EMAIL_TO, or SITTER_EMAIL_FROM not configured. Booking saved without email dispatch.',
+    );
   }
 
   return res.status(200).json({
@@ -162,4 +180,3 @@ export async function handleBookingSubmit(req: Request, res: Response) {
     clientDeliveryNote,
   });
 }
-

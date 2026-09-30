@@ -60,7 +60,12 @@
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at center, var(--color-brand-primary-subtle) 0%, var(--color-bg-dark-translucent-faint) 60%, var(--color-text-primary) 100%);
+  background: radial-gradient(
+    ellipse at center,
+    var(--color-brand-primary-subtle) 0%,
+    var(--color-bg-dark-translucent-faint) 60%,
+    var(--color-text-primary) 100%
+  );
   pointer-events: none;
   opacity: 0.8;
 }
@@ -109,21 +114,32 @@
 .hero-tagline {
   display: inline-flex;
   align-items: center;
-  gap: var(--spacing-sm-subtle);
-  padding: var(--spacing-badge-py) var(--spacing-badge-px);
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: var(--spacing-badge-py) var(--spacing-sm);
   border-radius: var(--radius-full);
   background-color: var(--color-brand-primary-medium);
   color: var(--color-brand-secondary);
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
+  line-height: var(--line-height-none);
   text-transform: uppercase;
   letter-spacing: 0.1em;
   border: 1px solid var(--color-border-soft);
 }
 
 .hero-tagline svg {
-  width: var(--paw-size-header);
+  display: block;
+  flex-shrink: 0;
+  width: 0.8125rem;
   height: auto;
+  position: relative;
+  top: -0.5px;
+}
+
+.hero-tagline-text {
+  display: inline-block;
+  line-height: var(--line-height-none);
 }
 
 .hero-title {
@@ -204,7 +220,7 @@
     max-width: 420px;
     margin-top: var(--spacing-md);
   }
-  
+
   .hero-ctas .btn {
     flex: initial;
     padding-left: var(--spacing-lg);
@@ -557,7 +573,12 @@
   max-width: calc(100% - var(--spacing-md) * 2);
   aspect-ratio: 1 / 1;
   height: auto;
-  background: radial-gradient(circle, var(--color-brand-primary-medium) 0%, var(--color-brand-primary-subtle) 55%, transparent 75%);
+  background: radial-gradient(
+    circle,
+    var(--color-brand-primary-medium) 0%,
+    var(--color-brand-primary-subtle) 55%,
+    transparent 75%
+  );
   filter: blur(40px);
   z-index: var(--z-content);
   pointer-events: none;
@@ -677,7 +698,7 @@
 /* ─── Glowing Rate Circle Badge ─── */
 #hero-rate-badge-circle {
   /* Mobile-first responsive badge custom properties using centralized design tokens */
-  --badge-size: 7.75rem;                        /* Generous, highly readable badge for mobile viewports */
+  --badge-size: 7.75rem; /* Generous, highly readable badge for mobile viewports */
   --badge-paw-size: var(--font-size-sm);
   --badge-title-size: var(--font-size-xs);
   --badge-price-size: var(--font-size-base);
@@ -731,8 +752,13 @@
 }
 
 @keyframes paw-wiggle {
-  0%, 100% { transform: rotate(0deg); }
-  50% { transform: rotate(8deg); }
+  0%,
+  100% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(8deg);
+  }
 }
 
 .badge-title {
@@ -874,4 +900,3 @@
     right: -4%;
   }
 }
-

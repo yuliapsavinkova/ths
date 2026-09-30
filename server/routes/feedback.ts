@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { getResendClient } from '../services/resend';
-import { CONFIG } from '../config';
-import { FeedbackPayload, generateFeedbackEmailHtml } from '../utils/feedbackEmail';
+import { getResendClient } from '../services/resend.ts';
+import { CONFIG } from '../config.ts';
+import { generateFeedbackEmailHtml, type FeedbackPayload } from '../utils/feedbackEmail.ts';
 
 export type { FeedbackPayload };
 export { generateFeedbackEmailHtml };

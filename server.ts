@@ -2,9 +2,9 @@ import express from 'express';
 import path from 'path';
 import dotenv from 'dotenv';
 import { createServer as createViteServer } from 'vite';
-import { handleBookingSubmit } from './server/routes/booking';
-import { handleSubscribe } from './server/routes/subscribe';
-import { handleFeedbackSubmit } from './server/routes/feedback';
+import { handleBookingSubmit } from './server/routes/booking.ts';
+import { handleSubscribe } from './server/routes/subscribe.ts';
+import { handleFeedbackSubmit } from './server/routes/feedback.ts';
 
 dotenv.config();
 

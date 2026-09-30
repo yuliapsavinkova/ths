@@ -8,6 +8,7 @@ import {
   Mail,
 } from 'lucide-react';
 import { PawIcon } from './Icons';
+import { PawWatermark } from './PawWatermark';
 
 export const FeedbackSection: React.FC = () => {
   const [message, setMessage] = useState<string>('');
@@ -65,12 +66,8 @@ export const FeedbackSection: React.FC = () => {
     <section id="feedback-section" className="feedback-section" aria-labelledby="feedback-section-title">
       {/* Ambient background glows and decorative watermarks */}
       <div className="feedback-bg-glow" aria-hidden="true" />
-      <div className="feedback-bg-paw-watermark feedback-bg-paw-left" aria-hidden="true">
-        <PawIcon size={160} />
-      </div>
-      <div className="feedback-bg-paw-watermark feedback-bg-paw-right" aria-hidden="true">
-        <PawIcon size={190} />
-      </div>
+      <PawWatermark position="left" size={160} />
+      <PawWatermark position="right" size={190} />
 
       <div className="feedback-container" id="feedback-container-wrap">
         

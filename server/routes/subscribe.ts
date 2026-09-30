@@ -1,9 +1,9 @@
-import { Request, Response } from 'express';
+import type { Request, Response } from 'express';
 import path from 'path';
 import fs from 'fs';
-import { getResendClient } from '../services/resend';
-import { CONFIG } from '../config';
-import { generateNewsletterEmailHtml } from '../utils/newsletterEmail';
+import { getResendClient } from '../services/resend.ts';
+import { CONFIG } from '../config.ts';
+import { generateNewsletterEmailHtml } from '../utils/newsletterEmail.ts';
 
 export async function handleSubscribe(req: Request, res: Response) {
   let body = req.body;
@@ -28,6 +28,7 @@ export async function handleSubscribe(req: Request, res: Response) {
 
   const recipient = process.env.SITTER_EMAIL_TO || CONFIG.SITTER_EMAIL_TO;
   const sender = process.env.SITTER_EMAIL_FROM || CONFIG.SITTER_EMAIL_FROM;
+  const apiKey = process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
 
   try {
     // A. Locally persist the email to subscribers.json if filesystem is writable
@@ -60,7 +61,7 @@ export async function handleSubscribe(req: Request, res: Response) {
     let emailSent = false;
     let resendData = null;
     try {
-      if (recipient) {
+      if (apiKey && recipient && sender) {
         const resend = getResendClient();
         resendData = await resend.emails.send({
           from: sender,

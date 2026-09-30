@@ -1,5 +1,5 @@
 import { Resend } from 'resend';
-import { CONFIG } from '../config';
+import { CONFIG } from '../config.ts';
 
 export function getResendClient(apiKey?: string): Resend {
   const key = apiKey || process.env.RESEND_API_KEY || CONFIG.RESEND_API_KEY;
