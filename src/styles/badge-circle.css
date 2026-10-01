@@ -112,7 +112,6 @@ button.badge-circle.is-active {
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  gap: var(--badge-rate-row-gap, var(--spacing-xs));
   line-height: var(--line-height-none);
   box-sizing: border-box;
   transform-origin: center center;

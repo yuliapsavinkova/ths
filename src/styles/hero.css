@@ -705,7 +705,6 @@
   --badge-unit-size: var(--font-size-xs);
   --badge-dash-size: var(--font-size-3xs);
   --badge-rates-gap: 0px;
-  --badge-rate-row-gap: var(--spacing-xs);
   --badge-paw-margin: var(--spacing-xs);
   --badge-title-margin: var(--spacing-sm);
   --badge-dash-margin: var(--spacing-xxs);
@@ -787,7 +786,6 @@
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  gap: var(--badge-rate-row-gap, var(--spacing-xs));
   line-height: var(--line-height-none);
   text-align: center;
 }
@@ -830,7 +828,6 @@
     --badge-unit-size: var(--font-size-xs);
     --badge-dash-size: var(--font-size-3xs);
     --badge-rates-gap: 0px;
-    --badge-rate-row-gap: var(--spacing-xs);
     --badge-paw-margin: var(--spacing-xs);
     --badge-title-margin: var(--spacing-sm);
     --badge-dash-margin: var(--spacing-xxs);
@@ -850,7 +847,6 @@
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-3xs);
     --badge-rates-gap: 0px;
-    --badge-rate-row-gap: var(--spacing-xs);
     --badge-paw-margin: var(--spacing-sm-subtle);
     --badge-title-margin: var(--spacing-sm);
     --badge-dash-margin: var(--spacing-xxs);
@@ -873,7 +869,6 @@
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-sm);
     --badge-rates-gap: 1px;
-    --badge-rate-row-gap: var(--spacing-sm-subtle);
     --badge-paw-margin: var(--spacing-sm);
     --badge-title-margin: var(--spacing-md-subtle);
     --badge-dash-margin: var(--spacing-xxs);
@@ -896,7 +891,6 @@
     --badge-unit-size: var(--font-size-base);
     --badge-dash-size: var(--font-size-sm);
     --badge-rates-gap: 1px;
-    --badge-rate-row-gap: var(--spacing-sm-subtle);
     --badge-paw-margin: var(--spacing-sm);
     --badge-title-margin: var(--spacing-md-subtle);
     --badge-dash-margin: var(--spacing-xxs);
