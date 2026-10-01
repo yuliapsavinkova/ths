@@ -1,6 +1,7 @@
 {
   "name": "Yulia — Trusted House & Pet Sitter",
-  "description": "Professional live-in house and pet sitter serving California areas with transparent pricing and seamless booking.",
+  "description": "Professional live-in house and pet sitter serving California's premier communities with transparent pricing, full-time presence, and verified 5-star reviews.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }
+
