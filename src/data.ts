@@ -109,7 +109,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq1',
     question: 'Where do you sit?',
     answer:
-      'While I am based in California, I am open to sitting anywhere for selected opportunities! For monthly or longer sits, distance is not a barrier.',
+      "I sit across California's communities and am open to sitting nationwide for selected monthly or extended opportunities. Since I work remotely and stay in your home full-time for the duration of the sit, distance is not a barrier for extended bookings.",
   },
   {
     id: 'faq2',
@@ -240,6 +240,7 @@ export const COVERAGE_AREAS = [
   'San Jose',
   'Saratoga',
   'Santa Barbara',
+  'Montecito',
   'Malibu',
   'Santa Monica',
   'Beverly Hills',

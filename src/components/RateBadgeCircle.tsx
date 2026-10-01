@@ -37,8 +37,8 @@ export const RateBadgeCircle: React.FC<RateBadgeCircleProps> = ({
   const handleContainerClick = (e: React.MouseEvent) => {
     if (!isInteractive) return;
     if ((e.target as HTMLElement).closest('.badge-rate-btn')) return;
-    setInternalActiveTier('week');
-    onSelectWeek?.();
+    setInternalActiveTier('month');
+    onSelectMonth?.();
   };
 
   return (
@@ -56,16 +56,6 @@ export const RateBadgeCircle: React.FC<RateBadgeCircleProps> = ({
             <>
               <button
                 type="button"
-                onClick={handleWeekClick}
-                className={`badge-rate-row badge-rate-btn ${activeTier === 'week' ? 'is-active' : ''}`}
-                aria-pressed={activeTier === 'week'}
-                title="Book 1 Week Stay"
-              >
-                <span className="badge-price">$299</span>
-                <span className="badge-unit">/week</span>
-              </button>
-              <button
-                type="button"
                 onClick={handleMonthClick}
                 className={`badge-rate-row badge-rate-btn ${activeTier === 'month' ? 'is-active' : ''}`}
                 aria-pressed={activeTier === 'month'}
@@ -74,16 +64,26 @@ export const RateBadgeCircle: React.FC<RateBadgeCircleProps> = ({
                 <span className="badge-price">$999</span>
                 <span className="badge-unit">/month</span>
               </button>
+              <button
+                type="button"
+                onClick={handleWeekClick}
+                className={`badge-rate-row badge-rate-btn ${activeTier === 'week' ? 'is-active' : ''}`}
+                aria-pressed={activeTier === 'week'}
+                title="Book 1 Week Stay"
+              >
+                <span className="badge-price">$299</span>
+                <span className="badge-unit">/week</span>
+              </button>
             </>
           ) : (
             <>
               <span className="badge-rate-row">
-                <span className="badge-price">$299</span>
-                <span className="badge-unit">/week</span>
-              </span>
-              <span className="badge-rate-row">
                 <span className="badge-price">$999</span>
                 <span className="badge-unit">/month</span>
+              </span>
+              <span className="badge-rate-row">
+                <span className="badge-price">$299</span>
+                <span className="badge-unit">/week</span>
               </span>
             </>
           )}

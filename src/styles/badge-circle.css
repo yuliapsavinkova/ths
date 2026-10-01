@@ -89,21 +89,21 @@ button.badge-circle.is-active {
   padding: var(--badge-content-padding, var(--spacing-xs));
   box-sizing: border-box;
   pointer-events: none;
+  overflow: hidden;
 }
 
 /* Interactive Clickable Rate Rows inside Badge Circle */
 .badge-rate-btn {
   background: transparent;
   border: 1px solid transparent;
-  padding-top: var(--badge-btn-pt, 4px);
-  padding-bottom: var(--badge-btn-pb, 7px);
-  padding-left: var(--badge-btn-px, 12px);
-  padding-right: var(--badge-btn-px, 12px);
+  padding-top: var(--badge-btn-pt, var(--spacing-xxs));
+  padding-bottom: var(--badge-btn-pb, var(--spacing-xxs));
+  padding-left: var(--badge-btn-px, var(--spacing-xs));
+  padding-right: var(--badge-btn-px, var(--spacing-xs));
   border-radius: var(--radius-full);
   cursor: pointer;
   pointer-events: auto;
   transition:
-    transform var(--transition-fast) cubic-bezier(0.16, 1, 0.3, 1),
     background-color var(--transition-fast) ease,
     border-color var(--transition-fast) ease,
     box-shadow var(--transition-fast) ease;
@@ -112,17 +112,15 @@ button.badge-circle.is-active {
   display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  gap: var(--badge-rate-row-gap, 4px);
+  gap: var(--badge-rate-row-gap, var(--spacing-xs));
   line-height: var(--line-height-none);
   box-sizing: border-box;
   transform-origin: center center;
 }
 
 .badge-rate-btn:hover {
-  background-color: rgba(255, 255, 255, 0.16);
-  border-color: rgba(255, 255, 255, 0.28);
-  transform: scale(1.04);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.22);
+  background-color: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.22);
 }
 
 .badge-rate-btn:active {
@@ -132,13 +130,12 @@ button.badge-circle.is-active {
 .badge-rate-btn.is-active {
   background-color: color-mix(in srgb, var(--color-brand-secondary) 25%, transparent);
   border-color: var(--color-brand-secondary);
-  box-shadow: 0 0 14px color-mix(in srgb, var(--color-brand-secondary) 50%, transparent);
+  box-shadow: 0 0 10px color-mix(in srgb, var(--color-brand-secondary) 40%, transparent);
 }
 
 .badge-rate-btn.is-active:hover {
-  background-color: color-mix(in srgb, var(--color-brand-secondary) 35%, transparent);
+  background-color: color-mix(in srgb, var(--color-brand-secondary) 32%, transparent);
   border-color: var(--color-brand-secondary);
-  transform: scale(1.04);
 }
 
 .badge-rate-btn.is-active .badge-price {

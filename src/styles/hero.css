@@ -705,14 +705,14 @@
   --badge-unit-size: var(--font-size-xs);
   --badge-dash-size: var(--font-size-3xs);
   --badge-rates-gap: var(--spacing-xxs);
-  --badge-rate-row-gap: var(--spacing-xxs);
-  --badge-paw-margin: var(--spacing-xxs);
-  --badge-title-margin: var(--spacing-xxs);
+  --badge-rate-row-gap: var(--spacing-xs);
+  --badge-paw-margin: var(--spacing-xs);
+  --badge-title-margin: var(--spacing-xs);
   --badge-dash-margin: var(--spacing-xxs);
   --badge-content-padding: var(--spacing-xs);
-  --badge-btn-pt: 4px;
-  --badge-btn-pb: 6px;
-  --badge-btn-px: 10px;
+  --badge-btn-pt: var(--spacing-xxs);
+  --badge-btn-pb: var(--spacing-xxs);
+  --badge-btn-px: var(--spacing-xs);
 
   position: absolute;
   bottom: -2%;
@@ -766,23 +766,30 @@
   font-size: var(--badge-title-size);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.08em;
   color: var(--color-text-secondary-inverse);
   margin-bottom: var(--badge-title-margin);
+  line-height: var(--line-height-none);
+  text-align: center;
+  margin-right: -0.08em;
 }
 
 .badge-rates {
   display: flex;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
   gap: var(--badge-rates-gap);
+  width: 100%;
 }
 
 .badge-rate-row {
-  display: flex;
+  display: inline-flex;
   align-items: baseline;
   justify-content: center;
-  gap: var(--badge-rate-row-gap);
+  gap: var(--badge-rate-row-gap, var(--spacing-xs));
+  line-height: var(--line-height-none);
+  text-align: center;
 }
 
 .badge-price {
@@ -792,7 +799,8 @@
   font-weight: var(--font-weight-bold);
   color: var(--color-status-success-vibrant);
   line-height: var(--line-height-none);
-  font-variant-numeric: lining-nums proportional-nums;
+  font-variant-numeric: tabular-nums lining-nums;
+  display: inline-block;
 }
 
 .badge-unit {
@@ -801,6 +809,7 @@
   font-weight: var(--font-weight-light);
   color: var(--color-text-secondary-inverse);
   line-height: var(--line-height-none);
+  display: inline-block;
 }
 
 .badge-dash {
@@ -820,15 +829,15 @@
     --badge-price-size: var(--font-size-lg);
     --badge-unit-size: var(--font-size-xs);
     --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: var(--spacing-xs);
+    --badge-rates-gap: var(--spacing-xxs);
     --badge-rate-row-gap: var(--spacing-xs);
-    --badge-paw-margin: var(--spacing-xxs);
+    --badge-paw-margin: var(--spacing-xs);
     --badge-title-margin: var(--spacing-xs);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-xs);
-    --badge-btn-pt: 5px;
-    --badge-btn-pb: 7px;
-    --badge-btn-px: 12px;
+    --badge-btn-pt: var(--spacing-xxs);
+    --badge-btn-pb: var(--spacing-xxs);
+    --badge-btn-px: var(--spacing-xs);
   }
 }
 
@@ -840,15 +849,15 @@
     --badge-price-size: var(--font-size-xl);
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: var(--spacing-sm-subtle);
-    --badge-rate-row-gap: var(--spacing-sm-subtle);
-    --badge-paw-margin: var(--spacing-xs);
-    --badge-title-margin: var(--spacing-sm-subtle);
+    --badge-rates-gap: var(--spacing-xxs);
+    --badge-rate-row-gap: var(--spacing-xs);
+    --badge-paw-margin: var(--spacing-sm-subtle);
+    --badge-title-margin: var(--spacing-xs);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm-subtle);
-    --badge-btn-pt: 6px;
-    --badge-btn-pb: 9px;
-    --badge-btn-px: 15px;
+    --badge-btn-pt: var(--spacing-xxs);
+    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-px: var(--spacing-xs);
 
     bottom: -1%;
     right: 2%;
@@ -863,15 +872,15 @@
     --badge-price-size: var(--font-size-xl);
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-sm);
-    --badge-rates-gap: var(--spacing-sm-subtle);
-    --badge-rate-row-gap: var(--spacing-xs);
-    --badge-paw-margin: var(--spacing-xs);
-    --badge-title-margin: var(--spacing-sm-subtle);
+    --badge-rates-gap: var(--spacing-xs);
+    --badge-rate-row-gap: var(--spacing-sm-subtle);
+    --badge-paw-margin: var(--spacing-sm);
+    --badge-title-margin: var(--spacing-xs);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: 7px;
-    --badge-btn-pb: 11px;
-    --badge-btn-px: 18px;
+    --badge-btn-pt: var(--spacing-xxs);
+    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-px: var(--spacing-sm-subtle);
 
     bottom: 0%;
     right: -2%;
@@ -886,15 +895,15 @@
     --badge-price-size: var(--font-size-2xl);
     --badge-unit-size: var(--font-size-base);
     --badge-dash-size: var(--font-size-sm);
-    --badge-rates-gap: var(--spacing-sm-subtle);
-    --badge-rate-row-gap: var(--spacing-xs);
-    --badge-paw-margin: var(--spacing-xs);
-    --badge-title-margin: var(--spacing-sm-subtle);
+    --badge-rates-gap: var(--spacing-xs);
+    --badge-rate-row-gap: var(--spacing-sm-subtle);
+    --badge-paw-margin: var(--spacing-sm);
+    --badge-title-margin: var(--spacing-xs);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: 8px;
-    --badge-btn-pb: 14px;
-    --badge-btn-px: 22px;
+    --badge-btn-pt: var(--spacing-xxs);
+    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-px: var(--spacing-sm-subtle);
 
     bottom: 0%;
     right: -4%;
