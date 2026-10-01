@@ -82,11 +82,11 @@ export const AboutSection: React.FC = () => {
               </h3>
               <div className="column-text">
                 <p className="large">
-                  I'm Yulia, a remote software engineer, so I'm home most of the time. When I'm
-                  house- and pet-sitting, your pets have consistent company throughout the day.
-                  Meals, walks, playtime, and any medications stay right on schedule, and I'm always
-                  nearby if something unexpected comes up. Your home also gets the security of a
-                  responsible person living in it, rather than sitting empty.
+                  I'm Yulia, a remote worker, so I'm home most of the time. When I'm house- and
+                  pet-sitting, your pets have consistent company throughout the day. Meals, walks,
+                  playtime, and any medications stay right on schedule, and I'm always nearby if
+                  something unexpected comes up. Your home also gets the security of a responsible
+                  person living in it, rather than sitting empty.
                 </p>
               </div>
             </div>
