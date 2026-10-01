@@ -96,8 +96,8 @@ button.badge-circle.is-active {
 .badge-rate-btn {
   background: transparent;
   border: 1px solid transparent;
-  padding-top: var(--badge-btn-pt, var(--spacing-xxs));
-  padding-bottom: var(--badge-btn-pb, var(--spacing-xxs));
+  padding-top: var(--badge-btn-pt, 1px);
+  padding-bottom: var(--badge-btn-pb, 1px);
   padding-left: var(--badge-btn-px, var(--spacing-xs));
   padding-right: var(--badge-btn-px, var(--spacing-xs));
   border-radius: var(--radius-full);

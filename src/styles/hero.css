@@ -704,14 +704,14 @@
   --badge-price-size: var(--font-size-base);
   --badge-unit-size: var(--font-size-xs);
   --badge-dash-size: var(--font-size-3xs);
-  --badge-rates-gap: var(--spacing-xxs);
+  --badge-rates-gap: 0px;
   --badge-rate-row-gap: var(--spacing-xs);
   --badge-paw-margin: var(--spacing-xs);
-  --badge-title-margin: var(--spacing-xs);
+  --badge-title-margin: var(--spacing-sm);
   --badge-dash-margin: var(--spacing-xxs);
   --badge-content-padding: var(--spacing-xs);
-  --badge-btn-pt: var(--spacing-xxs);
-  --badge-btn-pb: var(--spacing-xxs);
+  --badge-btn-pt: 1px;
+  --badge-btn-pb: 1px;
   --badge-btn-px: var(--spacing-xs);
 
   position: absolute;
@@ -829,14 +829,14 @@
     --badge-price-size: var(--font-size-lg);
     --badge-unit-size: var(--font-size-xs);
     --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: var(--spacing-xxs);
+    --badge-rates-gap: 0px;
     --badge-rate-row-gap: var(--spacing-xs);
     --badge-paw-margin: var(--spacing-xs);
-    --badge-title-margin: var(--spacing-xs);
+    --badge-title-margin: var(--spacing-sm);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-xs);
-    --badge-btn-pt: var(--spacing-xxs);
-    --badge-btn-pb: var(--spacing-xxs);
+    --badge-btn-pt: 1px;
+    --badge-btn-pb: 1px;
     --badge-btn-px: var(--spacing-xs);
   }
 }
@@ -849,14 +849,14 @@
     --badge-price-size: var(--font-size-xl);
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: var(--spacing-xxs);
+    --badge-rates-gap: 0px;
     --badge-rate-row-gap: var(--spacing-xs);
     --badge-paw-margin: var(--spacing-sm-subtle);
-    --badge-title-margin: var(--spacing-xs);
+    --badge-title-margin: var(--spacing-sm);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm-subtle);
-    --badge-btn-pt: var(--spacing-xxs);
-    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-pt: 2px;
+    --badge-btn-pb: 2px;
     --badge-btn-px: var(--spacing-xs);
 
     bottom: -1%;
@@ -872,14 +872,14 @@
     --badge-price-size: var(--font-size-xl);
     --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-sm);
-    --badge-rates-gap: var(--spacing-xs);
+    --badge-rates-gap: 1px;
     --badge-rate-row-gap: var(--spacing-sm-subtle);
     --badge-paw-margin: var(--spacing-sm);
-    --badge-title-margin: var(--spacing-xs);
+    --badge-title-margin: var(--spacing-md-subtle);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: var(--spacing-xxs);
-    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-pt: 2px;
+    --badge-btn-pb: 2px;
     --badge-btn-px: var(--spacing-sm-subtle);
 
     bottom: 0%;
@@ -895,14 +895,14 @@
     --badge-price-size: var(--font-size-2xl);
     --badge-unit-size: var(--font-size-base);
     --badge-dash-size: var(--font-size-sm);
-    --badge-rates-gap: var(--spacing-xs);
+    --badge-rates-gap: 1px;
     --badge-rate-row-gap: var(--spacing-sm-subtle);
     --badge-paw-margin: var(--spacing-sm);
-    --badge-title-margin: var(--spacing-xs);
+    --badge-title-margin: var(--spacing-md-subtle);
     --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: var(--spacing-xxs);
-    --badge-btn-pb: var(--spacing-xs);
+    --badge-btn-pt: 2px;
+    --badge-btn-pb: 2px;
     --badge-btn-px: var(--spacing-sm-subtle);
 
     bottom: 0%;
