@@ -129,7 +129,8 @@ export const FAQS: FaqItem[] = [
     answer:
       'Exchange platforms (like TrustedHousesitters) can be a wonderful budget-friendly option for easygoing pets and homeowners with flexible needs. If your pets have medical needs, separation anxiety, strict routines, or you simply want guaranteed accountability and dedicated remote-work presence, a professional in-home sitter ensures customized, round-the-clock peace of mind.',
     linkText: 'Read my guide: Exchange vs. Professional House Sitting →',
-    linkUrl: 'https://sitterjourney.com/blog/exchange-vs-professional-house-sitting',
+    linkUrl:
+      'https://sitterjourney.com/blog/trusted-housesitters-exchange-vs-professional-house-sitting',
   },
   {
     id: 'faq4',
