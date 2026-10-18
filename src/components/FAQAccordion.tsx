@@ -114,7 +114,7 @@ export default function FAQAccordion() {
                             href={faq.linkUrl} 
                             target="_blank" 
                             rel="noopener noreferrer" 
-                            className="faq-custom-link hover:underline"
+                            className="faq-custom-link"
                             aria-label={`${faq.linkText} (opens in a new tab)`}
                           >
                             {faq.linkText}

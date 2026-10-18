@@ -443,7 +443,7 @@ export default function BookMySit({
           onReset={handleReset}
         />
       ) : (
-        <form onSubmit={handleSubmit} className="w-full">
+        <form onSubmit={handleSubmit} className="bms-form">
           <div className="bms-form-flex-container">
             <div className="bms-flex-col bms-col-left">
               {/* STEP 1: DATES & STAY LENGTH */}

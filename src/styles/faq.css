@@ -153,6 +153,10 @@
   transition: color var(--transition-fast);
 }
 
+.faq-custom-link:hover {
+  text-decoration: underline;
+}
+
 .faq-custom-link:focus-visible {
   outline: 2px solid var(--color-brand-primary);
   outline-offset: 2px;

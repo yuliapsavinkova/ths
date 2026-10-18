@@ -81,6 +81,10 @@
 }
 
 /* Flexbox Layout - Beautifully balanced Columns */
+.bms-form {
+  width: 100%;
+}
+
 .bms-form-flex-container {
   display: flex;
   flex-direction: column;

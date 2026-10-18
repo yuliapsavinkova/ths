@@ -74,7 +74,7 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
     <>
       {variant !== 'inline' && !isHero && (
         <p className="hero-newsletter-title" id="newsletter-title-el">
-          <Mail size={13} className="text-amber-500" />
+          <Mail size={13} />
           Get Yulia's Monthly Updates
         </p>
       )}
@@ -91,9 +91,7 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
           >
             <div className="newsletter-success-title">
               <CheckCircle2 size={18} className="shrink-0" />
-              <span className="newsletter-success-title-text">
-                Successfully subscribed!
-              </span>
+              <span className="newsletter-success-title-text">Successfully subscribed!</span>
             </div>
             <p className="hero-newsletter-success-text" id="newsletter-success-desc">
               ✓ You'll receive my updates and availability.
@@ -106,7 +104,7 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.2 }}
-            className="w-full"
+            className="newsletter-form-container"
           >
             <form onSubmit={handleSubscribe} className="hero-newsletter-form" id="newsletter-form-el">
               <label htmlFor="newsletter-email-input" className="sr-only">
@@ -126,7 +124,7 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
               <button
                 type="submit"
                 disabled={status === 'loading'}
-                className="hero-newsletter-btn flex items-center justify-center gap-2 min-w-[150px]"
+                className="hero-newsletter-btn"
                 id="newsletter-submit-btn"
               >
                 {status === 'loading' ? (
@@ -140,15 +138,13 @@ export const NewsletterSubscription: React.FC<NewsletterSubscriptionProps> = ({
               </button>
             </form>
 
-            {!isHero && (
-              <PrivacyDisclosure type="newsletter" align="responsive" />
-            )}
+            {!isHero && <PrivacyDisclosure type="newsletter" align="responsive" />}
 
             {status === 'error' && (
               <motion.div
                 initial={{ opacity: 0, y: 5 }}
                 animate={{ opacity: 1, y: 0 }}
-                className="flex items-center gap-1.5 text-red-500 mt-2 text-xs font-medium"
+                className="newsletter-error-message"
               >
                 <AlertCircle size={14} className="shrink-0" />
                 <span>{errorMessage}</span>

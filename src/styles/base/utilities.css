@@ -14,6 +14,8 @@
 .grid { display: grid; }
 .hidden { display: none; }
 .shrink-0 { flex-shrink: 0; }
+.overflow-hidden { overflow: hidden; }
+.w-full { width: 100%; }
 
 /* Accessible Screen-Reader Utility */
 .sr-only {

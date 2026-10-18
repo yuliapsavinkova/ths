@@ -36,7 +36,7 @@ export const Hero: React.FC = () => {
           <div className="hero-tagline-wrapper" id="hero-tagline-wrap">
             <span className="hero-tagline">
               <PawIcon size={14} />
-              <span className="hero-tagline-text">Professional House &amp; Pet Care</span>
+              <span className="hero-tagline-text">Professional Care</span>
             </span>
           </div>
 
