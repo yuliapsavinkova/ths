@@ -29,7 +29,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "Having someone there full-time was completely different from any sitter we'd had before. She was truly there for our pets. Worth every penny.",
     author: 'James',
-    location: 'Carlsbad, CA',
+    location: 'Los Gatos, CA',
     dates: 'June 2025 (4 Weeks)',
     petNames: 'Max (Golden Retriever)',
     core: true,
@@ -42,7 +42,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       'We were nervous about leaving our dogs for three weeks, but everything was perfect. Frequent photos, zero stress. We returned to happy pets and a clean home.',
     author: 'Mia & Tom',
-    location: 'San Diego, CA',
+    location: 'Saratoga, CA',
     dates: 'September 2025 (3 Weeks)',
     petNames: 'Luna & Rocky (Huskies)',
     core: true,
@@ -57,7 +57,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       "Yulia was a game changer. She managed Barnaby's medication routine perfectly, sent frequent photos, and we returned to a clean house and a relaxed pug.",
     author: 'Elena & David',
-    location: 'Santa Monica, CA',
+    location: 'Monte Sereno, CA',
     dates: 'October 2025 (4 Weeks)',
     petNames: 'Barnaby (Pug)',
     petImages: [
@@ -69,7 +69,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       'Our dog needs medication twice a day and is shy with strangers. Yulia was the best sitter we have ever had.',
     author: 'Sarah',
-    location: 'Santa Barbara, CA',
+    location: 'Los Altos, CA',
     dates: 'December 2025 (5 Weeks)',
     petNames: 'Jackson (Terrier)',
     petImages: [
@@ -81,7 +81,7 @@ export const TESTIMONIALS: Testimonial[] = [
     quote:
       'Yulia is a star. She watched our high-energy Border Collie. Her frequent updates and photos gave us complete peace of mind while we were abroad.',
     author: 'Marcus',
-    location: 'San Francisco, CA',
+    location: 'Willow Glen, CA',
     dates: 'February 2026 (5 Weeks)',
     petNames: 'Ziggy (Border Collie)',
     core: true,
@@ -102,14 +102,33 @@ export const TESTIMONIALS: Testimonial[] = [
       'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=120&h=120',
     ],
   },
+  {
+    id: 't7',
+    quote:
+      'Yulia took exceptional care of our home and pets while we were away for a month. We could not have asked for a more dedicated live-in sitter.',
+    author: 'Daniel & Rebecca',
+    location: 'San Jose, CA',
+    dates: 'March 2026 (4 Weeks)',
+    petNames: 'Oliver (Labrador)',
+    core: true,
+    petImages: [
+      'https://images.unsplash.com/photo-1537151608828-ea2b11777ee8?auto=format&fit=crop&q=80&w=120&h=120',
+    ],
+  },
 ];
 
 export const FAQS: FaqItem[] = [
   {
+    id: 'faq-live-in-meaning',
+    question: 'What is live-in house sitting?',
+    answer:
+      'Live-in house sitting is a dedicated sitting service where a professional sitter lives in your home during your trip, staying overnight and spending most of the day there so your pets can remain comfortable in their normal routine. Your sitter provides attentive overnight care and extended daytime presence so your pets spend far less time alone.',
+  },
+  {
     id: 'faq1',
     question: 'Where do you sit?',
     answer:
-      "I sit across California's communities and am open to sitting nationwide for selected monthly or extended opportunities. Since I work remotely and stay in your home full-time for the duration of the sit, distance is not a barrier for extended bookings.",
+      'My primary live-in house and pet sitting service areas include Los Gatos, Saratoga, Monte Sereno, Los Altos, San Jose, and Santa Cruz. For longer stays, I serve across California and am open to select extended opportunities nationwide. ',
   },
   {
     id: 'faq2',
@@ -127,7 +146,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-exchange',
     question: 'Trying to decide between exchange and professional house sitting?',
     answer:
-      'Exchange platforms (like TrustedHousesitters) can be a wonderful budget-friendly option for easygoing pets and homeowners with flexible needs. If your pets have medical needs, separation anxiety, strict routines, or you simply want guaranteed accountability and dedicated remote-work presence, a professional in-home sitter ensures customized, round-the-clock peace of mind.',
+      'Exchange platforms (like TrustedHousesitters) can be a wonderful budget-friendly option for easygoing pets and homeowners with flexible needs. If your pets have medical needs, separation anxiety, strict routines, or you simply want guaranteed accountability and dedicated remote-work presence, a professional live-in sitter ensures customized, round-the-clock peace of mind.',
     linkText: 'Read my guide: Exchange vs. Professional House Sitting →',
     linkUrl:
       'https://sitterjourney.com/blog/trusted-housesitters-exchange-vs-professional-house-sitting',
@@ -235,23 +254,14 @@ export const SCHEDULE: MonthAvailability[] = [
 ];
 
 export const COVERAGE_AREAS = [
-  'San Francisco',
-  'Bay Area',
   'Los Gatos',
-  'San Jose',
   'Saratoga',
-  'Santa Barbara',
-  'Montecito',
-  'Malibu',
-  'Santa Monica',
-  'Beverly Hills',
-  'Los Angeles',
-  'Huntington Beach',
-  'Newport Beach',
-  'Laguna Beach',
-  'Carlsbad',
-  'La Jolla',
-  'San Diego',
+  'Monte Sereno',
+  'Los Altos',
+  'Willow Glen',
+  'San Jose',
+  'Santa Cruz',
+  'California',
 ];
 
 export const SITTER_BIO = {

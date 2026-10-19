@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
+import ServiceAreasSection from './components/ServiceAreasSection';
 import HighlightsSection from './components/HighlightsSection';
 import ServicesSection from './components/ServicesSection';
 import BookMySit from './components/BookMySit';
@@ -57,6 +58,9 @@ export default function App() {
 
         {/* ─── Services / What Is Included Section ─────────────────────────────── */}
         <ServicesSection />
+
+        {/* ─── Primary Service Areas Section ─────────────────────────────── */}
+        {/* <ServiceAreasSection /> */}
 
         {/* ─── Highlights at a Glance Section ─────────────────────────────── */}
         <HighlightsSection />

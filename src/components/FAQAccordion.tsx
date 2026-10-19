@@ -12,11 +12,14 @@ import {
   Scale,
   Percent,
   Gift,
+  Heart,
   HelpCircle,
 } from 'lucide-react';
 
 const getFAQIcon = (id: string) => {
   switch (id) {
+    case 'faq-live-in-meaning':
+      return Heart;
     case 'faq1':
       return MapPin;
     case 'faq2':
