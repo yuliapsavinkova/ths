@@ -122,7 +122,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq-live-in-meaning',
     question: 'What is live-in house sitting?',
     answer:
-      'Live-in house sitting is a dedicated sitting service where a professional sitter lives in your home during your trip, staying overnight and spending most of the day there so your pets can remain comfortable in their normal routine. Your sitter provides attentive overnight care and extended daytime presence so your pets spend far less time alone.',
+      'Live-in house sitting means your sitter stays in your home overnight and spends most of the day there while you’re away, providing constant companionship and attentive care so your pets can maintain their normal routine. This is different from drop-in visits, where a sitter comes for a short period of time and leaves, which can be stressful for pets and less secure for your home.',
   },
   {
     id: 'faq1',
