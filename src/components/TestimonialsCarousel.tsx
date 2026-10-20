@@ -11,6 +11,7 @@ export default function TestimonialsCarousel() {
     scrollNext,
     isAtStart,
     isAtEnd,
+    canScroll,
   } = useCarousel(TESTIMONIALS.length);
 
   return (
@@ -18,7 +19,7 @@ export default function TestimonialsCarousel() {
       {/* Swipe Deck Layout */}
       <div className="swipe-deck-wrapper" id="swipe-deck-box">
         {/* Relative Inner Wrapper for Side Arrows */}
-        <div className="swipe-deck-inner-wrapper">
+        <div className={`swipe-deck-inner-wrapper ${!canScroll ? 'no-scroll' : ''}`}>
           {/* Left Arrow Button */}
           <button 
             className="carousel-nav-btn prev" 
@@ -30,7 +31,10 @@ export default function TestimonialsCarousel() {
           </button>
 
           {/* Scrolling Deck */}
-          <div className="swipe-deck-container" ref={deckContainerRef}>
+          <div
+            className={`swipe-deck-container ${!canScroll ? 'is-centered' : ''}`}
+            ref={deckContainerRef}
+          >
             {TESTIMONIALS.map((item) => (
               <SwipeTestimonialCard key={item.id} item={item} />
             ))}
@@ -48,14 +52,16 @@ export default function TestimonialsCarousel() {
         </div>
 
         {/* Centered Progress Track */}
-        <div className="swipe-progress-track-wrapper" id="testimonials-progress-track-wrapper">
-          <div className="swipe-progress-track">
-            <div
-              ref={progressBarRef}
-              className="swipe-progress-bar"
-            />
+        {canScroll && (
+          <div className="swipe-progress-track-wrapper" id="testimonials-progress-track-wrapper">
+            <div className="swipe-progress-track">
+              <div
+                ref={progressBarRef}
+                className="swipe-progress-bar"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* 
           NOTE: DO NOT DELETE - Temporary commented out per user request; will be restored later.

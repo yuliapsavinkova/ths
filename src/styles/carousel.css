@@ -40,6 +40,21 @@
   display: none; /* Hide scrollbar on Chrome/Safari */
 }
 
+/* Centered alignment when content does not fill the full container width */
+.swipe-deck-container.is-centered {
+  justify-content: center;
+  justify-content: safe center;
+}
+
+.swipe-deck-inner-wrapper.no-scroll {
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.swipe-deck-inner-wrapper.no-scroll .carousel-nav-btn {
+  display: none;
+}
+
 /* Base style for carousel card items to share sizing and alignment */
 .swipe-deck-container > * {
   scroll-snap-align: center;
@@ -91,8 +106,8 @@
   min-width: var(--touch-target-compact);
   min-height: var(--touch-target-compact);
   border-radius: var(--radius-full);
-  background-color: var(--color-bg-primary);
-  border: 1px solid var(--color-border-primary);
+  background-color: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-bold);
   color: var(--color-brand-primary);
   align-items: center;
   justify-content: center;
@@ -119,8 +134,16 @@
 }
 
 .carousel-nav-btn:disabled {
-  opacity: 0.35;
+  opacity: 1;
+  background-color: var(--color-bg-surface);
+  border: 1.5px solid var(--color-border-bold);
+  color: var(--color-text-secondary);
+  box-shadow: none;
   cursor: not-allowed;
+}
+
+.carousel-nav-btn:disabled svg {
+  opacity: 0.35;
 }
 
 @media (--medium) {

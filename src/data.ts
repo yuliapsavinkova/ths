@@ -30,7 +30,6 @@ export const TESTIMONIALS: Testimonial[] = [
       "Having someone there full-time was completely different from any sitter we'd had before. She was truly there for our pets. Worth every penny.",
     author: 'James',
     location: 'Los Gatos, CA',
-    dates: 'June 2025 (4 Weeks)',
     petNames: 'Max (Golden Retriever)',
     core: true,
     petImages: [
@@ -43,7 +42,6 @@ export const TESTIMONIALS: Testimonial[] = [
       'We were nervous about leaving our dogs for three weeks, but everything was perfect. Frequent photos, zero stress. We returned to happy pets and a clean home.',
     author: 'Mia & Tom',
     location: 'Saratoga, CA',
-    dates: 'September 2025 (3 Weeks)',
     petNames: 'Luna & Rocky (Huskies)',
     core: true,
     petImages: [
@@ -58,7 +56,6 @@ export const TESTIMONIALS: Testimonial[] = [
       "Yulia was a game changer. She managed Barnaby's medication routine perfectly, sent frequent photos, and we returned to a clean house and a relaxed pug.",
     author: 'Elena & David',
     location: 'Monte Sereno, CA',
-    dates: 'October 2025 (4 Weeks)',
     petNames: 'Barnaby (Pug)',
     petImages: [
       'https://images.unsplash.com/photo-1517849845537-4d257902454a?auto=format&fit=crop&q=80&w=120&h=120',
@@ -70,7 +67,6 @@ export const TESTIMONIALS: Testimonial[] = [
       'Our dog needs medication twice a day and is shy with strangers. Yulia was the best sitter we have ever had.',
     author: 'Sarah',
     location: 'Los Altos, CA',
-    dates: 'December 2025 (5 Weeks)',
     petNames: 'Jackson (Terrier)',
     petImages: [
       'https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?auto=format&fit=crop&q=80&w=120&h=120',
@@ -82,7 +78,6 @@ export const TESTIMONIALS: Testimonial[] = [
       'Yulia is a star. She watched our high-energy Border Collie. Her frequent updates and photos gave us complete peace of mind while we were abroad.',
     author: 'Marcus',
     location: 'Willow Glen, CA',
-    dates: 'February 2026 (5 Weeks)',
     petNames: 'Ziggy (Border Collie)',
     core: true,
     petImages: [
@@ -95,7 +90,6 @@ export const TESTIMONIALS: Testimonial[] = [
       "We've had several sitters, but Yulia is by far the most professional. She cared for our Siamese cats and left the house in pristine condition.",
     author: 'Catherine',
     location: 'Santa Cruz, CA',
-    dates: 'May 2026 (4 Weeks)',
     petNames: 'Silo & Suki (Siamese Cats)',
     petImages: [
       'https://images.unsplash.com/photo-1573865526739-10659fec78a5?auto=format&fit=crop&q=80&w=120&h=120',
@@ -108,7 +102,6 @@ export const TESTIMONIALS: Testimonial[] = [
       'Yulia took exceptional care of our home and pets while we were away for a month. We could not have asked for a more dedicated live-in sitter.',
     author: 'Daniel & Rebecca',
     location: 'San Jose, CA',
-    dates: 'March 2026 (4 Weeks)',
     petNames: 'Oliver (Labrador)',
     core: true,
     petImages: [
@@ -122,13 +115,13 @@ export const FAQS: FaqItem[] = [
     id: 'faq-live-in-meaning',
     question: 'What is live-in house sitting?',
     answer:
-      'Live-in house sitting means your sitter stays in your home overnight and spends most of the day there while you’re away, providing constant companionship and attentive care so your pets can maintain their normal routine. This is different from drop-in visits, where a sitter comes for a short period of time and leaves, which can be stressful for pets and less secure for your home.',
+      'Live-in house sitting is a dedicated sitting service where a sitter lives in your home during your trip, staying overnight and spending most of the day there so your pets can remain comfortable in their normal routine. Your sitter provides attentive overnight care and extended daytime presence so your pets spend far less time alone.',
   },
   {
     id: 'faq1',
     question: 'Where do you sit?',
     answer:
-      'My primary live-in house and pet sitting service areas include Los Gatos, Saratoga, Monte Sereno, Los Altos, San Jose, and Santa Cruz. For longer stays, I serve across California and am open to select extended opportunities nationwide. ',
+      'My primary service areas for live-in house and pet sitting include Los Gatos, Saratoga, Monte Sereno, Los Altos, San Jose, Santa Cruz, and adjacent areas. For longer stays, I serve clients throughout California and am open to select extended opportunities nationwide.',
   },
   {
     id: 'faq2',

@@ -162,7 +162,7 @@ export const HighlightsSection: React.FC = () => {
   const activeHighlight = highlights[activeIndex] || highlights[0];
 
   return (
-    <section 
+    <div 
       id="highlights-section" 
       className="highlights-section-bleed"
     >
@@ -263,7 +263,7 @@ export const HighlightsSection: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 };
 

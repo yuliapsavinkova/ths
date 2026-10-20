@@ -85,6 +85,7 @@ export default function ShowcaseSection() {
     scrollNext,
     isAtStart,
     isAtEnd,
+    canScroll,
   } = useCarousel(filteredItems.length, activeCategory);
 
   // Modal navigation
@@ -159,7 +160,7 @@ export default function ShowcaseSection() {
 
         {/* Carousel Slider */}
         <div className="swipe-deck-wrapper" id="showcase-swipe-deck-box">
-          <div className="swipe-deck-inner-wrapper">
+          <div className={`swipe-deck-inner-wrapper ${!canScroll ? 'no-scroll' : ''}`}>
             {/* Left Nav Button */}
             <button
               className="carousel-nav-btn prev"
@@ -171,7 +172,10 @@ export default function ShowcaseSection() {
             </button>
 
             {/* Scrolling Deck Container */}
-            <div className="swipe-deck-container" ref={deckContainerRef}>
+            <div
+              className={`swipe-deck-container ${!canScroll ? 'is-centered' : ''}`}
+              ref={deckContainerRef}
+            >
               {filteredItems.map((item, index) => {
                 const isLiked = !!likedItems[item.id];
                 const likes = likesCount[item.id] ?? item.initialLikes;
@@ -296,7 +300,7 @@ export default function ShowcaseSection() {
             </div>
           )}
 
-          {filteredItems.length > 0 && (
+          {filteredItems.length > 0 && canScroll && (
             /* Centered Progress Track */
             <div className="swipe-progress-track-wrapper" id="showcase-progress-track-wrapper">
               <div className="swipe-progress-track">

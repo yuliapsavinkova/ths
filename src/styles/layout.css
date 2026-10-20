@@ -64,16 +64,17 @@ section {
   }
 }
 
-.section-bg-white,
-main > section:not(.hero):nth-of-type(odd) {
-  background-color: var(--color-bg-surface);
-}
-
-.section-bg-alt,
+/* ─── Alternating Section Backgrounds (Even = Darker/Cream, Odd = Light/Surface) ─── */
 main > section:not(.hero):nth-of-type(even) {
   background-color: var(--color-bg-secondary-translucent);
   border-top: 1px solid var(--color-border-soft);
   border-bottom: 1px solid var(--color-border-soft);
+}
+
+main > section:not(.hero):nth-of-type(odd) {
+  background-color: var(--color-bg-surface);
+  border-top: none;
+  border-bottom: none;
 }
 
 /* Grids & Grid helpers */

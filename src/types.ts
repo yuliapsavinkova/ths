@@ -62,7 +62,6 @@ export interface Testimonial {
   quote: string;
   author: string;
   location: string;
-  dates: string;
   petNames: string;
   core?: boolean;
   petImages?: string[];

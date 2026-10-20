@@ -7,13 +7,17 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [isAtStart, setIsAtStart] = useState(true);
   const [isAtEnd, setIsAtEnd] = useState(false);
+  const [canScroll, setCanScroll] = useState(false);
 
   const handleScroll = useCallback(() => {
     const el = containerRef.current;
     if (!el) return;
 
     const maxScroll = el.scrollWidth - el.clientWidth;
-    if (maxScroll <= 5) {
+    const scrollable = maxScroll > 5;
+    setCanScroll(scrollable);
+
+    if (!scrollable) {
       setScrollProgress(0);
       if (progressBarRef.current) {
         progressBarRef.current.style.left = '0px';
@@ -71,12 +75,12 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
     if (target) {
       el.scrollTo({
         left: Math.min(target.offsetLeft, maxScroll),
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     } else {
       el.scrollTo({
         left: maxScroll,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }, []);
@@ -95,12 +99,12 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
       const target = prevChildren[prevChildren.length - 1];
       el.scrollTo({
         left: Math.max(0, target.offsetLeft),
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     } else {
       el.scrollTo({
         left: 0,
-        behavior: 'smooth'
+        behavior: 'smooth',
       });
     }
   }, []);
@@ -122,6 +126,14 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
       el.addEventListener('scroll', handleScroll, { passive: true });
       window.addEventListener('resize', handleScroll, { passive: true });
 
+      let resizeObserver: ResizeObserver | null = null;
+      if (typeof ResizeObserver !== 'undefined') {
+        resizeObserver = new ResizeObserver(() => {
+          handleScroll();
+        });
+        resizeObserver.observe(el);
+      }
+
       handleScroll();
 
       const timer1 = setTimeout(handleScroll, 100);
@@ -131,6 +143,9 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
       return () => {
         el.removeEventListener('scroll', handleScroll);
         window.removeEventListener('resize', handleScroll);
+        if (resizeObserver) {
+          resizeObserver.disconnect();
+        }
         clearTimeout(timer1);
         clearTimeout(timer2);
         clearTimeout(timer3);
@@ -148,6 +163,7 @@ export function useCarousel(itemCount: number, resetDependency?: any) {
     handleScroll,
     isAtStart,
     isAtEnd,
+    canScroll,
   };
 }
 
