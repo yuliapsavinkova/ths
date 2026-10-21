@@ -43,7 +43,7 @@
 - **Currency**: USD
 
 ## Coverage Areas & Locations
-- **Primary Service Areas**: Los Gatos, Saratoga, San Jose, Willow Glen, Santa Cruz, and across California for extended live-in stays.
+- **Primary Service Areas**: California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, Sunnyvale.
 
 ## Booking & Consultation Workflow
 1. Homeowner submits trip dates and pet details via the inquiry form: https://yulia.sitterjourney.com/#booking-form-section

@@ -1,6 +1,6 @@
 {
   "name": "Yulia — Trusted House & Pet Sitter",
-  "description": "Professional live-in house and pet sitter serving Los Gatos, Saratoga, Monte Sereno, Los Altos, San Jose, Willow Glen, Santa Cruz, and California with transparent pricing and verified 5-star reviews.",
+  "description": "Professional live-in house and pet sitter serving California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, and Sunnyvale with transparent pricing and verified 5-star reviews.",
   "requestFramePermissions": [],
   "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
 }

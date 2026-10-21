@@ -1,5 +1,6 @@
 import { FaqItem, MonthAvailability, Testimonial, ShowcaseItem } from './types';
 
+
 export const REVIEWS_LINK = {
   text: 'All TrustedHousesitters Reviews →',
   url: 'https://www.trustedhousesitters.com/house-and-pet-sitters/united-states/california/san-francisco/l/6526245/',
@@ -121,7 +122,7 @@ export const FAQS: FaqItem[] = [
     id: 'faq1',
     question: 'Where do you sit?',
     answer:
-      'My primary service areas for live-in house and pet sitting include Los Gatos, Saratoga, Monte Sereno, Los Altos, San Jose, Santa Cruz, and adjacent areas. For longer stays, I serve clients throughout California and am open to select extended opportunities nationwide.',
+      'My primary service areas for live-in house and pet sitting include Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, Sunnyvale, and across California. For longer stays, I serve clients throughout California and am open to select extended opportunities nationwide.',
   },
   {
     id: 'faq2',
@@ -247,14 +248,16 @@ export const SCHEDULE: MonthAvailability[] = [
 ];
 
 export const COVERAGE_AREAS = [
-  'Los Gatos',
-  'Saratoga',
-  'Monte Sereno',
   'Los Altos',
-  'Willow Glen',
+  'Los Gatos',
+  'Monte Sereno',
+  'Mountain View',
+  'San Francisco',
   'San Jose',
+  'San Mateo',
   'Santa Cruz',
-  'California',
+  'Saratoga',
+  'Sunnyvale',
 ];
 
 export const SITTER_BIO = {

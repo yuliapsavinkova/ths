@@ -60,8 +60,7 @@ export default function App() {
         <ServicesSection />
 
         {/* ─── Primary Service Areas Section ─────────────────────────────── */}
-        {/* <MapSection /> */}
-        <section></section>
+        <MapSection />
 
         {/* ─── Highlights at a Glance Section ─────────────────────────────── */}
         <HighlightsSection />

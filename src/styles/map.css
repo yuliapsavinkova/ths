@@ -1,34 +1,36 @@
-/* Service map: equal-width image and description columns */
-.service-map-layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  align-items: center;
-  gap: var(--spacing-xl);
-}
-
-.service-map-image {
-  min-width: 0;
-}
-
-.service-map-image img {
-  display: block;
+.map-section .map-split-image {
   width: 100%;
-  height: auto;
+  height: 100%;
   aspect-ratio: 3 / 2;
   object-fit: cover;
-  border: 1px solid var(--color-border-soft);
-  border-radius: var(--radius-lg);
+  display: block;
 }
 
-.service-map-description {
-  min-width: 0;
-  color: var(--color-text-secondary);
-  line-height: 1.6;
+/* Keep map clear and stable on hover without cropping edge labels */
+.map-section .split-section:hover .map-split-image {
+  transform: none;
 }
 
-@media (max-width: 700px) {
-  .service-map-layout {
-    grid-template-columns: 1fr;
-    gap: var(--spacing-md);
+.map-pills {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.map-pills .pill {
+  background-color: var(--color-bg-surface);
+  border: 1px solid var(--color-border-bold);
+  color: var(--color-brand-primary);
+}
+
+.map-pills .pill:hover {
+  background-color: var(--color-bg-surface-alt);
+  border-color: var(--color-brand-primary);
+  cursor: pointer;
+}
+
+@media (--large) {
+  .map-pills {
+    justify-content: flex-start;
   }
 }
