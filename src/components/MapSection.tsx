@@ -39,8 +39,12 @@ export const MapSection: React.FC = () => {
                 , and adjacent cities.
               </p>
               <p className="large about-additional-para">
-                For longer stays, I serve clients throughout <strong>California</strong> and am open
-                to select extended opportunities nationwide.
+                For longer stays, I offer house and pet sitting throughout{' '}
+                <strong>California</strong> and am open to select extended opportunities nationwide.
+              </p>
+              <p className="large about-additional-para">
+                I welcome ongoing house and pet sitting arrangements for homeowners with multiple
+                residences or regular travel plans.
               </p>
             </div>
             <div className="pills-container map-pills">
