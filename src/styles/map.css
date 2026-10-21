@@ -6,11 +6,6 @@
   display: block;
 }
 
-/* Keep map clear and stable on hover without cropping edge labels */
-.map-section .split-section:hover .map-split-image {
-  transform: none;
-}
-
 .map-pills {
   display: flex;
   flex-wrap: wrap;
