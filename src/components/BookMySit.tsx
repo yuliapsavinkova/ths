@@ -3,6 +3,7 @@ import { PrivacyDisclosure } from './PrivacyDisclosure';
 import { InfoTooltip } from './InfoTooltip';
 import { BookingConfirmation } from './BookingConfirmation';
 import ReferralPerkCard from './ReferralPerkCard';
+import { PawIcon } from './Icons';
 import { SPECIALIZED_CARE_OPTIONS } from '../data';
 import {
   getDatesDiff,
@@ -436,7 +437,19 @@ export default function BookMySit({
   };
 
   return (
-    <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
+    <section id="booking-form-section">
+      <div className="wrap" id="booking-section-wrap">
+        <div className="section-header" id="booking-section-header">
+          <span className="section-tag">
+            <PawIcon size={14} /> Book A Sit
+          </span>
+          <h2 className="section-title">Your Trip Details</h2>
+          <p className="section-subtitle">
+            Tell me about your travel dates, location, pets, and any special needs.
+          </p>
+        </div>
+
+        <div id="bookmysit-app-widget" ref={widgetRef} className="bms-flex-outer-container">
       {isSuccess ? (
         <BookingConfirmation
           booking={submittedBooking || getCurrentBookingData()}
@@ -951,6 +964,8 @@ export default function BookMySit({
           <PrivacyDisclosure type="booking" align="center" />
         </form>
       )}
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }

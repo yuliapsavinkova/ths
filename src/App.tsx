@@ -4,26 +4,17 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import AboutSection from './components/AboutSection';
+import ServicesSection from './components/ServicesSection';
 import MapSection from './components/MapSection';
 import HighlightsSection from './components/HighlightsSection';
-import ServicesSection from './components/ServicesSection';
-import BookMySit from './components/BookMySit';
-import FAQAccordion from './components/FAQAccordion';
 import TestimonialsCarousel from './components/TestimonialsCarousel';
-import Footer from './components/Footer';
 import ShowcaseSection from './components/ShowcaseSection';
+import FAQAccordion from './components/FAQAccordion';
+import BookMySit from './components/BookMySit';
 import FeedbackSection from './components/FeedbackSection';
-import { PawIcon } from './components/Icons';
+import Footer from './components/Footer';
 
 export default function App() {
-  const [selectedDuration] = useState<number>(30);
-  const [selectedPetType] = useState<'dog' | 'cat' | 'mixed' | 'other' | 'none'>('none');
-  const [selectedPetCount] = useState<number>(0);
-  const [selectedHasMedications] = useState<boolean>(false);
-  const [selectedHasSeniorPets] = useState<boolean>(false);
-  const [selectedStartDate] = useState<string>('');
-  const [selectedEndDate] = useState<string>('');
-
   const [scrolled, setScrolled] = useState<boolean>(false);
 
   useEffect(() => {
@@ -66,66 +57,16 @@ export default function App() {
         <HighlightsSection />
 
         {/* ─── Client Testimonials / Reviews Carousel ─────────────────────────────── */}
-        <section id="testimonials-section">
-          <div className="wrap-ultrawide" id="testimonials-section-wrap">
-            <div className="section-header" id="testimonials-section-header">
-              <span className="section-tag">
-                <PawIcon size={14} /> Reviews
-              </span>
-              <h2 className="section-title">What Home Owners Say</h2>
-              <p className="section-subtitle">
-                Reviews from homeowners who trusted me with their homes and pets.
-              </p>
-            </div>
-
-            <TestimonialsCarousel />
-          </div>
-        </section>
+        <TestimonialsCarousel />
 
         {/* ─── Interactive Showcase Album Gallery Section ─────────────────────────── */}
         <ShowcaseSection />
 
         {/* ─── Accordion FAQ Section ─────────────────────────────── */}
-        <section id="faq-section">
-          <div className="wrap-narrow stack-xl" id="faq-section-wrap">
-            <div className="section-header" id="faq-section-header">
-              <span className="section-tag">
-                <PawIcon size={14} /> FAQS
-              </span>
-              <h2 className="section-title">Common Questions</h2>
-              <p className="section-subtitle">
-                Answers to common queries about live-in requirements, routines, and property
-                coordination.
-              </p>
-            </div>
-            <FAQAccordion />
-          </div>
-        </section>
+        <FAQAccordion />
 
         {/* ─── Rates, Planning, and Booking Sections ─────────────────────────────── */}
-        <section id="booking-form-section">
-          <div className="wrap" id="booking-section-wrap">
-            <div className="section-header" id="booking-section-header">
-              <span className="section-tag">
-                <PawIcon size={14} /> Book A Sit
-              </span>
-              <h2 className="section-title">Your Trip Details</h2>
-              <p className="section-subtitle">
-                Tell me about your travel dates, location, pets, and any special needs.
-              </p>
-            </div>
-
-            <BookMySit
-              initialDuration={selectedDuration}
-              initialPetType={selectedPetType}
-              initialPetCount={selectedPetCount}
-              initialHasMedications={selectedHasMedications}
-              initialHasSeniorPets={selectedHasSeniorPets}
-              initialStartDate={selectedStartDate}
-              initialEndDate={selectedEndDate}
-            />
-          </div>
-        </section>
+        <BookMySit />
 
         {/* ─── Visitor Thoughts & Feedback Section ─────────────────────────────── */}
         <FeedbackSection />

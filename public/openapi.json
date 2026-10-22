@@ -1,0 +1,151 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "Yulia House & Pet Sitting Booking API",
+    "description": "Programmatic interface for booking live-in house and pet sitting services, newsletter subscriptions, and feedback.",
+    "version": "1.0.0",
+    "contact": {
+      "name": "Yulia",
+      "url": "https://yulia.sitterjourney.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "https://yulia.sitterjourney.com",
+      "description": "Production server"
+    }
+  ],
+  "paths": {
+    "/api/health": {
+      "get": {
+        "summary": "Health check endpoint",
+        "operationId": "getHealth",
+        "responses": {
+          "200": {
+            "description": "Server is operational",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "status": {
+                      "type": "string",
+                      "example": "ok"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/submit-booking": {
+      "post": {
+        "summary": "Submit a live-in house and pet sitting booking inquiry",
+        "operationId": "submitBooking",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["name", "email", "startDate", "endDate"],
+                "properties": {
+                  "name": { "type": "string" },
+                  "email": { "type": "string", "format": "email" },
+                  "phone": { "type": "string" },
+                  "location": { "type": "string" },
+                  "startDate": { "type": "string", "format": "date" },
+                  "endDate": { "type": "string", "format": "date" },
+                  "duration": { "type": "integer" },
+                  "petType": { "type": "string" },
+                  "petCount": { "type": "integer" },
+                  "dogCount": { "type": "integer" },
+                  "catCount": { "type": "integer" },
+                  "otherCount": { "type": "integer" },
+                  "seniorCare": { "type": "boolean" },
+                  "medication": { "type": "boolean" },
+                  "gardenCare": { "type": "boolean" },
+                  "isRepeatClient": { "type": "boolean" },
+                  "notes": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Booking request received successfully",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": { "type": "boolean" },
+                    "message": { "type": "string" },
+                    "bookingId": { "type": "string" }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/subscribe": {
+      "post": {
+        "summary": "Subscribe email to monthly availability newsletter",
+        "operationId": "subscribeNewsletter",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["email"],
+                "properties": {
+                  "email": { "type": "string", "format": "email" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Subscribed successfully"
+          }
+        }
+      }
+    },
+    "/api/submit-feedback": {
+      "post": {
+        "summary": "Submit visitor thoughts or review feedback",
+        "operationId": "submitFeedback",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "required": ["message"],
+                "properties": {
+                  "message": { "type": "string" },
+                  "name": { "type": "string" },
+                  "email": { "type": "string" },
+                  "category": { "type": "string" },
+                  "rating": { "type": "string" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Feedback received successfully"
+          }
+        }
+      }
+    }
+  }
+}

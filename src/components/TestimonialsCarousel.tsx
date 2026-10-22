@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { TESTIMONIALS, REVIEWS_LINK } from '../data';
 import { Star, MapPin, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCarousel } from '../utils/carouselUtils';
+import { PawIcon } from './Icons';
 
 export default function TestimonialsCarousel() {
   const {
@@ -15,72 +16,69 @@ export default function TestimonialsCarousel() {
   } = useCarousel(TESTIMONIALS.length);
 
   return (
-    <div className="testimonials-interactive-wrapper" id="testimonials-root">
-      {/* Swipe Deck Layout */}
-      <div className="swipe-deck-wrapper" id="swipe-deck-box">
-        {/* Relative Inner Wrapper for Side Arrows */}
-        <div className={`swipe-deck-inner-wrapper ${!canScroll ? 'no-scroll' : ''}`}>
-          {/* Left Arrow Button */}
-          <button 
-            className="carousel-nav-btn prev" 
-            onClick={scrollPrev} 
-            disabled={isAtStart}
-            aria-label="Previous testimonials"
-          >
-            <ChevronLeft size={20} />
-          </button>
-
-          {/* Scrolling Deck */}
-          <div
-            className={`swipe-deck-container ${!canScroll ? 'is-centered' : ''}`}
-            ref={deckContainerRef}
-          >
-            {TESTIMONIALS.map((item) => (
-              <SwipeTestimonialCard key={item.id} item={item} />
-            ))}
-          </div>
-
-          {/* Right Arrow Button */}
-          <button 
-            className="carousel-nav-btn next" 
-            onClick={scrollNext} 
-            disabled={isAtEnd}
-            aria-label="Next testimonials"
-          >
-            <ChevronRight size={20} />
-          </button>
+    <section id="testimonials-section">
+      <div className="wrap-ultrawide" id="testimonials-section-wrap">
+        <div className="section-header" id="testimonials-section-header">
+          <span className="section-tag">
+            <PawIcon size={14} /> Reviews
+          </span>
+          <h2 className="section-title">What Home Owners Say</h2>
+          <p className="section-subtitle">
+            Reviews from homeowners who trusted me with their homes and pets.
+          </p>
         </div>
 
-        {/* Centered Progress Track */}
-        {canScroll && (
-          <div className="swipe-progress-track-wrapper" id="testimonials-progress-track-wrapper">
-            <div className="swipe-progress-track">
-              <div
-                ref={progressBarRef}
-                className="swipe-progress-bar"
-              />
-            </div>
-          </div>
-        )}
-
-        {/* 
-          NOTE: DO NOT DELETE - Temporary commented out per user request; will be restored later.
-          All Reviews External Link 
-          {REVIEWS_LINK && REVIEWS_LINK.url && (
-            <div className="reviews-link-wrapper">
-              <a
-                href={REVIEWS_LINK.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="reviews-link"
+        <div className="testimonials-interactive-wrapper" id="testimonials-root">
+          {/* Swipe Deck Layout */}
+          <div className="swipe-deck-wrapper" id="swipe-deck-box">
+            {/* Relative Inner Wrapper for Side Arrows */}
+            <div className={`swipe-deck-inner-wrapper ${!canScroll ? 'no-scroll' : ''}`}>
+              {/* Left Arrow Button */}
+              <button
+                className="carousel-nav-btn prev"
+                onClick={scrollPrev}
+                disabled={isAtStart}
+                aria-label="Previous testimonials"
               >
-                {REVIEWS_LINK.text}
-              </a>
+                <ChevronLeft size={20} />
+              </button>
+
+              {/* Scrolling Deck */}
+              <div
+                className={`swipe-deck-container ${!canScroll ? 'is-centered' : ''}`}
+                ref={deckContainerRef}
+              >
+                {TESTIMONIALS.map((item) => (
+                  <SwipeTestimonialCard key={item.id} item={item} />
+                ))}
+              </div>
+
+              {/* Right Arrow Button */}
+              <button
+                className="carousel-nav-btn next"
+                onClick={scrollNext}
+                disabled={isAtEnd}
+                aria-label="Next testimonials"
+              >
+                <ChevronRight size={20} />
+              </button>
             </div>
-          )}
-        */}
+
+            {/* Centered Progress Track */}
+            {canScroll && (
+              <div
+                className="swipe-progress-track-wrapper"
+                id="testimonials-progress-track-wrapper"
+              >
+                <div className="swipe-progress-track">
+                  <div ref={progressBarRef} className="swipe-progress-bar" />
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
       </div>
-    </div>
+    </section>
   );
 }
 

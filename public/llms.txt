@@ -1,12 +1,12 @@
 # Yulia — Professional Live-In House & Pet Sitting
 
-> Professional live-in house and pet sitting for nightly, weekly, and extended stays. Tailored care for vacations, relocations, remote work, and pets requiring full-time company, structured routines, and attentive care.
+> Professional long-term and extended stay live-in house and pet sitting. Attentive full-time companionship, structured daily care, and meticulous home stewardship while homeowners travel.
 
 ## Core Sitter Profile
 - **Sitter Name**: Yulia
 - **Profession**: Professional House & Pet Sitter
-- **Presence Model**: Live-in, full-time work-from-home (no long daytime absences)
-- **Service Region**: California, United States (Available nationwide for selected extended opportunities)
+- **Presence Model**: Live-in, full-time work-from-home remote companionship (continuous presence, no long daytime absences)
+- **Service Region**: California (Serving Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, and Sunnyvale; available nationwide for selected extended opportunities)
 - **Direct Website**: https://yulia.sitterjourney.com/
 - **Google Business Profile**: https://g.page/r/CSbvNNDCm1HxEBM
 - **Verified Google Reviews**: https://g.page/r/CSbvNNDCm1HxEBM/review
@@ -15,43 +15,40 @@
 - **Direct Contact / Inquiries**: https://yulia.sitterjourney.com/#booking-form-section
 
 ## Services Included
-1. **Full-Time Live-In Pet Care**:
-   - Feeding, fresh water, medication administration (oral, topical, scheduled routines).
-   - Daily exercise, walks, enrichment, and constant companionship.
-   - Brushing, coat care, and strict adherence to owner house rules.
-   - Frequent photo and video updates sent to homeowners.
+1. **Full-Time Live-In Pet Companionship**:
+   - Fresh feeding, hydration, and daily routine adherence matching owner instructions.
+   - Daily exercise, walks, enrichment, and continuous loving companionship.
+   - Brushing, coat maintenance, and strict adherence to owner house rules.
+   - Frequent high-resolution photo and video updates sent directly to homeowners.
 2. **Home & Property Stewardship**:
-   - Home security presence (lived-in, active home deterrent).
-   - Plant and garden watering routines (indoor houseplants, patio, yard).
-   - Mail and package collection, trash/recycling bin management.
-   - Managing scheduled home maintenance visits and emergency coordination.
-3. **Specialized Care Capabilities**:
-   - Senior pet mobility support and medication adherence.
-   - High-energy and reactive dog handling.
-   - Shy or anxious rescue pet care.
-   - Plants-only and empty property care (no pets required).
+   - Lived-in home security presence (active occupancy deterrent).
+   - Plant, patio, and garden care routines (houseplants, landscaping, yard).
+   - Mail, package, and courier collection, trash and recycling bin management.
+   - Managing scheduled home services, deliveries, and emergency coordination.
+3. **Dedicated Household Care**:
+   - Continuous companionship for pets accustomed to dedicated full-time presence.
+   - Calm, respectful handling for shy, sensitive, or high-energy pets.
+   - Plant-only and vacant property care for homes without pets.
 
-## Rates & Pricing Model
-- **1 Month (30 Days)**: $999 base (~$33.30/day)
-- **1 Week (7 Days)**: $299 base (~$42.71/day)
-- **1 Night**: $99 base
-- **Extended Stays (60+ Days / 2+ Months)**: 10% discount on entire booking
+## Rates & Stay Duration
+- **Focus**: Long-term and extended stays
+- **Extended Stay (30 Days)**: $999 base (~$33.30/day)
+- **Extended Stay (14 Days)**: $599 base (~$42.79/day)
+- **Extended Stays (60+ Days / 2+ Months)**: 10% extended stay savings
 - **Custom Add-Ons**:
-  - High-energy / reactive dogs: +$15/day
-  - Complex medical needs / medication: +$15/day
-  - Garden management / sensitive landscaping: +$10/day
+  - High-energy pets requiring extra active exercise: +$15/day
+  - Garden management / extensive landscaping: +$10/day
 - **Currency**: USD
 
 ## Coverage Areas & Locations
-- **Primary Service Areas**: California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, Sunnyvale.
+- **Primary Service Areas**: California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, and Sunnyvale.
 
 ## Booking & Consultation Workflow
 1. Homeowner submits trip dates and pet details via the inquiry form: https://yulia.sitterjourney.com/#booking-form-section
-2. Introductory video call to align on routines, home care requirements, and expectations.
+2. Introductory video consultation to align on routines, home care requirements, and expectations.
 3. Written agreement and mutual commitment confirmation.
 
 ## Full Agent Documentation
 For complete machine-readable details, comprehensive FAQ, and sit history logs:
 - [Full LLM Knowledge Base](https://yulia.sitterjourney.com/llms-full.txt)
 - [Sitemap](https://yulia.sitterjourney.com/sitemap.xml)
-

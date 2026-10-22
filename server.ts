@@ -14,12 +14,30 @@ const PORT = process.env.PORT ? parseInt(process.env.PORT) : 3000;
 
 
 // ----------------------------------------------------
-// API ENDPOINTS
+// API & MANIFEST ENDPOINTS
 // ----------------------------------------------------
 
 // Health check endpoint
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok' });
+});
+
+// Explicitly serve ARD AI Catalog manifests with correct application/json headers
+const serveAiCatalog = (_req: express.Request, res: express.Response) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  const catalogPath = path.join(process.cwd(), 'public', '.well-known', 'ai-catalog.json');
+  res.sendFile(catalogPath);
+};
+
+app.get('/.well-known/ai-catalog.json', serveAiCatalog);
+app.get('/ai-catalog.json', serveAiCatalog);
+app.get('/.well-known/ard.json', serveAiCatalog);
+
+// OpenAPI specification endpoint
+app.get('/openapi.json', (_req, res) => {
+  res.setHeader('Content-Type', 'application/json; charset=utf-8');
+  res.sendFile(path.join(process.cwd(), 'public', 'openapi.json'));
 });
 
 // 1. Submit Booking Request via Resend Email Service
@@ -36,8 +54,12 @@ app.post('/api/submit-feedback', handleFeedbackSubmit);
 // VITE AND STATIC ASSETS SERVING
 // ----------------------------------------------------
 async function startServer() {
-  // Always serve public static assets reliably
-  app.use(express.static(path.join(process.cwd(), 'public')));
+  // Always serve public static assets reliably (enable dotfiles for .well-known)
+  app.use(
+    express.static(path.join(process.cwd(), 'public'), {
+      dotfiles: 'allow',
+    }),
+  );
 
   if (process.env.NODE_ENV !== 'production') {
     const vite = await createViteServer({
@@ -47,23 +69,41 @@ async function startServer() {
     app.use(vite.middlewares);
   } else {
     const distPath = path.join(process.cwd(), 'dist');
-    
-    // Serve hashed static assets with long cache
-    app.use('/assets', express.static(path.join(distPath, 'assets'), {
-      maxAge: '1y',
-      immutable: true,
-    }));
 
-    // Serve other static files
-    app.use(express.static(distPath, {
-      setHeaders: (res, filePath) => {
-        if (filePath.endsWith('.html')) {
-          res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
-          res.setHeader('Pragma', 'no-cache');
-          res.setHeader('Expires', '0');
-        }
+    // Serve hashed static assets with long cache
+    app.use(
+      '/assets',
+      express.static(path.join(distPath, 'assets'), {
+        maxAge: '1y',
+        immutable: true,
+      }),
+    );
+
+    // Serve other static files (allowing .well-known dotfiles)
+    app.use(
+      express.static(distPath, {
+        dotfiles: 'allow',
+        setHeaders: (res, filePath) => {
+          if (filePath.endsWith('.html')) {
+            res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+            res.setHeader('Pragma', 'no-cache');
+            res.setHeader('Expires', '0');
+          }
+        },
+      }),
+    );
+
+    // Prevent soft-404 for missing static or well-known files before the SPA fallback
+    app.use((req, res, next) => {
+      const isStaticOrWellKnown =
+        req.path.startsWith('/.well-known/') ||
+        /\.(json|xml|txt|ico|png|jpe?g|webp|svg|css|js|map|woff2?|ttf|eot)$/i.test(req.path);
+
+      if (isStaticOrWellKnown) {
+        return res.status(404).type('text/plain').send('404 Not Found');
       }
-    }));
+      next();
+    });
 
     // SPA fallback: always serve index.html with NO CACHING
     app.get('*', (req, res) => {

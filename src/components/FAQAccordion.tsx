@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { FAQS } from '../data';
+import { PawIcon } from './Icons';
 import {
   ChevronDown,
   MapPin,
@@ -47,16 +48,29 @@ export default function FAQAccordion() {
   const [activeId, setActiveId] = useState<string | null>(null);
 
   const toggleFAQ = (id: string) => {
-    setActiveId(prev => (prev === id ? null : id));
+    setActiveId((prev) => (prev === id ? null : id));
   };
 
   return (
-    <div 
-      className="faq-box" 
-      id="faq-accordion"
-      itemScope 
-      itemType="https://schema.org/FAQPage"
-    >
+    <section id="faq-section">
+      <div className="wrap-narrow stack-xl" id="faq-section-wrap">
+        <div className="section-header" id="faq-section-header">
+          <span className="section-tag">
+            <PawIcon size={14} /> FAQS
+          </span>
+          <h2 className="section-title">Common Questions</h2>
+          <p className="section-subtitle">
+            Answers to common queries about live-in requirements, routines, and property
+            coordination.
+          </p>
+        </div>
+
+        <div
+          className="faq-box"
+          id="faq-accordion"
+          itemScope
+          itemType="https://schema.org/FAQPage"
+        >
       {FAQS.map((faq) => {
         const isOpen = activeId === faq.id;
         const Icon = getFAQIcon(faq.id);
@@ -132,6 +146,8 @@ export default function FAQAccordion() {
           </div>
         );
       })}
-    </div>
+        </div>
+      </div>
+    </section>
   );
 }
