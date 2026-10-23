@@ -88,10 +88,12 @@ export const Hero: React.FC = () => {
 
           <img
             src={SITTER_IMAGES.hero}
+            srcSet="/images/daisy-sm.webp 480w, /images/daisy.webp 960w"
+            sizes="(max-width: 640px) 310px, 480px"
             alt="Yulia with a friendly dog"
             className="hero-image"
             width={480}
-            height={480}
+            height={600}
             loading="eager"
             decoding="async"
             fetchPriority="high"

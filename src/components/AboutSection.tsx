@@ -119,7 +119,7 @@ export const AboutSection: React.FC = () => {
                   I’ve spent my whole life around animals and have been house-sitting for years.
                   I’ve cared for dogs, cats, other small pets, and homes without pets.
                 </p>
-                <p className="large about-additional-para">
+                <p className="large">
                   You’ll receive frequent photo and video updates, so you always know how your pets
                   are doing. I keep a close eye on your home’s security and upkeep, and with a clean
                   background check and verified five-star reviews from other homeowners, you can

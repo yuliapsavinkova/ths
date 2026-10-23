@@ -6,39 +6,42 @@
   },
   "entries": [
     {
-      "identifier": "urn:air:yulia.sitterjourney.com:service:house-pet-sitting",
+      "identifier": "urn:air:yulia.sitterjourney.com:skills:house-pet-sitting",
       "displayName": "Live-In House & Pet Sitting Services",
-      "type": "text/markdown",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://yulia.sitterjourney.com/llms.txt",
-      "description": "Professional long-term and extended stay live-in house and pet sitting companionship across California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, and Sunnyvale with attentive home stewardship and continuous remote presence.",
+      "description": "Professional long-term and extended stay live-in house and pet sitting companionship across California, Los Altos, Los Gatos, Monte Sereno, Mountain View, San Francisco, San Jose, San Mateo, Santa Cruz, Saratoga, and Sunnyvale.",
       "representativeQueries": [
-        "long term house sitter Los Gatos",
-        "long term house and pet sitter Saratoga",
-        "live in house sitter California extended stay",
-        "long term pet sitting Monte Sereno",
-        "extended stay live in house sitter Los Altos",
-        "extended stay pet and house sitting San Jose",
-        "long term house and pet sitter Santa Cruz",
-        "long term house sitter Mountain View",
-        "live in pet and house sitter Sunnyvale",
-        "extended stay house and pet sitter San Francisco",
-        "long term live in house sitter San Mateo",
-        "extended house and pet sitting California"
+        "long term house and pet sitter Los Gatos, Saratoga, and Monte Sereno",
+        "extended stay live in house sitter Los Altos, Mountain View, and Sunnyvale",
+        "long term house and pet sitter San Jose and Santa Cruz",
+        "extended stay house and pet sitter San Francisco and San Mateo",
+        "long term live in house and pet sitter California extended stay"
       ]
     },
     {
-      "identifier": "urn:air:yulia.sitterjourney.com:service:full-documentation",
+      "identifier": "urn:air:yulia.sitterjourney.com:skills:full-documentation",
       "displayName": "Full Sitter Journey Documentation",
-      "type": "text/markdown",
+      "type": "text/markdown; profile=\"urn:air:agent-skills\"",
       "url": "https://yulia.sitterjourney.com/llms-full.txt",
-      "description": "Complete LLM and autonomous agent knowledge base covering long-term and extended house sitting policies, pricing breakdown, and sit history."
+      "description": "Complete autonomous agent knowledge base covering long-term and extended house sitting policies, pricing breakdown, and sit history across all service locations.",
+      "representativeQueries": [
+        "house sitter qualifications and verified reviews",
+        "extended stay house sitting policies California",
+        "live in pet sitting rates and routine requirements"
+      ]
     },
     {
-      "identifier": "urn:air:yulia.sitterjourney.com:api:booking",
-      "displayName": "House & Pet Sitting Booking API",
-      "type": "application/openapi+json",
-      "url": "https://yulia.sitterjourney.com/openapi.json",
-      "description": "OpenAPI endpoint for programmatic booking inquiry submissions, newsletter subscription, and visitor feedback."
+      "identifier": "urn:air:yulia.sitterjourney.com:agent:booking",
+      "displayName": "House & Pet Sitting Booking Service",
+      "type": "application/agent-card+json",
+      "url": "https://yulia.sitterjourney.com/agent-card.json",
+      "description": "Agent card and service interface for programmatic booking inquiry submissions, date availability, and client communication.",
+      "representativeQueries": [
+        "book live in house sitter California",
+        "check extended stay house sitting availability",
+        "submit pet sitting inquiry Los Gatos"
+      ]
     }
   ]
 }

@@ -3,11 +3,6 @@ Allow: /
 
 Sitemap: https://yulia.sitterjourney.com/sitemap.xml
 
-# Agentic Resource Discovery (ARD) AI Catalog Manifests
-Agentmap: https://yulia.sitterjourney.com/.well-known/ai-catalog.json
-Agentmap: https://yulia.sitterjourney.com/ai-catalog.json
-
-# LLM & AI agent documentation
-# See https://yulia.sitterjourney.com/llms.txt
-
-
+# AI & Agentic Resource Discovery (ARD)
+# Catalog: https://yulia.sitterjourney.com/.well-known/ai-catalog.json
+# Knowledge Base: https://yulia.sitterjourney.com/llms.txt

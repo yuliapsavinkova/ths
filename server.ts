@@ -34,6 +34,17 @@ app.get('/.well-known/ai-catalog.json', serveAiCatalog);
 app.get('/ai-catalog.json', serveAiCatalog);
 app.get('/.well-known/ard.json', serveAiCatalog);
 
+// Explicitly serve A2A Agent Card with correct application/agent-card+json header
+const serveAgentCard = (_req: express.Request, res: express.Response) => {
+  res.setHeader('Content-Type', 'application/agent-card+json; charset=utf-8');
+  res.setHeader('Cache-Control', 'public, max-age=3600');
+  const agentCardPath = path.join(process.cwd(), 'public', 'agent-card.json');
+  res.sendFile(agentCardPath);
+};
+
+app.get('/.well-known/agent-card.json', serveAgentCard);
+app.get('/agent-card.json', serveAgentCard);
+
 // OpenAPI specification endpoint
 app.get('/openapi.json', (_req, res) => {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');

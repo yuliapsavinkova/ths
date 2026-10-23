@@ -1,0 +1,34 @@
+{
+  "name": "Yulia House & Pet Sitting Booking Service",
+  "description": "Autonomous booking interface for scheduling long-term and extended stay house and pet sitting inquiries across California.",
+  "version": "1.0.0",
+  "provider": {
+    "organization": "Yulia House & Pet Sitting",
+    "url": "https://yulia.sitterjourney.com"
+  },
+  "supportedInterfaces": [
+    {
+      "url": "https://yulia.sitterjourney.com/api/submit-booking",
+      "protocolBinding": "HTTP",
+      "protocolVersion": "1.1"
+    }
+  ],
+  "defaultInputModes": [
+    "application/json"
+  ],
+  "defaultOutputModes": [
+    "application/json"
+  ],
+  "skills": [
+    {
+      "id": "submit-booking-inquiry",
+      "name": "Submit Booking Inquiry",
+      "description": "Submit travel dates, location, and pet care requirements for extended live-in house sitting."
+    },
+    {
+      "id": "newsletter-subscription",
+      "name": "Newsletter Subscription",
+      "description": "Subscribe email for monthly calendar availability updates."
+    }
+  ]
+}

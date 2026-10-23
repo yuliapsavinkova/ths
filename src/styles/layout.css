@@ -186,6 +186,9 @@ main > section:not(.hero):nth-of-type(odd) {
 }
 
 .column-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
   color: var(--color-text-secondary);
   line-height: var(--line-height-relaxed);
   font-weight: var(--font-weight-light);

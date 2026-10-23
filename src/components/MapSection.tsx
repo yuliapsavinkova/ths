@@ -38,11 +38,11 @@ export const MapSection: React.FC = () => {
                 ))}
                 , and adjacent cities.
               </p>
-              <p className="large about-additional-para">
+              <p className="large">
                 For longer stays, I offer house and pet sitting throughout{' '}
                 <strong>California</strong> and am open to select extended opportunities nationwide.
               </p>
-              <p className="large about-additional-para">
+              <p className="large">
                 I welcome ongoing house and pet sitting arrangements for homeowners with multiple
                 residences or regular travel plans.
               </p>
