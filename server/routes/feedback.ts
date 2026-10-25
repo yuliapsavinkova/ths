@@ -83,7 +83,7 @@ export async function handleFeedbackSubmit(req: Request, res: Response) {
   let emailSent = false;
   let resendData = null;
 
-  if (apiKey && recipient) {
+  if (apiKey && recipient && sender) {
     try {
       const resend = getResendClient();
       const emailHtml = generateFeedbackEmailHtml(feedbackData);
@@ -104,7 +104,7 @@ export async function handleFeedbackSubmit(req: Request, res: Response) {
       console.warn('[Feedback] Could not send email via Resend:', errorMsg);
     }
   } else {
-    console.warn('[Feedback] RESEND_API_KEY or SITTER_EMAIL_TO not configured, skipped email dispatch.');
+    console.warn('[Feedback] RESEND_API_KEY, SITTER_EMAIL_TO, or SITTER_EMAIL_FROM not configured, skipped email dispatch.');
   }
 
   return res.status(200).json({

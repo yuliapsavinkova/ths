@@ -207,6 +207,13 @@ main > section:not(.hero):nth-of-type(odd) {
 }
 
 .split-title {
+  font-family: var(--font-serif);
+  font-style: normal;
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-light);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+  margin-bottom: var(--spacing-xs);
   text-align: center;
 }
 
@@ -229,10 +236,7 @@ main > section:not(.hero):nth-of-type(odd) {
     margin-right: 0;
   }
 
-  .split-title {
-    text-align: left;
-  }
-
+  .split-title,
   .column-text p {
     text-align: left;
   }
@@ -286,17 +290,6 @@ main > section:not(.hero):nth-of-type(odd) {
   flex-direction: column;
   gap: var(--spacing-md);
   order: 2; /* Text second on mobile stacked screens */
-}
-
-.split-title {
-  font-family: var(--font-serif);
-  font-style: normal;
-  font-size: var(--font-size-xl);
-  font-weight: var(--font-weight-light);
-  line-height: 1.2;
-  color: var(--color-text-primary);
-  margin-bottom: var(--spacing-xs);
-  text-align: left;
 }
 
 /* AI Guide Badge Button */

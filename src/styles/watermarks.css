@@ -1,7 +1,8 @@
 /* ─── REUSABLE DECORATIVE PAW WATERMARK UTILITY SYSTEM ─── */
 
 /* Base Styles (Mobile-First) */
-.paw-watermark {
+.paw-watermark,
+.feedback-bg-paw-watermark {
   position: absolute;
   pointer-events: none;
   user-select: none;
@@ -11,7 +12,8 @@
   transition: opacity var(--transition-normal);
 }
 
-.paw-watermark svg {
+.paw-watermark svg,
+.feedback-bg-paw-watermark svg {
   display: block;
 }
 
@@ -32,13 +34,15 @@
 }
 
 /* ─── Positional Classes (Mobile-First Base) ─── */
-.paw-watermark-left {
+.paw-watermark-left,
+.feedback-bg-paw-left {
   top: 3%;
   left: -20px;
   transform: rotate(-12deg) scale(0.75);
 }
 
-.paw-watermark-right {
+.paw-watermark-right,
+.feedback-bg-paw-right {
   bottom: 2%;
   right: -25px;
   transform: rotate(15deg) scale(0.75);
@@ -82,17 +86,20 @@
 
 /* ─── Desktop & Tablet Enhancements (Custom Media Tokens) ─── */
 @media (--medium) {
-  .paw-watermark {
+  .paw-watermark,
+  .feedback-bg-paw-watermark {
     opacity: 1;
   }
 
-  .paw-watermark-left {
+  .paw-watermark-left,
+  .feedback-bg-paw-left {
     top: 8%;
     left: max(2%, calc(50% - 460px));
     transform: rotate(-16deg) scale(1);
   }
 
-  .paw-watermark-right {
+  .paw-watermark-right,
+  .feedback-bg-paw-right {
     bottom: 8%;
     right: max(2%, calc(50% - 480px));
     transform: rotate(20deg) scale(1);
@@ -199,43 +206,3 @@
   }
 }
 
-/* ─── Backward Compatibility Aliases for Feedback ─── */
-.feedback-bg-paw-watermark {
-  position: absolute;
-  pointer-events: none;
-  color: color-mix(in srgb, var(--pram-gold-700) 6%, transparent);
-  z-index: var(--z-content);
-  user-select: none;
-  opacity: 0.45;
-  transition: opacity var(--transition-normal);
-}
-
-.feedback-bg-paw-left {
-  top: 3%;
-  left: -20px;
-  transform: rotate(-12deg) scale(0.75);
-}
-
-.feedback-bg-paw-right {
-  bottom: 2%;
-  right: -25px;
-  transform: rotate(15deg) scale(0.75);
-}
-
-@media (--medium) {
-  .feedback-bg-paw-watermark {
-    opacity: 1;
-  }
-
-  .feedback-bg-paw-left {
-    top: 8%;
-    left: max(2%, calc(50% - 460px));
-    transform: rotate(-16deg) scale(1);
-  }
-
-  .feedback-bg-paw-right {
-    bottom: 8%;
-    right: max(2%, calc(50% - 480px));
-    transform: rotate(20deg) scale(1);
-  }
-}

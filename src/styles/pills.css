@@ -19,12 +19,6 @@
   line-height: 1.6;
 }
 
-@media (--medium) {
-  .pullquote-text {
-    font-size: var(--font-size-lg);
-  }
-}
-
 .pullquote-author {
   display: block;
   font-family: var(--font-sans);

@@ -117,9 +117,6 @@ p.large {
 .text-xl { font-size: var(--font-size-xl); }
 .text-2xl { font-size: var(--font-size-2xl); }
 .text-3xl { font-size: var(--font-size-3xl); }
-.text-4xl { font-size: var(--font-size-3xl); }
-.text-5xl { font-size: var(--font-size-3xl); }
-.text-6xl { font-size: var(--font-size-3xl); }
 
 /* Font Weight & Style Utilities */
 .font-light { font-weight: var(--font-weight-light); }

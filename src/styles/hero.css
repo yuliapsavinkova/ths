@@ -636,28 +636,7 @@
   }
 }
 
-/* ─── Shared Cog-Spinning System (Interlocking Cogs) ─── */
-:root {
-  --cog-spin-duration: 45s; /* Synchronized speed for both cogs */
-}
 
-@keyframes cog-spin-clockwise {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@keyframes cog-spin-counter-clockwise {
-  from {
-    transform: rotate(360deg);
-  }
-  to {
-    transform: rotate(0deg);
-  }
-}
 
 .hero-image-ring {
   position: absolute;
@@ -741,22 +720,6 @@
   text-decoration: none;
 }
 
-.badge-circle-content {
-  position: relative;
-  z-index: var(--z-overlay);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  padding: var(--badge-content-padding, var(--spacing-xs));
-  box-sizing: border-box;
-  pointer-events: none;
-}
-
 .badge-paw {
   color: var(--color-brand-secondary);
   filter: drop-shadow(0 0 5px var(--color-brand-primary-bold-translucent));
@@ -837,20 +800,8 @@
 /* ─── Progressive Media Queries (Responsive scaling) ─── */
 @media (--small) {
   #hero-rate-badge-circle {
-    --badge-size: calc(var(--spacing-xxxl) * 1.8); /* 9rem / 144px */
-    --badge-paw-size: var(--font-size-sm);
-    --badge-title-size: var(--font-size-xs);
+    --badge-size: calc(var(--spacing-xxxl) * 1.8);
     --badge-price-size: var(--font-size-lg);
-    --badge-unit-size: var(--font-size-xs);
-    --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: 0px;
-    --badge-paw-margin: var(--spacing-xs);
-    --badge-title-margin: var(--spacing-sm);
-    --badge-dash-margin: var(--spacing-xxs);
-    --badge-content-padding: var(--spacing-xs);
-    --badge-btn-pt: 1px;
-    --badge-btn-pb: 1px;
-    --badge-btn-px: var(--spacing-xs);
   }
 }
 
@@ -861,16 +812,10 @@
     --badge-title-size: var(--font-size-sm);
     --badge-price-size: var(--font-size-xl);
     --badge-unit-size: var(--font-size-sm);
-    --badge-dash-size: var(--font-size-3xs);
-    --badge-rates-gap: 0px;
     --badge-paw-margin: var(--spacing-sm-subtle);
-    --badge-title-margin: var(--spacing-sm);
-    --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm-subtle);
     --badge-btn-pt: 2px;
     --badge-btn-pb: 2px;
-    --badge-btn-px: var(--spacing-xs);
-
     bottom: -1%;
     right: 2%;
   }
@@ -879,20 +824,12 @@
 @media (--large) {
   #hero-rate-badge-circle {
     --badge-size: calc(var(--spacing-xxxl) * 2.6);
-    --badge-paw-size: var(--font-size-base);
-    --badge-title-size: var(--font-size-sm);
-    --badge-price-size: var(--font-size-xl);
-    --badge-unit-size: var(--font-size-sm);
     --badge-dash-size: var(--font-size-sm);
     --badge-rates-gap: 1px;
     --badge-paw-margin: var(--spacing-sm);
     --badge-title-margin: var(--spacing-md-subtle);
-    --badge-dash-margin: var(--spacing-xxs);
     --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: 2px;
-    --badge-btn-pb: 2px;
     --badge-btn-px: var(--spacing-sm-subtle);
-
     bottom: 0%;
     right: -2%;
   }
@@ -905,16 +842,6 @@
     --badge-title-size: var(--font-size-base);
     --badge-price-size: var(--font-size-2xl);
     --badge-unit-size: var(--font-size-base);
-    --badge-dash-size: var(--font-size-sm);
-    --badge-rates-gap: 1px;
-    --badge-paw-margin: var(--spacing-sm);
-    --badge-title-margin: var(--spacing-md-subtle);
-    --badge-dash-margin: var(--spacing-xxs);
-    --badge-content-padding: var(--spacing-sm);
-    --badge-btn-pt: 2px;
-    --badge-btn-pb: 2px;
-    --badge-btn-px: var(--spacing-sm-subtle);
-
     bottom: 0%;
     right: -4%;
   }

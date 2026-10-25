@@ -271,39 +271,10 @@
 
 @media (--medium) {
   .swipe-testimonial-card {
-    flex: 0 0 calc(50% - var(--spacing-md) / 2);
-    scroll-snap-align: start;
     padding: var(--spacing-xl);
-    max-width: none;
-    min-height: auto;
-    height: auto;
   }
   .swipe-testimonial-text-container {
     margin-bottom: var(--spacing-md);
-  }
-}
-
-@media (--large) {
-  .swipe-testimonial-card {
-    flex: 0 0 calc(33.333% - var(--spacing-md) * 2 / 3);
-  }
-}
-
-@media (--xlarge) {
-  .swipe-testimonial-card {
-    flex: 0 0 calc(25% - var(--spacing-md) * 3 / 4);
-  }
-}
-
-@media (--xxlarge) {
-  .swipe-testimonial-card {
-    flex: 0 0 calc(20% - var(--spacing-md) * 4 / 5);
-  }
-}
-
-@media (--ultra) {
-  .swipe-testimonial-card {
-    flex: 0 0 calc(16.666% - var(--spacing-md) * 5 / 6);
   }
 }
 

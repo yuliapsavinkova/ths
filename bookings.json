@@ -1,0 +1,37 @@
+[
+  {
+    "id": "ulqhi68",
+    "timestamp": "2026-10-25T20:14:28.039Z",
+    "name": "Julia Space",
+    "email": "juliaspace42@gmail.com",
+    "phone": "19176995541",
+    "location": "efwef",
+    "isRepeatClient": true,
+    "startDate": "2027-03-10",
+    "endDate": "2027-04-09",
+    "duration": 30,
+    "petCount": 2,
+    "petType": "cat",
+    "dogCount": 0,
+    "catCount": 2,
+    "otherCount": 0,
+    "hasMedications": false,
+    "hasSeniorPets": false,
+    "largeGarden": false,
+    "notes": "efwwe ef ewr ewr gre gg",
+    "pricing": {
+      "baseRate": 999,
+      "petSurcharge": 150,
+      "petSurchargePerNight": 5,
+      "seniorSurcharge": 0,
+      "medsSurcharge": 0,
+      "gardenSurcharge": 0,
+      "durationDiscount": 0,
+      "homeOnlyDiscount": 0,
+      "repeatClientDiscount": 115,
+      "total": 1034,
+      "perDay": 34.47
+    },
+    "source": "bookmysit_v2"
+  }
+]

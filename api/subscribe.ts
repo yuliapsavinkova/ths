@@ -93,7 +93,7 @@ export default async function handler(req: VercelRequest, res: VercelResponse) {
     let emailSent = false;
     let resendData = null;
 
-    if (apiKey && recipient) {
+    if (apiKey && recipient && sender) {
       try {
         const resend = new Resend(apiKey);
         const { data, error } = await resend.emails.send({
