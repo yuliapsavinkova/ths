@@ -153,12 +153,14 @@
   flex-wrap: wrap;
   align-items: center;
   justify-content: center;
-  column-gap: var(--spacing-sm);
+  gap: var(--spacing-xs) var(--spacing-sm);
   padding-top: var(--footer-section-gap);
   border-top: 1px solid var(--color-border-inverse-soft);
   color: var(--color-text-secondary-inverse);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
+  text-align: center;
+  white-space: nowrap;
 }
 
 /* Covers the legal links and SITE_LINK if it renders an anchor */
@@ -174,17 +176,20 @@
   vertical-align: middle;
 }
 
-.footer-legal {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  column-gap: var(--spacing-sm);
-}
-
-/* Separator before every item, including the first (it follows the copyright) */
-.footer-legal li::before {
+/* Separator in front of every group except the first */
+.footer-bottom > :not(:first-child)::before {
   content: '·' / '';
   margin-right: var(--spacing-sm);
+}
+
+/* Separator between Privacy and Disclosure */
+.footer-legal li {
+  display: inline;
+}
+
+.footer-legal li + li::before {
+  content: '·' / '';
+  margin-inline: var(--spacing-sm);
 }
 
 /* ========================================

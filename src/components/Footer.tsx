@@ -103,8 +103,9 @@ export const Footer: React.FC = () => (
           {CURRENT_YEAR} {SITE_LINK}
         </p>
 
+        <p>All Rights Reserved</p>
+
         <ul className="footer-legal">
-          <li>All Rights Reserved</li>
           {LEGAL_LINKS.map(({ href, label }) => (
             <li key={href}>
               <NewTabLink href={href}>{label}</NewTabLink>
