@@ -1,95 +1,119 @@
-import React from 'react';
+import React, { useId } from 'react';
 import { ExternalLink } from 'lucide-react';
 import { BrandLogo } from './BrandLogo';
 import { TRUSTED_HOUSESITTERS_REF_LINK } from './TrustedHousesittersBanner';
 import { CURRENT_YEAR, SITE_LINK, PRIVACY_LINK, DISCLOSURE_LINK } from '../data';
 
-export const Footer: React.FC = () => {
+interface FooterLink {
+  href: string;
+  label: string;
+  sponsored?: boolean;
+}
+
+const NAV_LINKS: FooterLink[] = [
+  { href: '/#about-section', label: 'About' },
+  { href: '/#services-section', label: 'Services' },
+  { href: '/#testimonials-section', label: 'Reviews' },
+  { href: '/#faq-section', label: 'FAQs' },
+  { href: '/#booking-form-section', label: 'Book a Sit' },
+];
+
+const EXTERNAL_LINKS: FooterLink[] = [
+  { href: 'https://sitterjourney.com', label: 'SitterJourney Blog' },
+  { href: TRUSTED_HOUSESITTERS_REF_LINK, label: 'TrustedHousesitters', sponsored: true },
+];
+
+const LEGAL_LINKS: FooterLink[] = [
+  { href: PRIVACY_LINK, label: 'Privacy' },
+  { href: DISCLOSURE_LINK, label: 'Disclosure' },
+];
+
+interface NewTabLinkProps extends Pick<FooterLink, 'href' | 'sponsored'> {
+  showIcon?: boolean;
+  children: React.ReactNode;
+}
+
+const NewTabLink: React.FC<NewTabLinkProps> = ({
+  href,
+  sponsored = false,
+  showIcon = false,
+  children,
+}) => (
+  <a href={href} target="_blank" rel={`noopener noreferrer${sponsored ? ' sponsored' : ''}`}>
+    {children}
+    {showIcon && <ExternalLink size={12} aria-hidden="true" />}
+    <span className="footer-sr-only"> (opens in a new tab)</span>
+  </a>
+);
+
+interface FooterNavProps {
+  title: string;
+  children: React.ReactNode;
+}
+
+const FooterNav: React.FC<FooterNavProps> = ({ title, children }) => {
+  const titleId = useId();
+
   return (
-    <footer className="footer wrap-wide" id="site-footer">
+    <nav className="footer-col" aria-labelledby={titleId}>
+      <h2 className="footer-col-title" id={titleId}>
+        {title}
+      </h2>
+      <ul className="footer-links-list">{children}</ul>
+    </nav>
+  );
+};
+
+export const Footer: React.FC = () => (
+  <footer className="footer" id="site-footer">
+    <div className="footer-inner wrap-wide">
       <div className="footer-columns">
-        {/* Brand */}
         <div className="footer-col footer-col-brand">
           <BrandLogo variant="footer" />
-
           <p className="footer-brand-text">
-            Enjoy complete peace of mind while you're away with a trusted live-in sitter, attentive
-            care for your pets and home, and regular updates.
+            Enjoy complete peace of mind while you&rsquo;re away with a trusted live-in sitter,
+            attentive care for your pets and home, and regular updates.
           </p>
         </div>
 
-        {/* Navigation */}
-        <nav className="footer-col footer-col-nav" aria-label="Footer navigation">
-          <span className="footer-col-title">Navigation</span>
+        <FooterNav title="Navigation">
+          {NAV_LINKS.map(({ href, label }) => (
+            <li key={href}>
+              <a href={href}>{label}</a>
+            </li>
+          ))}
+        </FooterNav>
 
-          <ul className="footer-links-list">
-            <li>
-              <a href="#about-section">About</a>
+        <FooterNav title="External Networks">
+          {EXTERNAL_LINKS.map(({ href, label, sponsored }) => (
+            <li key={href}>
+              <NewTabLink href={href} sponsored={sponsored} showIcon>
+                {label}
+              </NewTabLink>
             </li>
-            <li>
-              <a href="#services-section">Services</a>
-            </li>
-            <li>
-              <a href="#testimonials-section">Reviews</a>
-            </li>
-            <li>
-              <a href="#faq-section">FAQs</a>
-            </li>
-            <li>
-              <a href="#booking-form-section">Book a Sit</a>
-            </li>
-          </ul>
-        </nav>
-
-        {/* External Networks */}
-        <nav className="footer-col footer-col-ext" aria-label="External networks">
-          <span className="footer-col-title">External Networks</span>
-
-          <ul className="footer-links-list">
-            <li>
-              <a href="https://sitterjourney.com" target="_blank" rel="noopener noreferrer">
-                SitterJourney Blog <ExternalLink size={12} aria-hidden="true" />
-              </a>
-            </li>
-            <li>
-              <a href={TRUSTED_HOUSESITTERS_REF_LINK} target="_blank" rel="noopener noreferrer">
-                TrustedHousesitters <ExternalLink size={12} aria-hidden="true" />
-              </a>
-            </li>
-          </ul>
-        </nav>
+          ))}
+        </FooterNav>
       </div>
 
       <div className="footer-bottom">
         <p className="footer-copyright">
-          <span className="footer-nowrap">
-            <span className="copyright-symbol">&copy;</span>
-            {CURRENT_YEAR} {SITE_LINK}
+          <span className="copyright-symbol" aria-hidden="true">
+            &copy;
           </span>
-          <span className="footer-nowrap">
-            <span className="footer-copyright-separator" aria-hidden="true">
-              ·
-            </span>
-            All Rights Reserved
-          </span>
-          <span className="footer-nowrap">
-            <span className="footer-copyright-separator" aria-hidden="true">
-              ·
-            </span>
-            <a href={PRIVACY_LINK} target="_blank" rel="noopener noreferrer">
-              Privacy
-            </a>
-            <span className="footer-copyright-separator" aria-hidden="true">
-              ·
-            </span>
-            <a href={DISCLOSURE_LINK} target="_blank" rel="noopener noreferrer">
-              Disclosure
-            </a>
-          </span>
+          {CURRENT_YEAR} {SITE_LINK}
         </p>
+
+        <ul className="footer-legal">
+          <li>All Rights Reserved</li>
+          {LEGAL_LINKS.map(({ href, label }) => (
+            <li key={href}>
+              <NewTabLink href={href}>{label}</NewTabLink>
+            </li>
+          ))}
+        </ul>
       </div>
-    </footer>
-  );
-};
+    </div>
+  </footer>
+);
 
 export default Footer;

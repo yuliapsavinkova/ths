@@ -1,37 +1,89 @@
+/* ========================================
+   BASE
+======================================== */
+
 .footer {
-  width: 100%;
-  padding: var(--spacing-xxl);
+  --footer-section-gap: var(--spacing-lg);
+
+  position: relative;
+  padding-block: var(--spacing-xxl);
+  padding-inline: var(--spacing-lg);
   background-color: var(--color-text-primary);
   color: var(--color-text-primary-inverse);
+  line-height: 1.6;
 }
 
-/* Main columns */
-
-.footer-columns {
+.footer .footer-inner {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  gap: var(--footer-section-gap);
+  padding-inline: 0;
+}
+
+.footer :where(h2, p, ul) {
+  margin: 0;
+  color: inherit;
+}
+
+.footer :where(ul) {
+  padding: 0;
+  list-style: none;
+}
+
+.footer a {
+  color: inherit;
+  transition:
+    color var(--transition-fast),
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.footer a:hover,
+.footer a:focus-visible {
+  color: var(--color-brand-secondary);
+}
+
+.footer a:focus-visible {
+  outline: 2px solid var(--color-brand-secondary);
+  outline-offset: 4px;
+  border-radius: var(--radius-xs);
+}
+
+.footer-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+/* ========================================
+   COLUMNS
+======================================== */
+
+.footer-columns {
+  /* Centered on mobile; flipped to start-aligned at the medium breakpoint */
+  --footer-align: center;
+  --footer-text-align: center;
+
+  display: flex;
+  flex-direction: column;
   gap: var(--spacing-xl);
-  width: 100%;
 }
 
 .footer-col {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: var(--footer-align);
   gap: var(--spacing-md);
-  width: 100%;
-  text-align: center;
-}
-
-.footer-col-brand {
-  max-width: 440px;
-  margin-inline: auto;
+  text-align: var(--footer-text-align);
 }
 
 .footer-col-title {
-  margin: 0;
   color: var(--color-brand-secondary);
+  font-family: inherit;
   font-size: var(--font-size-xs);
   font-weight: var(--font-weight-semibold);
   text-transform: uppercase;
@@ -40,31 +92,25 @@
 
 /* Brand */
 
-.footer-col-brand .brand-logo-component,
-.footer-col-brand .brand-logo-text-wrap {
-  justify-content: center;
-  text-align: center;
+.footer-col-brand :is(.brand-logo-component, .brand-logo-text-wrap) {
+  justify-content: var(--footer-align);
+  text-align: inherit;
 }
 
 .footer-brand-text {
-  margin: 0;
-  color: var(--color-text-primary-inverse);
+  max-width: 440px;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-light);
-  line-height: 1.6;
-  text-align: center;
+  text-align: inherit;
 }
 
-/* Navigation links */
+/* Link lists */
 
 .footer-links-list {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: var(--footer-align);
   gap: var(--spacing-sm);
-  margin: 0;
-  padding: 0;
-  list-style: none;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-normal);
 }
@@ -76,87 +122,69 @@
   color: var(--color-text-secondary-inverse);
   text-decoration: none;
   opacity: 0.88;
-  transition:
-    color var(--transition-fast),
-    transform var(--transition-fast),
-    opacity var(--transition-fast);
+}
+
+/* Declared after the rule above, so hover and focus still highlight */
+.footer-links-list a:hover,
+.footer-links-list a:focus-visible {
+  color: var(--color-brand-secondary);
+  opacity: 1;
 }
 
 .footer-links-list a:hover {
-  color: var(--color-brand-secondary);
-  opacity: 1;
   transform: translateY(-1px);
 }
 
-.footer-links-list a:focus-visible {
-  outline: 2px solid var(--color-brand-secondary);
-  outline-offset: 4px;
-  border-radius: var(--radius-xs);
-  color: var(--color-brand-secondary);
-  opacity: 1;
-}
-
-.footer-links-list a svg {
-  transition:
-    transform var(--transition-fast),
-    color var(--transition-fast);
+/* Icon inherits color via currentColor, so it only needs its own motion */
+.footer-links-list svg {
+  transition: transform var(--transition-fast);
 }
 
 .footer-links-list a:hover svg {
-  color: var(--color-brand-secondary);
   transform: translate(1px, -1px);
 }
 
-/* Copyright and legal links */
+/* ========================================
+   BOTTOM BAR
+======================================== */
 
 .footer-bottom {
-  width: 100%;
-  margin-top: var(--spacing-lg);
-  padding-top: var(--spacing-lg);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--spacing-sm);
+  padding-top: var(--footer-section-gap);
   border-top: 1px solid var(--color-border-inverse-soft);
-  text-align: center;
-}
-
-.footer-copyright {
-  margin: 0;
   color: var(--color-text-secondary-inverse);
   font-family: var(--font-mono);
   font-size: var(--font-size-xs);
-  line-height: 1.6;
 }
 
-.footer-nowrap {
-  display: inline-block;
-  white-space: nowrap;
+/* Covers the legal links and SITE_LINK if it renders an anchor */
+.footer-bottom a {
+  text-decoration: underline;
+  text-underline-offset: 3px;
 }
 
 .copyright-symbol {
   margin-right: var(--spacing-xs);
   color: var(--color-brand-secondary);
-  font-size: 1.2rem;
-  line-height: 1;
+  font-size: 1.2em;
   vertical-align: middle;
 }
 
-.footer-copyright-separator {
-  padding-inline: var(--spacing-sm);
+.footer-legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  column-gap: var(--spacing-sm);
 }
 
-.footer-copyright a {
-  color: inherit;
-  text-decoration: underline;
-  text-underline-offset: 3px;
-  transition: color var(--transition-fast);
-}
-
-.footer-copyright a:hover {
-  color: var(--color-brand-secondary);
-}
-
-.footer-copyright a:focus-visible {
-  outline: 2px solid var(--color-brand-secondary);
-  outline-offset: 3px;
-  border-radius: var(--radius-xs);
+/* Separator before every item, including the first (it follows the copyright) */
+.footer-legal li::before {
+  content: '·' / '';
+  margin-right: var(--spacing-sm);
 }
 
 /* ========================================
@@ -164,46 +192,36 @@
 ======================================== */
 
 @media (--medium) {
+  .footer {
+    --footer-section-gap: var(--spacing-xl);
+  }
+
   .footer-columns {
+    --footer-align: flex-start;
+    --footer-text-align: left;
+
     flex-direction: row;
-    align-items: flex-start;
     justify-content: space-between;
     gap: var(--spacing-xxl);
   }
 
   .footer-col {
-    align-items: flex-start;
-    width: auto;
-    text-align: left;
+    flex: 1;
   }
 
   .footer-col-brand {
     flex: 2;
-    margin-inline: 0;
-    text-align: left;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .footer a,
+  .footer svg {
+    transition: none;
   }
 
-  .footer-col-brand .brand-logo-component,
-  .footer-col-brand .brand-logo-text-wrap {
-    justify-content: flex-start;
-    text-align: left;
-  }
-
-  .footer-brand-text {
-    text-align: left;
-  }
-
-  .footer-col-nav,
-  .footer-col-ext {
-    flex: 1;
-  }
-
-  .footer-links-list {
-    align-items: flex-start;
-  }
-
-  .footer-bottom {
-    margin-top: var(--spacing-xl);
-    padding-top: var(--spacing-xl);
+  .footer a:hover,
+  .footer a:hover svg {
+    transform: none;
   }
 }
