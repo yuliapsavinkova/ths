@@ -1,5 +1,10 @@
 import { FaqItem, MonthAvailability, Testimonial, ShowcaseItem } from './types';
 
+export const CURRENT_YEAR = new Date().getFullYear();
+export const SITE_LINK = 'yulia.sitterjourney.com';
+export const PRIVACY_LINK = 'https://sitterjourney.com/privacy';
+export const DISCLOSURE_LINK = 'https://sitterjourney.com/disclosure';
+// export const TERMS_LINK = 'https://sitterjourney.com/terms';
 
 export const REVIEWS_LINK = {
   text: 'All TrustedHousesitters Reviews →',
